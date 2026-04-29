@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import Lenis from 'lenis';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
+import FallingRing from './components/FallingRing';
 import About from './components/About';
 import Services from './components/Services';
 import Vision from './components/Vision';
@@ -37,6 +38,7 @@ function App() {
 
   return (
     <>
+      <FallingRing />
       <Navbar />
       <main>
         <Hero />
