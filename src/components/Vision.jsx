@@ -105,7 +105,7 @@ const Vision = () => {
                 style={{ display: 'flex', gap: '1.5rem', background: 'var(--bg-alt)', padding: '1.5rem', borderRadius: '12px', border: '1px solid var(--border)' }}
                 whileHover={{ x: -10, borderColor: 'var(--secondary)' }}
               >
-                <div style={{ width: '48px', height: '48px', flexShrink: 0, borderRadius: '8px', background: 'rgba(212,175,55,0.1)', color: 'var(--secondary)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <div style={{ width: '48px', height: '48px', flexShrink: 0, borderRadius: '8px', background: 'rgba(202,169,76,0.1)', color: 'var(--secondary)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d={item.icon}/></svg>
                 </div>
                 <div>

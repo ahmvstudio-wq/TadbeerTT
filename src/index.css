@@ -1,14 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
 
 :root {
-  --primary: #082130; /* Deep Navy-Teal */
-  --primary-light: #123B54;
-  --secondary: #d4af37; /* Gold */
-  --secondary-light: #F0CF65;
-  --tertiary: #4BA665; /* Subtle Green */
-  --bg: #FAFAFA;
-  --bg-alt: #FFFFFF;
-  --text-main: #1A1A1A;
+  --primary: lab(30.74% -13.36 -12.26); /* Teal from logo */
+  --primary-light: #256a79; /* Lighter teal for hover */
+  --secondary: #CAA94C; /* Gold from logo */
+  --secondary-light: #D6BA6E; /* Lighter gold */
+  --tertiary: #184F5B; /* Subtle Green replaced with Teal */
+  --bg: #F9F8F3; /* Brand off-white */
+  --bg-alt: #F9F8F3; /* Match brand off-white for everything */
+  --text-main: #1C1B17; /* Black from logo */
   --text-muted: #555555;
   --text-light: #FDFDFD;
   --border: #E5E7EB;
@@ -81,7 +81,7 @@ ul {
 .btn-primary:hover {
   background: var(--primary-light);
   transform: translateY(-2px);
-  box-shadow: 0 10px 20px rgba(8, 33, 48, 0.15);
+  box-shadow: 0 10px 20px rgba(24, 79, 91, 0.15);
 }
 
 .btn-secondary {
@@ -144,16 +144,11 @@ ul {
 }
 
 .navbar:not(.scrolled) .nav-links a {
-  color: var(--bg);
+  color: var(--primary);
 }
 
 .navbar:not(.scrolled) .lang-switch {
-  color: var(--bg);
-}
-
-.navbar:not(.scrolled) .main-logo {
-  filter: invert(1) brightness(10);
-  mix-blend-mode: screen;
+  color: var(--primary);
 }
 
 .nav-links a::after {
@@ -287,7 +282,7 @@ ul {
 .service-icon {
   width: 60px;
   height: 60px;
-  background: rgba(212, 175, 55, 0.1);
+  background: rgba(202, 169, 76, 0.1);
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -317,13 +312,8 @@ ul {
 /* About / Journey */
 .journey-section {
   padding: var(--section-padding);
-  background: var(--primary);
-  color: var(--text-light);
-}
-
-.journey-section .section-title,
-.journey-section .section-subtitle {
-  color: var(--text-light);
+  background: var(--bg);
+  color: var(--text-main);
 }
 
 .journey-grid {
@@ -342,8 +332,8 @@ ul {
 
 .stat-item {
   padding: 2rem;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(24, 79, 91, 0.03);
+  border: 1px solid var(--border);
   border-radius: 8px;
 }
 
@@ -454,9 +444,10 @@ ul {
 
 /* Footer */
 .footer {
-  background: var(--primary);
-  color: var(--text-light);
+  background: var(--bg);
+  color: var(--text-main);
   padding: 5rem 5% 2rem;
+  border-top: 1px solid var(--border);
 }
 
 .footer-grid {
@@ -468,28 +459,28 @@ ul {
 
 .footer-heading {
   font-size: 1.2rem;
-  color: var(--bg);
+  color: var(--primary);
   margin-bottom: 1.5rem;
 }
 
 .footer-links li {
   margin-bottom: 0.75rem;
-  color: rgba(255, 255, 255, 0.7);
+  color: var(--text-muted);
   transition: var(--transition);
   cursor: pointer;
 }
 
 .footer-links li:hover {
-  color: var(--secondary);
+  color: var(--primary);
 }
 
 .footer-bottom {
   padding-top: 2rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-top: 1px solid var(--border);
   display: flex;
   justify-content: space-between;
   align-items: center;
-  color: rgba(255, 255, 255, 0.5);
+  color: var(--text-muted);
   font-size: 0.9rem;
 }
 

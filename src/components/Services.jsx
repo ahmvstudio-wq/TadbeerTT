@@ -163,7 +163,7 @@ const Services = () => {
                       transition={{ delay: 0.2 + (i * 0.1) }}
                       style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', fontSize: '1.05rem', fontWeight: '500' }}
                     >
-                      <span style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '24px', height: '24px', borderRadius: '50%', background: 'rgba(212,175,55,0.1)', color: 'var(--secondary)' }}>
+                      <span style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '24px', height: '24px', borderRadius: '50%', background: 'rgba(202,169,76,0.1)', color: 'var(--secondary)' }}>
                         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
                       </span>
                       {item}
@@ -196,8 +196,8 @@ const Services = () => {
                 
                 {service.type === 'ai' && (
                   <motion.div style={{ position: 'relative', zIndex: 1, width: '150px', height: '150px' }}>
-                    <motion.div animate={{ rotate: 360 }} transition={{ repeat: Infinity, duration: 10, ease: 'linear' }} style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', border: '2px dashed rgba(212,175,55,0.5)', borderRadius: '50%' }}></motion.div>
-                    <motion.div animate={{ rotate: -360 }} transition={{ repeat: Infinity, duration: 15, ease: 'linear' }} style={{ position: 'absolute', top: '15%', left: '15%', width: '70%', height: '70%', border: '2px solid rgba(75,166,101,0.5)', borderRadius: '50%' }}></motion.div>
+                    <motion.div animate={{ rotate: 360 }} transition={{ repeat: Infinity, duration: 10, ease: 'linear' }} style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', border: '2px dashed rgba(202,169,76,0.5)', borderRadius: '50%' }}></motion.div>
+                    <motion.div animate={{ rotate: -360 }} transition={{ repeat: Infinity, duration: 15, ease: 'linear' }} style={{ position: 'absolute', top: '15%', left: '15%', width: '70%', height: '70%', border: '2px solid rgba(24,79,91,0.5)', borderRadius: '50%' }}></motion.div>
                     <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', color: '#fff', fontWeight: 'bold', fontSize: '1.5rem', letterSpacing: '2px' }}>AI</div>
                   </motion.div>
                 )}

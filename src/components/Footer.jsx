@@ -7,10 +7,10 @@ const Footer = () => {
       <div className="container">
         <div className="footer-grid">
           <div>
-            <div style={{ marginBottom: '1.5rem', filter: 'brightness(0) invert(1) brightness(1.5)' }}>
+            <div style={{ marginBottom: '1.5rem' }}>
               <Logo />
             </div>
-            <p style={{ color: 'rgba(255,255,255,0.7)', marginBottom: '2rem', maxWidth: '300px' }}>
+            <p style={{ color: 'var(--text-muted)', marginBottom: '2rem', maxWidth: '300px' }}>
               From strategy to systems, people to technology, we stand beside you at every step. With global expertise, local insight, and full alignment with Oman Vision 2040, we transform businesses into lasting brands.
             </p>
           </div>
@@ -55,7 +55,7 @@ const Footer = () => {
                 Al Noor Plaza, Madinat Qaboos, Muscat, Oman
               </li>
             </ul>
-            <div style={{ marginTop: '1.5rem', color: 'rgba(255,255,255,0.7)' }}>
+            <div style={{ marginTop: '1.5rem', color: 'var(--text-muted)' }}>
               <strong>Hours:</strong> Sunday – Thursday | 8:30 AM – 5:00 PM
             </div>
           </div>
