@@ -2845,6 +2845,29 @@ img {
   object-fit: cover;
 }
 
+/* ===== HORIZONTAL TIMELINE ROADMAP ===== */
+.horizontal-timeline-container {
+  position: relative;
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+  overflow-x: auto;
+  padding-bottom: 1rem;
+}
+
+.horizontal-timeline-track {
+  min-width: 800px;
+  position: relative;
+}
+
+.timeline-year-text {
+  font-size: 13px;
+}
+
+.timeline-title-text {
+  font-size: 15px;
+}
+
 /* ===== HAMBURGER BUTTON & MOBILE DRAWER (NAVBAR) ===== */
 .nav-toggle {
   display: none;
@@ -3224,6 +3247,19 @@ img {
   .visual-story-graphic {
     height: 180px !important;
   }
+  .horizontal-timeline-container {
+    overflow-x: visible;
+  }
+  .horizontal-timeline-track {
+    min-width: auto;
+    width: 100%;
+  }
+  .timeline-year-text {
+    font-size: 20px;
+  }
+  .timeline-title-text {
+    font-size: 22px;
+  }
   .vertical-timeline-line {
     left: 20px;
   }
@@ -3493,6 +3529,12 @@ img {
   
   .company-stats-strip {
     grid-template-columns: 1fr;
+  }
+  .timeline-year-text {
+    font-size: 24px;
+  }
+  .timeline-title-text {
+    font-size: 26px;
   }
 }
 

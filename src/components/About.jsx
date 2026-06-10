@@ -407,8 +407,8 @@ const About = () => {
             </p>
           </motion.div>
 
-          <div className="horizontal-timeline-container" style={{ position: 'relative', width: '100%', maxWidth: '1000px', margin: '0 auto', overflowX: 'auto', paddingBottom: '1rem' }}>
-            <div style={{ minWidth: '800px', position: 'relative' }}>
+          <div className="horizontal-timeline-container">
+            <div className="horizontal-timeline-track">
               <svg viewBox="0 0 1000 350" style={{ width: '100%', height: 'auto', display: 'block', overflow: 'visible' }}>
                 {/* SVG Filters for Glow Effects */}
                 <defs>
@@ -511,7 +511,7 @@ const About = () => {
                           textAnchor="middle" 
                           fill="var(--secondary)"
                           fontWeight="700"
-                          fontSize="13"
+                          className="timeline-year-text"
                           letterSpacing="1"
                         >
                           {milestone.year}
@@ -522,7 +522,7 @@ const About = () => {
                           textAnchor="middle" 
                           fill={isActive ? 'var(--primary)' : 'var(--text-main)'}
                           fontWeight="600"
-                          fontSize="15"
+                          className="timeline-title-text"
                         >
                           {milestone.title.split(' | ')[0]}
                         </text>
