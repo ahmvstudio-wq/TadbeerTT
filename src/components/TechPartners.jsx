@@ -392,7 +392,6 @@ const PartnerCard = ({ partner }) => {
           alt={partner.name}
           className="tp-logo-img"
           onError={handleError}
-          loading="lazy"
           referrerPolicy="no-referrer"
         />
       )}

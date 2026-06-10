@@ -3006,11 +3006,14 @@ img {
 /* TechPartners Responsive */
 @media (max-width: 768px) {
   .tp-title { font-size: 2rem; }
-  .tp-card { padding: 10px 20px; }
-  .tp-card-name { font-size: 0.85rem; }
+  .tp-card { width: 120px; height: 80px; padding: 0.75rem; border-radius: 12px; }
+  .tp-logo-img { max-width: 80px; height: 38px; }
+  .tp-marquee-outer::before, .tp-marquee-outer::after { width: 80px; }
 }
 
 @media (max-width: 480px) {
-  .tp-card { padding: 8px 16px; }
-  .tp-card-name { font-size: 0.75rem; }
+  .tp-title { font-size: 1.75rem; }
+  .tp-card { width: 100px; height: 70px; padding: 0.5rem; border-radius: 10px; }
+  .tp-logo-img { max-width: 70px; height: 32px; }
+  .tp-marquee-outer::before, .tp-marquee-outer::after { width: 40px; }
 }
