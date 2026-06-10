@@ -2859,7 +2859,67 @@ img {
   line-height: 1.7;
 }
 
-/* Premium Chip Grid */
+/* Rows */
+.tp-rows-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  width: 100%;
+}
+
+/* Single row */
+.tp-marquee-outer {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  padding: 0.4rem 0;
+}
+
+.tp-marquee-outer::before,
+.tp-marquee-outer::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 60px;
+  z-index: 3;
+  pointer-events: none;
+}
+
+.tp-marquee-outer::before {
+  left: 0;
+  background: linear-gradient(to right, var(--bg), transparent);
+}
+
+.tp-marquee-outer::after {
+  right: 0;
+  background: linear-gradient(to left, var(--bg), transparent);
+}
+
+.tp-marquee-track {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  width: max-content;
+  animation: tp-scroll 45s linear infinite;
+  will-change: transform;
+}
+
+.tp-marquee-track:hover {
+  animation-play-state: paused;
+}
+
+@keyframes tp-scroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+/* Override tp-chip for marquee (ensure it doesn't wrap/squish) */
+.tp-marquee-track .tp-chip {
+  flex-shrink: 0;
+}
+
+/* Premium Chip Grid (Fallback / Original) */
 .tp-chip-grid {
   display: flex;
   flex-wrap: wrap;

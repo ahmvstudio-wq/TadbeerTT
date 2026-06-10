@@ -56,7 +56,6 @@ const partners = [
 ];
 
 const PartnerChip = ({ partner }) => {
-  // icon.horse guarantees a valid icon or a beautiful fallback letter icon
   const iconUrl = `https://icon.horse/icon/${partner.domain}`;
   return (
     <div className="tp-chip">
@@ -66,28 +65,43 @@ const PartnerChip = ({ partner }) => {
   );
 };
 
-const TechPartners = () => (
-  <section id="tech-partners" className="tp-section">
-    <div className="tp-inner">
-      <div className="tp-header">
-        <span className="section-label">Ecosystem</span>
-        <h2 className="section-title tp-title">
-          Technology &amp; Service <span className="tp-accent">Partners</span>
-        </h2>
-        <p className="tp-subtitle">
-          We integrate and work with 50+ industry-leading platforms to deliver
-          end-to-end digital transformation for our clients.
-        </p>
-      </div>
-
-      {/* The beautiful responsive grid */}
-      <div className="tp-chip-grid">
-        {partners.map((p, i) => (
-          <PartnerChip key={`${p.name}-${i}`} partner={p} />
-        ))}
+const MarqueeRow = ({ items, reverse }) => {
+  return (
+    <div className="tp-marquee-outer">
+      <div className="tp-marquee-track" style={{ animationDirection: reverse ? 'reverse' : 'normal' }}>
+        {items.map((p, i) => <PartnerChip key={`m1-${p.name}-${i}`} partner={p} />)}
+        {items.map((p, i) => <PartnerChip key={`m2-${p.name}-${i}`} partner={p} />)}
       </div>
     </div>
-  </section>
-);
+  );
+};
+
+const TechPartners = () => {
+  const half = Math.ceil(partners.length / 2);
+  const topRow = partners.slice(0, half);
+  const bottomRow = partners.slice(half);
+
+  return (
+    <section id="tech-partners" className="tp-section">
+      <div className="tp-inner">
+        <div className="tp-header">
+          <span className="section-label">Ecosystem</span>
+          <h2 className="section-title tp-title">
+            Technology &amp; Service <span className="tp-accent">Partners</span>
+          </h2>
+          <p className="tp-subtitle">
+            We integrate and work with 50+ industry-leading platforms to deliver
+            end-to-end digital transformation for our clients.
+          </p>
+        </div>
+
+        <div className="tp-rows-wrapper">
+          <MarqueeRow items={topRow} />
+          <MarqueeRow items={bottomRow} reverse={true} />
+        </div>
+      </div>
+    </section>
+  );
+};
 
 export default TechPartners;
