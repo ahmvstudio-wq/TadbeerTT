@@ -1,227 +1,405 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Check, X, ArrowRight, Zap, Target, Layers, Cpu, Users, CheckCircle2 } from 'lucide-react';
 
-const AnimatedIcon = ({ type }) => {
-  if (type === 'erp') {
+const servicesData = [
+  {
+    id: "marketing",
+    titleEn: "Digital Marketing",
+    titleAr: "التسويق الرقمي",
+    desc: "Bilingual, data-driven marketing ecosystems — not campaigns. We build brand authority and inbound leads that compound.",
+    icon: Target,
+    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80&auto=format",
+    items: ["Data-Driven Strategy", "Bilingual Social Media", "AI Content & Automation", "Performance Analytics"],
+    capabilities: [
+      "Bilingual Social Media Strategy & Management",
+      "High-Performance Paid Advertising (Meta, Google, TikTok, Snapchat)",
+      "SEO & Semantic Content Architecture",
+      "AI-Powered Content Personalization Pipelines",
+      "Lead Generation & Automated Email Funnels",
+      "Comprehensive Analytics & ROAS Attribution Models"
+    ],
+    pipeline: [
+      { step: "01", title: "Audit & Landscape Study", desc: "We map competitor ad spend, discover keyword gaps, and model your GCC customer personas." },
+      { step: "02", title: "Ecosystem Deployment", desc: "We launch structured ad accounts, install bilingual content engines, and configure analytics." },
+      { step: "03", title: "Compounding Growth Optimization", desc: "Continuous A/B testing, AI-driven lead routing, and weekly attribution reporting." }
+    ],
+    tech: ["Meta Ads", "Google Ads", "TikTok Business", "HubSpot", "Google Analytics 4", "Semrush"],
+    caseStudy: "4.2x increase in digital customer acquisition for a leading Muscat-based retail brand within 90 days."
+  },
+  {
+    id: "software",
+    titleEn: "Software Solutions",
+    titleAr: "حلول برمجية",
+    desc: "VAT-compliant, enterprise-proven systems. We map your operation first, then implement, configure, train, and support.",
+    icon: Layers,
+    image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&q=80&auto=format",
+    items: ["ERP Integration", "Warehouse Management", "HRMS & LMS", "POS & Vendor Systems"],
+    capabilities: [
+      "Modular ERP Implementations (Odoo, SAP, Microsoft Dynamics)",
+      "Real-Time Barcode & RF-Enabled WMS systems",
+      "Multi-Branch POS Synchronisation & Localized Tax (Oman VAT)",
+      "Custom Payroll & HRMS Systems matching Labor Law",
+      "Secure API Integrations & Database Merging",
+      "Corporate LMS (Learning Management Systems) for rapid training"
+    ],
+    pipeline: [
+      { step: "01", title: "Operational Process Mapping", desc: "We sit with your team, outline every transaction/movement, and draft a blueprint." },
+      { step: "02", title: "Sandbox Configuration", desc: "We implement the software, setup localized modules, and test transaction flows in dry-runs." },
+      { step: "03", title: "Staff Upskilling & Handover", desc: "Hands-on staff training, custom user manuals, and 24/7 dedicated local support." }
+    ],
+    tech: ["Odoo Enterprise", "SAP Business One", "Microsoft Dynamics", "PostgreSQL", "Node.js", "Docker"],
+    caseStudy: "Overhauled WMS for a Muscat food logistics supplier, eliminating 95% of manual paper tracking errors."
+  },
+  {
+    id: "ai",
+    titleEn: "AI & Next-Gen Tech",
+    titleAr: "تقنيات الذكاء الاصطناعي",
+    desc: "Enterprise-grade AI operations as a service. We deploy custom LLM applications, autonomous agentic workflows, and machine learning models to supercharge operational bandwidth.",
+    icon: Cpu,
+    image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&q=80&auto=format",
+    items: ["Agentic AI Workflows", "Custom LLM Applications", "Operational ML Pipelines", "Cognitive Automation"],
+    capabilities: [
+      "Custom RAG Architectures & Proprietary Knowledge Bases",
+      "Autonomous AI Agents for Task Routing & Delegation",
+      "Management-Level Decision Support Systems & Predictive Modeling",
+      "Computer Vision & NLP Pipelines for Document Extraction (OCR/Invoice Parsing)",
+      "Bilingual (Arabic/English) Conversational AI for Customer Success",
+      "AI-Powered Operational Dashboards & Real-time Anomaly Detection"
+    ],
+    pipeline: [
+      { step: "01", title: "AI Readiness & Data Strategy", desc: "We audit your data infrastructure, establish governance guardrails, and scope high-ROI use cases." },
+      { step: "02", title: "Model Training & Pipeline Integration", desc: "We fine-tune open-source or commercial models and seamlessly inject inference APIs into your existing ERP/CRM." },
+      { step: "03", title: "Continuous RLHF & Model Monitoring", desc: "We implement robust evaluation frameworks, drift detection, and user feedback loops to ensure enduring AI efficacy." }
+    ],
+    tech: ["LangChain", "LlamaIndex", "OpenAI / Claude / Cohere", "Pinecone / Milvus", "PyTorch / TensorFlow", "FastAPI / Docker"],
+    caseStudy: "Deployed autonomous HR screening agent and operational data parser, reducing manual administrative overhead by 78% for a regional holding company."
+  },
+  {
+    id: "talent",
+    titleEn: "Human Capital",
+    titleAr: "إدارة رأس المال البشري",
+    desc: "Omanization-aligned, people-first HCM strategy. Because your people ARE the business strategy.",
+    icon: Users,
+    image: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&q=80&auto=format",
+    items: ["Org Development", "Recruitment & Onboarding", "Training Programs", "Retention Strategy"],
+    capabilities: [
+      "Organizational Redesign & Scalable Hierarchies",
+      "Ministry-Compliant Omanization Strategy & Audit Prep",
+      "KPI & Goal-Setting Frameworks (OKR Systems)",
+      "Executive Recruitment & Specialized Headhunting",
+      "Custom Corporate Training & Leadership Pathways",
+      "Retainer-Based HR Advisory & Employee Engagement Programs"
+    ],
+    pipeline: [
+      { step: "01", title: "Talent Audit", desc: "We evaluate your current org chart, check compliance files, and outline salary bands." },
+      { step: "02", title: "Structure Engineering", desc: "We model updated role descriptions, design OKR sheets, and establish recruitment guidelines." },
+      { step: "03", title: "Systemic HCM Rollout", desc: "We launch compliance tracking dashboards, train managers, and manage executive onboarding." }
+    ],
+    tech: ["Slack", "BambooHR", "Notion Corporate", "LinkedIn Recruiter", "Odoo HR", "Ministry Portals"],
+    caseStudy: "Redesigned operational workflow for GCC retail group, decreasing middle-manager turnover by 42%."
+  }
+];
+
+const easeTransition = [0.22, 1, 0.36, 1];
+
+// Interactive mouse flashlight helper
+const useMousePositionInCard = () => {
+  const handleMouseMove = (e) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    e.currentTarget.style.setProperty('--mouse-x', `${x}px`);
+    e.currentTarget.style.setProperty('--mouse-y', `${y}px`);
+  };
+  return handleMouseMove;
+};
+
+// SVG Overlays for cards
+const ServiceSVGOverlay = ({ type }) => {
+  if (type === "marketing") {
     return (
-      <svg width="60" height="60" viewBox="0 0 60 60" fill="none">
-        <motion.rect x="15" y="15" width="12" height="12" rx="2" stroke="var(--secondary)" strokeWidth="2"
-          initial={{ y: -5, opacity: 0 }} whileInView={{ y: 0, opacity: 1 }} transition={{ delay: 0.1 }}
-        />
-        <motion.rect x="33" y="15" width="12" height="12" rx="2" stroke="var(--primary)" strokeWidth="2"
-          initial={{ y: -5, opacity: 0 }} whileInView={{ y: 0, opacity: 1 }} transition={{ delay: 0.2 }}
-        />
-        <motion.rect x="15" y="33" width="12" height="12" rx="2" stroke="var(--primary)" strokeWidth="2"
-          initial={{ y: 5, opacity: 0 }} whileInView={{ y: 0, opacity: 1 }} transition={{ delay: 0.3 }}
-        />
-        <motion.rect x="33" y="33" width="12" height="12" rx="2" stroke="var(--tertiary)" strokeWidth="2"
-          initial={{ y: 5, opacity: 0 }} whileInView={{ y: 0, opacity: 1 }} transition={{ delay: 0.4 }}
-        />
-        <motion.path d="M 27 21 L 33 21 M 21 27 L 21 33 M 39 27 L 39 33 M 27 39 L 33 39" stroke="var(--border)" strokeWidth="2"
-          initial={{ pathLength: 0 }} whileInView={{ pathLength: 1 }} transition={{ delay: 0.6 }}
-        />
+      <svg viewBox="0 0 200 200" className="card-blueprint-svg">
+        <path d="M20,180 Q100,50 180,20" fill="none" stroke="rgba(202,169,76,0.3)" strokeWidth="1.5" strokeDasharray="3 3" />
+        <circle cx="20" cy="180" r="4" fill="var(--secondary)" />
+        <circle cx="100" cy="115" r="4" fill="var(--primary)" />
+        <circle cx="180" cy="20" r="5" fill="var(--secondary)" />
+        {/* Funnel Outline */}
+        <polygon points="60,40 140,40 120,90 80,90" fill="none" stroke="rgba(24,79,91,0.2)" strokeWidth="1" />
+        <line x1="80" y1="90" x2="80" y2="150" stroke="rgba(24,79,91,0.2)" strokeWidth="1" />
+        <line x1="120" y1="90" x2="120" y2="150" stroke="rgba(24,79,91,0.2)" strokeWidth="1" />
       </svg>
     );
   }
-  if (type === 'ai') {
+  if (type === "software") {
     return (
-      <svg width="60" height="60" viewBox="0 0 60 60" fill="none">
-        <motion.circle cx="30" cy="30" r="16" stroke="var(--primary)" strokeWidth="2" strokeDasharray="4 4"
-          animate={{ rotate: 360 }} transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
-        />
-        <motion.circle cx="30" cy="30" r="8" fill="var(--secondary)"
-          animate={{ scale: [1, 1.2, 1] }} transition={{ duration: 2, repeat: Infinity }}
-        />
-        <motion.path d="M 30 6 L 30 14 M 30 46 L 30 54 M 6 30 L 14 30 M 46 30 L 54 30" stroke="var(--primary)" strokeWidth="2"
-          initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ delay: 0.3 }}
-        />
+      <svg viewBox="0 0 200 200" className="card-blueprint-svg">
+        {/* Interconnected Database Nodes */}
+        <rect x="30" y="30" width="40" height="30" rx="3" fill="none" stroke="rgba(202,169,76,0.3)" strokeWidth="1" />
+        <rect x="130" y="30" width="40" height="30" rx="3" fill="none" stroke="rgba(24,79,91,0.2)" strokeWidth="1" />
+        <rect x="80" y="130" width="40" height="30" rx="3" fill="none" stroke="rgba(202,169,76,0.3)" strokeWidth="1" />
+        <path d="M70,45 L130,45 M50,60 L80,145 M150,60 L120,145" fill="none" stroke="rgba(24,79,91,0.25)" strokeWidth="1.5" />
       </svg>
     );
   }
-  if (type === 'talent') {
+  if (type === "ai") {
     return (
-      <svg width="60" height="60" viewBox="0 0 60 60" fill="none">
-        <motion.circle cx="30" cy="20" r="8" stroke="var(--primary)" strokeWidth="2"
-          initial={{ y: 10, opacity: 0 }} whileInView={{ y: 0, opacity: 1 }}
-        />
-        <motion.path d="M 16 44 C 16 36, 22 32, 30 32 C 38 32, 44 36, 44 44" stroke="var(--primary)" strokeWidth="2" strokeLinecap="round"
-          initial={{ pathLength: 0 }} whileInView={{ pathLength: 1 }} transition={{ delay: 0.3 }}
-        />
-        <motion.path d="M 40 24 L 46 18 L 52 24" stroke="var(--tertiary)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
-          initial={{ y: 10, opacity: 0 }} whileInView={{ y: 0, opacity: 1 }} transition={{ delay: 0.5 }}
-        />
-        <motion.path d="M 46 28 L 46 18" stroke="var(--tertiary)" strokeWidth="2" strokeLinecap="round"
-          initial={{ pathLength: 0 }} whileInView={{ pathLength: 1 }} transition={{ delay: 0.6 }}
-        />
+      <svg viewBox="0 0 200 200" className="card-blueprint-svg">
+        {/* Brain/Neuron Network */}
+        <circle cx="100" cy="100" r="10" fill="none" stroke="var(--secondary)" strokeWidth="1" />
+        <circle cx="60" cy="60" r="6" fill="none" stroke="rgba(24,79,91,0.3)" strokeWidth="1" />
+        <circle cx="140" cy="60" r="6" fill="none" stroke="rgba(24,79,91,0.3)" strokeWidth="1" />
+        <circle cx="60" cy="140" r="6" fill="none" stroke="rgba(202,169,76,0.3)" strokeWidth="1" />
+        <circle cx="140" cy="140" r="6" fill="none" stroke="rgba(24,79,91,0.3)" strokeWidth="1" />
+        <path d="M100,90 L66,66 M100,110 L66,134 M100,90 L134,66 M100,110 L134,134 M60,66 L60,134 M140,66 L140,134" fill="none" stroke="rgba(24,79,91,0.2)" strokeWidth="1" />
       </svg>
     );
   }
-  if (type === 'marketing') {
-    return (
-      <svg width="60" height="60" viewBox="0 0 60 60" fill="none">
-        <motion.path d="M 10 45 L 25 30 L 35 40 L 50 15" stroke="var(--secondary)" strokeWidth="3" fill="none" strokeLinecap="round" strokeLinejoin="round"
-          initial={{ pathLength: 0 }} whileInView={{ pathLength: 1 }} transition={{ duration: 1 }}
-        />
-        <motion.circle cx="50" cy="15" r="4" fill="var(--tertiary)"
-          initial={{ scale: 0 }} whileInView={{ scale: 1 }} transition={{ delay: 1 }}
-        />
-        <motion.path d="M 10 50 L 50 50" stroke="var(--border)" strokeWidth="2" strokeLinecap="round" />
-        <motion.path d="M 10 10 L 10 50" stroke="var(--border)" strokeWidth="2" strokeLinecap="round" />
-      </svg>
-    );
-  }
+  return (
+    <svg viewBox="0 0 200 200" className="card-blueprint-svg">
+      {/* Organization Flow Chart */}
+      <circle cx="100" cy="40" r="12" fill="none" stroke="var(--secondary)" strokeWidth="1.5" />
+      <circle cx="50" cy="110" r="10" fill="none" stroke="rgba(24,79,91,0.3)" strokeWidth="1" />
+      <circle cx="100" cy="110" r="10" fill="none" stroke="rgba(24,79,91,0.3)" strokeWidth="1" />
+      <circle cx="150" cy="110" r="10" fill="none" stroke="rgba(24,79,91,0.3)" strokeWidth="1" />
+      <path d="M100,52 L100,85 M50,85 L150,85 M50,85 L50,100 M100,85 L100,100 M150,85 L150,100" fill="none" stroke="rgba(24,79,91,0.2)" strokeWidth="1" />
+    </svg>
+  );
 };
 
 const Services = () => {
-  const servicesData = [
-    {
-      type: 'erp',
-      titleEn: 'Strategic Growth & Operations',
-      titleAr: 'النمو الاستراتيجي والعمليات',
-      desc: 'Seamlessly align your enterprise resources. We deploy robust ERP systems, streamline financial planning, and integrate organizational data to scale operations.',
-      items: ['ERP Implementation & Integration', 'Financial Planning', 'Strategic Sustainability']
-    },
-    {
-      type: 'ai',
-      titleEn: 'Technology & Intelligent Systems',
-      titleAr: 'التقنية والأنظمة الذكية',
-      desc: 'Automate for the future. Implementing AI-powered tools, Visitor Management Systems, and CRM/LMS platforms that reduce friction and increase clarity.',
-      items: ['AI-Powered Automation', 'CRM & LMS Platforms', 'Visitor Management (VMS)']
-    },
-    {
-      type: 'talent',
-      titleEn: 'People & Talent Transformation',
-      titleAr: 'تحويل الأفراد والمهارات',
-      desc: 'Empowering the next generation of Omani leaders. We build resilient HR systems, clear career pathways, and targeted recruitment strategies.',
-      items: ['Training & Skills Development', 'Recruitment & Onboarding', 'HR Systems & Pathways']
-    },
-    {
-      type: 'marketing',
-      titleEn: 'Marketing & Customer Growth',
-      titleAr: 'التسويق ونمو العملاء',
-      desc: 'Expand your market share across the GCC. Data-driven brand strategies, high-conversion campaigns, and deep customer insights.',
-      items: ['Brand Strategy & Positioning', 'Digital Campaign Management', 'Customer Insights']
+  const [selectedService, setSelectedService] = useState(null);
+  const handleMouseMove = useMousePositionInCard();
+
+  // Handle body scroll locking when modal is open
+  useEffect(() => {
+    if (selectedService) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
     }
-  ];
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [selectedService]);
 
   return (
-    <section id="services" className="services-section" style={{ background: 'var(--bg-alt)' }}>
+    <section id="services" className="services-section">
       <div className="container">
-        <div className="text-center" style={{ marginBottom: '4rem' }}>
-          <motion.h4 
-            className="section-subtitle"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-          >
-            Our Solutions
-          </motion.h4>
-          <motion.h2 
-            className="section-title"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ delay: 0.1 }}
-          >
-            Comprehensive Digital Transformation
-          </motion.h2>
-        </div>
+        
+        {/* Header */}
+        <motion.div 
+          className="text-center"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.8 }}
+        >
+          <span className="section-label">Our Capabilities | خدماتنا</span>
+          <h2 className="section-title">Four Pillars of<br />Business Transformation.</h2>
+          <p style={{ color: 'var(--text-muted)', fontSize: '1.15rem', maxWidth: '600px', margin: '1rem auto 0' }}>
+            A premium network of operational architects, software engineers, and growth consultants, aligned to Oman Vision 2040.
+          </p>
+        </motion.div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '4rem' }}>
-          {servicesData.map((service, index) => (
-            <motion.div 
-              key={index} 
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.6 }}
-              style={{ 
-                display: 'grid', gridTemplateColumns: window.innerWidth > 768 ? (index % 2 === 0 ? '1fr 1fr' : '1fr 1fr') : '1fr', 
-                gap: '3rem', alignItems: 'center',
-                background: 'var(--bg)', padding: '3rem', borderRadius: '16px', border: '1px solid var(--border)',
-                boxShadow: '0 10px 30px rgba(0,0,0,0.02)'
-              }}
-            >
-              <div style={{ order: window.innerWidth > 768 && index % 2 !== 0 ? 2 : 1 }}>
-                <div style={{ width: '80px', height: '80px', background: 'var(--bg-alt)', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '1.5rem', border: '1px solid var(--border)' }}>
-                  <AnimatedIcon type={service.type} />
+        {/* Services Card Grid */}
+        <div className="services-grid">
+          {servicesData.map((service, index) => {
+            const IconComponent = service.icon;
+            return (
+              <motion.div 
+                key={service.id}
+                className="service-card"
+                onMouseMove={handleMouseMove}
+                onClick={() => setSelectedService(service)}
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{ duration: 0.7, delay: index * 0.1, ease: easeTransition }}
+              >
+                {/* Photo with SVG overlay container */}
+                <div className="card-photo-wrapper">
+                  <img 
+                    src={service.image} 
+                    alt={service.titleEn}
+                    className="card-unsplash-photo"
+                  />
+                  <div className="photo-dark-gradient"></div>
+                  <ServiceSVGOverlay type={service.id} />
+                  
+                  {/* Floating Icon Node */}
+                  <div className="floating-card-icon-node">
+                    <IconComponent size={24} />
+                  </div>
                 </div>
-                <h3 style={{ fontSize: '2rem', marginBottom: '0.5rem' }}>{service.titleEn}</h3>
-                <p style={{ fontFamily: 'var(--font-ar)', color: 'var(--primary-light)', fontSize: '1.25rem', marginBottom: '1.5rem', fontWeight: '600' }}>
-                  {service.titleAr}
-                </p>
-                <p style={{ color: 'var(--text-muted)', fontSize: '1.1rem', marginBottom: '2rem', lineHeight: '1.6' }}>
-                  {service.desc}
-                </p>
-                <ul style={{ display: 'grid', gap: '1rem' }}>
-                  {service.items.map((item, i) => (
-                    <motion.li 
-                      key={i}
-                      initial={{ opacity: 0, x: -20 }}
-                      whileInView={{ opacity: 1, x: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: 0.2 + (i * 0.1) }}
-                      style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', fontSize: '1.05rem', fontWeight: '500' }}
-                    >
-                      <span style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '24px', height: '24px', borderRadius: '50%', background: 'rgba(202,169,76,0.1)', color: 'var(--secondary)' }}>
-                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-                      </span>
-                      {item}
-                    </motion.li>
-                  ))}
-                </ul>
-              </div>
-              
-              {/* Illustration Side */}
-              <div style={{ order: window.innerWidth > 768 && index % 2 !== 0 ? 1 : 2, height: '100%', minHeight: '300px', background: 'var(--primary)', borderRadius: '12px', position: 'relative', overflow: 'hidden', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', backgroundImage: 'radial-gradient(circle at 50% 50%, rgba(255,255,255,0.05) 1px, transparent 1px)', backgroundSize: '20px 20px' }}></div>
-                
-                {/* Specific Illustrations per card */}
-                {service.type === 'erp' && (
-                  <motion.div style={{ position: 'relative', zIndex: 1, display: 'flex', flexDirection: 'column', gap: '1rem', width: '60%' }}>
-                    <motion.div animate={{ x: [-5, 5, -5] }} transition={{ repeat: Infinity, duration: 4 }} style={{ background: 'rgba(255,255,255,0.1)', padding: '1rem', borderRadius: '8px', border: '1px solid rgba(255,255,255,0.2)', display: 'flex', justifyContent: 'space-between' }}>
-                      <span style={{ color: '#fff', fontSize: '0.8rem', fontWeight: 'bold' }}>DATA WAREHOUSE</span>
-                      <span style={{ color: 'var(--secondary)' }}>100%</span>
-                    </motion.div>
-                    <motion.div animate={{ x: [5, -5, 5] }} transition={{ repeat: Infinity, duration: 4.5 }} style={{ background: 'rgba(255,255,255,0.1)', padding: '1rem', borderRadius: '8px', border: '1px solid rgba(255,255,255,0.2)', display: 'flex', justifyContent: 'space-between' }}>
-                      <span style={{ color: '#fff', fontSize: '0.8rem', fontWeight: 'bold' }}>HRMS SYNC</span>
-                      <span style={{ color: 'var(--tertiary)' }}>ACTIVE</span>
-                    </motion.div>
-                    <motion.div animate={{ x: [-5, 5, -5] }} transition={{ repeat: Infinity, duration: 5 }} style={{ background: 'rgba(255,255,255,0.1)', padding: '1rem', borderRadius: '8px', border: '1px solid rgba(255,255,255,0.2)', display: 'flex', justifyContent: 'space-between' }}>
-                      <span style={{ color: '#fff', fontSize: '0.8rem', fontWeight: 'bold' }}>FINANCIAL LEDGER</span>
-                      <span style={{ color: 'var(--secondary)' }}>SECURE</span>
-                    </motion.div>
-                  </motion.div>
-                )}
-                
-                {service.type === 'ai' && (
-                  <motion.div style={{ position: 'relative', zIndex: 1, width: '150px', height: '150px' }}>
-                    <motion.div animate={{ rotate: 360 }} transition={{ repeat: Infinity, duration: 10, ease: 'linear' }} style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', border: '2px dashed rgba(202,169,76,0.5)', borderRadius: '50%' }}></motion.div>
-                    <motion.div animate={{ rotate: -360 }} transition={{ repeat: Infinity, duration: 15, ease: 'linear' }} style={{ position: 'absolute', top: '15%', left: '15%', width: '70%', height: '70%', border: '2px solid rgba(24,79,91,0.5)', borderRadius: '50%' }}></motion.div>
-                    <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', color: '#fff', fontWeight: 'bold', fontSize: '1.5rem', letterSpacing: '2px' }}>AI</div>
-                  </motion.div>
-                )}
 
-                {service.type === 'talent' && (
-                  <motion.div style={{ position: 'relative', zIndex: 1, display: 'flex', gap: '1rem', alignItems: 'flex-end', height: '100px' }}>
-                    {[40, 70, 50, 90, 60].map((h, i) => (
-                      <motion.div key={i} initial={{ height: 0 }} whileInView={{ height: `${h}%` }} transition={{ duration: 1, delay: i * 0.2 }} style={{ width: '20px', background: i === 3 ? 'var(--secondary)' : 'rgba(255,255,255,0.2)', borderRadius: '4px 4px 0 0' }} />
+                <div className="service-card-body">
+                  <div className="title-row">
+                    <h3 className="service-title">{service.titleEn}</h3>
+                    <span className="service-arabic">{service.titleAr}</span>
+                  </div>
+                  <p className="service-desc">{service.desc}</p>
+                  
+                  <ul className="service-list">
+                    {service.items.map((item, i) => (
+                      <li key={i}>
+                        <span className="gold-bullet">•</span>
+                        <span>{item}</span>
+                      </li>
                     ))}
-                  </motion.div>
-                )}
+                  </ul>
 
-                {service.type === 'marketing' && (
-                  <motion.div style={{ position: 'relative', zIndex: 1 }}>
-                    <svg width="200" height="150" viewBox="0 0 200 150">
-                      <motion.path d="M 20 130 C 60 130, 80 50, 180 30" fill="none" stroke="var(--secondary)" strokeWidth="4" strokeLinecap="round" initial={{ pathLength: 0 }} whileInView={{ pathLength: 1 }} transition={{ duration: 1.5, ease: "easeOut" }} />
-                      <motion.circle cx="180" cy="30" r="8" fill="var(--tertiary)" initial={{ scale: 0 }} whileInView={{ scale: 1 }} transition={{ delay: 1.5 }} />
-                    </svg>
-                  </motion.div>
-                )}
-              </div>
-            </motion.div>
-          ))}
+                  <div className="learn-more-action-trigger">
+                    <span>Inspect Details</span>
+                    <ArrowRight size={16} className="arrow-trig" />
+                  </div>
+                </div>
+              </motion.div>
+            );
+          })}
         </div>
+
+        {/* Bottom Banner */}
+        <motion.div 
+          className="services-banner"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.8 }}
+        >
+          <div style={{ position: 'relative', zIndex: 2 }}>
+            <p style={{ fontSize: '1.35rem', fontWeight: '600', marginBottom: '0.5rem', color: '#fff' }}>
+              Complete Integration. Zero Friction.
+            </p>
+            <p style={{ fontSize: '1.05rem', opacity: 0.9, color: 'rgba(255,255,255,0.85)' }}>
+              From initial operational audit to final code deploy — Tadbeer assumes full responsibility.
+            </p>
+          </div>
+        </motion.div>
+
+        {/* IMMERSIVE DETAIL MODAL (AnimatePresence) */}
+        <AnimatePresence>
+          {selectedService && (
+            <>
+              {/* Dark backdrop overlay */}
+              <motion.div 
+                className="modal-backdrop-blur"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                onClick={() => setSelectedService(null)}
+              />
+
+              {/* Centered card panel */}
+              <div className="modal-container-scroll">
+                <motion.div 
+                  className="modal-detailed-panel"
+                  initial={{ opacity: 0, scale: 0.95, y: 30 }}
+                  animate={{ opacity: 1, scale: 1, y: 0 }}
+                  exit={{ opacity: 0, scale: 0.95, y: 30 }}
+                  transition={{ duration: 0.5, ease: easeTransition }}
+                >
+                  {/* Close button */}
+                  <button 
+                    className="modal-close-trigger-btn"
+                    onClick={() => setSelectedService(null)}
+                    aria-label="Close panel"
+                  >
+                    <X size={20} />
+                  </button>
+
+                  <div className="modal-inner-split">
+                    {/* Visual half */}
+                    <div className="modal-visual-side">
+                      <img 
+                        src={selectedService.image} 
+                        alt={selectedService.titleEn}
+                        className="modal-banner-image"
+                      />
+                      <div className="modal-visual-gradient"></div>
+                      <ServiceSVGOverlay type={selectedService.id} />
+                      
+                      <div className="modal-badge-info">
+                        <span className="badge-tag">Tadbeer Pillar</span>
+                        <h4 className="badge-title">{selectedService.titleEn}</h4>
+                      </div>
+                    </div>
+
+                    {/* Content half */}
+                    <div className="modal-content-side">
+                      <div className="modal-header-meta">
+                        <h2 className="modal-cap-title">{selectedService.titleEn}</h2>
+                        <span className="modal-cap-arabic">{selectedService.titleAr}</span>
+                      </div>
+                      
+                      <p className="modal-brief-intro">{selectedService.desc}</p>
+                      
+                      {/* Sub-capabilities */}
+                      <div className="modal-caps-group">
+                        <h4 className="sub-header-title"><Zap size={16} /> Sub-Capabilities & Deliverables</h4>
+                        <div className="caps-check-grid">
+                          {selectedService.capabilities.map((cap, i) => (
+                            <div key={i} className="cap-check-item">
+                              <Check className="check-svg" size={14} />
+                              <span>{cap}</span>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+
+                      {/* Process pipeline */}
+                      <div className="modal-caps-group">
+                        <h4 className="sub-header-title"><Layers size={16} /> Implementation Roadmap</h4>
+                        <div className="pipeline-steps-flow">
+                          {selectedService.pipeline.map((step, i) => (
+                            <div key={i} className="pipeline-step-node">
+                              <div className="step-num-badge">{step.step}</div>
+                              <div className="step-text-block">
+                                <h5 className="step-node-title">{step.title}</h5>
+                                <p className="step-node-desc">{step.desc}</p>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+
+                      {/* Tech stack */}
+                      <div className="modal-caps-group">
+                        <h4 className="sub-header-title"><Cpu size={16} /> System Tooling & Technologies</h4>
+                        <div className="tech-badge-list">
+                          {selectedService.tech.map((t, i) => (
+                            <span key={i} className="tech-badge-tag">{t}</span>
+                          ))}
+                        </div>
+                      </div>
+
+                      {/* Verified Case Study Capsule */}
+                      <div className="modal-case-capsule-box">
+                        <div className="case-caps-header">
+                          <CheckCircle2 size={16} className="ok-icon" />
+                          <span>Operational Validation Metric</span>
+                        </div>
+                        <p className="case-caps-description">{selectedService.caseStudy}</p>
+                      </div>
+
+                      {/* Call to action */}
+                      <div className="modal-footer-cta">
+                        <a 
+                          href="#cta" 
+                          className="btn btn-primary w-full"
+                          onClick={() => setSelectedService(null)}
+                        >
+                          Consult on this Service
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </motion.div>
+              </div>
+            </>
+          )}
+        </AnimatePresence>
+
       </div>
     </section>
   );

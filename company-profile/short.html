@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tadbeer Transformation - Executive Summary (10 Pages)</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #184F5B;
+      --primary-light: #256a79;
+      --secondary: #CAA94C;
+      --secondary-light: #D6BA6E;
+      --bg: #F9F8F3;
+      --text-main: #1C1B17;
+      --text-muted: #555555;
+      --border: #E5E7EB;
+      --font-en: 'Inter', sans-serif;
+      --font-ar: 'Cairo', sans-serif;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body { font-family: var(--font-en); background: #e5e7eb; color: var(--text-main); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+
+    @media print {
+      body { background: #fff; }
+      .page { box-shadow: none !important; margin: 0 !important; border-radius: 0 !important; page-break-after: always; transform: none !important; }
+      .page:last-child { page-break-after: avoid; }
+      .no-print { display: none !important; }
+    }
+
+    @page { size: 1600px 900px; margin: 0; }
+
+    .page { width: 1600px; height: 900px; margin: 2rem auto; background: #fff; position: relative; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.1); max-width: 100%; }
+    .page-inner { padding: 60px 80px; height: 100%; position: relative; z-index: 1; }
+    .page-inner.flex-col { display: flex; flex-direction: column; justify-content: center; height: calc(900px - 120px); }
+
+    .section-label { font-size: 0.75rem; color: var(--secondary); text-transform: uppercase; letter-spacing: 3px; font-weight: 700; display: block; margin-bottom: 0.75rem; }
+    .section-title { font-size: 2.25rem; color: var(--primary); font-weight: 700; line-height: 1.2; margin-bottom: 1rem; letter-spacing: -0.5px; }
+    .gold-line { width: 60px; height: 4px; background: var(--secondary); margin-bottom: 2rem; }
+
+    .page-watermark { position: absolute; bottom: 25px; right: 35px; font-size: 0.6rem; color: rgba(0,0,0,0.15); letter-spacing: 2px; text-transform: uppercase; font-weight: 600; }
+    .page-number { position: absolute; bottom: 25px; left: 65px; font-size: 0.75rem; color: var(--secondary); font-weight: 700; letter-spacing: 1px; }
+
+    .corner-accent { position: absolute; top: 0; right: 0; width: 250px; height: 250px; background: linear-gradient(135deg, transparent 50%, rgba(202,169,76,0.06) 50%); }
+
+    .dark-bg { background: var(--primary); color: #fff; }
+    .dark-bg .section-title { color: #fff; }
+    .dark-bg .page-watermark { color: rgba(255,255,255,0.2); }
+    .dark-bg .corner-accent { background: linear-gradient(135deg, transparent 50%, rgba(202,169,76,0.15) 50%); }
+    .dark-bg .text-muted { color: rgba(255,255,255,0.7); }
+
+    p { font-size: 1rem; margin-bottom: 1.25rem; line-height: 1.8; color: var(--text-muted); }
+    .dark-bg p { color: rgba(255,255,255,0.8); }
+    .lead-text { font-size: 1.25rem; font-weight: 500; color: var(--primary); margin-bottom: 2rem; line-height: 1.6; }
+    .dark-bg .lead-text { color: var(--secondary); }
+
+    .cover-page { background: #ffffff; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; position: relative; }
+    .cover-page::before { content: ''; position: absolute; top: -10%; left: -10%; width: 50%; height: 50%; background: radial-gradient(circle, rgba(24,79,91,0.05) 0%, transparent 60%); border-radius: 50%; filter: blur(40px); }
+    .cover-page::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 16px; background: linear-gradient(90deg, var(--primary) 0%, var(--primary-light) 50%, var(--secondary) 100%); }
+    .cover-logo { max-width: 400px; max-height: 200px; object-fit: contain; margin-bottom: 4rem; position: relative; z-index: 1; }
+    .cover-title { font-size: 3.5rem; color: var(--primary); font-weight: 700; letter-spacing: -1px; line-height: 1.1; margin-bottom: 1.5rem; position: relative; z-index: 1; }
+    .cover-title .accent { color: var(--secondary); font-weight: 300; font-style: italic; }
+    .cover-subtitle { color: var(--text-muted); font-size: 1.25rem; max-width: 550px; line-height: 1.6; margin-bottom: 5rem; position: relative; z-index: 1; font-weight: 400; }
+    .cover-bottom-strip { position: absolute; bottom: 50px; left: 0; right: 0; display: flex; justify-content: center; gap: 3rem; font-size: 0.85rem; color: var(--primary); z-index: 1; letter-spacing: 2px; text-transform: uppercase; font-weight: 600; border-top: 1px solid rgba(24,79,91,0.1); padding-top: 2rem; width: 70%; margin: 0 auto; }
+
+    .inside-cover { display: flex; flex-direction: column; justify-content: flex-end; padding-bottom: 100px; }
+    .document-control { border-top: 1px solid var(--border); padding-top: 2rem; margin-top: auto; }
+    .document-control h4 { font-size: 0.85rem; color: var(--primary); margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 1px; }
+    .document-control p { font-size: 0.75rem; margin-bottom: 0.25rem; }
+
+    .toc-list { list-style: none; margin-top: 2rem; }
+    .toc-item { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem; position: relative; }
+    .toc-item::after { content: ''; position: absolute; left: 0; right: 0; bottom: 5px; border-bottom: 1px dotted var(--border); z-index: 0; }
+    .toc-title { font-size: 1.15rem; font-weight: 600; color: var(--primary); background: #fff; padding-right: 1rem; position: relative; z-index: 1; }
+    .toc-page { font-size: 1rem; font-weight: 700; color: var(--secondary); background: #fff; padding-left: 1rem; position: relative; z-index: 1; }
+    .toc-category { font-size: 0.85rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 2px; margin-top: 1.5rem; margin-bottom: 1rem; border-bottom: 2px solid var(--secondary); padding-bottom: 0.5rem; display: inline-block; }
+
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; margin-top: 2rem; }
+    .split-grid { display: grid; grid-template-columns: 5fr 4fr; gap: 4rem; align-items: center; }
+
+    .highlight-box { padding: 2rem; background: rgba(24,79,91,0.04); border-left: 4px solid var(--primary); border-radius: 0 12px 12px 0; margin: 2rem 0; }
+    .highlight-box.gold { background: rgba(202,169,76,0.05); border-left-color: var(--secondary); }
+    .highlight-box h4 { font-size: 1.25rem; color: var(--primary); margin-bottom: 0.75rem; }
+    .highlight-box.gold h4 { color: var(--secondary); }
+
+    .capability-list { list-style: none; margin-top: 2rem; display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+    .capability-list li { display: flex; gap: 1rem; align-items: flex-start; margin-bottom: 0; }
+    .capability-list .check { color: var(--secondary); font-size: 1.25rem; font-weight: bold; line-height: 1; margin-top: 0.2rem; }
+    .capability-list h4 { font-size: 1.1rem; color: var(--primary); margin-bottom: 0.25rem; }
+    .dark-bg .capability-list h4 { color: #fff; }
+
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; margin-top: 2rem; }
+    .contact-block { margin-bottom: 2rem; }
+    .contact-label { font-size: 0.75rem; color: var(--secondary); text-transform: uppercase; letter-spacing: 2px; font-weight: 700; margin-bottom: 0.5rem; }
+    .contact-value { font-size: 1.25rem; color: var(--primary); font-weight: 500; }
+
+    /* ===== GRAPHIC ENHANCEMENTS ===== */
+    .bg-graphic-circle { position: absolute; border-radius: 50%; opacity: 0.03; z-index: 0; background: var(--primary); }
+    .dark-bg .bg-graphic-circle { background: #fff; }
+    .bg-graphic-grid { position: absolute; inset: 0; background-image: linear-gradient(rgba(24,79,91,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(24,79,91,0.03) 1px, transparent 1px); background-size: 60px 60px; z-index: 0; }
+    .dark-bg .bg-graphic-grid { background-image: linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px); }
+    .huge-watermark { position: absolute; font-size: 35rem; font-weight: 700; color: rgba(202,169,76,0.04); top: 50%; right: -5%; transform: translateY(-50%); line-height: 1; z-index: 0; font-family: var(--font-en); letter-spacing: -5px; user-select: none; }
+    .dark-bg .huge-watermark { color: rgba(255,255,255,0.02); }
+    .aesthetic-dots { position: absolute; width: 300px; height: 300px; background-image: radial-gradient(rgba(24,79,91,0.15) 2px, transparent 2px); background-size: 20px 20px; z-index: 0; }
+    .dark-bg .aesthetic-dots { background-image: radial-gradient(rgba(255,255,255,0.08) 2px, transparent 2px); }
+    .page-inner > * { position: relative; z-index: 1; }
+    .corner-accent { z-index: 0; }
+
+    /* ===== INFOGRAPHICS & CHARTS ===== */
+    .bar-chart-container { display: flex; align-items: flex-end; gap: 2rem; height: 300px; margin-top: 4rem; border-bottom: 2px solid var(--border); padding-bottom: 1rem; position: relative; }
+    .bar-chart-container::after { content: 'Projected Growth Horizon'; position: absolute; top: -30px; left: 0; font-size: 0.85rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 2px; }
+    .bar-col { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; position: relative; height: 100%; }
+    .bar-col .bar { width: 100%; background: linear-gradient(180deg, var(--secondary) 0%, rgba(202,169,76,0.1) 100%); border-radius: 8px 8px 0 0; position: relative; border: 1px solid rgba(202,169,76,0.3); border-bottom: none; }
+    .bar-col:nth-child(even) .bar { background: linear-gradient(180deg, var(--primary) 0%, rgba(24,79,91,0.1) 100%); border: 1px solid rgba(24,79,91,0.3); border-bottom: none; }
+    .bar-col .bar-val { position: absolute; top: -35px; left: 50%; transform: translateX(-50%); font-weight: 700; color: var(--primary); font-size: 1.25rem; white-space: nowrap; }
+    .bar-col .bar-lbl { position: absolute; bottom: -35px; left: 50%; transform: translateX(-50%); font-size: 0.85rem; color: var(--text-muted); text-transform: uppercase; font-weight: 700; white-space: nowrap; }
+
+    .gap-analysis { display: flex; align-items: center; justify-content: space-between; margin-top: 3rem; background: #fff; padding: 3rem; border-radius: 16px; border: 1px solid var(--border); box-shadow: 0 10px 30px rgba(0,0,0,0.03); }
+    .gap-node { text-align: center; width: 30%; }
+    .gap-node .icon { width: 100px; height: 100px; background: rgba(24,79,91,0.05); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 2.5rem; margin: 0 auto 1.5rem; border: 2px dashed var(--primary); }
+    .gap-node h4 { font-size: 1.5rem; color: var(--primary); margin-bottom: 0.5rem; }
+    .gap-bridge { flex: 1; height: 4px; background: repeating-linear-gradient(90deg, var(--border), var(--border) 10px, transparent 10px, transparent 20px); position: relative; margin: 0 2rem; }
+    .gap-bridge::before { content: 'EXECUTION GAP'; position: absolute; top: -45px; left: 50%; transform: translateX(-50%); background: #fdf5df; color: var(--secondary); padding: 8px 20px; border-radius: 20px; font-size: 0.85rem; font-weight: 700; letter-spacing: 1px; white-space: nowrap; border: 1px solid rgba(202,169,76,0.3); }
+
+    .synergy-flow { display: flex; align-items: center; justify-content: space-between; margin-top: 3rem; background: var(--primary); padding: 4rem 2rem; border-radius: 16px; color: #fff; position: relative; overflow: hidden; }
+    .synergy-flow::before { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at center, rgba(202,169,76,0.15) 0%, transparent 60%); }
+    .flow-node { text-align: center; position: relative; z-index: 1; flex: 1; }
+    .flow-node .circle { width: 120px; height: 120px; border: 2px solid rgba(255,255,255,0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 3rem; margin: 0 auto 1.5rem; background: rgba(0,0,0,0.2); backdrop-filter: blur(5px); }
+    .flow-node h4 { font-size: 1.25rem; color: var(--secondary); margin-bottom: 0.5rem; }
+    .flow-arrow { font-size: 2.5rem; color: rgba(255,255,255,0.2); position: relative; z-index: 1; margin: 0 1rem; }
+
+    .clients-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 2rem; }
+    .client-card { border: 1px solid var(--border); border-radius: 12px; padding: 1rem; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 160px; background: #fff; position: relative; }
+    .client-card.dark { background: rgba(255,255,255,0.03); border-color: rgba(255,255,255,0.1); }
+    .client-img { max-width: 80%; max-height: 70%; object-fit: contain; filter: grayscale(100%) opacity(0.7); transition: filter 0.3s ease; position: absolute; z-index: 2; }
+    .client-card.dark .client-img { filter: grayscale(100%) brightness(1000%) opacity(0.7); }
+    .client-placeholder-text { font-size: 1.2rem; color: var(--primary); font-weight: 700; z-index: 1; }
+    .client-card.dark .client-placeholder-text { color: #fff; }
+    .client-card span { font-size: 0.75rem; color: var(--text-muted); margin-top: auto; font-weight: 500; z-index: 1; padding-top: 100px; }
+    .client-card.dark span { color: rgba(255,255,255,0.5); }
+  </style>
+</head>
+<body>
+
+  <!-- ================= PAGE 01: COVER ================= -->
+  <div class="page cover-page">
+    <img src="logo.png" alt="Tadbeer Transformation" class="cover-logo">
+    <h1 class="cover-title">We Turn Great Ideas Into<br><span class="accent">Dominant Brands.</span></h1>
+    <p class="cover-subtitle">Strategy. Technology. People. Marketing. — One team, end-to-end transformation for businesses across Oman & the GCC.</p>
+    <div class="cover-bottom-strip">
+      <span>Company Profile</span>
+      <span>|</span>
+      <span>Muscat, Oman</span>
+      <span>|</span>
+      <span>www.tadbeertt.com</span>
+    </div>
+  </div>
+
+  <!-- ================= PAGE 02: EXEC ================= -->
+  <div class="page">
+    <div class="corner-accent"></div>
+    <div class="page-inner flex-col">
+      <div class="huge-watermark" style="right: 5%;">EXEC</div><div class="bg-graphic-circle" style="width: 600px; height: 600px; bottom: -200px; left: -200px;"></div>
+      <span class="section-label">Executive Foreword</span>
+      <h2 class="section-title">A New Standard for the GCC.</h2>
+      <div class="gold-line"></div>
+      
+      <p class="lead-text">Oman is evolving at an unprecedented pace. Ambitious entrepreneurs and established enterprises alike are recognizing that local success now requires global operational standards.</p>
+      
+      <div class="highlight-box">
+        <h4>The Tadbeer Solution</h4>
+        <p style="margin-bottom:0">We built Tadbeer to be the single, unified engine for business transformation. We combine Strategy, Technology, People, and Marketing under one roof. We map the operation, deploy the software, train the team, integrate the AI, and launch the campaigns—with full accountability at every step.</p>
+      </div>
+      
+      <div style="margin-top: 3rem;">
+        <h4 style="color: var(--primary); font-size: 1.1rem;">The Founders</h4>
+        <p style="font-size: 0.85rem; color: var(--secondary); text-transform: uppercase; font-weight: 700; letter-spacing: 1px;">Tadbeer Transformation</p>
+      </div>
+      <span class="page-number">02</span>
+    </div>
+  </div>
+
+  <!-- ================= PAGE 03: THE SYNERGY MODEL ================= -->
+  <div class="page">
+    <div class="corner-accent"></div>
+    <div class="page-inner flex-col">
+      <div class="huge-watermark" style="right: 5%;">SYNC</div><div class="aesthetic-dots" style="bottom: 50px; left: 50px;"></div>
+      <span class="section-label">Our Approach</span>
+      <h2 class="section-title">The Synergy Model</h2>
+      <div class="gold-line"></div>
+      
+      <p class="lead-text">Four independent pillars. One unified operational loop. Zero friction.</p>
+      
+      <div class="synergy-flow">
+        <div class="flow-node">
+          <div class="circle">📣</div>
+          <h4>1. Marketing</h4>
+          <p style="font-size: 0.85rem; color: rgba(255,255,255,0.7); margin-bottom: 0;">Generates Demand</p>
+        </div>
+        <div class="flow-arrow">➔</div>
+        <div class="flow-node">
+          <div class="circle">💻</div>
+          <h4>2. Software</h4>
+          <p style="font-size: 0.85rem; color: rgba(255,255,255,0.7); margin-bottom: 0;">Captures Data</p>
+        </div>
+        <div class="flow-arrow">➔</div>
+        <div class="flow-node">
+          <div class="circle">🤖</div>
+          <h4>3. AI & Tech</h4>
+          <p style="font-size: 0.85rem; color: rgba(255,255,255,0.7); margin-bottom: 0;">Automates Process</p>
+        </div>
+        <div class="flow-arrow">➔</div>
+        <div class="flow-node">
+          <div class="circle">👥</div>
+          <h4>4. Human Capital</h4>
+          <p style="font-size: 0.85rem; color: rgba(255,255,255,0.7); margin-bottom: 0;">Executes Output</p>
+        </div>
+      </div>
+      <span class="page-number">03</span>
+    </div>
+  </div>
+
+  <!-- ================= PAGE 04: THE 4 PILLARS GRID ================= -->
+  <div class="page">
+    <div class="corner-accent"></div>
+    <div class="page-inner flex-col">
+      <div class="bg-graphic-grid"></div>
+      <span class="section-label">The Synergy Model</span>
+      <h2 class="section-title">The 4 Pillars</h2>
+      <div class="gold-line"></div>
+      
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 2rem;">
+        <div style="border: 1px solid var(--border); padding: 2.5rem; border-radius: 12px; position: relative; background: #fff;">
+          <div style="position: absolute; top: -20px; left: 20px; width: 40px; height: 40px; background: var(--primary); color: #fff; display: flex; align-items: center; justify-content: center; font-weight: bold; border-radius: 8px;">I</div>
+          <h3 style="color: var(--primary); margin-bottom: 0.5rem; margin-top: 0.5rem;">Digital Marketing</h3>
+          <p style="font-size: 0.95rem; margin-bottom: 0;">Driving the demand generation engine. Creating brand authority and pulling qualified leads into the top of the funnel.</p>
+        </div>
+        <div style="border: 1px solid var(--border); padding: 2.5rem; border-radius: 12px; position: relative; background: #fff;">
+          <div style="position: absolute; top: -20px; left: 20px; width: 40px; height: 40px; background: var(--primary); color: #fff; display: flex; align-items: center; justify-content: center; font-weight: bold; border-radius: 8px;">II</div>
+          <h3 style="color: var(--primary); margin-bottom: 0.5rem; margin-top: 0.5rem;">Software Solutions</h3>
+          <p style="font-size: 0.95rem; margin-bottom: 0;">The central nervous system. Capturing leads, processing orders, and managing the core operational database (ERP/WMS).</p>
+        </div>
+        <div style="border: 1px solid var(--border); padding: 2.5rem; border-radius: 12px; position: relative; background: #fff;">
+          <div style="position: absolute; top: -20px; left: 20px; width: 40px; height: 40px; background: var(--primary); color: #fff; display: flex; align-items: center; justify-content: center; font-weight: bold; border-radius: 8px;">III</div>
+          <h3 style="color: var(--primary); margin-bottom: 0.5rem; margin-top: 0.5rem;">AI & Next-Gen Tech</h3>
+          <p style="font-size: 0.95rem; margin-bottom: 0;">The accelerator. Automating repetitive tasks, routing information autonomously, and predicting future trends.</p>
+        </div>
+        <div style="border: 1px solid var(--border); padding: 2.5rem; border-radius: 12px; position: relative; background: #fff;">
+          <div style="position: absolute; top: -20px; left: 20px; width: 40px; height: 40px; background: var(--primary); color: #fff; display: flex; align-items: center; justify-content: center; font-weight: bold; border-radius: 8px;">IV</div>
+          <h3 style="color: var(--primary); margin-bottom: 0.5rem; margin-top: 0.5rem;">Human Capital</h3>
+          <p style="font-size: 0.95rem; margin-bottom: 0;">The operators. Training and structuring the team to utilize Software and AI to convert Marketing demand into revenue.</p>
+        </div>
+      </div>
+      <span class="page-number">04</span>
+    </div>
+  </div>
+
+  <!-- ================= PAGE 05: PILLAR I ================= -->
+  <div class="page">
+    <div class="corner-accent"></div>
+    <div class="page-inner flex-col">
+      <div class="huge-watermark">01</div><div class="bg-graphic-grid"></div>
+      <span class="section-label">Pillar I</span>
+      <h2 class="section-title">Digital Marketing</h2>
+      <div class="gold-line"></div>
+      
+      <p class="lead-text">Bilingual, data-driven marketing ecosystems — not campaigns. We build brand authority and inbound leads that compound.</p>
+      
+      <ul class="capability-list">
+        <li>
+          <span class="check">✓</span>
+          <div>
+            <h4>Bilingual Strategy</h4>
+            <p style="font-size: 0.9rem;">Native, culturally resonant content in English and Arabic.</p>
+          </div>
+        </li>
+        <li>
+          <span class="check">✓</span>
+          <div>
+            <h4>Paid Advertising</h4>
+            <p style="font-size: 0.9rem;">ROI-focused media buying across Meta, Google, and TikTok.</p>
+          </div>
+        </li>
+        <li>
+          <span class="check">✓</span>
+          <div>
+            <h4>SEO Architecture</h4>
+            <p style="font-size: 0.9rem;">Dominating search results through technical SEO.</p>
+          </div>
+        </li>
+        <li>
+          <span class="check">✓</span>
+          <div>
+            <h4>ROAS Attribution</h4>
+            <p style="font-size: 0.9rem;">Closed-loop reporting to track exact ad dollar returns.</p>
+          </div>
+        </li>
+      </ul>
+      <span class="page-number">05</span>
+    </div>
+  </div>
+
+  <!-- ================= PAGE 06: PILLAR II ================= -->
+  <div class="page">
+    <div class="corner-accent"></div>
+    <div class="page-inner flex-col">
+      <div class="huge-watermark">02</div><div class="bg-graphic-grid"></div>
+      <span class="section-label">Pillar II</span>
+      <h2 class="section-title">Software Solutions</h2>
+      <div class="gold-line"></div>
+      
+      <p class="lead-text">VAT-compliant, enterprise-proven systems. We map your operation first, then implement, configure, and train.</p>
+      
+      <ul class="capability-list">
+        <li>
+          <span class="check">✓</span>
+          <div>
+            <h4>ERP Implementations</h4>
+            <p style="font-size: 0.9rem;">Deployment of Odoo, SAP, and Dynamics tailored to your needs.</p>
+          </div>
+        </li>
+        <li>
+          <span class="check">✓</span>
+          <div>
+            <h4>Real-Time WMS</h4>
+            <p style="font-size: 0.9rem;">Barcode-enabled warehouse management to eliminate stockouts.</p>
+          </div>
+        </li>
+        <li>
+          <span class="check">✓</span>
+          <div>
+            <h4>VAT-Compliant POS</h4>
+            <p style="font-size: 0.9rem;">Multi-branch POS fully synchronized with accounting.</p>
+          </div>
+        </li>
+        <li>
+          <span class="check">✓</span>
+          <div>
+            <h4>Custom Integrations</h4>
+            <p style="font-size: 0.9rem;">Connecting ERP to E-commerce and 3PL logistics.</p>
+          </div>
+        </li>
+      </ul>
+      <span class="page-number">06</span>
+    </div>
+  </div>
+
+  <!-- ================= PAGE 07: PILLAR III ================= -->
+  <div class="page">
+    <div class="corner-accent"></div>
+    <div class="page-inner flex-col">
+      <div class="huge-watermark">03</div><div class="bg-graphic-grid"></div>
+      <span class="section-label">Pillar III</span>
+      <h2 class="section-title">AI & Next-Gen Tech</h2>
+      <div class="gold-line"></div>
+      
+      <p class="lead-text">Turn manual friction into automated precision. We deploy AI tools that augment your human capital.</p>
+      
+      <ul class="capability-list">
+        <li>
+          <span class="check">✓</span>
+          <div>
+            <h4>AI Chatbots</h4>
+            <p style="font-size: 0.9rem;">Intelligent customer support that closes sales 24/7.</p>
+          </div>
+        </li>
+        <li>
+          <span class="check">✓</span>
+          <div>
+            <h4>Predictive Analytics</h4>
+            <p style="font-size: 0.9rem;">Machine learning models that forecast demand and inventory.</p>
+          </div>
+        </li>
+        <li>
+          <span class="check">✓</span>
+          <div>
+            <h4>RPA (Automation)</h4>
+            <p style="font-size: 0.9rem;">Automating repetitive data entry across multiple legacy systems.</p>
+          </div>
+        </li>
+        <li>
+          <span class="check">✓</span>
+          <div>
+            <h4>Custom Dashboards</h4>
+            <p style="font-size: 0.9rem;">Executive BI dashboards pulling from every data source.</p>
+          </div>
+        </li>
+      </ul>
+      <span class="page-number">07</span>
+    </div>
+  </div>
+
+  <!-- ================= PAGE 08: PILLAR IV ================= -->
+  <div class="page">
+    <div class="corner-accent"></div>
+    <div class="page-inner flex-col">
+      <div class="huge-watermark">04</div><div class="bg-graphic-grid"></div>
+      <span class="section-label">Pillar IV</span>
+      <h2 class="section-title">Human Capital</h2>
+      <div class="gold-line"></div>
+      
+      <p class="lead-text">Great software needs great operators. We recruit, structure, and upskill the teams that run the engine.</p>
+      
+      <ul class="capability-list">
+        <li>
+          <span class="check">✓</span>
+          <div>
+            <h4>Organizational Design</h4>
+            <p style="font-size: 0.9rem;">Structuring clear hierarchies, OKRs, and reporting lines.</p>
+          </div>
+        </li>
+        <li>
+          <span class="check">✓</span>
+          <div>
+            <h4>Executive Search</h4>
+            <p style="font-size: 0.9rem;">Recruiting top-tier operational talent suited for your culture.</p>
+          </div>
+        </li>
+        <li>
+          <span class="check">✓</span>
+          <div>
+            <h4>Omanization Programs</h4>
+            <p style="font-size: 0.9rem;">Strategic placement and upskilling of local talent.</p>
+          </div>
+        </li>
+        <li>
+          <span class="check">✓</span>
+          <div>
+            <h4>Corporate LMS</h4>
+            <p style="font-size: 0.9rem;">Implementing Learning Management Systems for automated onboarding.</p>
+          </div>
+        </li>
+      </ul>
+      <span class="page-number">08</span>
+    </div>
+  </div>
+
+  <!-- ================= PAGE 09: METRICS ================= -->
+  <div class="page">
+    <div class="corner-accent"></div>
+    <div class="page-inner flex-col">
+      <div class="huge-watermark" style="right: 5%;">DATA</div><div class="bg-graphic-grid"></div>
+      <span class="section-label">Proof of Impact</span>
+      <h2 class="section-title">Global Metrics</h2>
+      <div class="gold-line"></div>
+      
+      <p class="lead-text">We do not deal in vanity metrics. We measure our success entirely by the quantifiable growth of our partners.</p>
+      
+      <div class="bar-chart-container">
+        <div class="bar-col">
+          <div class="bar" style="height: 40%;">
+            <span class="bar-val">15+</span>
+            <span class="bar-lbl">ERP Deployments</span>
+          </div>
+        </div>
+        <div class="bar-col">
+          <div class="bar" style="height: 60%;">
+            <span class="bar-val">300+</span>
+            <span class="bar-lbl">Talents Upskilled</span>
+          </div>
+        </div>
+        <div class="bar-col">
+          <div class="bar" style="height: 80%;">
+            <span class="bar-val">8.4x</span>
+            <span class="bar-lbl">Average ROAS</span>
+          </div>
+        </div>
+        <div class="bar-col">
+          <div class="bar" style="height: 100%;">
+            <span class="bar-val">1M+ OMR</span>
+            <span class="bar-lbl">Ad Spend Managed</span>
+          </div>
+        </div>
+      </div>
+      <span class="page-number">09</span>
+    </div>
+  </div>
+
+  <!-- ================= PAGE 10: CONTACT ================= -->
+  <div class="page">
+    <div class="corner-accent"></div>
+    <div class="page-inner flex-col">
+      <div class="bg-graphic-circle" style="width: 1200px; height: 1200px; bottom: -600px; right: -400px;"></div>
+      <span class="section-label">Next Steps</span>
+      <h2 class="section-title">Initiate Transformation</h2>
+      <div class="gold-line"></div>
+      
+      <p class="lead-text" style="max-width: 600px;">Stop managing vendors. Start building scalable systems. Contact us today to schedule your operational audit.</p>
+      
+      <div class="contact-grid">
+        <div class="contact-block">
+          <div class="contact-label">Headquarters</div>
+          <div class="contact-value">Al Noor Plaza, Madinat Qaboos<br>Muscat, Sultanate of Oman</div>
+        </div>
+        <div class="contact-block">
+          <div class="contact-label">Digital Access</div>
+          <div class="contact-value">www.tadbeertt.com<br>hello@tadbeertt.com</div>
+        </div>
+        <div class="contact-block">
+          <div class="contact-label">Direct Line</div>
+          <div class="contact-value">+968 9000 0000</div>
+        </div>
+        <div class="contact-block">
+          <div class="contact-label">Social</div>
+          <div class="contact-value">@TadbeerTT (LinkedIn, IG)</div>
+        </div>
+      </div>
+      <span class="page-number">10</span>
+    </div>
+  </div>
+
+</body>
+</html>
