@@ -66,13 +66,13 @@ const Hero = () => {
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1.2, delay: 0.5, ease: [0.25, 0.1, 0.25, 1] }}
-            style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem', alignItems: 'center' }}
+            className="hero-buttons"
           >
             <motion.a 
               href="#contact"
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.97 }}
-              className="btn btn-primary"
+              className="btn btn-primary hero-cta-btn"
               style={{ fontSize: '1.05rem', padding: '1rem 2rem' }}
             >
               Book Free Consultation →

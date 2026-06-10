@@ -331,7 +331,7 @@ const About = () => {
             <h2 className="section-title">The Tadbeer Engine</h2>
           </motion.div>
 
-          <div className="visual-story-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '2rem' }}>
+          <div className="visual-story-grid">
             
             {/* 01. The Reality */}
             <motion.div 
@@ -340,9 +340,6 @@ const About = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.1 }}
-              style={{ background: 'var(--bg-alt)', borderRadius: '16px', border: '1px solid var(--border)', padding: '2.5rem 1.5rem', textAlign: 'center', display: 'flex', flexDirection: 'column', gap: '2rem', transition: 'transform 0.3s ease', cursor: 'pointer' }}
-              onMouseOver={(e) => e.currentTarget.style.transform = 'translateY(-10px)'}
-              onMouseOut={(e) => e.currentTarget.style.transform = 'translateY(0)'}
             >
               <div className="visual-story-graphic" style={{ height: '220px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                 <TheGapIllustration />
@@ -356,14 +353,11 @@ const About = () => {
 
             {/* 02. The Philosophy */}
             <motion.div 
-              className="visual-story-card"
+              className="visual-story-card visual-story-card--featured"
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.3 }}
-              style={{ background: 'var(--bg-alt)', borderRadius: '16px', border: '1px solid var(--secondary)', padding: '2.5rem 1.5rem', textAlign: 'center', display: 'flex', flexDirection: 'column', gap: '2rem', transition: 'transform 0.3s ease', cursor: 'pointer', boxShadow: '0 10px 30px rgba(202, 169, 76, 0.1)' }}
-              onMouseOver={(e) => e.currentTarget.style.transform = 'translateY(-10px)'}
-              onMouseOut={(e) => e.currentTarget.style.transform = 'translateY(0)'}
             >
               <div className="visual-story-graphic" style={{ height: '220px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                 <MuscatSparkIllustration />
@@ -382,9 +376,6 @@ const About = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.5 }}
-              style={{ background: 'var(--bg-alt)', borderRadius: '16px', border: '1px solid var(--border)', padding: '2.5rem 1.5rem', textAlign: 'center', display: 'flex', flexDirection: 'column', gap: '2rem', transition: 'transform 0.3s ease', cursor: 'pointer' }}
-              onMouseOver={(e) => e.currentTarget.style.transform = 'translateY(-10px)'}
-              onMouseOut={(e) => e.currentTarget.style.transform = 'translateY(0)'}
             >
               <div className="visual-story-graphic" style={{ height: '220px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                 <SynergyIllustration />
@@ -550,39 +541,27 @@ const About = () => {
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -20 }}
                     transition={{ duration: 0.4 }}
-                    style={{
-                      marginTop: '1rem',
-                      padding: '2rem',
-                      background: 'var(--bg-alt)',
-                      border: '1px solid var(--secondary)',
-                      borderRadius: '12px',
-                      display: 'grid',
-                      gridTemplateColumns: '1fr 200px',
-                      gap: '2rem',
-                      alignItems: 'center',
-                      boxShadow: '0 10px 30px rgba(202, 169, 76, 0.1)',
-                      position: 'relative'
-                    }}
+                    className="timeline-detail-box"
                   >
-                    <div>
-                      <span style={{ fontSize: '0.8rem', color: 'var(--secondary)', textTransform: 'uppercase', letterSpacing: '2px', fontWeight: '700' }}>
+                    <div className="timeline-detail-text">
+                      <span className="timeline-detail-year">
                         {milestones[activeIndex].year}
                       </span>
-                      <h3 style={{ fontSize: '1.5rem', color: 'var(--primary)', marginBottom: '0.5rem', marginTop: '0.25rem' }}>
+                      <h3 className="timeline-detail-title">
                         {milestones[activeIndex].title}
                       </h3>
-                      <p style={{ fontWeight: '600', color: 'var(--text-main)', marginBottom: '0.5rem' }}>
+                      <p className="timeline-detail-summary">
                         {milestones[activeIndex].summary}
                       </p>
-                      <p style={{ color: 'var(--text-muted)', lineHeight: '1.6', fontSize: '0.95rem' }}>
+                      <p className="timeline-detail-desc">
                         {milestones[activeIndex].detail}
                       </p>
                     </div>
-                    <div style={{ borderRadius: '8px', overflow: 'hidden', height: '150px' }}>
+                    <div className="timeline-detail-img-container">
                       <img 
                         src={milestones[activeIndex].image} 
                         alt={milestones[activeIndex].title}
-                        style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                        className="timeline-detail-img"
                       />
                     </div>
                   </motion.div>
