@@ -4660,5 +4660,152 @@ html, body {
     padding-top: 1rem !important;
     font-size: 0.8rem !important;
   }
+
+  /* ==========================================================================
+     GLOBAL MOBILE COMPACTION & POLISHING OVERLAY
+     ========================================================================== */
+
+  /* Section Spacing Compactions */
+  .hero-section {
+    padding: 6rem 1rem 1.5rem !important;
+  }
+  .about-narrative-section {
+    padding: 2.25rem 1rem !important;
+  }
+  .process-section {
+    padding: 2.25rem 1rem !important;
+  }
+  .faq-section {
+    padding: 2.25rem 1rem !important;
+  }
+  .cta-section {
+    padding: 2.75rem 1rem !important;
+  }
+  .tp-section {
+    padding: 2.25rem 0 !important;
+  }
+  .tp-header {
+    margin-bottom: 1.5rem !important;
+  }
+  .careers-culture {
+    padding: 2.25rem 1rem !important;
+  }
+  .careers-hero {
+    padding: 6rem 1rem 2rem !important;
+  }
+
+  /* Typography Optimization */
+  .section-title {
+    font-size: clamp(1.4rem, 6.5vw, 1.8rem) !important;
+    line-height: 1.25 !important;
+    margin-bottom: 0.5rem !important;
+  }
+  .hero-title {
+    font-size: clamp(1.75rem, 8vw, 2.1rem) !important;
+    line-height: 1.25 !important;
+    margin-bottom: 0.75rem !important;
+  }
+  .section-subtitle, .hero-desc, .tp-subtitle {
+    font-size: 0.9rem !important;
+    line-height: 1.5 !important;
+    margin-top: 0.5rem !important;
+  }
+  .section-label {
+    font-size: 0.7rem !important;
+    letter-spacing: 1px !important;
+    margin-bottom: 0.35rem !important;
+  }
+  .story-headline {
+    font-size: 1.45rem !important;
+  }
+
+  /* Card and Grid Padding Reductions */
+  .services-grid {
+    gap: 1rem !important;
+  }
+  .service-card {
+    padding: 1rem !important;
+    border-radius: 8px !important;
+  }
+  .service-card-body {
+    padding: 0.75rem 0.25rem !important;
+  }
+  .service-card-body .service-desc {
+    font-size: 0.85rem !important;
+    line-height: 1.4 !important;
+    margin-bottom: 0.75rem !important;
+  }
+  .service-card-body .service-list {
+    margin-bottom: 1rem !important;
+  }
+  .service-card-body .service-list li {
+    font-size: 0.8rem !important;
+    margin-bottom: 0.35rem !important;
+  }
+  .service-card-body .learn-more-action-trigger {
+    margin-top: 0.5rem !important;
+    font-size: 0.85rem !important;
+  }
+
+  .values-grid {
+    gap: 0.75rem !important;
+  }
+  .value-card {
+    padding: 1rem !important;
+    border-radius: 8px !important;
+  }
+  .value-card h3 {
+    font-size: 1.05rem !important;
+    margin-bottom: 0.4rem !important;
+  }
+  .value-card p {
+    font-size: 0.85rem !important;
+    line-height: 1.4 !important;
+  }
+
+  .visual-story-card {
+    padding: 1.25rem 1rem !important;
+    gap: 1rem !important;
+  }
+
+  .process-card {
+    padding: 1.15rem 1rem !important;
+    border-radius: 8px !important;
+  }
+  .process-number {
+    font-size: 1.5rem !important;
+    width: 32px !important;
+    height: 32px !important;
+    margin-bottom: 0.5rem !important;
+  }
+  .process-title {
+    font-size: 1.05rem !important;
+    margin-bottom: 0.35rem !important;
+  }
+  .process-desc {
+    font-size: 0.85rem !important;
+    line-height: 1.4 !important;
+  }
+
+  /* FAQ Accordion Compacting */
+  .faq-grid {
+    gap: 0.75rem !important;
+  }
+  .faq-item {
+    margin-bottom: 0.5rem !important;
+    border-radius: 6px !important;
+  }
+  .faq-question {
+    padding: 0.85rem 1rem !important;
+    font-size: 0.9rem !important;
+  }
+  .faq-question-text {
+    font-weight: 600 !important;
+  }
+  .faq-answer {
+    padding: 0 1rem 0.85rem !important;
+    font-size: 0.82rem !important;
+    line-height: 1.4 !important;
+  }
 }
 
