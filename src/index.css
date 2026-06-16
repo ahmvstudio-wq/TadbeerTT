@@ -3791,8 +3791,66 @@ img {
 }
 
 /* ==========================================================================
-   MOBILE FOCUS RESPONSIVE CLASSES OVERHAUL
+   MOBILE FOCUS RESPONSIVE CLASSES OVERHAUL & POLISHING
    ========================================================================== */
+
+/* Global Centering, margins, and headings decorations on Mobile */
+@media (max-width: 768px) {
+  :root {
+    --section-padding: 2.25rem 1rem !important;
+  }
+  
+  .section-header-block,
+  .tp-header,
+  .faq-header,
+  .cta-section,
+  .section-title,
+  .section-label,
+  .section-subtitle,
+  .section-desc,
+  .section-header-block p,
+  .sp-hero-title,
+  .sp-hero-subtitle,
+  .sp-hero-desc {
+    text-align: center !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    display: block !important;
+  }
+
+  .sp-hero-breadcrumbs {
+    justify-content: center !important;
+  }
+
+  .section-title {
+    font-size: 1.65rem !important;
+    line-height: 1.2 !important;
+    margin-bottom: 1rem !important;
+    position: relative;
+  }
+
+  /* Premium visual divider line */
+  .section-title::after {
+    content: '';
+    display: block;
+    width: 45px;
+    height: 3px;
+    background: var(--secondary);
+    margin: 0.75rem auto 0;
+    border-radius: 2px;
+  }
+
+  /* Tighter card elements globally to fit more on screen at once */
+  .card, 
+  .job-card, 
+  .why-card, 
+  .process-card, 
+  .stat-box-card, 
+  .ops-feature-card,
+  .ac-main-grid button {
+    padding: 1.25rem !important;
+  }
+}
 
 /* Advanced Capabilities classes */
 .ac-main-grid {
@@ -3814,7 +3872,7 @@ img {
 @media (max-width: 768px) {
   .ac-main-grid {
     grid-template-columns: 1fr;
-    gap: 1.5rem;
+    gap: 1.25rem;
   }
   .ac-demo-grid {
     grid-template-columns: 1fr;
@@ -3845,9 +3903,46 @@ img {
   border-right: 1px solid var(--border);
   padding-right: 2rem;
 }
-.work-navigator button {
-  flex-shrink: 0;
+.work-nav-btn {
+  background: transparent;
+  border: 1px solid transparent;
+  padding: 1.25rem;
+  border-radius: 12px;
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 }
+.work-nav-btn.active {
+  background: var(--bg-alt);
+  border-color: var(--secondary);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+.work-nav-btn-glow {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: var(--secondary);
+}
+.work-nav-btn-category {
+  display: block;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 0.25rem;
+}
+.work-nav-btn-title {
+  font-size: 1.1rem;
+  margin: 0;
+  font-weight: 700;
+}
+
 .work-viewport {
   position: relative;
   border-radius: 20px;
@@ -3879,26 +3974,111 @@ img {
     gap: 1.5rem;
   }
   .work-navigator {
-    flex-direction: row;
-    overflow-x: auto;
-    white-space: nowrap;
-    border-right: none;
-    border-bottom: 1px solid var(--border);
-    padding-right: 0;
-    padding-bottom: 1rem;
-    margin-bottom: 0.5rem;
-    width: 100%;
-    gap: 0.75rem;
+    flex-direction: row !important;
+    justify-content: flex-start !important;
+    align-items: center !important;
+    overflow-x: auto !important;
+    white-space: nowrap !important;
+    border: 1px solid var(--border) !important;
+    border-radius: 40px !important;
+    padding: 0.35rem 0.5rem !important;
+    background: rgba(24, 79, 91, 0.03) !important;
+    margin-bottom: 1.5rem !important;
+    width: 100% !important;
+    gap: 0.5rem !important;
     -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .work-navigator::-webkit-scrollbar {
+    display: none;
+  }
+  .work-nav-btn {
+    padding: 0.5rem 1.25rem !important;
+    border-radius: 30px !important;
+    text-align: center !important;
+    display: inline-flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: auto !important;
+    border: 1px solid transparent !important;
+    box-shadow: none !important;
+    background: transparent !important;
+  }
+  .work-nav-btn.active {
+    background: var(--primary) !important;
+    border-color: var(--primary) !important;
+  }
+  .work-nav-btn-glow {
+    display: none !important;
+  }
+  .work-nav-btn.active .work-nav-btn-title {
+    color: white !important;
+  }
+  .work-nav-btn.active .work-nav-btn-category {
+    color: var(--secondary) !important;
   }
   .work-viewport {
-    min-height: 480px;
+    min-height: 460px;
   }
   .work-viewport-content {
-    padding: 1.5rem;
+    padding: 1.25rem;
+    text-align: center !important;
+    align-items: center !important;
+  }
+  .work-viewport-content p {
+    text-align: center !important;
+    font-size: 0.95rem !important;
+    margin-bottom: 1.5rem !important;
   }
   .work-viewport-headline {
-    font-size: 1.75rem;
+    font-size: 1.6rem !important;
+    text-align: center !important;
+    margin-bottom: 1rem !important;
+  }
+}
+
+/* Circular score gauges classes */
+.readiness-gauge-wrapper {
+  position: relative;
+  width: 160px;
+  height: 160px;
+  margin: 0 auto 2rem;
+}
+.readiness-gauge-wrapper--small {
+  width: 120px;
+  height: 120px;
+  margin: 0 auto 1.5rem;
+}
+.readiness-gauge-score {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: var(--primary);
+  line-height: 1;
+}
+.readiness-gauge-wrapper--small .readiness-gauge-score {
+  font-size: 2rem;
+}
+.readiness-gauge-label {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+}
+.readiness-gauge-wrapper--small .readiness-gauge-label {
+  font-size: 0.65rem;
+}
+
+@media (max-width: 768px) {
+  .readiness-gauge-wrapper {
+    width: 120px;
+    height: 120px;
+    margin: 0 auto 1.5rem;
+  }
+  .readiness-gauge-score {
+    font-size: 2rem;
+  }
+  .readiness-gauge-label {
+    font-size: 0.65rem;
   }
 }
 
@@ -3976,7 +4156,12 @@ img {
 
 @media (max-width: 768px) {
   .roi-output-card {
-    padding: 1.75rem;
+    padding: 1.5rem !important;
+    text-align: center !important;
+    align-items: center !important;
+  }
+  .roi-output-card div {
+    text-align: center !important;
   }
 }
 @media (max-width: 480px) {
@@ -4043,3 +4228,349 @@ img {
     grid-template-columns: 1fr;
   }
 }
+
+/* ==========================================================================
+   MOBILE CENTERING & OVERFLOW PROTECTION OVERHAUL
+   ========================================================================== */
+
+/* Prevent horizontal scroll globally on small viewports */
+html, body {
+  overflow-x: hidden !important;
+  width: 100% !important;
+  position: relative !important;
+}
+
+#root {
+  overflow-x: hidden !important;
+  width: 100% !important;
+}
+
+@media (max-width: 768px) {
+  /* Compacting section spacing and padding */
+  :root {
+    --section-padding: 2.25rem 1rem !important;
+  }
+
+  .container {
+    padding: 0 1rem !important;
+  }
+
+  /* Global headings decorations and alignments */
+  .section-label,
+  .section-subtitle,
+  .section-title,
+  .section-desc,
+  .section-header-block,
+  .section-header-block p,
+  .sp-hero-title,
+  .sp-hero-subtitle,
+  .sp-hero-desc {
+    text-align: center !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+
+  /* Force gold lines to look highly premium and centered */
+  .section-title::after {
+    content: '';
+    display: block;
+    width: 45px;
+    height: 3px;
+    background: var(--secondary) !important;
+    margin: 0.75rem auto 0 !important;
+    border-radius: 2px !important;
+  }
+
+  /* 1. Hero Section Centering */
+  .hero-text {
+    text-align: center !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+  }
+  
+  .hero-pillars-strip {
+    justify-content: center !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    width: auto !important;
+    display: flex !important;
+  }
+
+  .hero-buttons {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 1rem !important;
+  }
+
+  .hero-buttons .btn-primary {
+    width: 100% !important;
+    max-width: 320px !important;
+    justify-content: center !important;
+  }
+
+  .hero-image-container {
+    height: 220px !important;
+    margin-top: 2rem !important;
+  }
+
+  /* 2. Industries Served Centering */
+  .values-grid {
+    grid-template-columns: 1fr !important;
+    gap: 1.25rem !important;
+  }
+
+  /* 3. Services Pillar Cards Centering */
+  .services-grid {
+    grid-template-columns: 1fr !important;
+    gap: 1.5rem !important;
+  }
+
+  .service-card {
+    text-align: center !important;
+    align-items: center !important;
+  }
+
+  .service-card-body {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    padding: 1.5rem 1rem !important;
+  }
+
+  .service-card-body .title-row {
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 0.25rem !important;
+    margin-bottom: 0.75rem !important;
+  }
+
+  .service-card-body .service-desc {
+    text-align: center !important;
+    margin-bottom: 1rem !important;
+  }
+
+  .service-card-body .service-list {
+    display: inline-flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    margin: 0 auto 1.5rem !important;
+    text-align: left !important;
+  }
+
+  .service-card-body .learn-more-action-trigger {
+    justify-content: center !important;
+    margin-top: 1rem !important;
+  }
+
+  /* 4. Our Work Data Console Overhauls */
+  .work-viewport-content {
+    padding: 1.5rem 1.25rem !important;
+    align-items: center !important;
+    text-align: center !important;
+  }
+
+  .work-state-toggle {
+    justify-content: center !important;
+    margin-bottom: 2rem !important;
+    width: 100% !important;
+  }
+
+  .work-state-toggle button {
+    flex: 1 !important;
+    justify-content: center !important;
+    font-size: 0.85rem !important;
+    padding: 0.6rem 1rem !important;
+  }
+
+  .work-viewport-headline {
+    font-size: 1.5rem !important;
+    text-align: center !important;
+  }
+
+  .work-viewport-content p {
+    text-align: center !important;
+    font-size: 0.9rem !important;
+    margin-bottom: 2rem !important;
+  }
+
+  .work-metrics-grid {
+    grid-template-columns: 1fr !important;
+    gap: 1rem !important;
+    width: 100% !important;
+  }
+
+  .work-metrics-grid > div {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    text-align: center !important;
+    padding: 1rem !important;
+  }
+
+  /* 5. Interactive Assessment (Readiness Score) Sizer & Padding Compressions */
+  .readiness-card {
+    padding: 1.25rem 1rem !important;
+    border-radius: 12px !important;
+  }
+
+  .assessment-layout {
+    grid-template-columns: 1fr !important;
+    gap: 1rem !important;
+    text-align: center !important;
+  }
+
+  .assessment-illustration-wrapper {
+    max-height: 120px !important;
+    padding: 0.5rem !important;
+    margin: 0 auto !important;
+  }
+
+  .assessment-layout h3 {
+    text-align: center !important;
+    font-size: 1.1rem !important;
+    margin-bottom: 1rem !important;
+  }
+
+  .assessment-layout button {
+    padding: 0.75rem 1rem !important;
+    font-size: 0.85rem !important;
+    justify-content: center !important;
+  }
+
+  .readiness-matrix-grid {
+    grid-template-columns: 1fr !important;
+    gap: 0.75rem !important;
+    margin-bottom: 1.5rem !important;
+  }
+
+  .readiness-matrix-grid > div {
+    padding: 1rem !important;
+    text-align: center !important;
+  }
+
+  .readiness-matrix-grid h4 {
+    justify-content: center !important;
+  }
+
+  /* 6. ROI Calculator Mobile Alignments & Sizing */
+  .roi-section {
+    padding: 2.25rem 1rem !important;
+  }
+
+  .roi-inputs-container {
+    gap: 1.5rem !important;
+  }
+
+  .roi-input-group label {
+    font-size: 0.85rem !important;
+  }
+
+  .roi-benchmarks-box {
+    padding: 1rem !important;
+    text-align: center !important;
+  }
+
+  .roi-benchmarks-box h4 {
+    text-align: center !important;
+  }
+
+  .roi-benchmarks-box div {
+    text-align: left !important;
+  }
+
+  .roi-output-card {
+    padding: 1.5rem 1rem !important;
+    text-align: center !important;
+    align-items: center !important;
+  }
+
+  .roi-output-card div {
+    text-align: center !important;
+  }
+
+  .roi-output-card .roi-results-subgrid {
+    grid-template-columns: 1fr !important;
+    gap: 1rem !important;
+    margin-bottom: 1.5rem !important;
+    padding-top: 1.5rem !important;
+  }
+
+  .roi-output-card .btn {
+    width: 100% !important;
+    justify-content: center !important;
+  }
+
+  /* 7. Why Section (4 Reasons) Centering */
+  .why-section {
+    padding: 3rem 0 0 !important;
+  }
+
+  .why-grid > div:first-child {
+    display: none !important; /* Hide why-image on mobile to shorten the page */
+  }
+
+  .why-grid > div:last-child {
+    text-align: center !important;
+  }
+
+  .why-grid h2 {
+    text-align: center !important;
+    font-size: 1.6rem !important;
+  }
+
+  .why-cards {
+    grid-template-columns: 1fr !important;
+    gap: 1rem !important;
+  }
+
+  .why-card {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    text-align: center !important;
+    padding: 1.25rem !important;
+  }
+
+  /* 8. Footer Mobile Centering */
+  .footer {
+    text-align: center !important;
+  }
+
+  .footer-grid {
+    grid-template-columns: 1fr !important;
+    gap: 2rem !important;
+    justify-items: center !important;
+  }
+
+  .footer-grid > div {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    text-align: center !important;
+  }
+
+  .footer-grid p {
+    text-align: center !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+
+  .footer-links {
+    align-items: center !important;
+  }
+
+  .footer-links li {
+    justify-content: center !important;
+    text-align: center !important;
+  }
+
+  .footer-bottom {
+    flex-direction: column !important;
+    gap: 0.75rem !important;
+    text-align: center !important;
+  }
+}
+

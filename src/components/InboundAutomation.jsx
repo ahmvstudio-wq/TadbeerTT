@@ -48,7 +48,7 @@ const InboundAutomation = () => {
         </div>
 
         {/* Integrations & Outcomes */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '2rem' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '2rem' }}>
           <div style={{ background: 'white', borderRadius: '16px', padding: '2.5rem', border: '1px solid var(--border)' }}>
             <h3 style={{ fontSize: '1.25rem', marginBottom: '1.5rem', color: 'var(--primary)' }}>Seamless Integrations</h3>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>

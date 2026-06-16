@@ -120,8 +120,8 @@ const AssessmentFlow = ({ assessmentType = 'digital-transformation', onComplete 
               const score = calculateScore();
               return (
                 <>
-                  <div style={{ position: 'relative', width: '120px', height: '120px', margin: '0 auto 1.5rem' }}>
-                    <svg viewBox="0 0 100 100" style={{ transform: 'rotate(-90deg)' }}>
+                  <div className="readiness-gauge-wrapper readiness-gauge-wrapper--small">
+                    <svg viewBox="0 0 100 100" style={{ transform: 'rotate(-90deg)', width: '100%', height: '100%' }}>
                       <circle cx="50" cy="50" r="45" fill="none" stroke="var(--border)" strokeWidth="8" />
                       <motion.circle 
                         cx="50" cy="50" r="45" fill="none" stroke="var(--secondary)" strokeWidth="8"
@@ -133,8 +133,8 @@ const AssessmentFlow = ({ assessmentType = 'digital-transformation', onComplete 
                       />
                     </svg>
                     <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
-                      <span style={{ fontSize: '2rem', fontWeight: '800', color: 'var(--primary)', lineHeight: '1' }}>{score}</span>
-                      <span style={{ fontSize: '0.65rem', color: 'var(--text-muted)', textTransform: 'uppercase' }}>/ 100</span>
+                      <span className="readiness-gauge-score">{score}</span>
+                      <span className="readiness-gauge-label">/ 100</span>
                     </div>
                   </div>
 

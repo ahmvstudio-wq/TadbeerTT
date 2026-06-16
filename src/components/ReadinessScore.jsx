@@ -256,6 +256,7 @@ const ReadinessScore = () => {
           whileInView={{ opacity: 1, y: 0, scale: 1 }}
           viewport={{ once: true, margin: "-10%" }}
           transition={{ type: "spring", bounce: 0.15, duration: 1.0 }}
+          className="readiness-card"
           style={{ background: 'white', borderRadius: '16px', border: '1px solid var(--border)', padding: '2.5rem', boxShadow: '0 10px 30px rgba(0,0,0,0.02)' }}
         >
           <AnimatePresence mode="wait">
@@ -322,8 +323,8 @@ const ReadinessScore = () => {
                   const result = getResultContent(score);
                   return (
                     <>
-                      <div style={{ position: 'relative', width: '160px', height: '160px', margin: '0 auto 2rem' }}>
-                        <svg viewBox="0 0 100 100" style={{ transform: 'rotate(-90deg)' }}>
+                      <div className="readiness-gauge-wrapper">
+                        <svg viewBox="0 0 100 100" style={{ transform: 'rotate(-90deg)', width: '100%', height: '100%' }}>
                           <circle cx="50" cy="50" r="45" fill="none" stroke="var(--border)" strokeWidth="8" />
                           <motion.circle 
                             cx="50" cy="50" r="45" fill="none" stroke="var(--secondary)" strokeWidth="8"
@@ -335,8 +336,8 @@ const ReadinessScore = () => {
                           />
                         </svg>
                         <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
-                          <span style={{ fontSize: '2.5rem', fontWeight: '800', color: 'var(--primary)', lineHeight: '1' }}>{score}</span>
-                          <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)', textTransform: 'uppercase' }}>out of 100</span>
+                          <span className="readiness-gauge-score">{score}</span>
+                          <span className="readiness-gauge-label">out of 100</span>
                         </div>
                       </div>
 

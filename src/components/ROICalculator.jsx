@@ -49,7 +49,7 @@ const ROICalculator = () => {
         <div className="roi-calc-grid">
           
           {/* Inputs */}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
+          <div className="roi-inputs-container" style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
             <div className="roi-input-group">
               <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.5rem' }}>
                 <label style={{ fontWeight: '600', color: 'var(--text-main)', fontSize: '0.95rem' }}>Monthly Revenue (OMR)</label>
@@ -82,7 +82,7 @@ const ROICalculator = () => {
               <input type="range" min="0" max="50000" step="500" value={marketingSpend} onChange={(e) => setMarketingSpend(Number(e.target.value))} style={{ width: '100%', accentColor: 'var(--secondary)' }} />
             </div>
             {/* Calculation Parameters & GCC Benchmarks */}
-            <div style={{ background: 'rgba(24,79,91,0.02)', border: '1px solid var(--border)', borderRadius: '12px', padding: '1.25rem', marginTop: '1rem' }}>
+            <div className="roi-benchmarks-box" style={{ background: 'rgba(24,79,91,0.02)', border: '1px solid var(--border)', borderRadius: '12px', padding: '1.25rem', marginTop: '1rem' }}>
               <h4 style={{ fontSize: '0.85rem', fontWeight: '700', color: 'var(--primary)', marginBottom: '0.75rem' }}>📊 Calculation Parameters & Benchmarks</h4>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', fontSize: '0.8rem', color: 'var(--text-muted)' }}>
                 <div>• Average GCC administrative hourly wage modeled at <strong>OMR 3.50</strong>.</div>

@@ -168,29 +168,18 @@ const OurWork = () => {
                 <button
                   key={proj.id}
                   onClick={() => handleProjectSwitch(idx)}
-                  style={{
-                    background: isActive ? 'var(--bg-alt)' : 'transparent',
-                    border: isActive ? '1px solid var(--secondary)' : '1px solid transparent',
-                    padding: '1.25rem',
-                    borderRadius: '12px',
-                    textAlign: 'left',
-                    cursor: 'pointer',
-                    transition: 'all 0.3s ease',
-                    position: 'relative',
-                    overflow: 'hidden',
-                    boxShadow: isActive ? '0 4px 15px rgba(0,0,0,0.05)' : 'none'
-                  }}
+                  className={`work-nav-btn ${isActive ? 'active' : ''}`}
                 >
                   {isActive && (
                     <motion.div 
                       layoutId="activeGlow"
-                      style={{ position: 'absolute', left: 0, top: 0, bottom: 0, width: '4px', background: 'var(--secondary)' }}
+                      className="work-nav-btn-glow"
                     />
                   )}
-                  <span style={{ display: 'block', fontSize: '0.75rem', color: isActive ? 'var(--secondary)' : 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '0.25rem' }}>
+                  <span className="work-nav-btn-category" style={{ color: isActive ? 'var(--secondary)' : 'var(--text-muted)' }}>
                     {proj.category}
                   </span>
-                  <h4 style={{ color: isActive ? 'var(--primary)' : 'var(--text-main)', fontSize: '1.1rem', margin: 0, fontWeight: '700' }}>{proj.client}</h4>
+                  <h4 className="work-nav-btn-title" style={{ color: isActive ? 'var(--primary)' : 'var(--text-main)' }}>{proj.client}</h4>
                 </button>
               );
             })}
@@ -219,7 +208,7 @@ const OurWork = () => {
             <div className="work-viewport-content">
               
               {/* State Toggle */}
-              <div style={{ display: 'flex', gap: '1rem', marginBottom: '3rem', flexWrap: 'wrap' }}>
+              <div className="work-state-toggle" style={{ display: 'flex', gap: '1rem', marginBottom: '3rem', flexWrap: 'wrap' }}>
                 <button
                   onClick={() => setViewState('problem')}
                   style={{
@@ -276,7 +265,7 @@ const OurWork = () => {
                   </p>
 
                   {/* Proof Metrics Grid */}
-                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1.5rem' }}>
+                  <div className="work-metrics-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1.5rem' }}>
                     {(viewState === 'problem' ? activeProject.problem.metrics : activeProject.solution.metrics).map((m, i) => {
                       const Icon = m.icon;
                       return (
