@@ -198,13 +198,13 @@ img {
 }
 
 .main-logo {
-  height: 70px;
+  height: 100px;
   width: auto;
   transition: var(--transition);
 }
 
 .navbar.scrolled .main-logo {
-  height: 55px;
+  height: 80px;
 }
 
 /* ===== HERO ===== */
@@ -3145,10 +3145,10 @@ img {
     padding: 0.75rem 1.25rem;
   }
   .main-logo {
-    height: 48px;
+    height: 72px;
   }
   .navbar.scrolled .main-logo {
-    height: 42px;
+    height: 58px;
   }
 
   /* Hero adjustments for clean breathing room */
@@ -4503,6 +4503,11 @@ html, body {
     justify-content: center !important;
   }
 
+  .roi-impact-value {
+    font-size: 2.2rem !important;
+    word-break: break-all !important;
+  }
+
   /* 7. Why Section (4 Reasons) Centering */
   .why-section {
     padding: 3rem 0 0 !important;
@@ -4539,10 +4544,20 @@ html, body {
     border-radius: 0px !important;
     border-left: none !important;
     border-right: none !important;
+    border-top: 1px solid rgba(24, 79, 91, 0.08) !important;
+    border-bottom: 1px solid rgba(24, 79, 91, 0.08) !important;
     max-width: 100% !important;
     margin-left: -1rem !important;
     margin-right: -1rem !important;
     width: calc(100% + 2rem) !important;
+  }
+
+  .client-card-chip {
+    border-radius: 4px !important;
+  }
+
+  .client-card-chip > div {
+    border-radius: 2px !important;
   }
 
   .footer {

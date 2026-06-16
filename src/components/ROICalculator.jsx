@@ -96,7 +96,7 @@ const ROICalculator = () => {
           <div className="roi-output-card" style={{ background: 'var(--primary)', borderRadius: '16px', color: 'white', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
             <div style={{ marginBottom: '2rem' }}>
               <div style={{ fontSize: '0.9rem', textTransform: 'uppercase', letterSpacing: '1px', opacity: 0.8, marginBottom: '0.5rem' }}>Projected Annual Impact</div>
-              <motion.div key={results.totalImpact} initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} style={{ fontSize: '3.5rem', fontWeight: '800', color: 'var(--secondary)', lineHeight: '1.1' }}>
+              <motion.div className="roi-impact-value" key={results.totalImpact} initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} style={{ fontSize: '3.5rem', fontWeight: '800', color: 'var(--secondary)', lineHeight: '1.1' }}>
                 {formatCurrency(results.totalImpact)}
               </motion.div>
             </div>
