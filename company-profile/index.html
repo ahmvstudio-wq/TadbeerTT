@@ -194,17 +194,60 @@ h4 { font-size: 24px; font-weight: 700; line-height: 1.3; }
 
 /* Logo strip */
 .logo-strip {
-  display: flex; flex-wrap: wrap; gap: 20px;
-  align-items: center; margin-top: 32px;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 16px;
+  margin-top: 36px;
 }
-.logo-strip img {
-  height: 120px; width: auto;
-  object-fit: contain;
-  filter: grayscale(0.3);
-  border-radius: 12px;
+.logo-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
   background: #fff;
-  border: 1px solid var(--border);
-  padding: 16px 24px;
+  border: 1.5px solid rgba(0,0,0,0.07);
+  border-radius: 18px;
+  padding: 0;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.04);
+  transition: transform 0.3s cubic-bezier(.34,1.56,.64,1), box-shadow 0.3s ease, border-color 0.3s ease;
+  overflow: hidden;
+  cursor: default;
+}
+.logo-card:hover {
+  transform: translateY(-6px) scale(1.03);
+  box-shadow: 0 12px 36px rgba(202,169,76,0.18);
+  border-color: var(--secondary);
+}
+.logo-image-wrapper {
+  width: 100%;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px 18px 0 18px;
+}
+.logo-card img {
+  width: 100%;
+  height: 80px;
+  object-fit: contain;
+  mix-blend-mode: multiply;
+  display: block;
+}
+.logo-name {
+  width: 100%;
+  background: #f9f9f9;
+  border-top: 1px solid rgba(0,0,0,0.05);
+  padding: 10px 8px;
+  font-size: 10px;
+  font-weight: 700;
+  color: #555;
+  text-align: center;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 /* Page number */
@@ -411,7 +454,7 @@ h4 { font-size: 24px; font-weight: 700; line-height: 1.3; }
         <div class="stat-item stat-item-light"><span class="stat-num">40+</span><span class="stat-label">Transformations</span></div>
         <div class="stat-item stat-item-light"><span class="stat-num">1M+</span><span class="stat-label">OMR Managed</span></div>
       </div>
-      <span class="page-num page-num-light">COMPANY PROFILE 2025</span>
+      <span class="page-num page-num-light">01 / 24</span>
     </div>
   </div>
 </div>
@@ -439,7 +482,7 @@ h4 { font-size: 24px; font-weight: 700; line-height: 1.3; }
         <span class="pill">Full Accountability</span>
       </div>
       <img src="logo.png" class="watermark" alt="">
-      <span class="page-num">02 / 20</span>
+      <span class="page-num">02 / 24</span>
     </div>
   </div>
 </div>
@@ -484,7 +527,7 @@ h4 { font-size: 24px; font-weight: 700; line-height: 1.3; }
         </div>
       </div>
       <p style="margin-top: 32px; font-size: 16px; color: var(--primary); font-weight: 600; padding: 16px 20px; background: var(--teal-glow); border-radius: 10px; border-left: 4px solid var(--primary);">Tadbeer eliminates every one of these friction points. Permanently.</p>
-      <span class="page-num">03 / 20</span>
+      <span class="page-num">03 / 24</span>
     </div>
   </div>
 </div>
@@ -527,7 +570,7 @@ h4 { font-size: 24px; font-weight: 700; line-height: 1.3; }
     </div>
     <p style="text-align:center; margin-top: 40px; font-size: 18px; font-weight: 600; color: var(--primary);">Complete Integration. Zero Friction. — From initial audit to final deploy.</p>
     <img src="logo.png" class="watermark" alt="">
-    <span class="page-num">04 / 20</span>
+    <span class="page-num">04 / 24</span>
   </div>
 </div>
 
@@ -564,7 +607,7 @@ h4 { font-size: 24px; font-weight: 700; line-height: 1.3; }
       <div class="pill-row" style="margin-top: 24px;">
         <span class="pill">Meta Ads</span><span class="pill">Google Ads</span><span class="pill">TikTok</span><span class="pill">HubSpot</span><span class="pill">GA4</span><span class="pill">Semrush</span>
       </div>
-      <span class="page-num">05 / 20</span>
+      <span class="page-num">05 / 24</span>
     </div>
   </div>
 </div>
@@ -588,11 +631,11 @@ h4 { font-size: 24px; font-weight: 700; line-height: 1.3; }
       <p class="lead" style="font-size:17px; margin-top:16px;">VAT-compliant, enterprise-proven systems. We map your operation first, then implement, configure, train, and support.</p>
       <ul class="check-list" style="margin-top: 24px;">
         <li>Modular ERP Implementations (Odoo, SAP, Microsoft Dynamics)</li>
-        <li>Real-Time Barcode & RF-Enabled WMS</li>
-        <li>Multi-Branch POS Synchronisation & Oman VAT</li>
+        <li>Visitor Management & Property Management Systems</li>
+        <li>Comprehensive Procurement Management Systems</li>
         <li>Custom Payroll & HRMS (Labour Law Compliant)</li>
+        <li>Multi-Branch POS Synchronisation & Real-Time WMS</li>
         <li>Secure API Integrations & Database Merging</li>
-        <li>Corporate LMS for Rapid Staff Training</li>
       </ul>
       <div class="pipeline-row" style="margin-top: 32px;">
         <div class="pipeline-step"><div class="card-num">01</div><h4 class="card-title" style="font-size:14px;">Process Mapping</h4></div>
@@ -603,11 +646,163 @@ h4 { font-size: 24px; font-weight: 700; line-height: 1.3; }
         <span class="pill">Odoo</span><span class="pill">SAP</span><span class="pill">Dynamics</span><span class="pill">PostgreSQL</span><span class="pill">Node.js</span><span class="pill">Docker</span>
       </div>
       <img src="logo.png" class="watermark" alt="">
-      <span class="page-num">06 / 20</span>
+      <span class="page-num">06 / 24</span>
     </div>
   </div>
 </div>
 
+
+
+<!-- ═══════════════════════════════════════════════════════════════════════
+     SLIDE XX — VISITOR MANAGEMENT SYSTEM
+     ═══════════════════════════════════════════════════════════════════════ -->
+<div class="slide bg-white">
+  <div class="split-left">
+    <div class="visual">
+      <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=1200&q=85&auto=format" alt="Visitor Management">
+      <div class="visual-overlay"></div>
+      <div style="position:absolute; bottom:60px; left:60px; right:60px; color:#fff;">
+        <span class="tag tag-light" style="margin-bottom:12px;">SOFTWARE PORTFOLIO</span>
+        <h3 style="color:#fff; font-size: 36px;">Visitor Management<br><span style="color:var(--secondary-light); font-style:italic;">نظام إدارة الزوار</span></h3>
+      </div>
+    </div>
+    <div class="content" style="padding: 60px 70px;">
+      <span class="tag">SECURE & SEAMLESS ENTRY</span>
+      <h3>First Impressions.<br><span class="accent">Total Security.</span></h3>
+      <p class="lead" style="font-size:17px; margin-top:16px;">Transform your reception into a digital fortress. Modernize check-ins, capture data instantly, ensure 100% facility security, and eliminate paper logs entirely with a seamless, cloud-based platform designed for enterprise control.</p>
+      <ul class="check-list" style="margin-top: 24px;">
+        <li>Digital check-in kiosks with facial recognition & ID scanning</li>
+        <li>Automated host notifications (SMS/Email/WhatsApp)</li>
+        <li>Pre-registration portals for VIPs and contractors with QR codes</li>
+        <li>Real-time evacuation lists and live dashboard monitoring</li>
+        <li>Integration with physical access control systems (turnstiles/doors)</li>
+        <li>Customizable visitor badges printed instantly on arrival</li>
+        <li>Comprehensive analytics on visitor footfall and peak hours</li>
+        <li>Multi-tenant architecture for large corporate office buildings</li>
+        <li>Watchlist screening and blocklist management for enhanced security</li>
+      </ul>
+      <div class="pipeline-row" style="margin-top: 32px;">
+        <div class="pipeline-step"><div class="card-num">01</div><h4 class="card-title" style="font-size:14px;">Site Audit</h4></div>
+        <div class="pipeline-step"><div class="card-num">02</div><h4 class="card-title" style="font-size:14px;">Kiosk Setup</h4></div>
+        <div class="pipeline-step"><div class="card-num">03</div><h4 class="card-title" style="font-size:14px;">Go-Live</h4></div>
+      </div>
+      <span class="page-num">07 / 24</span>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════════════
+     SLIDE XX — PROPERTY MANAGEMENT SYSTEM
+     ═══════════════════════════════════════════════════════════════════════ -->
+<div class="slide bg-cream">
+  <div class="split-right">
+    <div class="visual">
+      <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=1200&q=85&auto=format" alt="Property Management">
+      <div class="visual-overlay" style="background: linear-gradient(135deg, rgba(202,169,76,0.9), rgba(180,148,48,0.6));"></div>
+      <div style="position:absolute; bottom:60px; left:60px; right:60px; color:#fff;">
+        <span class="tag tag-light" style="margin-bottom:12px;">SOFTWARE PORTFOLIO</span>
+        <h3 style="color:#fff; font-size: 36px;">Property Management<br><span style="color:#fff; font-style:italic;">إدارة الأملاك</span></h3>
+      </div>
+    </div>
+    <div class="content" style="padding: 60px 70px;">
+      <span class="tag">REAL ESTATE AUTOMATION</span>
+      <h3>Maximize Yields.<br><span class="accent">Minimize Friction.</span></h3>
+      <p class="lead" style="font-size:17px; margin-top:16px;">Centralize your real estate portfolio. From leasing and maintenance to billing and tenant communication, manage everything in one dashboard. Optimize occupancy rates and automate the entire tenant lifecycle.</p>
+      <ul class="check-list" style="margin-top: 24px;">
+        <li>Automated lease tracking and proactive renewal reminders</li>
+        <li>Digital tenant portals for online rent payments and complaints</li>
+        <li>Financial reporting, PDC (Post-Dated Cheque) tracking & Oman VAT</li>
+        <li>Facility maintenance scheduling and automated vendor dispatch</li>
+        <li>Multi-property portfolio analytics and real-time vacancy tracking</li>
+        <li>Utility billing distribution and automated recurring invoicing</li>
+        <li>Document management for digital lease agreements and contracts</li>
+        <li>Dynamic pricing integration to optimize rental yields over time</li>
+        <li>Mobile application for property managers to inspect on the go</li>
+      </ul>
+      <div class="pipeline-row" style="margin-top: 32px;">
+        <div class="pipeline-step"><div class="card-num">01</div><h4 class="card-title" style="font-size:14px;">Data Migration</h4></div>
+        <div class="pipeline-step"><div class="card-num">02</div><h4 class="card-title" style="font-size:14px;">Tenant Portal</h4></div>
+        <div class="pipeline-step"><div class="card-num">03</div><h4 class="card-title" style="font-size:14px;">Operations Sync</h4></div>
+      </div>
+      <img src="logo.png" class="watermark" alt="">
+      <span class="page-num">08 / 24</span>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════════════
+     SLIDE XX — PROCUREMENT MANAGEMENT SYSTEM
+     ═══════════════════════════════════════════════════════════════════════ -->
+<div class="slide bg-white">
+  <div class="split-left">
+    <div class="visual">
+      <img src="https://images.unsplash.com/photo-1553413077-190dd305871c?w=1200&q=85&auto=format" alt="Procurement & Supply Chain">
+      <div class="visual-overlay" style="background: linear-gradient(135deg, rgba(24,79,91,0.9), rgba(24,79,91,0.3));"></div>
+      <div style="position:absolute; bottom:60px; left:60px; right:60px; color:#fff;">
+        <span class="tag tag-light" style="margin-bottom:12px;">SOFTWARE PORTFOLIO</span>
+        <h3 style="color:#fff; font-size: 36px;">Procurement System<br><span style="color:var(--secondary-light); font-style:italic;">نظام إدارة المشتريات</span></h3>
+      </div>
+    </div>
+    <div class="content" style="padding: 60px 70px;">
+      <span class="tag">SUPPLY CHAIN INTELLIGENCE</span>
+      <h3>Control Spend.<br><span class="accent">Accelerate Sourcing.</span></h3>
+      <p class="lead" style="font-size:17px; margin-top:16px;">Eliminate bottlenecked approvals and rogue spending. Streamline the entire procure-to-pay lifecycle with smart, automated workflows that ensure maximum cost savings, transparent vendor bidding, and strict compliance.</p>
+      <ul class="check-list" style="margin-top: 24px;">
+        <li>Multi-level digital purchase approval workflows and dynamic routing</li>
+        <li>Automated RFQ (Request for Quotation) generation and vendor bidding</li>
+        <li>Vendor performance tracking and compliance risk scoring</li>
+        <li>Real-time budget visibility across all departments and cost centers</li>
+        <li>Contract lifecycle management and automated expiration alerts</li>
+        <li>Seamless three-way matching with WMS and Accounts Payable</li>
+        <li>E-catalog integration for standardized indirect procurement</li>
+        <li>Supplier self-service portal for onboarding, invoices, and updates</li>
+        <li>Advanced spend analytics dashboards to identify cost-saving areas</li>
+      </ul>
+      <div class="pipeline-row" style="margin-top: 32px;">
+        <div class="pipeline-step"><div class="card-num">01</div><h4 class="card-title" style="font-size:14px;">Workflow Design</h4></div>
+        <div class="pipeline-step"><div class="card-num">02</div><h4 class="card-title" style="font-size:14px;">Vendor Onboard</h4></div>
+        <div class="pipeline-step"><div class="card-num">03</div><h4 class="card-title" style="font-size:14px;">Spend Control</h4></div>
+      </div>
+      <span class="page-num">09 / 24</span>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════════════
+     SLIDE XX — HRMS
+     ═══════════════════════════════════════════════════════════════════════ -->
+<div class="slide bg-cream">
+  <div class="split-right">
+    <div class="visual">
+      <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=1200&q=85&auto=format" alt="HR Team Collaboration">
+      <div class="visual-overlay" style="background: linear-gradient(135deg, rgba(15,51,59,0.9), rgba(15,51,59,0.5));"></div>
+      <div style="position:absolute; bottom:60px; left:60px; right:60px; color:#fff;">
+        <span class="tag tag-light" style="margin-bottom:12px;">SOFTWARE PORTFOLIO</span>
+        <h3 style="color:#fff; font-size: 36px;">Advanced HRMS<br><span style="color:#4FD1C5; font-style:italic;">نظام الموارد البشرية</span></h3>
+      </div>
+    </div>
+    <div class="content" style="padding: 60px 70px;">
+      <span class="tag">PEOPLE OPERATIONS</span>
+      <h3>Empower Teams.<br><span class="accent">Ensure Compliance.</span></h3>
+      <p class="lead" style="font-size:17px; margin-top:16px;">A core HR engine built for the GCC. Fully compliant with local labor laws, Omanization tracking, and automated payroll.</p>
+      <ul class="check-list" style="margin-top: 24px;">
+        <li>Automated payroll calculation including overtime, bonuses, and deductions</li>
+        <li>Oman Labor Law compliance and Ministry reporting formats</li>
+        <li>Employee self-service mobile app for leaves, loans, and letters</li>
+        <li>Biometric attendance machine integration (Fingerprint/Facial)</li>
+        <li>Performance management, OKR tracking, and appraisal cycles</li>
+        <li>Document management (Visas, Passports, Contracts) with expiry alerts</li>
+      </ul>
+      <div class="pipeline-row" style="margin-top: 32px;">
+        <div class="pipeline-step"><div class="card-num">01</div><h4 class="card-title" style="font-size:14px;">Policy Mapping</h4></div>
+        <div class="pipeline-step"><div class="card-num">02</div><h4 class="card-title" style="font-size:14px;">System Setup</h4></div>
+        <div class="pipeline-step"><div class="card-num">03</div><h4 class="card-title" style="font-size:14px;">Team Adoption</h4></div>
+      </div>
+      <img src="logo.png" class="watermark" alt="">
+      <span class="page-num">10 / 24</span>
+    </div>
+  </div>
+</div>
 <!-- ═══════════════════════════════════════════════════════════════════════
      SLIDE 07 — AI & NEXT-GEN TECH DEEP DIVE
      ═══════════════════════════════════════════════════════════════════════ -->
@@ -636,7 +831,7 @@ h4 { font-size: 24px; font-weight: 700; line-height: 1.3; }
       <div class="pill-row" style="margin-top: 24px;">
         <span class="pill pill-dark">LangChain</span><span class="pill pill-dark">LlamaIndex</span><span class="pill pill-dark">OpenAI</span><span class="pill pill-dark">Claude</span><span class="pill pill-dark">PyTorch</span><span class="pill pill-dark">FastAPI</span>
       </div>
-      <span class="page-num page-num-light">07 / 20</span>
+      <span class="page-num page-num-light">11 / 24</span>
     </div>
   </div>
 </div>
@@ -675,7 +870,7 @@ h4 { font-size: 24px; font-weight: 700; line-height: 1.3; }
       <span style="font-size: 24px;">🔒</span>
       <span style="color: rgba(255,255,255,0.7); font-size: 15px;">Your data never trains public models. Isolated instances with strict role-based access and hallucination guardrails.</span>
     </div>
-    <span class="page-num page-num-light">08 / 20</span>
+    <span class="page-num page-num-light">12 / 24</span>
   </div>
 </div>
 
@@ -708,7 +903,7 @@ h4 { font-size: 24px; font-weight: 700; line-height: 1.3; }
       <div class="pill-row" style="margin-top: 24px;">
         <span class="pill">BambooHR</span><span class="pill">Odoo HR</span><span class="pill">LinkedIn Recruiter</span><span class="pill">Ministry Portals</span>
       </div>
-      <span class="page-num">09 / 20</span>
+      <span class="page-num">13 / 24</span>
     </div>
   </div>
 </div>
@@ -745,7 +940,7 @@ h4 { font-size: 24px; font-weight: 700; line-height: 1.3; }
       </div>
     </div>
     <img src="logo.png" class="watermark" alt="">
-    <span class="page-num">10 / 20</span>
+    <span class="page-num">14 / 24</span>
   </div>
 </div>
 
@@ -780,7 +975,7 @@ h4 { font-size: 24px; font-weight: 700; line-height: 1.3; }
           <div><h4 class="card-title-light">Your Vision. Your Blueprint.</h4><p class="card-desc-light" style="margin-top:4px;">Built around you — not a template that worked for someone else.</p></div>
         </div>
       </div>
-      <span class="page-num page-num-light">11 / 20</span>
+      <span class="page-num page-num-light">15 / 24</span>
     </div>
   </div>
 </div>
@@ -788,40 +983,592 @@ h4 { font-size: 24px; font-weight: 700; line-height: 1.3; }
 <!-- ═══════════════════════════════════════════════════════════════════════
      SLIDE 12 — CLIENTS WE SERVE
      ═══════════════════════════════════════════════════════════════════════ -->
-<div class="slide bg-white">
-  <div class="inner-pad">
-    <div class="corner-deco"></div>
-    <span class="tag">OUR CLIENTS | عملاؤنا</span>
-    <h2>Trusted by Leading<br>Businesses Across <span class="accent">Oman & the GCC</span></h2>
-    <p class="lead">From F&B and government to manufacturing, telecom, and construction — we've earned the trust of industry leaders.</p>
-    <div class="logo-strip" style="margin-top: 48px; gap: 16px;">
-      <img src="al-harrasi-rope-factory.png" alt="Al Harrasi Rope Factory" title="Al Harrasi Rope Factory">
-      <img src="oman-air.png" alt="Oman Air" title="Oman Air">
-      <img src="tamimah-telecom.png" alt="Tamimah Telecom" title="Tamimah Telecom">
-      <img src="mafran-meat.png" alt="Mafran Meat" title="Mafran Meat">
-      <img src="gloria-jeans.png" alt="Gloria Jean's" title="Gloria Jean's">
-      <img src="al-qurum-perfumes.png" alt="Al Qurum Perfumes" title="Al Qurum Perfumes">
-      <img src="sultanate-of-marble.png" alt="Sultanate of Marble" title="Sultanate of Marble">
-      <img src="ministry-of-awqaf.png" alt="Ministry of Awqaf" title="Ministry of Awqaf">
-      <img src="amec-almusharfi.png" alt="AMEC Almusharfi" title="AMEC Almusharfi Engineering">
-      <img src="atiin.png" alt="Atiin" title="Atiin">
-      <img src="troxy.png" alt="Troxy" title="Troxy">
-      <img src="oudh-al-kabir.png" alt="Oudh Al Kabir" title="Oudh Al Kabir">
-      <img src="yalla-pass.jpg" alt="Yalla Pass" title="Yalla Pass">
-      <img src="yalla.png" alt="Yalla" title="Yalla">
+<div class="slide" style="background: #f8f6f2;">
+  <div style="
+    padding: 52px 90px 52px;
+    height: 100%;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+  ">
+
+    <!-- Subtle gold accent top-right -->
+    <div style="position:absolute; top:0; right:0; width:280px; height:280px;
+      background: radial-gradient(circle at top right, rgba(202,169,76,0.12) 0%, transparent 70%);
+      pointer-events:none;"></div>
+
+    <!-- Header -->
+    <div style="display:flex; align-items:flex-end; justify-content:space-between; margin-bottom:32px; flex-shrink:0;">
+      <div>
+        <span style="
+          display: inline-block;
+          font-size: 11px;
+          font-weight: 800;
+          letter-spacing: 3px;
+          text-transform: uppercase;
+          color: var(--secondary);
+          margin-bottom: 12px;
+        ">OUR CLIENTS</span>
+        <h2 style="margin:0; font-size: 36px; line-height:1.15; color:#1a1a1a;">
+          Trusted by Leading Businesses<br>Across <span style="color:var(--secondary); font-style:italic;">Oman &amp; the GCC</span>
+        </h2>
+      </div>
+      <div style="text-align:right;">
+        <div style="font-size:42px; font-weight:900; color:var(--secondary); line-height:1;">14</div>
+        <div style="font-size:12px; font-weight:700; color:#999; letter-spacing:2px; text-transform:uppercase; margin-top:4px;">Client Brands</div>
+        <div style="display:flex; gap:8px; justify-content:flex-end; margin-top:14px; flex-wrap:wrap;">
+          <span style="padding:4px 12px; background:rgba(202,169,76,0.12); border:1px solid rgba(202,169,76,0.3); border-radius:20px; font-size:10.5px; font-weight:700; color:#9a7c2e;">✈️ Aviation</span>
+          <span style="padding:4px 12px; background:rgba(202,169,76,0.12); border:1px solid rgba(202,169,76,0.3); border-radius:20px; font-size:10.5px; font-weight:700; color:#9a7c2e;">🍽️ F&amp;B</span>
+          <span style="padding:4px 12px; background:rgba(202,169,76,0.12); border:1px solid rgba(202,169,76,0.3); border-radius:20px; font-size:10.5px; font-weight:700; color:#9a7c2e;">🏛️ Govt</span>
+          <span style="padding:4px 12px; background:rgba(202,169,76,0.12); border:1px solid rgba(202,169,76,0.3); border-radius:20px; font-size:10.5px; font-weight:700; color:#9a7c2e;">📡 Telecom</span>
+          <span style="padding:4px 12px; background:rgba(202,169,76,0.12); border:1px solid rgba(202,169,76,0.3); border-radius:20px; font-size:10.5px; font-weight:700; color:#9a7c2e;">💎 Luxury</span>
+        </div>
+      </div>
     </div>
-    <div class="pill-row" style="margin-top: 40px;">
-      <span class="pill">🍽️ F&B</span>
-      <span class="pill">🏛️ Government</span>
-      <span class="pill">🏭 Manufacturing</span>
-      <span class="pill">📡 Telecom</span>
-      <span class="pill">🏗️ Construction</span>
-      <span class="pill">🛒 Retail</span>
-      <span class="pill">✈️ Aviation</span>
-      <span class="pill">💎 Luxury</span>
+
+    <!-- Logo grid: 5 + 5 + 4 rows -->
+    <div style="display:flex; flex-direction:column; gap:18px; flex:1;">
+      <div style="
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 18px;
+      ">
+        <div style="
+        background: #ffffff;
+        border: 1px solid rgba(0,0,0,0.06);
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+        transition: all 0.35s cubic-bezier(.34,1.56,.64,1);
+        cursor: default;
+        display: flex;
+        flex-direction: column;
+"
+          onmouseover="this.style.transform='translateY(-8px) scale(1.04)';this.style.boxShadow='0 20px 50px rgba(202,169,76,0.25)';this.style.borderColor='#caa94c'"
+          onmouseout="this.style.transform='';this.style.boxShadow='0 2px 16px rgba(0,0,0,0.06)';this.style.borderColor='rgba(0,0,0,0.06)'">
+          <div style="
+            flex: 1;
+            min-height: 150px;
+            background-image: url('al-harrasi-rope-factory.png');
+            background-size: 72%;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-color: #ffffff;
+          "></div>
+          <div style="
+            padding: 12px 10px 13px;
+            text-align: center;
+            font-size: 10px;
+            font-weight: 800;
+            color: #777;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            border-top: 1px solid rgba(0,0,0,0.05);
+            background: #fafafa;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+          ">Al Harrasi</div>
+        </div>
+        <div style="
+        background: #ffffff;
+        border: 1px solid rgba(0,0,0,0.06);
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+        transition: all 0.35s cubic-bezier(.34,1.56,.64,1);
+        cursor: default;
+        display: flex;
+        flex-direction: column;
+"
+          onmouseover="this.style.transform='translateY(-8px) scale(1.04)';this.style.boxShadow='0 20px 50px rgba(202,169,76,0.25)';this.style.borderColor='#caa94c'"
+          onmouseout="this.style.transform='';this.style.boxShadow='0 2px 16px rgba(0,0,0,0.06)';this.style.borderColor='rgba(0,0,0,0.06)'">
+          <div style="
+            flex: 1;
+            min-height: 150px;
+            background-image: url('oman-air.png');
+            background-size: 72%;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-color: #ffffff;
+          "></div>
+          <div style="
+            padding: 12px 10px 13px;
+            text-align: center;
+            font-size: 10px;
+            font-weight: 800;
+            color: #777;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            border-top: 1px solid rgba(0,0,0,0.05);
+            background: #fafafa;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+          ">Oman Air</div>
+        </div>
+        <div style="
+        background: #ffffff;
+        border: 1px solid rgba(0,0,0,0.06);
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+        transition: all 0.35s cubic-bezier(.34,1.56,.64,1);
+        cursor: default;
+        display: flex;
+        flex-direction: column;
+"
+          onmouseover="this.style.transform='translateY(-8px) scale(1.04)';this.style.boxShadow='0 20px 50px rgba(202,169,76,0.25)';this.style.borderColor='#caa94c'"
+          onmouseout="this.style.transform='';this.style.boxShadow='0 2px 16px rgba(0,0,0,0.06)';this.style.borderColor='rgba(0,0,0,0.06)'">
+          <div style="
+            flex: 1;
+            min-height: 150px;
+            background-image: url('tamimah-telecom.png');
+            background-size: 72%;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-color: #ffffff;
+          "></div>
+          <div style="
+            padding: 12px 10px 13px;
+            text-align: center;
+            font-size: 10px;
+            font-weight: 800;
+            color: #777;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            border-top: 1px solid rgba(0,0,0,0.05);
+            background: #fafafa;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+          ">Tech Nova</div>
+        </div>
+        <div style="
+        background: #ffffff;
+        border: 1px solid rgba(0,0,0,0.06);
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+        transition: all 0.35s cubic-bezier(.34,1.56,.64,1);
+        cursor: default;
+        display: flex;
+        flex-direction: column;
+"
+          onmouseover="this.style.transform='translateY(-8px) scale(1.04)';this.style.boxShadow='0 20px 50px rgba(202,169,76,0.25)';this.style.borderColor='#caa94c'"
+          onmouseout="this.style.transform='';this.style.boxShadow='0 2px 16px rgba(0,0,0,0.06)';this.style.borderColor='rgba(0,0,0,0.06)'">
+          <div style="
+            flex: 1;
+            min-height: 150px;
+            background-image: url('mafran-meat.png');
+            background-size: 72%;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-color: #ffffff;
+          "></div>
+          <div style="
+            padding: 12px 10px 13px;
+            text-align: center;
+            font-size: 10px;
+            font-weight: 800;
+            color: #777;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            border-top: 1px solid rgba(0,0,0,0.05);
+            background: #fafafa;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+          ">Mafran Meat</div>
+        </div>
+        <div style="
+        background: #ffffff;
+        border: 1px solid rgba(0,0,0,0.06);
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+        transition: all 0.35s cubic-bezier(.34,1.56,.64,1);
+        cursor: default;
+        display: flex;
+        flex-direction: column;
+"
+          onmouseover="this.style.transform='translateY(-8px) scale(1.04)';this.style.boxShadow='0 20px 50px rgba(202,169,76,0.25)';this.style.borderColor='#caa94c'"
+          onmouseout="this.style.transform='';this.style.boxShadow='0 2px 16px rgba(0,0,0,0.06)';this.style.borderColor='rgba(0,0,0,0.06)'">
+          <div style="
+            flex: 1;
+            min-height: 150px;
+            background-image: url('gloria-jeans.png');
+            background-size: 72%;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-color: #ffffff;
+          "></div>
+          <div style="
+            padding: 12px 10px 13px;
+            text-align: center;
+            font-size: 10px;
+            font-weight: 800;
+            color: #777;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            border-top: 1px solid rgba(0,0,0,0.05);
+            background: #fafafa;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+          ">Gloria Jean's</div>
+        </div>
+      </div>
+      <div style="
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 18px;
+      ">
+        <div style="
+        background: #ffffff;
+        border: 1px solid rgba(0,0,0,0.06);
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+        transition: all 0.35s cubic-bezier(.34,1.56,.64,1);
+        cursor: default;
+        display: flex;
+        flex-direction: column;
+"
+          onmouseover="this.style.transform='translateY(-8px) scale(1.04)';this.style.boxShadow='0 20px 50px rgba(202,169,76,0.25)';this.style.borderColor='#caa94c'"
+          onmouseout="this.style.transform='';this.style.boxShadow='0 2px 16px rgba(0,0,0,0.06)';this.style.borderColor='rgba(0,0,0,0.06)'">
+          <div style="
+            flex: 1;
+            min-height: 150px;
+            background-image: url('al-qurum-perfumes.png');
+            background-size: 72%;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-color: #ffffff;
+          "></div>
+          <div style="
+            padding: 12px 10px 13px;
+            text-align: center;
+            font-size: 10px;
+            font-weight: 800;
+            color: #777;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            border-top: 1px solid rgba(0,0,0,0.05);
+            background: #fafafa;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+          ">Al Qurum Perfumes</div>
+        </div>
+        <div style="
+        background: #ffffff;
+        border: 1px solid rgba(0,0,0,0.06);
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+        transition: all 0.35s cubic-bezier(.34,1.56,.64,1);
+        cursor: default;
+        display: flex;
+        flex-direction: column;
+"
+          onmouseover="this.style.transform='translateY(-8px) scale(1.04)';this.style.boxShadow='0 20px 50px rgba(202,169,76,0.25)';this.style.borderColor='#caa94c'"
+          onmouseout="this.style.transform='';this.style.boxShadow='0 2px 16px rgba(0,0,0,0.06)';this.style.borderColor='rgba(0,0,0,0.06)'">
+          <div style="
+            flex: 1;
+            min-height: 150px;
+            background-image: url('sultanate-of-marble.png');
+            background-size: 72%;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-color: #ffffff;
+          "></div>
+          <div style="
+            padding: 12px 10px 13px;
+            text-align: center;
+            font-size: 10px;
+            font-weight: 800;
+            color: #777;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            border-top: 1px solid rgba(0,0,0,0.05);
+            background: #fafafa;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+          ">Sultanate of Marble</div>
+        </div>
+        <div style="
+        background: #ffffff;
+        border: 1px solid rgba(0,0,0,0.06);
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+        transition: all 0.35s cubic-bezier(.34,1.56,.64,1);
+        cursor: default;
+        display: flex;
+        flex-direction: column;
+"
+          onmouseover="this.style.transform='translateY(-8px) scale(1.04)';this.style.boxShadow='0 20px 50px rgba(202,169,76,0.25)';this.style.borderColor='#caa94c'"
+          onmouseout="this.style.transform='';this.style.boxShadow='0 2px 16px rgba(0,0,0,0.06)';this.style.borderColor='rgba(0,0,0,0.06)'">
+          <div style="
+            flex: 1;
+            min-height: 150px;
+            background-image: url('ministry-of-awqaf.png');
+            background-size: 72%;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-color: #ffffff;
+          "></div>
+          <div style="
+            padding: 12px 10px 13px;
+            text-align: center;
+            font-size: 10px;
+            font-weight: 800;
+            color: #777;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            border-top: 1px solid rgba(0,0,0,0.05);
+            background: #fafafa;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+          ">Ministry of Awqaf</div>
+        </div>
+        <div style="
+        background: #ffffff;
+        border: 1px solid rgba(0,0,0,0.06);
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+        transition: all 0.35s cubic-bezier(.34,1.56,.64,1);
+        cursor: default;
+        display: flex;
+        flex-direction: column;
+"
+          onmouseover="this.style.transform='translateY(-8px) scale(1.04)';this.style.boxShadow='0 20px 50px rgba(202,169,76,0.25)';this.style.borderColor='#caa94c'"
+          onmouseout="this.style.transform='';this.style.boxShadow='0 2px 16px rgba(0,0,0,0.06)';this.style.borderColor='rgba(0,0,0,0.06)'">
+          <div style="
+            flex: 1;
+            min-height: 150px;
+            background-image: url('amec-almusharfi.png');
+            background-size: 72%;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-color: #ffffff;
+          "></div>
+          <div style="
+            padding: 12px 10px 13px;
+            text-align: center;
+            font-size: 10px;
+            font-weight: 800;
+            color: #777;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            border-top: 1px solid rgba(0,0,0,0.05);
+            background: #fafafa;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+          ">AMEC Almusharfi</div>
+        </div>
+        <div style="
+        background: #ffffff;
+        border: 1px solid rgba(0,0,0,0.06);
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+        transition: all 0.35s cubic-bezier(.34,1.56,.64,1);
+        cursor: default;
+        display: flex;
+        flex-direction: column;
+"
+          onmouseover="this.style.transform='translateY(-8px) scale(1.04)';this.style.boxShadow='0 20px 50px rgba(202,169,76,0.25)';this.style.borderColor='#caa94c'"
+          onmouseout="this.style.transform='';this.style.boxShadow='0 2px 16px rgba(0,0,0,0.06)';this.style.borderColor='rgba(0,0,0,0.06)'">
+          <div style="
+            flex: 1;
+            min-height: 150px;
+            background-image: url('atiin.png');
+            background-size: 72%;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-color: #ffffff;
+          "></div>
+          <div style="
+            padding: 12px 10px 13px;
+            text-align: center;
+            font-size: 10px;
+            font-weight: 800;
+            color: #777;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            border-top: 1px solid rgba(0,0,0,0.05);
+            background: #fafafa;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+          ">Atiin</div>
+        </div>
+      </div>
+      <div style="
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 18px;
+      ">
+        <div style="
+        background: #ffffff;
+        border: 1px solid rgba(0,0,0,0.06);
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+        transition: all 0.35s cubic-bezier(.34,1.56,.64,1);
+        cursor: default;
+        display: flex;
+        flex-direction: column;
+"
+          onmouseover="this.style.transform='translateY(-8px) scale(1.04)';this.style.boxShadow='0 20px 50px rgba(202,169,76,0.25)';this.style.borderColor='#caa94c'"
+          onmouseout="this.style.transform='';this.style.boxShadow='0 2px 16px rgba(0,0,0,0.06)';this.style.borderColor='rgba(0,0,0,0.06)'">
+          <div style="
+            flex: 1;
+            min-height: 150px;
+            background-image: url('troxy.png');
+            background-size: 72%;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-color: #ffffff;
+          "></div>
+          <div style="
+            padding: 12px 10px 13px;
+            text-align: center;
+            font-size: 10px;
+            font-weight: 800;
+            color: #777;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            border-top: 1px solid rgba(0,0,0,0.05);
+            background: #fafafa;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+          ">Troxy</div>
+        </div>
+        <div style="
+        background: #ffffff;
+        border: 1px solid rgba(0,0,0,0.06);
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+        transition: all 0.35s cubic-bezier(.34,1.56,.64,1);
+        cursor: default;
+        display: flex;
+        flex-direction: column;
+"
+          onmouseover="this.style.transform='translateY(-8px) scale(1.04)';this.style.boxShadow='0 20px 50px rgba(202,169,76,0.25)';this.style.borderColor='#caa94c'"
+          onmouseout="this.style.transform='';this.style.boxShadow='0 2px 16px rgba(0,0,0,0.06)';this.style.borderColor='rgba(0,0,0,0.06)'">
+          <div style="
+            flex: 1;
+            min-height: 150px;
+            background-image: url('oudh-al-kabir.png');
+            background-size: 72%;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-color: #ffffff;
+          "></div>
+          <div style="
+            padding: 12px 10px 13px;
+            text-align: center;
+            font-size: 10px;
+            font-weight: 800;
+            color: #777;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            border-top: 1px solid rgba(0,0,0,0.05);
+            background: #fafafa;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+          ">Oudh Al Kabir</div>
+        </div>
+        <div style="
+        background: #ffffff;
+        border: 1px solid rgba(0,0,0,0.06);
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+        transition: all 0.35s cubic-bezier(.34,1.56,.64,1);
+        cursor: default;
+        display: flex;
+        flex-direction: column;
+"
+          onmouseover="this.style.transform='translateY(-8px) scale(1.04)';this.style.boxShadow='0 20px 50px rgba(202,169,76,0.25)';this.style.borderColor='#caa94c'"
+          onmouseout="this.style.transform='';this.style.boxShadow='0 2px 16px rgba(0,0,0,0.06)';this.style.borderColor='rgba(0,0,0,0.06)'">
+          <div style="
+            flex: 1;
+            min-height: 150px;
+            background-image: url('yalla-pass.jpg');
+            background-size: 72%;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-color: #ffffff;
+          "></div>
+          <div style="
+            padding: 12px 10px 13px;
+            text-align: center;
+            font-size: 10px;
+            font-weight: 800;
+            color: #777;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            border-top: 1px solid rgba(0,0,0,0.05);
+            background: #fafafa;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+          ">Yalla Pass</div>
+        </div>
+        <div style="
+        background: #ffffff;
+        border: 1px solid rgba(0,0,0,0.06);
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+        transition: all 0.35s cubic-bezier(.34,1.56,.64,1);
+        cursor: default;
+        display: flex;
+        flex-direction: column;
+"
+          onmouseover="this.style.transform='translateY(-8px) scale(1.04)';this.style.boxShadow='0 20px 50px rgba(202,169,76,0.25)';this.style.borderColor='#caa94c'"
+          onmouseout="this.style.transform='';this.style.boxShadow='0 2px 16px rgba(0,0,0,0.06)';this.style.borderColor='rgba(0,0,0,0.06)'">
+          <div style="
+            flex: 1;
+            min-height: 150px;
+            background-image: url('yalla.png');
+            background-size: 72%;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-color: #ffffff;
+          "></div>
+          <div style="
+            padding: 12px 10px 13px;
+            text-align: center;
+            font-size: 10px;
+            font-weight: 800;
+            color: #777;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            border-top: 1px solid rgba(0,0,0,0.05);
+            background: #fafafa;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+          ">Yalla</div>
+        </div>
+      </div>
     </div>
+
     <img src="logo.png" class="watermark" alt="">
-    <span class="page-num">12 / 20</span>
+    <span class="page-num">16 / 24</span>
   </div>
 </div>
 
@@ -852,7 +1599,7 @@ h4 { font-size: 24px; font-weight: 700; line-height: 1.3; }
       </div>
     </div>
     <img src="logo.png" class="watermark" alt="">
-    <span class="page-num">13 / 20</span>
+    <span class="page-num">17 / 24</span>
   </div>
 </div>
 
@@ -883,7 +1630,7 @@ h4 { font-size: 24px; font-weight: 700; line-height: 1.3; }
       </div>
     </div>
     <img src="logo.png" class="watermark" alt="">
-    <span class="page-num">14 / 20</span>
+    <span class="page-num">18 / 24</span>
   </div>
 </div>
 
@@ -917,7 +1664,7 @@ h4 { font-size: 24px; font-weight: 700; line-height: 1.3; }
       </div>
     </div>
     <img src="logo.png" class="watermark" alt="">
-    <span class="page-num">15 / 20</span>
+    <span class="page-num">19 / 24</span>
   </div>
 </div>
 
@@ -929,76 +1676,186 @@ h4 { font-size: 24px; font-weight: 700; line-height: 1.3; }
     <span class="tag">TECHNOLOGY ECOSYSTEM</span>
     <h2>50+ Service & Technology <span class="accent">Partners</span></h2>
     <p class="lead" style="font-size: 17px;">We integrate and work with industry-leading platforms across every domain to deliver end-to-end transformation.</p>
-    <div style="display: flex; flex-wrap: wrap; gap: 14px; margin-top: 40px;">
-      <!-- ERP -->
-      <span class="pill" style="font-size: 14px; padding: 12px 24px; background: #fff;">ERPNext</span>
-      <span class="pill" style="font-size: 14px; padding: 12px 24px; background: #fff;">SAP</span>
-      <span class="pill" style="font-size: 14px; padding: 12px 24px; background: #fff;">Odoo</span>
-      <span class="pill" style="font-size: 14px; padding: 12px 24px; background: #fff;">Microsoft Dynamics 365</span>
-      <span class="pill" style="font-size: 14px; padding: 12px 24px; background: #fff;">Oracle NetSuite</span>
-      
-      <!-- AI -->
-      <span class="pill" style="font-size: 14px; padding: 12px 24px; background: #fff;">OpenAI</span>
-      <span class="pill" style="font-size: 14px; padding: 12px 24px; background: #fff;">Google Gemini</span>
-      <span class="pill" style="font-size: 14px; padding: 12px 24px; background: #fff;">DeepSeek</span>
-      <span class="pill" style="font-size: 14px; padding: 12px 24px; background: #fff;">Anthropic Claude</span>
-      <span class="pill" style="font-size: 14px; padding: 12px 24px; background: #fff;">Microsoft Azure AI</span>
-      
-      <!-- Cloud -->
-      <span class="pill" style="font-size: 14px; padding: 12px 24px; background: #fff;">Microsoft Azure</span>
-      <span class="pill" style="font-size: 14px; padding: 12px 24px; background: #fff;">Google Cloud Platform</span>
-      <span class="pill" style="font-size: 14px; padding: 12px 24px; background: #fff;">AWS</span>
-      <span class="pill" style="font-size: 14px; padding: 12px 24px; background: #fff;">ASP.NET / .NET</span>
-      <span class="pill" style="font-size: 14px; padding: 12px 24px; background: #fff;">GitHub</span>
-      
-      <!-- Marketing -->
-      <span class="pill" style="font-size: 14px; padding: 12px 24px; background: #fff;">Meta Business Suite</span>
-      <span class="pill" style="font-size: 14px; padding: 12px 24px; background: #fff;">Google Ads</span>
-      <span class="pill" style="font-size: 14px; padding: 12px 24px; background: #fff;">Google Analytics</span>
-      <span class="pill" style="font-size: 14px; padding: 12px 24px; background: #fff;">LinkedIn Marketing</span>
-      <span class="pill" style="font-size: 14px; padding: 12px 24px; background: #fff;">TikTok for Business</span>
-      <span class="pill" style="font-size: 14px; padding: 12px 24px; background: #fff;">Mailchimp</span>
-      
-      <!-- Finance -->
-      <span class="pill" style="font-size: 14px; padding: 12px 24px; background: #fff;">Tally</span>
-      <span class="pill" style="font-size: 14px; padding: 12px 24px; background: #fff;">QuickBooks</span>
-      <span class="pill" style="font-size: 14px; padding: 12px 24px; background: #fff;">Zoho Books</span>
-      <span class="pill" style="font-size: 14px; padding: 12px 24px; background: #fff;">Xero</span>
-      
-      <!-- HR -->
-      <span class="pill" style="font-size: 14px; padding: 12px 24px; background: #fff;">Zoho People</span>
-      <span class="pill" style="font-size: 14px; padding: 12px 24px; background: #fff;">BambooHR</span>
-      <span class="pill" style="font-size: 14px; padding: 12px 24px; background: #fff;">SAP SuccessFactors</span>
-      <span class="pill" style="font-size: 14px; padding: 12px 24px; background: #fff;">Workday</span>
-      
-      <!-- CRM / PM -->
-      <span class="pill" style="font-size: 14px; padding: 12px 24px; background: #fff;">Salesforce</span>
-      <span class="pill" style="font-size: 14px; padding: 12px 24px; background: #fff;">HubSpot</span>
-      <span class="pill" style="font-size: 14px; padding: 12px 24px; background: #fff;">Zoho CRM</span>
-      <span class="pill" style="font-size: 14px; padding: 12px 24px; background: #fff;">ClickUp</span>
-      <span class="pill" style="font-size: 14px; padding: 12px 24px; background: #fff;">Asana</span>
-      <span class="pill" style="font-size: 14px; padding: 12px 24px; background: #fff;">Monday.com</span>
-      <span class="pill" style="font-size: 14px; padding: 12px 24px; background: #fff;">Trello</span>
-      <span class="pill" style="font-size: 14px; padding: 12px 24px; background: #fff;">Jira</span>
-      
-      <!-- Comms & Mobile & eComm -->
-      <span class="pill" style="font-size: 14px; padding: 12px 24px; background: #fff;">WhatsApp Business</span>
-      <span class="pill" style="font-size: 14px; padding: 12px 24px; background: #fff;">Slack</span>
-      <span class="pill" style="font-size: 14px; padding: 12px 24px; background: #fff;">Microsoft Teams</span>
-      <span class="pill" style="font-size: 14px; padding: 12px 24px; background: #fff;">Zoom</span>
-      <span class="pill" style="font-size: 14px; padding: 12px 24px; background: #fff;">Flutter</span>
-      <span class="pill" style="font-size: 14px; padding: 12px 24px; background: #fff;">React Native</span>
-      <span class="pill" style="font-size: 14px; padding: 12px 24px; background: #fff;">Android Studio</span>
-      <span class="pill" style="font-size: 14px; padding: 12px 24px; background: #fff;">Apple Developer</span>
-      <span class="pill" style="font-size: 14px; padding: 12px 24px; background: #fff;">Shopify</span>
-      <span class="pill" style="font-size: 14px; padding: 12px 24px; background: #fff;">WooCommerce</span>
-      <span class="pill" style="font-size: 14px; padding: 12px 24px; background: #fff;">Magento</span>
-      <span class="pill" style="font-size: 14px; padding: 12px 24px; background: #fff;">WordPress</span>
-      <span class="pill" style="font-size: 14px; padding: 12px 24px; background: #fff;">Power BI</span>
-      <span class="pill" style="font-size: 14px; padding: 12px 24px; background: #fff;">Tableau</span>
-      <span class="pill" style="font-size: 14px; padding: 12px 24px; background: #fff;">Looker Studio</span>
-    </div>
-    <span class="page-num">16 / 20</span>
+    <style>
+      .partner-logo-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+        gap: 32px 16px;
+        margin-top: 40px;
+        background: var(--bg-alt);
+        padding: 48px;
+        border-radius: 16px;
+        border: 1px solid var(--border);
+        align-items: center;
+        justify-items: center;
+      }
+      .partner-logo {
+        max-height: 40px;
+        max-width: 100px;
+        object-fit: contain;
+        filter: grayscale(1) opacity(0.5);
+        transition: all 0.3s ease;
+      }
+      .partner-logo:hover {
+        filter: grayscale(0) opacity(1);
+        transform: scale(1.05);
+      }
+    </style>
+<div class="partner-logo-grid">
+      <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; text-align: center;">
+        <img src="https://www.google.com/s2/favicons?sz=128&domain=erpnext.com" alt="ERPNext" style="height: 48px; width: 48px; object-fit: contain; filter: grayscale(1) opacity(0.7); transition: all 0.3s ease;" onmouseover="this.style.filter='grayscale(0) opacity(1)'; this.style.transform='scale(1.1)'" onmouseout="this.style.filter='grayscale(1) opacity(0.7)'; this.style.transform='scale(1)'">
+        <span style="font-size: 11px; font-weight: 600; color: var(--text-muted);">ERPNext</span>
+      </div>
+      <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; text-align: center;">
+        <img src="https://www.google.com/s2/favicons?sz=128&domain=sap.com" alt="SAP" style="height: 48px; width: 48px; object-fit: contain; filter: grayscale(1) opacity(0.7); transition: all 0.3s ease;" onmouseover="this.style.filter='grayscale(0) opacity(1)'; this.style.transform='scale(1.1)'" onmouseout="this.style.filter='grayscale(1) opacity(0.7)'; this.style.transform='scale(1)'">
+        <span style="font-size: 11px; font-weight: 600; color: var(--text-muted);">SAP</span>
+      </div>
+      <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; text-align: center;">
+        <img src="https://www.google.com/s2/favicons?sz=128&domain=odoo.com" alt="Odoo" style="height: 48px; width: 48px; object-fit: contain; filter: grayscale(1) opacity(0.7); transition: all 0.3s ease;" onmouseover="this.style.filter='grayscale(0) opacity(1)'; this.style.transform='scale(1.1)'" onmouseout="this.style.filter='grayscale(1) opacity(0.7)'; this.style.transform='scale(1)'">
+        <span style="font-size: 11px; font-weight: 600; color: var(--text-muted);">Odoo</span>
+      </div>
+      <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; text-align: center;">
+        <img src="https://www.google.com/s2/favicons?sz=128&domain=microsoft.com" alt="Microsoft Dynamics" style="height: 48px; width: 48px; object-fit: contain; filter: grayscale(1) opacity(0.7); transition: all 0.3s ease;" onmouseover="this.style.filter='grayscale(0) opacity(1)'; this.style.transform='scale(1.1)'" onmouseout="this.style.filter='grayscale(1) opacity(0.7)'; this.style.transform='scale(1)'">
+        <span style="font-size: 11px; font-weight: 600; color: var(--text-muted);">Microsoft Dynamics</span>
+      </div>
+      <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; text-align: center;">
+        <img src="https://www.google.com/s2/favicons?sz=128&domain=netsuite.com" alt="Oracle NetSuite" style="height: 48px; width: 48px; object-fit: contain; filter: grayscale(1) opacity(0.7); transition: all 0.3s ease;" onmouseover="this.style.filter='grayscale(0) opacity(1)'; this.style.transform='scale(1.1)'" onmouseout="this.style.filter='grayscale(1) opacity(0.7)'; this.style.transform='scale(1)'">
+        <span style="font-size: 11px; font-weight: 600; color: var(--text-muted);">NetSuite</span>
+      </div>
+      <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; text-align: center;">
+        <img src="https://www.google.com/s2/favicons?sz=128&domain=openai.com" alt="OpenAI" style="height: 48px; width: 48px; object-fit: contain; filter: grayscale(1) opacity(0.7); transition: all 0.3s ease;" onmouseover="this.style.filter='grayscale(0) opacity(1)'; this.style.transform='scale(1.1)'" onmouseout="this.style.filter='grayscale(1) opacity(0.7)'; this.style.transform='scale(1)'">
+        <span style="font-size: 11px; font-weight: 600; color: var(--text-muted);">OpenAI</span>
+      </div>
+      <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; text-align: center;">
+        <img src="https://www.google.com/s2/favicons?sz=128&domain=google.com" alt="Google Gemini" style="height: 48px; width: 48px; object-fit: contain; filter: grayscale(1) opacity(0.7); transition: all 0.3s ease;" onmouseover="this.style.filter='grayscale(0) opacity(1)'; this.style.transform='scale(1.1)'" onmouseout="this.style.filter='grayscale(1) opacity(0.7)'; this.style.transform='scale(1)'">
+        <span style="font-size: 11px; font-weight: 600; color: var(--text-muted);">Google Gemini</span>
+      </div>
+      <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; text-align: center;">
+        <img src="https://www.google.com/s2/favicons?sz=128&domain=deepseek.com" alt="DeepSeek" style="height: 48px; width: 48px; object-fit: contain; filter: grayscale(1) opacity(0.7); transition: all 0.3s ease;" onmouseover="this.style.filter='grayscale(0) opacity(1)'; this.style.transform='scale(1.1)'" onmouseout="this.style.filter='grayscale(1) opacity(0.7)'; this.style.transform='scale(1)'">
+        <span style="font-size: 11px; font-weight: 600; color: var(--text-muted);">DeepSeek</span>
+      </div>
+      <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; text-align: center;">
+        <img src="https://www.google.com/s2/favicons?sz=128&domain=anthropic.com" alt="Anthropic" style="height: 48px; width: 48px; object-fit: contain; filter: grayscale(1) opacity(0.7); transition: all 0.3s ease;" onmouseover="this.style.filter='grayscale(0) opacity(1)'; this.style.transform='scale(1.1)'" onmouseout="this.style.filter='grayscale(1) opacity(0.7)'; this.style.transform='scale(1)'">
+        <span style="font-size: 11px; font-weight: 600; color: var(--text-muted);">Anthropic Claude</span>
+      </div>
+      <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; text-align: center;">
+        <img src="https://www.google.com/s2/favicons?sz=128&domain=azure.microsoft.com" alt="Microsoft Azure" style="height: 48px; width: 48px; object-fit: contain; filter: grayscale(1) opacity(0.7); transition: all 0.3s ease;" onmouseover="this.style.filter='grayscale(0) opacity(1)'; this.style.transform='scale(1.1)'" onmouseout="this.style.filter='grayscale(1) opacity(0.7)'; this.style.transform='scale(1)'">
+        <span style="font-size: 11px; font-weight: 600; color: var(--text-muted);">Azure</span>
+      </div>
+      <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; text-align: center;">
+        <img src="https://www.google.com/s2/favicons?sz=128&domain=cloud.google.com" alt="Google Cloud" style="height: 48px; width: 48px; object-fit: contain; filter: grayscale(1) opacity(0.7); transition: all 0.3s ease;" onmouseover="this.style.filter='grayscale(0) opacity(1)'; this.style.transform='scale(1.1)'" onmouseout="this.style.filter='grayscale(1) opacity(0.7)'; this.style.transform='scale(1)'">
+        <span style="font-size: 11px; font-weight: 600; color: var(--text-muted);">GCP</span>
+      </div>
+      <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; text-align: center;">
+        <img src="https://www.google.com/s2/favicons?sz=128&domain=aws.amazon.com" alt="AWS" style="height: 48px; width: 48px; object-fit: contain; filter: grayscale(1) opacity(0.7); transition: all 0.3s ease;" onmouseover="this.style.filter='grayscale(0) opacity(1)'; this.style.transform='scale(1.1)'" onmouseout="this.style.filter='grayscale(1) opacity(0.7)'; this.style.transform='scale(1)'">
+        <span style="font-size: 11px; font-weight: 600; color: var(--text-muted);">AWS</span>
+      </div>
+      <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; text-align: center;">
+        <img src="https://www.google.com/s2/favicons?sz=128&domain=github.com" alt="GitHub" style="height: 48px; width: 48px; object-fit: contain; filter: grayscale(1) opacity(0.7); transition: all 0.3s ease;" onmouseover="this.style.filter='grayscale(0) opacity(1)'; this.style.transform='scale(1.1)'" onmouseout="this.style.filter='grayscale(1) opacity(0.7)'; this.style.transform='scale(1)'">
+        <span style="font-size: 11px; font-weight: 600; color: var(--text-muted);">GitHub</span>
+      </div>
+      <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; text-align: center;">
+        <img src="https://www.google.com/s2/favicons?sz=128&domain=meta.com" alt="Meta" style="height: 48px; width: 48px; object-fit: contain; filter: grayscale(1) opacity(0.7); transition: all 0.3s ease;" onmouseover="this.style.filter='grayscale(0) opacity(1)'; this.style.transform='scale(1.1)'" onmouseout="this.style.filter='grayscale(1) opacity(0.7)'; this.style.transform='scale(1)'">
+        <span style="font-size: 11px; font-weight: 600; color: var(--text-muted);">Meta</span>
+      </div>
+      <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; text-align: center;">
+        <img src="https://www.google.com/s2/favicons?sz=128&domain=linkedin.com" alt="LinkedIn" style="height: 48px; width: 48px; object-fit: contain; filter: grayscale(1) opacity(0.7); transition: all 0.3s ease;" onmouseover="this.style.filter='grayscale(0) opacity(1)'; this.style.transform='scale(1.1)'" onmouseout="this.style.filter='grayscale(1) opacity(0.7)'; this.style.transform='scale(1)'">
+        <span style="font-size: 11px; font-weight: 600; color: var(--text-muted);">LinkedIn</span>
+      </div>
+      <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; text-align: center;">
+        <img src="https://www.google.com/s2/favicons?sz=128&domain=tiktok.com" alt="TikTok" style="height: 48px; width: 48px; object-fit: contain; filter: grayscale(1) opacity(0.7); transition: all 0.3s ease;" onmouseover="this.style.filter='grayscale(0) opacity(1)'; this.style.transform='scale(1.1)'" onmouseout="this.style.filter='grayscale(1) opacity(0.7)'; this.style.transform='scale(1)'">
+        <span style="font-size: 11px; font-weight: 600; color: var(--text-muted);">TikTok</span>
+      </div>
+      <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; text-align: center;">
+        <img src="https://www.google.com/s2/favicons?sz=128&domain=mailchimp.com" alt="Mailchimp" style="height: 48px; width: 48px; object-fit: contain; filter: grayscale(1) opacity(0.7); transition: all 0.3s ease;" onmouseover="this.style.filter='grayscale(0) opacity(1)'; this.style.transform='scale(1.1)'" onmouseout="this.style.filter='grayscale(1) opacity(0.7)'; this.style.transform='scale(1)'">
+        <span style="font-size: 11px; font-weight: 600; color: var(--text-muted);">Mailchimp</span>
+      </div>
+      <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; text-align: center;">
+        <img src="https://www.google.com/s2/favicons?sz=128&domain=tallysolutions.com" alt="Tally" style="height: 48px; width: 48px; object-fit: contain; filter: grayscale(1) opacity(0.7); transition: all 0.3s ease;" onmouseover="this.style.filter='grayscale(0) opacity(1)'; this.style.transform='scale(1.1)'" onmouseout="this.style.filter='grayscale(1) opacity(0.7)'; this.style.transform='scale(1)'">
+        <span style="font-size: 11px; font-weight: 600; color: var(--text-muted);">Tally</span>
+      </div>
+      <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; text-align: center;">
+        <img src="https://www.google.com/s2/favicons?sz=128&domain=quickbooks.intuit.com" alt="QuickBooks" style="height: 48px; width: 48px; object-fit: contain; filter: grayscale(1) opacity(0.7); transition: all 0.3s ease;" onmouseover="this.style.filter='grayscale(0) opacity(1)'; this.style.transform='scale(1.1)'" onmouseout="this.style.filter='grayscale(1) opacity(0.7)'; this.style.transform='scale(1)'">
+        <span style="font-size: 11px; font-weight: 600; color: var(--text-muted);">QuickBooks</span>
+      </div>
+      <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; text-align: center;">
+        <img src="https://www.google.com/s2/favicons?sz=128&domain=zoho.com" alt="Zoho" style="height: 48px; width: 48px; object-fit: contain; filter: grayscale(1) opacity(0.7); transition: all 0.3s ease;" onmouseover="this.style.filter='grayscale(0) opacity(1)'; this.style.transform='scale(1.1)'" onmouseout="this.style.filter='grayscale(1) opacity(0.7)'; this.style.transform='scale(1)'">
+        <span style="font-size: 11px; font-weight: 600; color: var(--text-muted);">Zoho</span>
+      </div>
+      <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; text-align: center;">
+        <img src="https://www.google.com/s2/favicons?sz=128&domain=xero.com" alt="Xero" style="height: 48px; width: 48px; object-fit: contain; filter: grayscale(1) opacity(0.7); transition: all 0.3s ease;" onmouseover="this.style.filter='grayscale(0) opacity(1)'; this.style.transform='scale(1.1)'" onmouseout="this.style.filter='grayscale(1) opacity(0.7)'; this.style.transform='scale(1)'">
+        <span style="font-size: 11px; font-weight: 600; color: var(--text-muted);">Xero</span>
+      </div>
+      <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; text-align: center;">
+        <img src="https://www.google.com/s2/favicons?sz=128&domain=bamboohr.com" alt="BambooHR" style="height: 48px; width: 48px; object-fit: contain; filter: grayscale(1) opacity(0.7); transition: all 0.3s ease;" onmouseover="this.style.filter='grayscale(0) opacity(1)'; this.style.transform='scale(1.1)'" onmouseout="this.style.filter='grayscale(1) opacity(0.7)'; this.style.transform='scale(1)'">
+        <span style="font-size: 11px; font-weight: 600; color: var(--text-muted);">BambooHR</span>
+      </div>
+      <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; text-align: center;">
+        <img src="https://www.google.com/s2/favicons?sz=128&domain=workday.com" alt="Workday" style="height: 48px; width: 48px; object-fit: contain; filter: grayscale(1) opacity(0.7); transition: all 0.3s ease;" onmouseover="this.style.filter='grayscale(0) opacity(1)'; this.style.transform='scale(1.1)'" onmouseout="this.style.filter='grayscale(1) opacity(0.7)'; this.style.transform='scale(1)'">
+        <span style="font-size: 11px; font-weight: 600; color: var(--text-muted);">Workday</span>
+      </div>
+      <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; text-align: center;">
+        <img src="https://www.google.com/s2/favicons?sz=128&domain=salesforce.com" alt="Salesforce" style="height: 48px; width: 48px; object-fit: contain; filter: grayscale(1) opacity(0.7); transition: all 0.3s ease;" onmouseover="this.style.filter='grayscale(0) opacity(1)'; this.style.transform='scale(1.1)'" onmouseout="this.style.filter='grayscale(1) opacity(0.7)'; this.style.transform='scale(1)'">
+        <span style="font-size: 11px; font-weight: 600; color: var(--text-muted);">Salesforce</span>
+      </div>
+      <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; text-align: center;">
+        <img src="https://www.google.com/s2/favicons?sz=128&domain=hubspot.com" alt="HubSpot" style="height: 48px; width: 48px; object-fit: contain; filter: grayscale(1) opacity(0.7); transition: all 0.3s ease;" onmouseover="this.style.filter='grayscale(0) opacity(1)'; this.style.transform='scale(1.1)'" onmouseout="this.style.filter='grayscale(1) opacity(0.7)'; this.style.transform='scale(1)'">
+        <span style="font-size: 11px; font-weight: 600; color: var(--text-muted);">HubSpot</span>
+      </div>
+      <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; text-align: center;">
+        <img src="https://www.google.com/s2/favicons?sz=128&domain=clickup.com" alt="ClickUp" style="height: 48px; width: 48px; object-fit: contain; filter: grayscale(1) opacity(0.7); transition: all 0.3s ease;" onmouseover="this.style.filter='grayscale(0) opacity(1)'; this.style.transform='scale(1.1)'" onmouseout="this.style.filter='grayscale(1) opacity(0.7)'; this.style.transform='scale(1)'">
+        <span style="font-size: 11px; font-weight: 600; color: var(--text-muted);">ClickUp</span>
+      </div>
+      <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; text-align: center;">
+        <img src="https://www.google.com/s2/favicons?sz=128&domain=asana.com" alt="Asana" style="height: 48px; width: 48px; object-fit: contain; filter: grayscale(1) opacity(0.7); transition: all 0.3s ease;" onmouseover="this.style.filter='grayscale(0) opacity(1)'; this.style.transform='scale(1.1)'" onmouseout="this.style.filter='grayscale(1) opacity(0.7)'; this.style.transform='scale(1)'">
+        <span style="font-size: 11px; font-weight: 600; color: var(--text-muted);">Asana</span>
+      </div>
+      <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; text-align: center;">
+        <img src="https://www.google.com/s2/favicons?sz=128&domain=monday.com" alt="Monday.com" style="height: 48px; width: 48px; object-fit: contain; filter: grayscale(1) opacity(0.7); transition: all 0.3s ease;" onmouseover="this.style.filter='grayscale(0) opacity(1)'; this.style.transform='scale(1.1)'" onmouseout="this.style.filter='grayscale(1) opacity(0.7)'; this.style.transform='scale(1)'">
+        <span style="font-size: 11px; font-weight: 600; color: var(--text-muted);">Monday.com</span>
+      </div>
+      <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; text-align: center;">
+        <img src="https://www.google.com/s2/favicons?sz=128&domain=trello.com" alt="Trello" style="height: 48px; width: 48px; object-fit: contain; filter: grayscale(1) opacity(0.7); transition: all 0.3s ease;" onmouseover="this.style.filter='grayscale(0) opacity(1)'; this.style.transform='scale(1.1)'" onmouseout="this.style.filter='grayscale(1) opacity(0.7)'; this.style.transform='scale(1)'">
+        <span style="font-size: 11px; font-weight: 600; color: var(--text-muted);">Trello</span>
+      </div>
+      <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; text-align: center;">
+        <img src="https://www.google.com/s2/favicons?sz=128&domain=atlassian.com" alt="Jira" style="height: 48px; width: 48px; object-fit: contain; filter: grayscale(1) opacity(0.7); transition: all 0.3s ease;" onmouseover="this.style.filter='grayscale(0) opacity(1)'; this.style.transform='scale(1.1)'" onmouseout="this.style.filter='grayscale(1) opacity(0.7)'; this.style.transform='scale(1)'">
+        <span style="font-size: 11px; font-weight: 600; color: var(--text-muted);">Jira</span>
+      </div>
+      <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; text-align: center;">
+        <img src="https://www.google.com/s2/favicons?sz=128&domain=whatsapp.com" alt="WhatsApp" style="height: 48px; width: 48px; object-fit: contain; filter: grayscale(1) opacity(0.7); transition: all 0.3s ease;" onmouseover="this.style.filter='grayscale(0) opacity(1)'; this.style.transform='scale(1.1)'" onmouseout="this.style.filter='grayscale(1) opacity(0.7)'; this.style.transform='scale(1)'">
+        <span style="font-size: 11px; font-weight: 600; color: var(--text-muted);">WhatsApp</span>
+      </div>
+      <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; text-align: center;">
+        <img src="https://www.google.com/s2/favicons?sz=128&domain=slack.com" alt="Slack" style="height: 48px; width: 48px; object-fit: contain; filter: grayscale(1) opacity(0.7); transition: all 0.3s ease;" onmouseover="this.style.filter='grayscale(0) opacity(1)'; this.style.transform='scale(1.1)'" onmouseout="this.style.filter='grayscale(1) opacity(0.7)'; this.style.transform='scale(1)'">
+        <span style="font-size: 11px; font-weight: 600; color: var(--text-muted);">Slack</span>
+      </div>
+      <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; text-align: center;">
+        <img src="https://www.google.com/s2/favicons?sz=128&domain=zoom.us" alt="Zoom" style="height: 48px; width: 48px; object-fit: contain; filter: grayscale(1) opacity(0.7); transition: all 0.3s ease;" onmouseover="this.style.filter='grayscale(0) opacity(1)'; this.style.transform='scale(1.1)'" onmouseout="this.style.filter='grayscale(1) opacity(0.7)'; this.style.transform='scale(1)'">
+        <span style="font-size: 11px; font-weight: 600; color: var(--text-muted);">Zoom</span>
+      </div>
+      <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; text-align: center;">
+        <img src="https://www.google.com/s2/favicons?sz=128&domain=shopify.com" alt="Shopify" style="height: 48px; width: 48px; object-fit: contain; filter: grayscale(1) opacity(0.7); transition: all 0.3s ease;" onmouseover="this.style.filter='grayscale(0) opacity(1)'; this.style.transform='scale(1.1)'" onmouseout="this.style.filter='grayscale(1) opacity(0.7)'; this.style.transform='scale(1)'">
+        <span style="font-size: 11px; font-weight: 600; color: var(--text-muted);">Shopify</span>
+      </div>
+      <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; text-align: center;">
+        <img src="https://www.google.com/s2/favicons?sz=128&domain=woocommerce.com" alt="WooCommerce" style="height: 48px; width: 48px; object-fit: contain; filter: grayscale(1) opacity(0.7); transition: all 0.3s ease;" onmouseover="this.style.filter='grayscale(0) opacity(1)'; this.style.transform='scale(1.1)'" onmouseout="this.style.filter='grayscale(1) opacity(0.7)'; this.style.transform='scale(1)'">
+        <span style="font-size: 11px; font-weight: 600; color: var(--text-muted);">WooCommerce</span>
+      </div>
+      <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; text-align: center;">
+        <img src="https://www.google.com/s2/favicons?sz=128&domain=magento.com" alt="Magento" style="height: 48px; width: 48px; object-fit: contain; filter: grayscale(1) opacity(0.7); transition: all 0.3s ease;" onmouseover="this.style.filter='grayscale(0) opacity(1)'; this.style.transform='scale(1.1)'" onmouseout="this.style.filter='grayscale(1) opacity(0.7)'; this.style.transform='scale(1)'">
+        <span style="font-size: 11px; font-weight: 600; color: var(--text-muted);">Magento</span>
+      </div>
+      <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; text-align: center;">
+        <img src="https://www.google.com/s2/favicons?sz=128&domain=wordpress.org" alt="WordPress" style="height: 48px; width: 48px; object-fit: contain; filter: grayscale(1) opacity(0.7); transition: all 0.3s ease;" onmouseover="this.style.filter='grayscale(0) opacity(1)'; this.style.transform='scale(1.1)'" onmouseout="this.style.filter='grayscale(1) opacity(0.7)'; this.style.transform='scale(1)'">
+        <span style="font-size: 11px; font-weight: 600; color: var(--text-muted);">WordPress</span>
+      </div>
+      <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; text-align: center;">
+        <img src="https://www.google.com/s2/favicons?sz=128&domain=tableau.com" alt="Tableau" style="height: 48px; width: 48px; object-fit: contain; filter: grayscale(1) opacity(0.7); transition: all 0.3s ease;" onmouseover="this.style.filter='grayscale(0) opacity(1)'; this.style.transform='scale(1.1)'" onmouseout="this.style.filter='grayscale(1) opacity(0.7)'; this.style.transform='scale(1)'">
+        <span style="font-size: 11px; font-weight: 600; color: var(--text-muted);">Tableau</span>
+      </div>
+    </div>div>
+    <span class="page-num">20 / 24</span>
   </div>
 </div>
 
@@ -1019,7 +1876,7 @@ h4 { font-size: 24px; font-weight: 700; line-height: 1.3; }
       <div class="tl-node"><div class="tl-dot"></div><div class="tl-year">Vision 2040</div><div class="tl-title">The Future</div><div class="tl-desc">Sustainable competitive advantages aligned with Oman's national vision.</div></div>
     </div>
     <img src="logo.png" class="watermark" alt="">
-    <span class="page-num">17 / 20</span>
+    <span class="page-num">21 / 24</span>
   </div>
 </div>
 
@@ -1059,7 +1916,7 @@ h4 { font-size: 24px; font-weight: 700; line-height: 1.3; }
       <div style="text-align:center;"><div class="metric-val" style="font-size: 48px;">42%</div><div class="metric-label" style="color: rgba(255,255,255,0.4);">Turnover Drop<br>(HCM)</div></div>
     </div>
     <img src="logo.png" class="watermark watermark-light" alt="">
-    <span class="page-num page-num-light">18 / 20</span>
+    <span class="page-num page-num-light">22 / 24</span>
   </div>
 </div>
 
@@ -1100,7 +1957,7 @@ h4 { font-size: 24px; font-weight: 700; line-height: 1.3; }
           <p class="card-desc">Your first consultation is completely free. If we can't demonstrate value in the first conversation, we haven't earned the right to ask for more.</p>
         </div>
       </div>
-      <span class="page-num">19 / 20</span>
+      <span class="page-num">23 / 24</span>
     </div>
   </div>
 </div>
@@ -1125,7 +1982,7 @@ h4 { font-size: 24px; font-weight: 700; line-height: 1.3; }
       <span>📍 Al Noor Plaza, Madinat Qaboos, Muscat</span>
     </div>
     <div style="position:absolute; bottom: 36px; right: 60px; color: rgba(255,255,255,0.25); font-size: 12px; letter-spacing: 2px;">
-      © 2025 TADBEER TRANSFORMATION &nbsp;|&nbsp; 20 / 20
+      © 2025 TADBEER TRANSFORMATION &nbsp;|&nbsp; 24 / 24
     </div>
   </div>
 </div>

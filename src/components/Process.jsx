@@ -49,7 +49,7 @@ const Process = () => {
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.6 }}
+          transition={{ type: "spring", bounce: 0.1, duration: 1.2 }}
           style={{ marginBottom: '1rem' }}
         >
           <span className="section-label">How We Work | كيف نعمل</span>
@@ -76,7 +76,7 @@ const Process = () => {
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}
-              transition={{ delay: index * 0.15, duration: 0.5 }}
+              transition={{ type: "spring", bounce: 0.15, duration: 0.8, delay: index * 0.12 }}
             >
               <div className="process-number">{step.num}</div>
               <h3 className="process-title">{step.title}</h3>
@@ -93,7 +93,7 @@ const Process = () => {
               initial={{ opacity: 0, x: -40 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.8 }}
+              transition={{ type: "spring", bounce: 0.1, duration: 1.4 }}
             >
               <img 
                 src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=600&q=80&auto=format"
@@ -107,7 +107,7 @@ const Process = () => {
                 initial={{ opacity: 0, x: 40 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.6 }}
+                transition={{ type: "spring", bounce: 0.1, duration: 1.2 }}
                 style={{ marginBottom: '2rem' }}
               >
                 <span className="section-label">Why Tadbeer</span>
@@ -122,7 +122,7 @@ const Process = () => {
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    transition={{ duration: 0.5, delay: i * 0.1 }}
+                    transition={{ type: "spring", bounce: 0.2, duration: 0.8, delay: i * 0.08 }}
                   >
                     <div className="why-card-icon">{item.icon}</div>
                     <h4>{item.title}</h4>

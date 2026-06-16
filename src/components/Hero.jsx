@@ -1,6 +1,8 @@
 import React from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useRef } from 'react';
+import { Compass, Cpu, Users, Target } from 'lucide-react';
+
 
 const Hero = () => {
   const containerRef = useRef(null);
@@ -11,6 +13,10 @@ const Hero = () => {
 
   const y1 = useTransform(scrollYProgress, [0, 1], [0, 80]);
   const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
+  const yBlob = useTransform(scrollYProgress, [0, 1], [0, 150]);
+  const yImage = useTransform(scrollYProgress, [0, 1], [0, -50]);
+  const yFloat1 = useTransform(scrollYProgress, [0, 1], [0, -120]);
+  const yFloat2 = useTransform(scrollYProgress, [0, 1], [0, 90]);
 
   return (
     <section ref={containerRef} className="hero-section">
@@ -27,8 +33,39 @@ const Hero = () => {
           style={{
             position: 'absolute', top: '-15%', right: '-15%', width: '55vw', height: '55vw',
             background: 'radial-gradient(circle, rgba(202, 169, 76, 0.05) 0%, transparent 60%)',
-            borderRadius: '50%', filter: 'blur(80px)'
+            borderRadius: '50%', filter: 'blur(80px)',
+            y: yBlob
           }} 
+        />
+        {/* Floating Ring Left */}
+        <motion.div 
+          style={{
+            position: 'absolute',
+            left: '5%',
+            top: '30%',
+            width: '80px',
+            height: '80px',
+            borderRadius: '50%',
+            border: '2px dashed rgba(202, 169, 76, 0.12)',
+            y: yFloat1,
+            zIndex: 0
+          }}
+          animate={{ rotate: 360 }}
+          transition={{ repeat: Infinity, duration: 30, ease: "linear" }}
+        />
+        {/* Floating Dot Grid Right */}
+        <motion.div 
+          style={{
+            position: 'absolute',
+            right: '8%',
+            top: '55%',
+            width: '120px',
+            height: '120px',
+            backgroundImage: 'radial-gradient(rgba(24, 79, 91, 0.12) 2px, transparent 2px)',
+            backgroundSize: '16px 16px',
+            y: yFloat2,
+            zIndex: 0
+          }}
         />
       </div>
 
@@ -49,18 +86,58 @@ const Hero = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1.2, delay: 0.2, ease: [0.25, 0.1, 0.25, 1] }}
           >
-            We Turn Great Ideas Into{' '}
+            Turn Great Ideas Into{' '}
             <span className="accent">Dominant Brands.</span>
           </motion.h1>
 
-          <motion.p 
-            className="hero-desc"
+          {/* Focus Pillars Strip - Extremely minimal and space-efficient */}
+          <motion.div 
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1.2, delay: 0.4, ease: [0.25, 0.1, 0.25, 1] }}
+            style={{
+              display: 'flex',
+              flexWrap: 'wrap',
+              gap: '0.5rem',
+              marginTop: '0.25rem',
+              marginBottom: '1.25rem',
+              width: '100%'
+            }}
           >
-            Strategy. Technology. People. Marketing. — One team, end-to-end transformation for businesses across Oman & the GCC.
-          </motion.p>
+            {[
+              { title: 'Strategy', icon: <Compass size={13} /> },
+              { title: 'Technology', icon: <Cpu size={13} /> },
+              { title: 'People', icon: <Users size={13} /> },
+              { title: 'Marketing', icon: <Target size={13} /> }
+            ].map((p, idx) => (
+              <motion.div
+                key={idx}
+                whileHover={{ 
+                  scale: 1.05, 
+                  borderColor: 'var(--secondary)', 
+                  backgroundColor: 'rgba(202,169,76,0.06)',
+                  boxShadow: '0 2px 8px rgba(202,169,76,0.04)' 
+                }}
+                style={{
+                  background: 'rgba(24, 79, 91, 0.02)',
+                  border: '1px solid rgba(24, 79, 91, 0.06)',
+                  padding: '0.3rem 0.75rem',
+                  borderRadius: '30px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '0.35rem',
+                  cursor: 'pointer'
+                }}
+              >
+                <div style={{ color: 'var(--primary)', display: 'flex', alignItems: 'center' }}>
+                  {p.icon}
+                </div>
+                <span style={{ fontSize: '0.8rem', fontWeight: '600', color: 'var(--primary)' }}>
+                  {p.title}
+                </span>
+              </motion.div>
+            ))}
+          </motion.div>
 
           <motion.div 
             initial={{ opacity: 0, y: 15 }}
@@ -86,25 +163,6 @@ const Hero = () => {
             </motion.a>
           </motion.div>
 
-          <motion.div 
-            className="hero-stats"
-            initial={{ opacity: 0, y: 15 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1.2, delay: 0.7, ease: [0.25, 0.1, 0.25, 1] }}
-          >
-            <div className="hero-stat">
-              <span className="hero-stat-number">15+</span>
-              <span className="hero-stat-label">Active Clients</span>
-            </div>
-            <div className="hero-stat">
-              <span className="hero-stat-number">40+</span>
-              <span className="hero-stat-label">Transformations</span>
-            </div>
-            <div className="hero-stat">
-              <span className="hero-stat-number">1M+</span>
-              <span className="hero-stat-label">OMR Managed</span>
-            </div>
-          </motion.div>
         </motion.div>
 
         {/* Right: Image */}
@@ -112,6 +170,7 @@ const Hero = () => {
           className="hero-image-container"
           initial={{ opacity: 0, x: 40 }}
           animate={{ opacity: 1, x: 0 }}
+          style={{ y: yImage }}
           transition={{ duration: 1.4, delay: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
         >
           <img 

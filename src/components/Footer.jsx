@@ -19,21 +19,21 @@ const Footer = () => {
           <div>
             <h4 className="footer-heading">Services</h4>
             <ul className="footer-links">
-              <li><a href="#services">Digital Marketing</a></li>
-              <li><a href="#services">Software Solutions</a></li>
-              <li><a href="#services">AI & Next-Gen Tech</a></li>
-              <li><a href="#services">Human Capital</a></li>
+              <li><Link to="/services/digital-marketing">Digital Marketing</Link></li>
+              <li><Link to="/services/software-solutions">Software Solutions</Link></li>
+              <li><Link to="/services/ai-technology">AI & Next-Gen Tech</Link></li>
+              <li><Link to="/services/human-capital">Human Capital</Link></li>
             </ul>
           </div>
           
           <div>
             <h4 className="footer-heading">Company</h4>
             <ul className="footer-links">
-              <li><a href="#about">Our Journey</a></li>
-              <li><a href="#ai-ops">AI Operations</a></li>
-              <li><a href="#work">Our Work</a></li>
-              <li><a href="#process">Process</a></li>
-              <li><a href="#faq">FAQ</a></li>
+              <li><a href="/#about">Our Journey</a></li>
+              <li><Link to="/resources">Resources</Link></li>
+              <li><a href="/#work">Our Work</a></li>
+              <li><a href="/#process">Process</a></li>
+              <li><a href="/#faq">FAQ</a></li>
               <li><Link to="/careers">Careers</Link></li>
             </ul>
           </div>
