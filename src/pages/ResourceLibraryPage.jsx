@@ -142,7 +142,7 @@ const ResourceLibraryPage = () => {
 
   const filteredResources = activeFilter === 'All' 
     ? resources 
-    : resources.filter(r => r.category === activeFilter);veFilter);
+    : resources.filter(r => r.category === activeFilter);
 
   return (
     <div className="page-wrapper">
