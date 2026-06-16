@@ -203,8 +203,12 @@ img {
   transition: var(--transition);
 }
 
+.navbar .main-logo {
+  height: 110px;
+}
+
 .navbar.scrolled .main-logo {
-  height: 100px;
+  height: 90px;
 }
 
 /* ===== HERO ===== */
@@ -3147,8 +3151,11 @@ img {
   .main-logo {
     height: 100px;
   }
-  .navbar.scrolled .main-logo {
+  .navbar .main-logo {
     height: 80px;
+  }
+  .navbar.scrolled .main-logo {
+    height: 65px;
   }
 
   /* Hero adjustments for clean breathing room */
@@ -4551,34 +4558,45 @@ html, body {
     border-radius: 0px !important;
     border-left: none !important;
     border-right: none !important;
-    border-top: 2px solid var(--primary) !important;
-    border-bottom: 2px solid var(--primary) !important;
+    border-top: 1px solid rgba(24, 79, 91, 0.08) !important;
+    border-bottom: 1px solid rgba(24, 79, 91, 0.08) !important;
     max-width: 100% !important;
     margin-left: -5% !important;
     margin-right: -5% !important;
     width: calc(100% + 10%) !important;
-    background: rgba(24, 79, 91, 0.02) !important;
+    background: rgba(24, 79, 91, 0.01) !important;
     box-shadow: none !important;
-    padding: 1rem 0 !important;
+    padding: 0.6rem 0 !important;
   }
 
   .marquee-container {
-    margin: 0.2rem 0 !important;
-    padding: 0.4rem 0 !important;
-    background: rgba(255, 255, 255, 0.5) !important;
-    border-top: 1px solid rgba(24, 79, 91, 0.06) !important;
-    border-bottom: 1px solid rgba(24, 79, 91, 0.06) !important;
+    margin: 0.15rem 0 !important;
+    padding: 0.2rem 0 !important;
+    background: rgba(255, 255, 255, 0.4) !important;
+    border-top: 1px solid rgba(24, 79, 91, 0.04) !important;
+    border-bottom: 1px solid rgba(24, 79, 91, 0.04) !important;
   }
 
   .client-card-chip {
     border-radius: 0px !important;
-    border: 1px solid rgba(24, 79, 91, 0.12) !important;
+    border: 1px solid rgba(24, 79, 91, 0.08) !important;
     box-shadow: none !important;
+    min-width: 160px !important;
+    max-width: 200px !important;
+    padding: 0.3rem 0.8rem 0.3rem 0.4rem !important;
+    gap: 0.5rem !important;
   }
 
   .client-card-chip > div {
+    width: 40px !important;
+    height: 40px !important;
     border-radius: 0px !important;
-    border: 1px solid rgba(24, 79, 91, 0.05) !important;
+    border: 1px solid rgba(24, 79, 91, 0.03) !important;
+  }
+
+  .client-card-chip span {
+    font-size: 0.75rem !important;
+    font-weight: 600 !important;
   }
 
   .footer {
