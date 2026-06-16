@@ -198,13 +198,13 @@ img {
 }
 
 .main-logo {
-  height: 100px;
+  height: 140px;
   width: auto;
   transition: var(--transition);
 }
 
 .navbar.scrolled .main-logo {
-  height: 80px;
+  height: 100px;
 }
 
 /* ===== HERO ===== */
@@ -3145,10 +3145,10 @@ img {
     padding: 0.75rem 1.25rem;
   }
   .main-logo {
-    height: 72px;
+    height: 100px;
   }
   .navbar.scrolled .main-logo {
-    height: 58px;
+    height: 80px;
   }
 
   /* Hero adjustments for clean breathing room */
@@ -4485,6 +4485,9 @@ html, body {
     padding: 1.5rem 1rem !important;
     text-align: center !important;
     align-items: center !important;
+    overflow: hidden !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
   }
 
   .roi-output-card div {
@@ -4504,8 +4507,13 @@ html, body {
   }
 
   .roi-impact-value {
-    font-size: 2.2rem !important;
-    word-break: break-all !important;
+    font-size: clamp(1.4rem, 7.5vw, 2.2rem) !important;
+    word-wrap: break-word !important;
+    overflow-wrap: break-word !important;
+    white-space: normal !important;
+    max-width: 100% !important;
+    display: block !important;
+    text-align: center !important;
   }
 
   /* 7. Why Section (4 Reasons) Centering */
@@ -4539,25 +4547,38 @@ html, body {
     padding: 1.25rem !important;
   }
 
-  /* 8. Footer Mobile Centering & Compacting */
   .clients-marquee-frame {
     border-radius: 0px !important;
     border-left: none !important;
     border-right: none !important;
-    border-top: 1px solid rgba(24, 79, 91, 0.08) !important;
-    border-bottom: 1px solid rgba(24, 79, 91, 0.08) !important;
+    border-top: 2px solid var(--primary) !important;
+    border-bottom: 2px solid var(--primary) !important;
     max-width: 100% !important;
-    margin-left: -1rem !important;
-    margin-right: -1rem !important;
-    width: calc(100% + 2rem) !important;
+    margin-left: -5% !important;
+    margin-right: -5% !important;
+    width: calc(100% + 10%) !important;
+    background: rgba(24, 79, 91, 0.02) !important;
+    box-shadow: none !important;
+    padding: 1rem 0 !important;
+  }
+
+  .marquee-container {
+    margin: 0.2rem 0 !important;
+    padding: 0.4rem 0 !important;
+    background: rgba(255, 255, 255, 0.5) !important;
+    border-top: 1px solid rgba(24, 79, 91, 0.06) !important;
+    border-bottom: 1px solid rgba(24, 79, 91, 0.06) !important;
   }
 
   .client-card-chip {
-    border-radius: 4px !important;
+    border-radius: 0px !important;
+    border: 1px solid rgba(24, 79, 91, 0.12) !important;
+    box-shadow: none !important;
   }
 
   .client-card-chip > div {
-    border-radius: 2px !important;
+    border-radius: 0px !important;
+    border: 1px solid rgba(24, 79, 91, 0.05) !important;
   }
 
   .footer {
