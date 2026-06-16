@@ -4534,15 +4534,31 @@ html, body {
     padding: 1.25rem !important;
   }
 
-  /* 8. Footer Mobile Centering */
+  /* 8. Footer Mobile Centering & Compacting */
+  .clients-marquee-frame {
+    border-radius: 0px !important;
+    border-left: none !important;
+    border-right: none !important;
+    max-width: 100% !important;
+    margin-left: -1rem !important;
+    margin-right: -1rem !important;
+    width: calc(100% + 2rem) !important;
+  }
+
   .footer {
     text-align: center !important;
+    padding: 2.25rem 1rem 1.5rem !important;
+  }
+
+  .footer-desc {
+    display: none !important; /* Hide description on mobile to reduce height */
   }
 
   .footer-grid {
-    grid-template-columns: 1fr !important;
-    gap: 2rem !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 1.5rem 1rem !important;
     justify-items: center !important;
+    align-items: start !important;
   }
 
   .footer-grid > div {
@@ -4552,25 +4568,43 @@ html, body {
     text-align: center !important;
   }
 
-  .footer-grid p {
-    text-align: center !important;
-    margin-left: auto !important;
-    margin-right: auto !important;
+  /* Span logo and contact blocks across 2 columns to keep layout clean */
+  .footer-grid > div:first-child {
+    grid-column: span 2 !important;
+    margin-bottom: 0.5rem !important;
+  }
+
+  .footer-grid > div:last-child {
+    grid-column: span 2 !important;
+    margin-top: 0.5rem !important;
+    border-top: 1px solid rgba(24, 79, 91, 0.08) !important;
+    padding-top: 1rem !important;
+    width: 100% !important;
   }
 
   .footer-links {
     align-items: center !important;
+    font-size: 0.85rem !important;
   }
 
   .footer-links li {
     justify-content: center !important;
     text-align: center !important;
+    margin-bottom: 0.5rem !important;
+  }
+
+  .footer-heading {
+    font-size: 0.95rem !important;
+    margin-bottom: 0.75rem !important;
   }
 
   .footer-bottom {
     flex-direction: column !important;
-    gap: 0.75rem !important;
+    gap: 0.5rem !important;
     text-align: center !important;
+    margin-top: 1.5rem !important;
+    padding-top: 1rem !important;
+    font-size: 0.8rem !important;
   }
 }
 

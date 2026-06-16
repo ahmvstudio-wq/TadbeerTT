@@ -2,7 +2,6 @@ import React from 'react';
 
 import alHarrasi      from '../assets/clients/al-harrasi-rope-factory.png';
 import omanAir        from '../assets/clients/oman-air.png';
-import tamimahTelecom from '../assets/clients/tamimah-telecom.png';
 import mafranMeat     from '../assets/clients/mafran-meat.png';
 import gloriaJeans    from '../assets/clients/gloria-jeans.png';
 import alQurumPerfumes from '../assets/clients/al-qurum-perfumes.png';
@@ -19,7 +18,6 @@ const Clients = () => {
   const row1 = [
     { name: "Al Harrasi Rope Factory",    logo: alHarrasi,    scale: 1.6,  offset: '0px' },
     { name: "Oman Air",                   logo: omanAir,       scale: 1.7,  offset: '-1px' },
-    { name: "Tamimah Telecom",            logo: tamimahTelecom,scale: 1.7,  offset: '0px' },
     { name: "Mafran Meat",                logo: mafranMeat,    scale: 1.25, offset: '0px' },
     { name: "Gloria Jean's",              logo: gloriaJeans,   scale: 1.6,  offset: '0px' },
   ];
@@ -218,7 +216,7 @@ const Clients = () => {
         </div>
 
         {/* Triple lane counter-scrolling marquees in a centered lean frame */}
-        <div style={{ 
+        <div className="clients-marquee-frame" style={{ 
           maxWidth: '1000px', 
           margin: '0 auto', 
           borderRadius: '16px', 

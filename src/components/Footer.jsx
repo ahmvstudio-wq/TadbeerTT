@@ -11,7 +11,7 @@ const Footer = () => {
             <div style={{ marginBottom: '1.5rem' }}>
               <Logo />
             </div>
-            <p style={{ color: 'var(--text-muted)', marginBottom: '2rem', maxWidth: '300px', fontSize: '0.95rem', lineHeight: '1.6' }}>
+            <p className="footer-desc" style={{ color: 'var(--text-muted)', marginBottom: '2rem', maxWidth: '300px', fontSize: '0.95rem', lineHeight: '1.6' }}>
               Strategy to systems, people to technology — global expertise, local insight, aligned with Oman Vision 2040.
             </p>
           </div>
