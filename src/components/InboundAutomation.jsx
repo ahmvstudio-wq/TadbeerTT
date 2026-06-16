@@ -23,9 +23,9 @@ const InboundAutomation = () => {
         <div style={{ position: 'relative', marginBottom: '5rem', display: 'flex', flexDirection: 'column', gap: '2rem' }}>
           
           {/* Desktop Pipeline (Horizontal) */}
-          <div className="pipeline-desktop" style={{ display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: '1rem', position: 'relative' }}>
+          <div className="pipeline-desktop inbound-pipeline-grid">
             {/* Connecting Line */}
-            <div style={{ position: 'absolute', top: '40px', left: '10%', right: '10%', height: '2px', borderBottom: '2px dashed var(--border)', zIndex: 0 }} />
+            <div className="connecting-line" style={{ position: 'absolute', top: '40px', left: '10%', right: '10%', height: '2px', borderBottom: '2px dashed var(--border)', zIndex: 0 }} />
             
             {stages.map((stage, i) => (
               <motion.div 

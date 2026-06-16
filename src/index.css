@@ -3789,3 +3789,257 @@ img {
     padding: 1rem;
   }
 }
+
+/* ==========================================================================
+   MOBILE FOCUS RESPONSIVE CLASSES OVERHAUL
+   ========================================================================== */
+
+/* Advanced Capabilities classes */
+.ac-main-grid {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 2rem;
+}
+.ac-demo-grid {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 1.5rem;
+  align-items: center;
+}
+.ac-demo-flex {
+  display: flex;
+  gap: 1.5rem;
+}
+
+@media (max-width: 768px) {
+  .ac-main-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  .ac-demo-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    text-align: center;
+  }
+  .ac-demo-grid svg {
+    margin: 0 auto;
+  }
+  .ac-demo-flex {
+    flex-direction: column;
+    gap: 1rem;
+  }
+}
+
+/* Our Work classes */
+.work-console-grid {
+  display: grid;
+  grid-template-columns: minmax(250px, 300px) 1fr;
+  gap: 2rem;
+  height: auto;
+  min-height: 700px;
+}
+.work-navigator {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  border-right: 1px solid var(--border);
+  padding-right: 2rem;
+}
+.work-navigator button {
+  flex-shrink: 0;
+}
+.work-viewport {
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+  background: var(--bg-alt);
+  border: 1px solid var(--border);
+  min-height: 600px;
+}
+.work-viewport-content {
+  position: relative;
+  z-index: 10;
+  height: 100%;
+  padding: 3.5rem;
+  display: flex;
+  flex-direction: column;
+}
+.work-viewport-headline {
+  font-size: 3rem;
+  line-height: 1.1;
+  margin-bottom: 1.5rem;
+  color: var(--primary);
+  font-weight: 800;
+}
+
+@media (max-width: 768px) {
+  .work-console-grid {
+    grid-template-columns: 1fr;
+    min-height: auto;
+    gap: 1.5rem;
+  }
+  .work-navigator {
+    flex-direction: row;
+    overflow-x: auto;
+    white-space: nowrap;
+    border-right: none;
+    border-bottom: 1px solid var(--border);
+    padding-right: 0;
+    padding-bottom: 1rem;
+    margin-bottom: 0.5rem;
+    width: 100%;
+    gap: 0.75rem;
+    -webkit-overflow-scrolling: touch;
+  }
+  .work-viewport {
+    min-height: 480px;
+  }
+  .work-viewport-content {
+    padding: 1.5rem;
+  }
+  .work-viewport-headline {
+    font-size: 1.75rem;
+  }
+}
+
+/* Readiness Score matrix and action buttons */
+.readiness-matrix-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-bottom: 2.5rem;
+  text-align: left;
+}
+.readiness-action-buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+}
+
+@media (max-width: 768px) {
+  .readiness-matrix-grid {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+  .readiness-action-buttons {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .readiness-action-buttons .btn,
+  .readiness-action-buttons a {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* Inbound Automation Pipeline & Lead capture modal */
+.inbound-pipeline-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 1rem;
+  position: relative;
+}
+.modal-form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+@media (max-width: 768px) {
+  .inbound-pipeline-grid {
+    grid-template-columns: 1fr;
+    gap: 2.25rem;
+  }
+  .inbound-pipeline-grid .connecting-line {
+    display: none !important;
+  }
+  .modal-form-row {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+}
+
+/* ROI Calculator classes */
+.roi-calc-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 3rem;
+}
+.roi-output-card {
+  padding: 3rem;
+}
+.roi-results-subgrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+@media (max-width: 768px) {
+  .roi-output-card {
+    padding: 1.75rem;
+  }
+}
+@media (max-width: 480px) {
+  .roi-results-subgrid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+}
+
+/* Generic / Service Page Demo grids */
+.demo-grid-4 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.75rem;
+}
+.demo-grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.75rem;
+}
+.demo-grid-2 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+.demo-grid-1-2 {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 1.5rem;
+}
+.demo-grid-1-auto {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 1.5rem;
+  align-items: end;
+}
+
+@media (max-width: 900px) {
+  .demo-grid-4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 768px) {
+  .demo-grid-3 {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  .demo-grid-2 {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  .demo-grid-1-2 {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+  .demo-grid-1-auto {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+    align-items: stretch;
+  }
+}
+@media (max-width: 480px) {
+  .demo-grid-4 {
+    grid-template-columns: 1fr;
+  }
+}

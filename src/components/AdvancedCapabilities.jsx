@@ -37,7 +37,7 @@ const AdvancedCapabilities = () => {
           centered 
         />
 
-        <div style={{ display: 'grid', gridTemplateColumns: '280px 1fr', gap: '2rem', marginTop: '3rem' }}>
+        <div className="ac-main-grid" style={{ marginTop: '3rem' }}>
           
           {/* Controls */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
@@ -78,7 +78,7 @@ const AdvancedCapabilities = () => {
 
             <AnimatePresence mode="wait">
               {activeDemo === 0 && (
-                <motion.div key="demo0" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }} style={{ display: 'grid', gridTemplateColumns: '1fr auto 1fr', gap: '1.5rem', alignItems: 'center' }}>
+                <motion.div key="demo0" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }} className="ac-demo-grid">
                   
                   <div style={{ background: 'white', border: '1px dashed var(--border)', padding: '1.5rem', borderRadius: '12px', fontFamily: 'monospace', fontSize: '0.75rem', color: 'var(--text-muted)', height: '240px' }}>
                     <div style={{ color: 'var(--primary)', marginBottom: '0.5rem', fontWeight: 'bold', fontFamily: 'var(--font-en)', fontSize: '0.8rem' }}>RAW INVOICE (PDF)</div>
@@ -114,7 +114,7 @@ const AdvancedCapabilities = () => {
               )}
 
               {activeDemo === 1 && (
-                <motion.div key="demo1" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }} style={{ display: 'flex', gap: '1.5rem', minHeight: '240px' }}>
+                <motion.div key="demo1" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }} className="ac-demo-flex" style={{ minHeight: '240px' }}>
                   <div style={{ flex: 1, background: 'white', borderRadius: '12px', padding: '1rem', border: '1px solid var(--border)' }}>
                     <div style={{ fontSize: '0.75rem', textTransform: 'uppercase', color: 'var(--text-muted)', marginBottom: '1rem', fontWeight: '600' }}>Incoming Messages</div>
                     <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }} style={{ background: 'var(--bg)', padding: '0.75rem', borderRadius: '8px', marginBottom: '0.5rem', fontSize: '0.85rem', color: 'var(--text-main)' }}>

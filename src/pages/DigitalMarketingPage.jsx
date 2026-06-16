@@ -221,7 +221,7 @@ const DigitalMarketingPage = () => {
       <section className="sp-section" style={{ padding: '3.5rem 5%' }}>
         <div className="container">
           <SectionHeader label="Capabilities" title="Full-Funnel Marketing" centered />
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '3rem', marginTop: '3rem', alignItems: 'center' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '3rem', marginTop: '3rem', alignItems: 'center' }}>
             {/* Left: Illustration */}
             <motion.div initial={{ opacity: 0, scale: 0.95 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} style={{ display: 'flex', justifyContent: 'center' }}>
               <AcquisitionLoopSVG />
@@ -327,7 +327,7 @@ const DigitalMarketingPage = () => {
       <section className="sp-section" style={{ padding: 'var(--section-padding)' }}>
         <div className="container">
           <SectionHeader label="Proven Results" title="Case Studies" />
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '2rem', marginTop: '3rem' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '2rem', marginTop: '3rem' }}>
             {caseStudies.map((study, idx) => (
               <motion.div 
                 key={idx}

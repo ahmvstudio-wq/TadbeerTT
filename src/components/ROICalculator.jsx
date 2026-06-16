@@ -46,7 +46,7 @@ const ROICalculator = () => {
           <p style={{ color: 'var(--text-muted)', fontSize: '1.15rem', marginTop: '1rem' }}>See how much your business could save and earn with the right technology and strategy.</p>
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '3rem' }}>
+        <div className="roi-calc-grid">
           
           {/* Inputs */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
@@ -93,7 +93,7 @@ const ROICalculator = () => {
           </div>
 
           {/* Outputs */}
-          <div style={{ background: 'var(--primary)', borderRadius: '16px', padding: '3rem', color: 'white', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+          <div className="roi-output-card" style={{ background: 'var(--primary)', borderRadius: '16px', color: 'white', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
             <div style={{ marginBottom: '2rem' }}>
               <div style={{ fontSize: '0.9rem', textTransform: 'uppercase', letterSpacing: '1px', opacity: 0.8, marginBottom: '0.5rem' }}>Projected Annual Impact</div>
               <motion.div key={results.totalImpact} initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} style={{ fontSize: '3.5rem', fontWeight: '800', color: 'var(--secondary)', lineHeight: '1.1' }}>
@@ -101,7 +101,7 @@ const ROICalculator = () => {
               </motion.div>
             </div>
 
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem', marginBottom: '3rem', borderTop: '1px solid rgba(255,255,255,0.1)', paddingTop: '2rem' }}>
+            <div className="roi-results-subgrid" style={{ marginBottom: '3rem', borderTop: '1px solid rgba(255,255,255,0.1)', paddingTop: '2rem' }}>
               <div>
                 <div style={{ fontSize: '0.8rem', opacity: 0.7, marginBottom: '0.25rem' }}>Efficiency Savings</div>
                 <div style={{ fontSize: '1.5rem', fontWeight: '600' }}>{formatCurrency(results.efficiencySavings)}</div>

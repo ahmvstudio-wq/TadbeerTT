@@ -344,7 +344,7 @@ const ReadinessScore = () => {
                       <p style={{ color: 'var(--text-muted)', marginBottom: '2rem', fontSize: '1rem' }}>{result.desc}</p>
 
                       {/* Action Priority Matrix */}
-                      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', marginBottom: '2.5rem', textAlign: 'left' }}>
+                      <div className="readiness-matrix-grid">
                         <div style={{ background: 'rgba(34,197,94,0.03)', border: '1px solid rgba(34,197,94,0.15)', borderRadius: '12px', padding: '1.25rem' }}>
                           <h4 style={{ fontSize: '0.9rem', fontWeight: '700', color: '#166534', marginBottom: '0.5rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>⚡ Quick Wins</h4>
                           <p style={{ fontSize: '0.8rem', color: 'var(--text-muted)', margin: 0, lineHeight: '1.4' }}>
@@ -379,7 +379,7 @@ const ReadinessScore = () => {
                         </div>
                       </div>
 
-                      <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center' }}>
+                      <div className="readiness-action-buttons">
                         <button onClick={() => setModalOpen(true)} className="btn btn-primary" style={{ padding: '0.75rem 1.5rem', fontSize: '0.95rem' }}>
                           Get Full Detailed Report
                         </button>

@@ -178,7 +178,7 @@ const Navbar = () => {
 
         <div className="nav-actions">
           <span className="lang-switch">العربية</span>
-          <a href="#contact" className="btn btn-primary" style={{ padding: '0.65rem 1.25rem', fontSize: '0.9rem' }}>Book Consultation</a>
+          <a href="#contact" className="btn btn-primary nav-cta-btn" style={{ padding: '0.65rem 1.25rem', fontSize: '0.9rem' }}>Book Consultation</a>
           
           <button 
             className={`nav-toggle ${mobileOpen ? 'open' : ''}`} 

@@ -81,7 +81,7 @@ const SoftwareSolutionsPage = () => {
         <div className="container">
           <SectionHeader label="Our Expertise" title="Systems Built For Growth" centered />
           
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '3rem', marginTop: '3rem', alignItems: 'center' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '3rem', marginTop: '3rem', alignItems: 'center' }}>
             {/* Left: Illustration */}
             <motion.div initial={{ opacity: 0, scale: 0.95 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} style={{ display: 'flex', justifyContent: 'center' }}>
               <IntegrationArchitectureSVG />
@@ -164,7 +164,7 @@ const SoftwareSolutionsPage = () => {
                         <div style={{ background: 'white', border: '1px solid #e2e8f0', padding: '0.5rem 1rem', borderRadius: '8px', fontSize: '0.85rem', fontWeight: '600' }}>Last 30 Days</div>
                       </div>
 
-                      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '1.5rem' }}>
+                      <div className="demo-grid-3">
                         {[
                           { label: 'Total Revenue', value: 'OMR 124,500', trend: '+14%' },
                           { label: 'Total Expenses', value: 'OMR 42,100', trend: '-2%' },
@@ -196,7 +196,7 @@ const SoftwareSolutionsPage = () => {
                         <div style={{ background: '#22c55e', color: 'white', padding: '0.5rem 1rem', borderRadius: '8px', fontSize: '0.85rem', fontWeight: '600' }}>System Online</div>
                       </div>
 
-                      <div style={{ display: 'grid', gridTemplateColumns: '1fr 2fr', gap: '1.5rem' }}>
+                      <div className="demo-grid-1-2">
                         <div style={{ background: 'white', padding: '1.5rem', borderRadius: '12px', border: '1px solid #e2e8f0' }}>
                           <div style={{ width: '120px', height: '120px', border: '12px solid #e2e8f0', borderTopColor: 'var(--secondary)', borderRadius: '50%', margin: '0 auto 1rem' }} />
                           <div style={{ textAlign: 'center', fontWeight: 'bold', fontSize: '1.25rem' }}>84% Capacity</div>
@@ -232,7 +232,7 @@ const SoftwareSolutionsPage = () => {
                         <input type="text" placeholder="Search employees..." style={{ padding: '0.5rem 1rem', borderRadius: '8px', border: '1px solid #e2e8f0', width: '250px', backgroundColor: '#FFFFFF', color: '#1C1B17' }} />
                       </div>
 
-                      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
+                      <div className="demo-grid-2">
                         {[
                           { name: 'Ahmed Al Balushi', role: 'Operations Manager', dept: 'Logistics', status: 'Active' },
                           { name: 'Sarah Jenkins', role: 'Financial Controller', dept: 'Finance', status: 'Active' },

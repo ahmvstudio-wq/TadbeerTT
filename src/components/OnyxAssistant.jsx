@@ -321,9 +321,13 @@ const OnyxAssistant = () => {
           }
           @media (max-width: 480px) {
             .onyx-panel {
+              position: fixed !important;
               width: calc(100vw - 32px) !important;
+              left: 16px !important;
               right: 16px !important;
-              bottom: 80px !important;
+              bottom: 88px !important;
+              height: calc(100vh - 120px) !important;
+              max-height: 520px !important;
             }
           }
         `}} />

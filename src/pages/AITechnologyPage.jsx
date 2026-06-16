@@ -102,7 +102,7 @@ const OmnichannelDemo = () => {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem', height: '100%' }}>
       {/* Channel Capture */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '0.75rem' }}>
+      <div className="demo-grid-4">
         {channels.map((ch, i) => (
           <motion.div
             key={i}
@@ -132,7 +132,7 @@ const OmnichannelDemo = () => {
             {step >= 3 && <span style={{ marginLeft: 'auto', color: '#22c55e', fontSize: '0.75rem', fontWeight: '600' }}>✓ Analysis Complete</span>}
           </div>
           {step >= 3 && (
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.75rem' }}>
+            <div className="demo-grid-2">
               <div style={{ background: 'white', padding: '0.75rem', borderRadius: '8px', border: '1px solid var(--border)' }}>
                 <div style={{ fontSize: '0.7rem', color: 'var(--text-muted)', marginBottom: '0.25rem' }}>Ahmed Al-Busaidi</div>
                 <div style={{ display: 'flex', justifyContent: 'space-between' }}>
@@ -154,7 +154,7 @@ const OmnichannelDemo = () => {
 
       {/* Assignment + CRM */}
       {step >= 4 && (
-        <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
+        <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="demo-grid-2">
           <div style={{ background: '#f0fdf4', border: '1px solid #bbf7d0', borderRadius: '12px', padding: '1.25rem' }}>
             <div style={{ fontWeight: '700', color: '#166534', fontSize: '0.85rem', display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.75rem' }}><Users size={16} /> Auto-Assigned</div>
             <div style={{ fontSize: '0.8rem', color: '#15803d' }}>Ahmed → <strong>Senior Rep (Mohammed K.)</strong><br />Instagram → <strong>Nurture Sequence #3</strong></div>
@@ -210,7 +210,7 @@ const WebsiteSalesDemo = () => {
         Click a visitor behaviour to see how our AI converts it into pipeline:
       </div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.75rem' }}>
+      <div className="demo-grid-2">
         {triggers.map((t) => (
           <button
             key={t.action}
@@ -347,7 +347,7 @@ const ReportingDemo = () => {
             </div>
 
             {/* Chart + Metric */}
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr auto', gap: '1.5rem', alignItems: 'end' }}>
+            <div className="demo-grid-1-auto">
               <div style={{ display: 'flex', alignItems: 'flex-end', gap: '0.5rem', height: '120px', borderBottom: '1px solid var(--border)', paddingBottom: '0.25rem' }}>
                 {result.chart.map((val, i) => {
                   const maxVal = Math.max(...result.chart);
@@ -420,7 +420,7 @@ const OutreachDemo = () => {
     <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', height: '100%' }}>
       <div style={{ fontSize: '0.85rem', color: 'var(--text-muted)' }}>Select a target account to see AI-powered research + auto-generated outreach:</div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '0.75rem' }}>
+      <div className="demo-grid-3">
         {companies.map((c) => (
           <button key={c.name} onClick={() => handleResearch(c)} style={{ padding: '1rem', background: targetCompany === c.name ? 'rgba(24,79,91,0.05)' : 'white', border: `1.5px solid ${targetCompany === c.name ? 'var(--primary)' : 'var(--border)'}`, borderRadius: '10px', cursor: 'pointer', textAlign: 'left', transition: 'all 0.2s' }}>
             <div style={{ fontWeight: '700', fontSize: '0.9rem', color: 'var(--primary)', marginBottom: '0.25rem' }}>{c.name}</div>
@@ -437,7 +437,7 @@ const OutreachDemo = () => {
       )}
 
       {intel && !isResearching && (
-        <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', flex: 1 }}>
+        <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="demo-grid-2" style={{ flex: 1 }}>
           {/* Left: Intel */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
             <div style={{ background: 'var(--bg)', padding: '1rem', borderRadius: '10px', border: '1px solid var(--border)' }}>
@@ -471,7 +471,7 @@ const CustomToolsDemo = () => {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', height: '100%' }}>
       <div style={{ fontSize: '0.85rem', color: 'var(--text-muted)' }}>Select an industry to see a real AI solution we've built or designed:</div>
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '0.75rem' }}>
+      <div className="demo-grid-3">
         {industryUseCases.map((uc, i) => (
           <button key={i} onClick={() => setSelectedIndustry(i)} style={{ padding: '1rem', background: selectedIndustry === i ? 'rgba(202,169,76,0.08)' : 'white', border: `1.5px solid ${selectedIndustry === i ? 'var(--secondary)' : 'var(--border)'}`, borderRadius: '10px', cursor: 'pointer', textAlign: 'left', transition: 'all 0.2s' }}>
             <div style={{ fontWeight: '700', fontSize: '0.9rem', color: 'var(--primary)' }}>{uc.industry}</div>
@@ -481,7 +481,7 @@ const CustomToolsDemo = () => {
 
       <AnimatePresence mode="wait">
         {selectedIndustry !== null && (
-          <motion.div key={selectedIndustry} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} style={{ flex: 1, display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem' }}>
+          <motion.div key={selectedIndustry} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} className="demo-grid-2" style={{ flex: 1 }}>
             <div style={{ background: '#fef2f2', border: '1px solid #fecaca', borderRadius: '12px', padding: '1.5rem', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
               <div style={{ fontWeight: '700', color: '#991b1b', fontSize: '0.85rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}><AlertTriangle size={16} /> The Problem</div>
               <p style={{ fontSize: '0.9rem', color: '#7f1d1d', margin: 0, lineHeight: '1.6' }}>{industryUseCases[selectedIndustry].problem}</p>

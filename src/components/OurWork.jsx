@@ -158,10 +158,10 @@ const OurWork = () => {
         </motion.div>
 
         {/* Dynamic Mobile Layout adjusts to block, Desktop is grid */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'minmax(250px, 300px) 1fr', gap: '2rem', height: 'auto', minHeight: '700px' }} className="work-console-grid">
+        <div className="work-console-grid">
           
           {/* Left: Mission Control Navigator */}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', borderRight: '1px solid var(--border)', paddingRight: '2rem' }}>
+          <div className="work-navigator">
             {projects.map((proj, idx) => {
               const isActive = activeProjectIdx === idx;
               return (
@@ -197,7 +197,7 @@ const OurWork = () => {
           </div>
 
           {/* Right: The Data Viewport */}
-          <div style={{ position: 'relative', borderRadius: '20px', overflow: 'hidden', background: 'var(--bg-alt)', border: '1px solid var(--border)', minHeight: '600px' }}>
+          <div className="work-viewport">
             
             {/* Background Image Layer (Crossfades) */}
             <AnimatePresence mode="wait">
@@ -216,7 +216,7 @@ const OurWork = () => {
             <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', background: 'linear-gradient(90deg, var(--bg-alt) 40%, transparent 100%)' }} />
 
             {/* UI Content Layer */}
-            <div style={{ position: 'relative', zIndex: 10, height: '100%', padding: '3.5rem', display: 'flex', flexDirection: 'column' }}>
+            <div className="work-viewport-content">
               
               {/* State Toggle */}
               <div style={{ display: 'flex', gap: '1rem', marginBottom: '3rem', flexWrap: 'wrap' }}>
@@ -268,13 +268,7 @@ const OurWork = () => {
                   transition={{ duration: 0.5, ease: "easeOut" }}
                   style={{ maxWidth: '650px', marginTop: 'auto', marginBottom: 'auto' }}
                 >
-                  <h3 style={{ 
-                    fontSize: '3rem', 
-                    lineHeight: '1.1', 
-                    marginBottom: '1.5rem', 
-                    color: 'var(--primary)',
-                    fontWeight: '800'
-                  }}>
+                  <h3 className="work-viewport-headline">
                     {viewState === 'problem' ? activeProject.problem.headline : activeProject.solution.headline}
                   </h3>
                   <p style={{ fontSize: '1.15rem', color: 'var(--text-main)', lineHeight: '1.7', marginBottom: '3rem' }}>
