@@ -1,25 +1,33 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, CheckCircle } from 'lucide-react';
+import { createLead } from '../supabaseService';
 
-const LeadCaptureModal = ({ isOpen, onClose, onSubmit, resourceTitle, resourceType }) => {
+const LeadCaptureModal = ({ isOpen, onClose, onSubmit, resourceTitle, resourceType, resourceLink }) => {
   const [formData, setFormData] = useState({ name: '', email: '', company: '', phone: '' });
   const [submitted, setSubmitted] = useState(false);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     
-    // Save to localStorage as a mock CRM
-    const leads = JSON.parse(localStorage.getItem('tadbeer_leads') || '[]');
-    leads.push({
-      ...formData,
-      resource: resourceTitle,
+    const lead = {
+      name: formData.name,
+      email: formData.email,
+      company: formData.company || null,
+      phone: formData.phone || null,
+      resource: resourceTitle ? `${resourceType || 'Download'}: ${resourceTitle}` : 'General Lead',
       date: new Date().toISOString()
-    });
-    localStorage.setItem('tadbeer_leads', JSON.stringify(leads));
+    };
+    
+    // Insert into Supabase
+    await createLead(lead);
 
     setSubmitted(true);
     if (onSubmit) onSubmit(formData);
+    
+    if (resourceLink) {
+      window.open(resourceLink, '_blank');
+    }
     
     // Auto close after success
     setTimeout(() => {

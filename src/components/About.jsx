@@ -1,9 +1,78 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 
-// SVG Illustration for Retail
-const RetailIllustration = () => (
-  <svg viewBox="0 0 120 120" style={{ width: '80px', height: '80px', marginBottom: '1.25rem' }}>
+// SVG Illustration for Healthcare
+const HealthcareIllustration = ({ style }) => (
+  <svg viewBox="0 0 120 120" style={{ width: '44px', height: '44px', flexShrink: 0, ...style }}>
+    <motion.path
+      d="M45,25 L75,25 L75,45 L95,45 L95,75 L75,75 L75,95 L45,95 L45,75 L25,75 L25,45 L45,45 Z"
+      fill="rgba(24,79,91,0.04)"
+      stroke="var(--primary)"
+      strokeWidth="2"
+      initial={{ pathLength: 0 }}
+      whileInView={{ pathLength: 1 }}
+      viewport={{ once: true }}
+      transition={{ duration: 1.2 }}
+    />
+    <motion.path
+      d="M35,60 L85,60"
+      stroke="var(--secondary)"
+      strokeWidth="2.5"
+      initial={{ pathLength: 0 }}
+      whileInView={{ pathLength: 1 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.8, delay: 0.5 }}
+    />
+    <motion.path
+      d="M60,35 L60,85"
+      stroke="var(--secondary)"
+      strokeWidth="2.5"
+      initial={{ pathLength: 0 }}
+      whileInView={{ pathLength: 1 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.8, delay: 0.5 }}
+    />
+  </svg>
+);
+
+// SVG Illustration for Real Estate
+const RealEstateIllustration = ({ style }) => (
+  <svg viewBox="0 0 120 120" style={{ width: '44px', height: '44px', flexShrink: 0, ...style }}>
+    <motion.path
+      d="M20,90 L20,50 L60,20 L100,50 L100,90 Z"
+      fill="rgba(202,169,76,0.04)"
+      stroke="var(--primary)"
+      strokeWidth="2"
+      initial={{ pathLength: 0 }}
+      whileInView={{ pathLength: 1 }}
+      viewport={{ once: true }}
+      transition={{ duration: 1.2 }}
+    />
+    <motion.path
+      d="M45,90 L45,65 L75,65 L75,90"
+      fill="none"
+      stroke="var(--secondary)"
+      strokeWidth="2"
+      initial={{ pathLength: 0 }}
+      whileInView={{ pathLength: 1 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.8, delay: 0.4 }}
+    />
+    <motion.line
+      x1="15" y1="90" x2="105" y2="90"
+      stroke="var(--primary)"
+      strokeWidth="2"
+      initial={{ scaleX: 0 }}
+      whileInView={{ scaleX: 1 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.8, delay: 1 }}
+    />
+  </svg>
+);
+
+// SVG Illustration for Retail/E-Commerce
+const RetailIllustration = ({ style }) => (
+  <svg viewBox="0 0 120 120" style={{ width: '44px', height: '44px', flexShrink: 0, ...style }}>
     <motion.path
       d="M30,40 L90,40 L85,80 L35,80 Z"
       fill="rgba(24,79,91,0.04)"
@@ -39,8 +108,8 @@ const RetailIllustration = () => (
 );
 
 // SVG Illustration for Logistics
-const LogisticsIllustration = () => (
-  <svg viewBox="0 0 120 120" style={{ width: '80px', height: '80px', marginBottom: '1.25rem' }}>
+const LogisticsIllustration = ({ style }) => (
+  <svg viewBox="0 0 120 120" style={{ width: '44px', height: '44px', flexShrink: 0, ...style }}>
     <motion.rect
       x="20" y="40" width="55" height="40" rx="4"
       fill="none"
@@ -76,9 +145,100 @@ const LogisticsIllustration = () => (
   </svg>
 );
 
+// SVG Illustration for Construction
+const ConstructionIllustration = ({ style }) => (
+  <svg viewBox="0 0 120 120" style={{ width: '44px', height: '44px', flexShrink: 0, ...style }}>
+    <motion.path
+      d="M25,90 L25,30 L85,30"
+      fill="none"
+      stroke="var(--primary)"
+      strokeWidth="2.5"
+      initial={{ pathLength: 0 }}
+      whileInView={{ pathLength: 1 }}
+      viewport={{ once: true }}
+      transition={{ duration: 1.2 }}
+    />
+    <motion.path
+      d="M25,45 L85,30 L85,45 Z"
+      fill="rgba(24,79,91,0.04)"
+      stroke="var(--secondary)"
+      strokeWidth="2"
+      initial={{ pathLength: 0 }}
+      whileInView={{ pathLength: 1 }}
+      viewport={{ once: true }}
+      transition={{ duration: 1, delay: 0.4 }}
+    />
+    <motion.path
+      d="M50,90 L50,45"
+      stroke="rgba(24,79,91,0.2)"
+      strokeWidth="1.5"
+      initial={{ pathLength: 0 }}
+      whileInView={{ pathLength: 1 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.8, delay: 0.8 }}
+    />
+    <motion.path
+      d="M75,90 L75,45"
+      stroke="rgba(24,79,91,0.2)"
+      strokeWidth="1.5"
+      initial={{ pathLength: 0 }}
+      whileInView={{ pathLength: 1 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.8, delay: 0.8 }}
+    />
+    <motion.line
+      x1="15" y1="90" x2="105" y2="90"
+      stroke="var(--primary)"
+      strokeWidth="2"
+      initial={{ scaleX: 0 }}
+      whileInView={{ scaleX: 1 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.8, delay: 1 }}
+    />
+  </svg>
+);
+
+// SVG Illustration for Manufacturing
+const ManufacturingIllustration = ({ style }) => (
+  <svg viewBox="0 0 120 120" style={{ width: '44px', height: '44px', flexShrink: 0, ...style }}>
+    <motion.circle
+      cx="60" cy="60" r="25"
+      fill="rgba(24,79,91,0.04)"
+      stroke="var(--primary)"
+      strokeWidth="2.5"
+      initial={{ pathLength: 0 }}
+      whileInView={{ pathLength: 1 }}
+      viewport={{ once: true }}
+      transition={{ duration: 1.2 }}
+    />
+    <motion.circle
+      cx="60" cy="60" r="10"
+      fill="none"
+      stroke="var(--secondary)"
+      strokeWidth="2"
+      initial={{ pathLength: 0 }}
+      whileInView={{ pathLength: 1 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.8, delay: 0.4 }}
+    />
+    {[0, 45, 90, 135, 180, 225, 270, 315].map((angle, i) => (
+      <motion.rect
+        key={i}
+        x="56" y="27" width="8" height="12" rx="1"
+        fill="var(--primary)"
+        style={{ originX: '60px', originY: '60px', rotate: angle }}
+        initial={{ scaleY: 0 }}
+        whileInView={{ scaleY: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.5, delay: 0.6 + i * 0.05 }}
+      />
+    ))}
+  </svg>
+);
+
 // SVG Illustration for Government
-const GovernmentIllustration = () => (
-  <svg viewBox="0 0 120 120" style={{ width: '80px', height: '80px', marginBottom: '1.25rem' }}>
+const GovernmentIllustration = ({ style }) => (
+  <svg viewBox="0 0 120 120" style={{ width: '44px', height: '44px', flexShrink: 0, ...style }}>
     <motion.polygon
       points="60,20 20,45 100,45"
       fill="rgba(24,79,91,0.04)"
@@ -115,8 +275,8 @@ const GovernmentIllustration = () => (
 );
 
 // SVG Illustration for Corporate
-const CorporateIllustration = () => (
-  <svg viewBox="0 0 120 120" style={{ width: '80px', height: '80px', marginBottom: '1.25rem' }}>
+const CorporateIllustration = ({ style }) => (
+  <svg viewBox="0 0 120 120" style={{ width: '44px', height: '44px', flexShrink: 0, ...style }}>
     <motion.rect
       x="25" y="45" width="70" height="45" rx="3"
       fill="rgba(202,169,76,0.04)"
@@ -152,14 +312,51 @@ const CorporateIllustration = () => (
   </svg>
 );
 
-const About = () => {
-  const industries = [
-    { illustration: <RetailIllustration />, title: 'Retail & E-Commerce', desc: 'Scalable omnichannel platforms with deep ERP integrations and dynamic inventory systems.' },
-    { illustration: <LogisticsIllustration />, title: 'Logistics & Supply Chain', desc: 'Custom fleet management, real-time tracking, and automated supply chain operations.' },
-    { illustration: <GovernmentIllustration />, title: 'Government & Public Sector', desc: 'Secure, high-compliance portals and digital governance solutions for Oman Vision 2040.' },
-    { illustration: <CorporateIllustration />, title: 'Corporate & Enterprise', desc: 'Enterprise-grade resource planning, custom CRM, and secure data infrastructure.' },
-  ];
+// Easily editable, removable or reorderable industries config
+const INDUSTRIES_DATA = [
+  {
+    illustration: <HealthcareIllustration />,
+    title: 'Healthcare',
+    desc: 'AI-driven diagnostics integration and digital operational workflow automation.'
+  },
+  {
+    illustration: <RealEstateIllustration />,
+    title: 'Real Estate',
+    desc: 'PropTech solutions, secure transaction flows, and automated lead intelligence.'
+  },
+  {
+    illustration: <LogisticsIllustration />,
+    title: 'Logistics & Supply Chain',
+    desc: 'Custom fleet management, real-time tracking, and automated supply chain operations.'
+  },
+  {
+    illustration: <RetailIllustration />,
+    title: 'E-Commerce',
+    desc: 'Scalable omnichannel platforms with deep ERP integrations and dynamic inventory systems.'
+  },
+  {
+    illustration: <ConstructionIllustration />,
+    title: 'Construction',
+    desc: 'Automated project management tracking, resource allocation, and material compliance portals.'
+  },
+  {
+    illustration: <ManufacturingIllustration />,
+    title: 'Manufacturing',
+    desc: 'Smart inventory control, custom ERP platforms, and predictive maintenance tracking systems.'
+  },
+  {
+    illustration: <GovernmentIllustration />,
+    title: 'Government & Public Sector',
+    desc: 'Secure, high-compliance portals and digital governance solutions for Oman Vision 2040.'
+  },
+  {
+    illustration: <CorporateIllustration />,
+    title: 'Professional Services',
+    desc: 'Enterprise-grade resource planning, custom CRM, and secure data infrastructure.'
+  }
+];
 
+const About = () => {
   return (
     <section id="about" className="about-narrative-section" style={{ padding: '3.5rem 0' }}>
       <div className="container">
@@ -174,46 +371,32 @@ const About = () => {
             transition={{ type: "spring", bounce: 0.1, duration: 1.2 }}
             style={{ marginBottom: '3.5rem' }}
           >
-            <span className="section-label">Industries Served</span>
+            <span className="section-label">Industries We Serve</span>
             <h2 className="section-title">Perfectly Effect Based.</h2>
           </motion.div>
 
-          <div className="values-grid">
-            {industries.map((v, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ type: "spring", bounce: 0.2, duration: 0.8, delay: i * 0.08 }}
-                whileHover={{ 
-                  y: -8,
-                  borderColor: 'var(--secondary)',
-                  boxShadow: '0 12px 30px rgba(202, 169, 76, 0.08)' 
-                }}
-                style={{ 
-                  padding: '2.25rem 1.5rem', 
-                  background: 'white', 
-                  borderRadius: 'var(--radius)', 
-                  border: '1px solid var(--border)', 
-                  display: 'flex',
-                  flexDirection: 'column',
-                  alignItems: 'center',
-                  textAlign: 'center',
-                  cursor: 'pointer'
-                }}
-              >
-                <motion.div 
-                  whileHover={{ scale: 1.12, rotate: [0, -2, 2, 0] }}
-                  transition={{ type: "spring", stiffness: 300, damping: 10 }}
-                  style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
+          <div className="industries-panel">
+            <div className="industries-compact-grid">
+              {INDUSTRIES_DATA.map((v, i) => (
+                <motion.div
+                  key={i}
+                  className="industry-compact-item"
+                  initial={{ opacity: 0, y: 15 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ type: "spring", bounce: 0.1, duration: 0.8, delay: i * 0.05 }}
+                  whileHover={{ x: 6 }}
                 >
-                  {v.illustration}
+                  <div className="industry-icon-box">
+                    {v.illustration}
+                  </div>
+                  <div className="industry-info">
+                    <h4 className="industry-name">{v.title}</h4>
+                    <p className="industry-text">{v.desc}</p>
+                  </div>
                 </motion.div>
-                <h4 style={{ fontSize: '1.15rem', color: 'var(--primary)', marginBottom: '0.75rem', fontWeight: '700' }}>{v.title}</h4>
-                <p style={{ color: 'var(--text-muted)', fontSize: '0.95rem', lineHeight: '1.6', margin: 0 }}>{v.desc}</p>
-              </motion.div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
 

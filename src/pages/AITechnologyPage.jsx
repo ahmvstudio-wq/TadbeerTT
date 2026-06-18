@@ -7,8 +7,9 @@ import {
   FileText, BarChart3, Globe, Filter, Mail, Target, TrendingUp, 
   MessageSquare, Phone, AtSign, Users, Settings, ArrowRight,
   Play, RotateCcw, Search, PieChart, Layers, Send, ShieldCheck,
-  Sparkles, LineChart, AlertTriangle, Clock, Building2
+  Sparkles, LineChart, AlertTriangle, Clock, Building2, Activity, Truck, X
 } from 'lucide-react';
+import { createLead } from '../supabaseService';
 
 /* ──────────────────────────────────────────────
    DEMO DATA
@@ -498,10 +499,150 @@ const CustomToolsDemo = () => {
 };
 
 /* ──────────────────────────────────────────────
+   CONVERSATIONAL AI LEAD MODAL
+   ────────────────────────────────────────────── */
+const AIDemoLeadModal = ({ isOpen, onClose }) => {
+  const [formData, setFormData] = useState({ name: '', company: '', email: '', phone: '', requirement: '' });
+  const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    
+    const lead = {
+      name: formData.name,
+      email: formData.email,
+      company: formData.company || null,
+      phone: formData.phone || null,
+      resource: `AI Demo Enquiry: ${formData.requirement}`,
+      date: new Date().toISOString()
+    };
+    
+    const { error } = await createLead(lead);
+    setLoading(false);
+    if (!error) {
+      setSubmitted(true);
+      sessionStorage.setItem('ai_demo_lead_capture_submitted', 'true');
+      setTimeout(() => {
+        setSubmitted(false);
+        onClose();
+        setFormData({ name: '', company: '', email: '', phone: '', requirement: '' });
+      }, 3000);
+    } else {
+      alert('Something went wrong, please try again.');
+    }
+  };
+
+  return (
+    <AnimatePresence>
+      {isOpen && (
+        <div style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', zIndex: 1000, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '1rem' }}>
+          <motion.div 
+            initial={{ opacity: 0 }} 
+            animate={{ opacity: 1 }} 
+            exit={{ opacity: 0 }}
+            onClick={onClose}
+            style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', background: 'rgba(0,0,0,0.5)', backdropFilter: 'blur(8px)' }}
+          />
+          
+          <motion.div
+            data-lenis-prevent
+            initial={{ opacity: 0, scale: 0.9, y: 20 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.9, y: 20 }}
+            style={{ background: 'white', borderRadius: '16px', width: '100%', maxWidth: '500px', position: 'relative', overflow: 'hidden', boxShadow: '0 25px 50px -12px rgba(0,0,0,0.25)' }}
+          >
+            {/* Header */}
+            <div style={{ background: 'var(--primary)', color: 'white', padding: '1.5rem', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', borderTopLeftRadius: '16px', borderTopRightRadius: '16px' }}>
+              <div>
+                <span style={{ fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '1px', opacity: 0.8 }}>AI assistant</span>
+                <h3 style={{ fontSize: '1.25rem', marginTop: '0.25rem', lineHeight: '1.4', color: 'white' }}>Build Your AI Advantage</h3>
+              </div>
+              <button onClick={onClose} style={{ background: 'transparent', border: 'none', color: 'white', cursor: 'pointer', padding: '0.25rem' }}>
+                <X size={20} />
+              </button>
+            </div>
+
+            <div style={{ padding: '2rem' }}>
+              {submitted ? (
+                <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} style={{ textAlign: 'center', padding: '2rem 0' }}>
+                  <CheckCircle2 size={64} color="var(--secondary)" style={{ margin: '0 auto 1rem' }} />
+                  <h3 style={{ fontSize: '1.5rem', color: 'var(--primary)', marginBottom: '0.5rem' }}>Thank You!</h3>
+                  <p style={{ color: 'var(--text-muted)' }}>We've received your requirements. Our AI architect will review them and reach out to you shortly.</p>
+                </motion.div>
+              ) : (
+                <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                  <p style={{ color: 'var(--text-muted)', marginBottom: '1.25rem', fontSize: '0.95rem', lineHeight: '1.5' }}>
+                    "Looking to build an AI system for your business? Tell us your requirements and we'll show you how we can help."
+                  </p>
+                  
+                  <div>
+                    <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: '600', marginBottom: '0.5rem', color: 'var(--text-main)' }}>Your Name *</label>
+                    <input required type="text" value={formData.name} onChange={e => setFormData({...formData, name: e.target.value})} style={{ width: '100%', padding: '0.75rem', borderRadius: '8px', border: '1px solid var(--border)', fontSize: '0.95rem', backgroundColor: '#FFFFFF', color: '#1C1B17' }} />
+                  </div>
+
+                  <div className="modal-form-row">
+                    <div>
+                      <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: '600', marginBottom: '0.5rem', color: 'var(--text-main)' }}>Company</label>
+                      <input type="text" value={formData.company} onChange={e => setFormData({...formData, company: e.target.value})} style={{ width: '100%', padding: '0.75rem', borderRadius: '8px', border: '1px solid var(--border)', fontSize: '0.95rem', backgroundColor: '#FFFFFF', color: '#1C1B17' }} />
+                    </div>
+                    <div>
+                      <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: '600', marginBottom: '0.5rem', color: 'var(--text-main)' }}>Phone Number</label>
+                      <input type="tel" value={formData.phone} onChange={e => setFormData({...formData, phone: e.target.value})} style={{ width: '100%', padding: '0.75rem', borderRadius: '8px', border: '1px solid var(--border)', fontSize: '0.95rem', backgroundColor: '#FFFFFF', color: '#1C1B17' }} />
+                    </div>
+                  </div>
+                  
+                  <div>
+                    <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: '600', marginBottom: '0.5rem', color: 'var(--text-main)' }}>Email Address *</label>
+                    <input required type="email" value={formData.email} onChange={e => setFormData({...formData, email: e.target.value})} style={{ width: '100%', padding: '0.75rem', borderRadius: '8px', border: '1px solid var(--border)', fontSize: '0.95rem', backgroundColor: '#FFFFFF', color: '#1C1B17' }} />
+                  </div>
+
+                  <div>
+                    <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: '600', marginBottom: '0.5rem', color: 'var(--text-main)' }}>AI Requirements / Message *</label>
+                    <textarea required rows="3" value={formData.requirement} onChange={e => setFormData({...formData, requirement: e.target.value})} placeholder="E.g., We want to build a bilingual customer service agent on WhatsApp..." style={{ width: '100%', padding: '0.75rem', borderRadius: '8px', border: '1px solid var(--border)', fontSize: '0.95rem', backgroundColor: '#FFFFFF', color: '#1C1B17', fontFamily: 'inherit', resize: 'vertical' }} />
+                  </div>
+
+                  <button type="submit" disabled={loading} className="btn btn-primary" style={{ width: '100%', padding: '1rem', marginTop: '1rem', fontSize: '1.05rem' }}>
+                    {loading ? 'Submitting...' : 'Submit Requirements'}
+                  </button>
+                </form>
+              )}
+            </div>
+          </motion.div>
+        </div>
+      )}
+    </AnimatePresence>
+  );
+};
+
+/* ──────────────────────────────────────────────
    MAIN PAGE COMPONENT
    ────────────────────────────────────────────── */
 const AITechnologyPage = () => {
   const [activeWorkflow, setActiveWorkflow] = useState('omnichannel');
+  const [popupOpen, setPopupOpen] = useState(false);
+  const interactionTimerRef = useRef(null);
+
+  const handleDemoInteraction = () => {
+    const isDismissed = sessionStorage.getItem('ai_demo_lead_capture_dismissed');
+    const isSubmitted = sessionStorage.getItem('ai_demo_lead_capture_submitted');
+    if (isDismissed || isSubmitted) return;
+
+    if (!interactionTimerRef.current) {
+      interactionTimerRef.current = setTimeout(() => {
+        setPopupOpen(true);
+      }, 7500); // 7.5 seconds engagement
+    }
+  };
+
+  useEffect(() => {
+    return () => {
+      if (interactionTimerRef.current) {
+        clearTimeout(interactionTimerRef.current);
+      }
+    };
+  }, []);
 
   const demoComponents = {
     omnichannel: <OmnichannelDemo />,
@@ -525,31 +666,56 @@ const AITechnologyPage = () => {
         <div className="container">
           <SectionHeader label="Our Capabilities" title="Enterprise AI Solutions" centered />
           
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '2rem', marginTop: '3.5rem' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '2rem', marginTop: '3.5rem' }}>
             {[
               {
-                title: 'Agentic Workflows',
+                title: 'Healthcare AI',
+                icon: <Activity size={28} />,
+                problem: 'Patient scheduling inefficiencies, administrative bottlenecks, and high diagnostic wait times.',
+                solution: 'Predictive patient flow analytics, secure bilingual EHR indexing, and automated appointment optimization systems.',
+                outcome: '38% reduction in no-shows and significantly streamlined clinical operations.'
+              },
+              {
+                title: 'Real Estate AI',
+                icon: <Building2 size={28} />,
+                problem: 'Agents losing hours on unqualified enquiries and cold property leads.',
+                solution: 'Intelligent WhatsApp scoring agents that pre-qualify and match buyer profiles with active listings.',
+                outcome: '2.8x increase in sales close rates and zero lead leakage.'
+              },
+              {
+                title: 'Logistics AI',
+                icon: <Truck size={28} />,
+                problem: 'Manual route planning, inaccurate dispatch times, and high warehouse picking errors.',
+                solution: 'Machine learning route optimization engines and intelligent warehouse tracking systems.',
+                outcome: '40% reduction in picking errors and optimized delivery turnaround times.'
+              },
+              {
+                title: 'Sales Automation',
+                icon: <Workflow size={28} />,
+                problem: 'Sales teams wasting 70% of their day on manual follow-ups and CRM updates.',
+                solution: 'Multi-channel agentic outreach sequences that auto-schedule meetings and update customer databases in real-time.',
+                outcome: '4x increase in outreach volume and structured pipeline tracking.'
+              },
+              {
+                title: 'Lead Qualification',
+                icon: <Target size={28} />,
+                problem: 'Inbound leads cooling down due to slow manual response times.',
+                solution: 'Instant omnichannel qualification bots that score and route high-intent leads in under 2 minutes.',
+                outcome: '60% faster response times and improved lead-to-opportunity conversion.'
+              },
+              {
+                title: 'AI Reporting',
+                icon: <BarChart3 size={28} />,
+                problem: 'Executive teams waiting days for data analysts to compile performance reports.',
+                solution: 'Natural language data queries that generate real-time charts and revenue attribution reports.',
+                outcome: 'Hallucination-free insights instantly accessible in plain English or Arabic.'
+              },
+              {
+                title: 'AI Assistants',
                 icon: <Bot size={28} />,
-                desc: 'Autonomous AI agents that execute complex, multi-step business operations, communicate across systems, and handle edge cases.',
-                capabilities: ['Self-healing workflow loops', 'Cross-platform RPA integration', 'Human-in-the-loop guardrails', 'Context-aware task planning']
-              },
-              {
-                title: 'Cognitive Data Pipelines',
-                icon: <Database size={28} />,
-                desc: 'Ingest and structure massive volumes of unstructured data (invoices, emails, call logs) into clean databases automatically.',
-                capabilities: ['Bilingual OCR & Document extraction', 'PII sanitization & compliance', 'Auto-tagging & classification', 'Custom schema generation']
-              },
-              {
-                title: 'Bilingual RAG Systems',
-                icon: <Network size={28} />,
-                desc: 'Secure enterprise search engines that query your internal knowledge base in Arabic & English, delivering hallucination-free answers.',
-                capabilities: ['Hybrid keyword & vector retrieval', 'Source citation & verification', 'Strict role-based access controls', 'Multi-tenant indexing']
-              },
-              {
-                title: 'Predictive Intelligence',
-                icon: <Cpu size={28} />,
-                desc: 'Analyze historical data patterns to forecast future trends, demand spikes, inventory needs, and customer churn.',
-                capabilities: ['Time-series demand forecasting', 'Customer churn vulnerability alerts', 'Dynamic pricing optimization', 'Anomaly & fraud detection']
+                problem: 'Internal teams bogged down by repetitive customer support and operational QA enquiries.',
+                solution: 'High-context RAG-enabled workspace assistants with strict role-based access security.',
+                outcome: '80% automated resolution of internal support requests and instant knowledge retrieval.'
               }
             ].map((system, idx) => (
               <motion.div
@@ -557,7 +723,7 @@ const AITechnologyPage = () => {
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: idx * 0.1 }}
+                transition={{ delay: idx * 0.08 }}
                 style={{
                   background: 'white',
                   borderRadius: '16px',
@@ -584,18 +750,20 @@ const AITechnologyPage = () => {
                   {system.icon}
                 </div>
                 
-                <h3 style={{ fontSize: '1.3rem', fontWeight: '700', color: 'var(--primary)', marginBottom: '1rem' }}>{system.title}</h3>
-                <p style={{ fontSize: '0.9rem', color: 'var(--text-muted)', lineHeight: '1.6', marginBottom: '1.5rem', flex: 1 }}>{system.desc}</p>
+                <h3 style={{ fontSize: '1.3rem', fontWeight: '700', color: 'var(--primary)', marginBottom: '1.5rem' }}>{system.title}</h3>
                 
-                <div style={{ borderTop: '1px solid var(--border)', paddingTop: '1.25rem', marginTop: 'auto' }}>
-                  <span style={{ display: 'block', fontSize: '0.75rem', fontWeight: '700', color: 'var(--secondary)', textTransform: 'uppercase', letterSpacing: '0.5px', marginBottom: '0.75rem' }}>Core Capabilities:</span>
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-                    {system.capabilities.map((cap, i) => (
-                      <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.8rem', color: 'var(--text-main)' }}>
-                        <div style={{ width: '5px', height: '5px', borderRadius: '50%', background: 'var(--secondary)' }} />
-                        <span>{cap}</span>
-                      </div>
-                    ))}
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem', flex: 1 }}>
+                  <div>
+                    <span style={{ fontWeight: '700', color: 'var(--primary)', display: 'block', fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.5px', marginBottom: '0.25rem' }}>Business Problem:</span>
+                    <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)', lineHeight: '1.5', margin: 0 }}>{system.problem}</p>
+                  </div>
+                  <div>
+                    <span style={{ fontWeight: '700', color: 'var(--secondary)', display: 'block', fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.5px', marginBottom: '0.25rem' }}>AI Solution:</span>
+                    <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)', lineHeight: '1.5', margin: 0 }}>{system.solution}</p>
+                  </div>
+                  <div style={{ borderTop: '1px solid var(--border)', paddingTop: '1rem', marginTop: 'auto' }}>
+                    <span style={{ fontWeight: '700', color: '#166534', display: 'block', fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.5px', marginBottom: '0.25rem' }}>Business Outcome:</span>
+                    <p style={{ fontSize: '0.85rem', color: 'var(--text-main)', fontWeight: '600', lineHeight: '1.5', margin: 0 }}>{system.outcome}</p>
                   </div>
                 </div>
               </motion.div>
@@ -636,7 +804,7 @@ const AITechnologyPage = () => {
           </div>
 
           {/* Demo Stage */}
-          <div style={{ background: 'white', borderRadius: '20px', border: '1px solid var(--border)', boxShadow: '0 20px 60px rgba(0,0,0,0.04)', overflow: 'hidden' }}>
+          <div onMouseDownCapture={handleDemoInteraction} onKeyDownCapture={handleDemoInteraction} style={{ background: 'white', borderRadius: '20px', border: '1px solid var(--border)', boxShadow: '0 20px 60px rgba(0,0,0,0.04)', overflow: 'hidden' }}>
             {/* Header Bar */}
             <div style={{ padding: '1.25rem 2rem', borderBottom: '1px solid var(--border)', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
@@ -675,6 +843,8 @@ const AITechnologyPage = () => {
           </div>
         </div>
       </section>
+
+      <AIDemoLeadModal isOpen={popupOpen} onClose={() => { setPopupOpen(false); sessionStorage.setItem('ai_demo_lead_capture_dismissed', 'true'); }} />
     </div>
   );
 };

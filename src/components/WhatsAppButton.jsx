@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
+import { fetchSettings, defaultSettings } from '../supabaseService';
 
 const WhatsAppButton = () => {
   const [isVisible, setIsVisible] = useState(false);
+  const [settings, setSettings] = useState(null);
   const location = useLocation();
 
   useEffect(() => {
@@ -11,38 +13,33 @@ const WhatsAppButton = () => {
     const timer = setTimeout(() => {
       setIsVisible(true);
     }, 2000);
+
+    const loadSettings = async () => {
+      const data = await fetchSettings();
+      setSettings(data);
+    };
+    loadSettings();
+
     return () => clearTimeout(timer);
   }, []);
 
-  const getSettings = () => {
-    const stored = localStorage.getItem('tadbeer_settings');
-    if (stored) {
-      try {
-        return JSON.parse(stored);
-      } catch (e) {
-        console.error(e);
-      }
-    }
-    return null;
-  };
-
-  const settings = getSettings();
-  const phone = settings?.whatsappPhone || '96876307656';
+  const activeSettings = settings || defaultSettings;
+  const phone = activeSettings.whatsappPhone || '96876307656';
 
   const getWhatsAppMessage = () => {
     const path = location.pathname;
-    let message = settings?.msgDefault || "Hi Tadbeer, I'd like to learn more about your business transformation services.";
+    let message = activeSettings.msgDefault || "Hi Tadbeer, I'd like to learn more about your business transformation services.";
     
     if (path.includes('/services/digital-marketing')) {
-      message = settings?.msgMarketing || "Hi Tadbeer, I'm visiting your website and want to discuss Digital Marketing and Growth systems for my business.";
+      message = activeSettings.msgMarketing || "Hi Tadbeer, I'm visiting your website and want to discuss Digital Marketing and Growth systems for my business.";
     } else if (path.includes('/services/software-solutions')) {
-      message = settings?.msgSoftware || "Hi Tadbeer, I'm visiting your website and want to discuss Enterprise Software and ERP implementation.";
+      message = activeSettings.msgSoftware || "Hi Tadbeer, I'm visiting your website and want to discuss Enterprise Software and ERP implementation.";
     } else if (path.includes('/services/ai-technology')) {
-      message = settings?.msgAI || "Hi Tadbeer, I'm visiting your website and want to discuss custom AI integrations and automation.";
+      message = activeSettings.msgAI || "Hi Tadbeer, I'm visiting your website and want to discuss custom AI integrations and automation.";
     } else if (path.includes('/services/human-capital')) {
-      message = settings?.msgHumanCapital || "Hi Tadbeer, I'm visiting your website and want to discuss Human Capital management and Omanization compliance.";
+      message = activeSettings.msgHumanCapital || "Hi Tadbeer, I'm visiting your website and want to discuss Human Capital management and Omanization compliance.";
     } else if (path.includes('/resources')) {
-      message = settings?.msgResources || "Hi Tadbeer, I'm visiting your resources page and would like to learn more about your consulting services.";
+      message = activeSettings.msgResources || "Hi Tadbeer, I'm visiting your resources page and would like to learn more about your consulting services.";
     }
     
     return encodeURIComponent(message);

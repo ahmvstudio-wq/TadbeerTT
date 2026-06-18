@@ -3,129 +3,13 @@ import {
   X, CheckCircle, Plus, LogOut, Trash2, Edit, Download, Save, 
   Briefcase, BookOpen, Users, Settings, Key, Phone, MessageSquare, ExternalLink
 } from 'lucide-react';
-
-// Default resources to seed local storage if empty
-const DEFAULT_RESOURCES = [
-  { 
-    id: '1',
-    title: "Google's Digital Marketing & E-commerce Certificate", 
-    category: "SEO & Marketing", 
-    type: "Free Course", 
-    desc: "Google's official free professional certificate covering SEO, SEM, email marketing, and analytics — industry recognized.", 
-    link: "https://grow.google/certificates/digital-marketing-ecommerce/",
-    external: true
-  },
-  { 
-    id: '2',
-    title: "HubSpot: The Ultimate Guide to AI in Marketing", 
-    category: "AI & Automation", 
-    type: "Free Guide", 
-    desc: "Comprehensive guide on leveraging AI for content creation, lead scoring, customer segmentation, and campaign optimization.", 
-    link: "https://blog.hubspot.com/marketing/ai-marketing",
-    external: true
-  },
-  { 
-    id: '3',
-    title: "McKinsey: The State of AI — Global Survey", 
-    category: "Digital Transformation", 
-    type: "Report", 
-    desc: "McKinsey's latest global survey on AI adoption, ROI benchmarks, and implementation strategies across industries.", 
-    link: "https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai",
-    external: true
-  },
-  { 
-    id: '4',
-    title: "Odoo ERP Implementation Playbook", 
-    category: "ERP & Software", 
-    type: "Free Guide", 
-    desc: "Step-by-step deployment playbook for Odoo ERP covering configuration, data migration, user training, and go-live.", 
-    link: "https://www.odoo.com/documentation/17.0/",
-    external: true
-  },
-  { 
-    id: '5',
-    title: "SHRM: Future of Work — HR Trends 2025-2026", 
-    category: "Human Capital", 
-    type: "Report", 
-    desc: "SHRM's comprehensive analysis of workforce trends, hybrid work models, employee engagement, and talent acquisition.", 
-    link: "https://www.shrm.org/topics-tools/news/future-of-work",
-    external: true
-  },
-  { 
-    id: '6',
-    title: "Google Analytics 4 Complete Guide", 
-    category: "SEO & Marketing", 
-    type: "Free Course", 
-    desc: "Master GA4 with Google's free Skillshop courses — from setup and event tracking to advanced attribution models.", 
-    link: "https://skillshop.withgoogle.com/intl/en/analytics",
-    external: true
-  },
-  { 
-    id: '7',
-    title: "Harvard Business Review: Scaling AI", 
-    category: "Business Strategy", 
-    type: "Article Collection", 
-    desc: "HBR's curated collection of articles on building an AI-first organization, overcoming adoption barriers, and measuring ROI.", 
-    link: "https://hbr.org/topic/subject/ai-and-machine-learning",
-    external: true
-  },
-  { 
-    id: '8',
-    title: "Microsoft: AI Transformation Playbook", 
-    category: "AI & Automation", 
-    type: "Free Guide", 
-    desc: "Microsoft's blueprint for enterprise AI adoption covering use case identification, governance, and responsible deployment.", 
-    link: "https://www.microsoft.com/en-us/ai/ai-business-school",
-    external: true
-  },
-  { 
-    id: '9',
-    title: "Deloitte: GCC Economic Outlook & Digital Economy", 
-    category: "Business Strategy", 
-    type: "Report", 
-    desc: "Analysis of GCC economic diversification, Oman Vision 2040, and digital economy growth opportunities.", 
-    link: "https://www2.deloitte.com/xe/en/pages/about-deloitte/topics/gcc-country-reports.html",
-    external: true
-  },
-  { 
-    id: '10',
-    title: "Coursera: Google Project Management Certificate", 
-    category: "Business Strategy", 
-    type: "Free Course", 
-    desc: "Free professional certificate from Google covering agile methodologies, stakeholder management, and project execution.", 
-    link: "https://www.coursera.org/professional-certificates/google-project-management",
-    external: true
-  },
-  { 
-    id: '11',
-    title: "ILO: Labour Market Reports — Arab States", 
-    category: "Human Capital", 
-    type: "Report", 
-    desc: "International Labour Organization data on employment trends, wage benchmarking, and Omanization compliance.", 
-    link: "https://www.ilo.org/arabstates",
-    external: true
-  },
-  { 
-    id: '12',
-    title: "Salesforce: State of Marketing Report", 
-    category: "Digital Transformation", 
-    type: "Report", 
-    desc: "Salesforce's annual survey of 4,800+ marketers on AI adoption, personalization, data strategy, and ROI measurement.", 
-    link: "https://www.salesforce.com/resources/research-reports/state-of-marketing/",
-    external: true
-  }
-];
-
-const defaultSettings = {
-  adminPassword: 'tadbeer2025',
-  whatsappPhone: '96876307656',
-  msgDefault: "Hi Tadbeer, I'd like to learn more about your business transformation services.",
-  msgMarketing: "Hi Tadbeer, I'm visiting your website and want to discuss Digital Marketing and Growth systems for my business.",
-  msgSoftware: "Hi Tadbeer, I'm visiting your website and want to discuss Enterprise Software and ERP implementation.",
-  msgAI: "Hi Tadbeer, I'm visiting your website and want to discuss custom AI integrations and automation.",
-  msgHumanCapital: "Hi Tadbeer, I'm visiting your website and want to discuss Human Capital management and Omanization compliance.",
-  msgResources: "Hi Tadbeer, I'm visiting your resources page and would like to learn more about your consulting services."
-};
+import { 
+  fetchJobs, createJob, updateJob, deleteJob,
+  fetchResources, createResource, updateResource, deleteResource,
+  fetchLeads, deleteLead, clearAllLeads,
+  fetchSettings, updateSettings, defaultSettings, DEFAULT_RESOURCES,
+  verifyAdminPassword
+} from '../supabaseService';
 
 const emptyJob = {
   title: '',
@@ -143,7 +27,8 @@ const emptyResource = {
   type: 'Free Guide',
   desc: '',
   link: '',
-  external: true
+  external: true,
+  thumbnail: ''
 };
 
 const CareersAdmin = () => {
@@ -151,6 +36,7 @@ const CareersAdmin = () => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [activeTab, setActiveTab] = useState('jobs'); // 'jobs', 'resources', 'leads', 'settings'
+  const [loading, setLoading] = useState(false);
   
   // Data stores
   const [jobs, setJobs] = useState([]);
@@ -163,10 +49,42 @@ const CareersAdmin = () => {
   const [showForm, setShowForm] = useState(false);
   const [jobForm, setJobForm] = useState(emptyJob);
   const [resourceForm, setResourceForm] = useState(emptyResource);
+  const [resourceLinkType, setResourceLinkType] = useState('url');
+  const [resourceThumbnailType, setResourceThumbnailType] = useState('url');
   const [settingsForm, setSettingsForm] = useState(defaultSettings);
+
+  const handlePDFUpload = (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    if (file.size > 8 * 1024 * 1024) {
+      alert('File size exceeds 8MB. Please use an external or drive link instead.');
+      return;
+    }
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      setResourceForm(prev => ({ ...prev, link: event.target.result }));
+    };
+    reader.readAsDataURL(file);
+  };
+
+  const handleImageUpload = (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    if (file.size > 2 * 1024 * 1024) {
+      alert('Image size exceeds 2MB.');
+      return;
+    }
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      setResourceForm(prev => ({ ...prev, thumbnail: event.target.result }));
+    };
+    reader.readAsDataURL(file);
+  };
   
   const [showToast, setShowToast] = useState(false);
   const [toastMessage, setToastMessage] = useState('');
+
+  const getPassword = () => sessionStorage.getItem('tadbeer_admin_password') || '';
 
   // 1. Initial Authentication Check
   useEffect(() => {
@@ -176,51 +94,34 @@ const CareersAdmin = () => {
     }
   }, []);
 
-  // 2. Fetch Password dynamic check
-  const getAdminPassword = () => {
-    const storedSettings = localStorage.getItem('tadbeer_settings');
-    if (storedSettings) {
-      try {
-        const parsed = JSON.parse(storedSettings);
-        if (parsed.adminPassword) return parsed.adminPassword;
-      } catch (e) {}
-    }
-    return 'tadbeer2025';
-  };
-
-  // 3. Load Datasets when Authenticated
+  // 2. Load Datasets when Authenticated
   useEffect(() => {
     if (authenticated) {
-      // Jobs
-      const storedJobs = localStorage.getItem('tadbeer_jobs');
-      if (storedJobs) {
-        setJobs(JSON.parse(storedJobs));
-      }
-
-      // Resources
-      const storedResources = localStorage.getItem('tadbeer_resources');
-      if (storedResources) {
-        setResources(JSON.parse(storedResources));
-      } else {
-        setResources(DEFAULT_RESOURCES);
-        localStorage.setItem('tadbeer_resources', JSON.stringify(DEFAULT_RESOURCES));
-      }
-
-      // Settings
-      const storedSettings = localStorage.getItem('tadbeer_settings');
-      if (storedSettings) {
-        const parsed = JSON.parse(storedSettings);
-        setSettings(parsed);
-        setSettingsForm(parsed);
-      } else {
-        localStorage.setItem('tadbeer_settings', JSON.stringify(defaultSettings));
-      }
-
-      // Leads
-      const storedLeads = localStorage.getItem('tadbeer_leads');
-      if (storedLeads) {
-        setLeads(JSON.parse(storedLeads));
-      }
+      const loadTabAllData = async () => {
+        setLoading(true);
+        const pwd = getPassword();
+        try {
+          if (activeTab === 'jobs') {
+            const data = await fetchJobs();
+            setJobs(data);
+          } else if (activeTab === 'resources') {
+            const data = await fetchResources();
+            setResources(data);
+          } else if (activeTab === 'settings') {
+            const data = await fetchSettings();
+            setSettings(data);
+            setSettingsForm(data);
+          } else if (activeTab === 'leads') {
+            const data = await fetchLeads(pwd);
+            setLeads(data);
+          }
+        } catch (err) {
+          console.error('Error fetching tab data:', err);
+        } finally {
+          setLoading(false);
+        }
+      };
+      loadTabAllData();
     }
   }, [authenticated, activeTab]);
 
@@ -231,13 +132,14 @@ const CareersAdmin = () => {
   };
 
   // Auth actions
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
-    const targetPassword = getAdminPassword();
-    if (password === targetPassword) {
+    setError('');
+    const isValid = await verifyAdminPassword(password);
+    if (isValid) {
       setAuthenticated(true);
       sessionStorage.setItem('tadbeer_admin_auth', 'true');
-      setError('');
+      sessionStorage.setItem('tadbeer_admin_password', password);
     } else {
       setError('Incorrect password. Please try again.');
     }
@@ -246,41 +148,53 @@ const CareersAdmin = () => {
   const handleLogout = () => {
     setAuthenticated(false);
     sessionStorage.removeItem('tadbeer_admin_auth');
+    sessionStorage.removeItem('tadbeer_admin_password');
     setPassword('');
   };
 
   // Jobs Actions
-  const handleJobSubmit = (e) => {
+  const handleJobSubmit = async (e) => {
     e.preventDefault();
     const requirementsArray = jobForm.requirements
       .split('\n')
       .map(r => r.trim())
       .filter(r => r.length > 0);
 
-    let updatedJobs;
-    if (editingId) {
-      updatedJobs = jobs.map(j => 
-        j.id === editingId 
-          ? { ...jobForm, id: editingId, requirements: requirementsArray, posted: j.posted }
-          : j
-      );
-      triggerToast('Job posting updated successfully!');
-    } else {
-      const newJob = {
-        ...jobForm,
-        id: Date.now().toString(),
-        requirements: requirementsArray,
-        posted: new Date().toISOString().split('T')[0]
-      };
-      updatedJobs = [...jobs, newJob];
-      triggerToast('Job posting created successfully!');
-    }
+    const jobData = {
+      title: jobForm.title,
+      department: jobForm.department,
+      location: jobForm.location,
+      type: jobForm.type,
+      description: jobForm.description,
+      requirements: requirementsArray,
+      formUrl: jobForm.formUrl
+    };
 
-    setJobs(updatedJobs);
-    localStorage.setItem('tadbeer_jobs', JSON.stringify(updatedJobs));
-    setJobForm(emptyJob);
-    setEditingId(null);
-    setShowForm(false);
+    const pwd = getPassword();
+
+    if (editingId) {
+      const { data, error } = await updateJob(pwd, editingId, jobData);
+      if (error) {
+        triggerToast('Error updating job: ' + error.message);
+      } else {
+        setJobs(jobs.map(j => j.id === editingId ? data : j));
+        triggerToast('Job posting updated successfully!');
+        setJobForm(emptyJob);
+        setEditingId(null);
+        setShowForm(false);
+      }
+    } else {
+      const { data, error } = await createJob(pwd, jobData);
+      if (error) {
+        triggerToast('Error creating job: ' + error.message);
+      } else {
+        setJobs([data, ...jobs]);
+        triggerToast('Job posting created successfully!');
+        setJobForm(emptyJob);
+        setEditingId(null);
+        setShowForm(false);
+      }
+    }
   };
 
   const handleJobEdit = (job) => {
@@ -292,73 +206,105 @@ const CareersAdmin = () => {
     setShowForm(true);
   };
 
-  const handleJobDelete = (id) => {
+  const handleJobDelete = async (id) => {
     if (window.confirm('Delete this job posting?')) {
-      const updated = jobs.filter(j => j.id !== id);
-      setJobs(updated);
-      localStorage.setItem('tadbeer_jobs', JSON.stringify(updated));
-      triggerToast('Job posting deleted.');
+      const pwd = getPassword();
+      const { error } = await deleteJob(pwd, id);
+      if (error) {
+        triggerToast('Error deleting job: ' + error.message);
+      } else {
+        setJobs(jobs.filter(j => j.id !== id));
+        triggerToast('Job posting deleted.');
+      }
     }
   };
 
   // Resources Actions
-  const handleResourceSubmit = (e) => {
+  const handleResourceSubmit = async (e) => {
     e.preventDefault();
-    let updatedRes;
-    if (editingId) {
-      updatedRes = resources.map(r => 
-        r.id === editingId 
-          ? { ...resourceForm, id: editingId }
-          : r
-      );
-      triggerToast('Resource updated successfully!');
-    } else {
-      const newRes = {
-        ...resourceForm,
-        id: Date.now().toString()
-      };
-      updatedRes = [...resources, newRes];
-      triggerToast('Resource added successfully!');
-    }
+    const resourceData = {
+      title: resourceForm.title,
+      category: resourceForm.category,
+      type: resourceForm.type,
+      desc: resourceForm.desc,
+      link: resourceForm.link,
+      external: resourceForm.external,
+      thumbnail: resourceForm.thumbnail || ''
+    };
 
-    setResources(updatedRes);
-    localStorage.setItem('tadbeer_resources', JSON.stringify(updatedRes));
-    setResourceForm(emptyResource);
-    setEditingId(null);
-    setShowForm(false);
+    const pwd = getPassword();
+
+    if (editingId) {
+      const { data, error } = await updateResource(pwd, editingId, resourceData);
+      if (error) {
+        triggerToast('Error updating resource: ' + error.message);
+      } else {
+        setResources(resources.map(r => r.id === editingId ? data : r));
+        triggerToast('Resource updated successfully!');
+        setResourceForm(emptyResource);
+        setEditingId(null);
+        setShowForm(false);
+      }
+    } else {
+      const { data, error } = await createResource(pwd, resourceData);
+      if (error) {
+        triggerToast('Error adding resource: ' + error.message);
+      } else {
+        setResources([data, ...resources]);
+        triggerToast('Resource added successfully!');
+        setResourceForm(emptyResource);
+        setEditingId(null);
+        setShowForm(false);
+      }
+    }
   };
 
   const handleResourceEdit = (res) => {
     setResourceForm(res);
     setEditingId(res.id);
+    setResourceLinkType(res.link && res.link.startsWith('data:') ? 'file' : 'url');
+    setResourceThumbnailType(res.thumbnail && res.thumbnail.startsWith('data:') ? 'file' : 'url');
     setShowForm(true);
   };
 
-  const handleResourceDelete = (id) => {
+  const handleResourceDelete = async (id) => {
     if (window.confirm('Delete this resource?')) {
-      const updated = resources.filter(r => r.id !== id);
-      setResources(updated);
-      localStorage.setItem('tadbeer_resources', JSON.stringify(updated));
-      triggerToast('Resource deleted.');
+      const pwd = getPassword();
+      const { error } = await deleteResource(pwd, id);
+      if (error) {
+        triggerToast('Error deleting resource: ' + error.message);
+      } else {
+        setResources(resources.filter(r => r.id !== id));
+        triggerToast('Resource deleted.');
+      }
     }
   };
 
   // Leads Actions
-  const handleLeadDelete = (idx) => {
+  const handleLeadDelete = async (id) => {
     if (window.confirm('Delete this lead entry?')) {
-      const updated = leads.filter((_, i) => i !== idx);
-      setLeads(updated);
-      localStorage.setItem('tadbeer_leads', JSON.stringify(updated));
-      triggerToast('Lead entry removed.');
+      const pwd = getPassword();
+      const { error } = await deleteLead(pwd, id);
+      if (error) {
+        triggerToast('Error deleting lead: ' + error.message);
+      } else {
+        setLeads(leads.filter(l => l.id !== id));
+        triggerToast('Lead entry removed.');
+      }
     }
   };
 
-  const handleClearAllLeads = () => {
+  const handleClearAllLeads = async () => {
     if (window.confirm('Are you absolutely sure you want to delete ALL captured leads? This cannot be undone.')) {
       if (window.confirm('Confirming second time: delete ALL leads?')) {
-        setLeads([]);
-        localStorage.setItem('tadbeer_leads', JSON.stringify([]));
-        triggerToast('All leads deleted.');
+        const pwd = getPassword();
+        const { error } = await clearAllLeads(pwd);
+        if (error) {
+          triggerToast('Error clearing leads: ' + error.message);
+        } else {
+          setLeads([]);
+          triggerToast('All leads deleted.');
+        }
       }
     }
   };
@@ -386,11 +332,16 @@ const CareersAdmin = () => {
   };
 
   // Settings Actions
-  const handleSettingsSubmit = (e) => {
+  const handleSettingsSubmit = async (e) => {
     e.preventDefault();
-    setSettings(settingsForm);
-    localStorage.setItem('tadbeer_settings', JSON.stringify(settingsForm));
-    triggerToast('Settings updated successfully!');
+    const pwd = getPassword();
+    const { data, error } = await updateSettings(pwd, settingsForm);
+    if (error) {
+      triggerToast('Error updating settings: ' + error.message);
+    } else {
+      setSettings(settingsForm);
+      triggerToast('Settings updated successfully!');
+    }
   };
 
   // Login Screen
@@ -460,7 +411,7 @@ const CareersAdmin = () => {
         ].map(tab => (
           <button
             key={tab.id}
-            onClick={() => { setActiveTab(tab.id); setShowForm(false); setEditingId(null); setJobForm(emptyJob); setResourceForm(emptyResource); }}
+            onClick={() => { setActiveTab(tab.id); setShowForm(false); setEditingId(null); setJobForm(emptyJob); setResourceForm(emptyResource); setResourceLinkType('url'); setResourceThumbnailType('url'); }}
             style={{
               padding: '0.6rem 1.25rem',
               background: activeTab === tab.id ? 'var(--primary)' : 'transparent',
@@ -495,9 +446,21 @@ const CareersAdmin = () => {
       </div>
 
       {/* TABS WORKSPACES */}
-      
-      {/* 1. JOBS TAB */}
-      {activeTab === 'jobs' && (
+      {loading ? (
+        <div style={{ textAlign: 'center', padding: '5rem', color: 'var(--text-muted)' }}>
+          <div className="spinner" style={{ border: '3px solid rgba(24,79,91,0.1)', borderTop: '3px solid var(--primary)', borderRadius: '50%', width: '30px', height: '30px', animation: 'spin 1s linear infinite', margin: '0 auto 1rem' }}></div>
+          <p>Loading database data...</p>
+          <style>{`
+            @keyframes spin {
+              0% { transform: rotate(0deg); }
+              100% { transform: rotate(360deg); }
+            }
+          `}</style>
+        </div>
+      ) : (
+        <>
+          {/* 1. JOBS TAB */}
+          {activeTab === 'jobs' && (
         <div>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' }}>
             <h3 style={{ color: 'var(--primary)', margin: 0 }}>Active Job Postings</h3>
@@ -605,7 +568,7 @@ const CareersAdmin = () => {
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' }}>
             <h3 style={{ color: 'var(--primary)', margin: 0 }}>Manage Free Resources</h3>
             {!showForm && (
-              <button className="btn btn-primary" onClick={() => { setShowForm(true); setEditingId(null); setResourceForm(emptyResource); }} style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', fontSize: '0.9rem', padding: '0.6rem 1.25rem' }}>
+              <button className="btn btn-primary" onClick={() => { setShowForm(true); setEditingId(null); setResourceForm(emptyResource); setResourceLinkType('url'); setResourceThumbnailType('url'); }} style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', fontSize: '0.9rem', padding: '0.6rem 1.25rem' }}>
                 <Plus size={16} /> Add New Resource
               </button>
             )}
@@ -645,8 +608,47 @@ const CareersAdmin = () => {
                 </div>
 
                 <div className="form-group">
-                  <label>Redirect URL / Download Link *</label>
-                  <input name="link" value={resourceForm.link} onChange={(e) => setResourceForm({...resourceForm, link: e.target.value})} required placeholder="e.g. https://drive.google.com/file/... or website URL" />
+                  <label>Access Resource via:</label>
+                  <div style={{ display: 'flex', gap: '1.5rem', marginBottom: '0.5rem', fontSize: '0.9rem' }}>
+                    <label style={{ display: 'flex', alignItems: 'center', gap: '0.35rem', cursor: 'pointer', fontWeight: 'normal' }}>
+                      <input type="radio" name="linkType" checked={resourceLinkType === 'url'} onChange={() => { setResourceLinkType('url'); setResourceForm({ ...resourceForm, link: '' }); }} style={{ width: 'auto', margin: 0 }} /> External Link / Drive URL / Video Link
+                    </label>
+                    <label style={{ display: 'flex', alignItems: 'center', gap: '0.35rem', cursor: 'pointer', fontWeight: 'normal' }}>
+                      <input type="radio" name="linkType" checked={resourceLinkType === 'file'} onChange={() => { setResourceLinkType('file'); setResourceForm({ ...resourceForm, link: '' }); }} style={{ width: 'auto', margin: 0 }} /> Direct PDF Upload
+                    </label>
+                  </div>
+                  {resourceLinkType === 'file' ? (
+                    <div style={{ border: '1px dashed var(--border)', padding: '1rem', borderRadius: '8px', background: 'var(--bg)' }}>
+                      <input type="file" accept="application/pdf" onChange={handlePDFUpload} style={{ border: 'none', background: 'transparent', padding: 0 }} />
+                      {resourceForm.link && resourceForm.link.startsWith('data:') && (
+                        <span style={{ fontSize: '0.8rem', color: '#166534', display: 'block', marginTop: '0.5rem' }}>✓ PDF File Loaded ({Math.round(resourceForm.link.length / 1024)} KB)</span>
+                      )}
+                    </div>
+                  ) : (
+                    <input name="link" value={resourceForm.link} onChange={(e) => setResourceForm({...resourceForm, link: e.target.value})} required placeholder="e.g. https://drive.google.com/file/... or website URL" />
+                  )}
+                </div>
+
+                <div className="form-group">
+                  <label>Thumbnail Image:</label>
+                  <div style={{ display: 'flex', gap: '1.5rem', marginBottom: '0.5rem', fontSize: '0.9rem' }}>
+                    <label style={{ display: 'flex', alignItems: 'center', gap: '0.35rem', cursor: 'pointer', fontWeight: 'normal' }}>
+                      <input type="radio" name="thumbnailType" checked={resourceThumbnailType === 'url'} onChange={() => { setResourceThumbnailType('url'); setResourceForm({ ...resourceForm, thumbnail: '' }); }} style={{ width: 'auto', margin: 0 }} /> Image URL
+                    </label>
+                    <label style={{ display: 'flex', alignItems: 'center', gap: '0.35rem', cursor: 'pointer', fontWeight: 'normal' }}>
+                      <input type="radio" name="thumbnailType" checked={resourceThumbnailType === 'file'} onChange={() => { setResourceThumbnailType('file'); setResourceForm({ ...resourceForm, thumbnail: '' }); }} style={{ width: 'auto', margin: 0 }} /> Direct Image Upload
+                    </label>
+                  </div>
+                  {resourceThumbnailType === 'file' ? (
+                    <div style={{ border: '1px dashed var(--border)', padding: '1rem', borderRadius: '8px', background: 'var(--bg)', display: 'flex', gap: '1rem', alignItems: 'center' }}>
+                      <input type="file" accept="image/*" onChange={handleImageUpload} style={{ border: 'none', background: 'transparent', padding: 0 }} />
+                      {resourceForm.thumbnail && (
+                        <img src={resourceForm.thumbnail} alt="Preview" style={{ width: '50px', height: '50px', objectFit: 'cover', borderRadius: '4px', border: '1px solid var(--border)' }} />
+                      )}
+                    </div>
+                  ) : (
+                    <input name="thumbnail" value={resourceForm.thumbnail || ''} onChange={(e) => setResourceForm({...resourceForm, thumbnail: e.target.value})} placeholder="e.g. https://images.unsplash.com/... or leave blank" />
+                  )}
                 </div>
 
                 <div className="form-group">
@@ -658,7 +660,7 @@ const CareersAdmin = () => {
                   <button type="submit" className="btn btn-primary">
                     <Save size={16} style={{ marginRight: '0.35rem' }} /> {editingId ? 'Update Resource' : 'Add Resource'}
                   </button>
-                  <button type="button" className="btn btn-secondary" onClick={() => { setShowForm(false); setEditingId(null); setResourceForm(emptyResource); }}>
+                  <button type="button" className="btn btn-secondary" onClick={() => { setShowForm(false); setEditingId(null); setResourceForm(emptyResource); setResourceLinkType('url'); setResourceThumbnailType('url'); }}>
                     Cancel
                   </button>
                 </div>
@@ -676,20 +678,25 @@ const CareersAdmin = () => {
             ) : (
               resources.map(res => (
                 <div key={res.id} className="admin-job-item" style={{ background: '#fff' }}>
-                  <div style={{ flex: 1, minWidth: '250px' }}>
-                    <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '0.35rem' }}>
-                      <span style={{ fontSize: '0.75rem', background: 'rgba(202,169,76,0.1)', color: 'var(--secondary)', padding: '0.15rem 0.5rem', borderRadius: '50px', fontWeight: '700' }}>
-                        {res.category}
-                      </span>
-                      <span style={{ fontSize: '0.75rem', background: 'rgba(24,79,91,0.05)', color: 'var(--primary)', padding: '0.15rem 0.5rem', borderRadius: '50px', fontWeight: '600' }}>
-                        {res.type}
-                      </span>
+                  <div style={{ display: 'flex', gap: '1rem', flex: 1, minWidth: '250px' }}>
+                    {res.thumbnail && (
+                      <img src={res.thumbnail} alt={res.title} style={{ width: '60px', height: '60px', objectFit: 'cover', borderRadius: '6px', border: '1px solid var(--border)', flexShrink: 0 }} />
+                    )}
+                    <div>
+                      <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '0.35rem' }}>
+                        <span style={{ fontSize: '0.75rem', background: 'rgba(202,169,76,0.1)', color: 'var(--secondary)', padding: '0.15rem 0.5rem', borderRadius: '50px', fontWeight: '700' }}>
+                          {res.category}
+                        </span>
+                        <span style={{ fontSize: '0.75rem', background: 'rgba(24,79,91,0.05)', color: 'var(--primary)', padding: '0.15rem 0.5rem', borderRadius: '50px', fontWeight: '600' }}>
+                          {res.type}
+                        </span>
+                      </div>
+                      <h4 style={{ color: 'var(--primary)', margin: '0 0 0.25rem 0', fontSize: '1.1rem', fontWeight: '700' }}>{res.title}</h4>
+                      <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)', margin: '0 0 0.5rem 0', lineHeight: '1.4' }}>{res.desc}</p>
+                      <a href={res.link} target="_blank" rel="noopener noreferrer" style={{ fontSize: '0.8rem', color: 'var(--secondary)', display: 'inline-flex', alignItems: 'center', gap: '0.25rem', textDecoration: 'underline' }}>
+                        <ExternalLink size={12} /> View Link
+                      </a>
                     </div>
-                    <h4 style={{ color: 'var(--primary)', margin: '0 0 0.25rem 0', fontSize: '1.1rem', fontWeight: '700' }}>{res.title}</h4>
-                    <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)', margin: '0 0 0.5rem 0', lineHeight: '1.4' }}>{res.desc}</p>
-                    <a href={res.link} target="_blank" rel="noopener noreferrer" style={{ fontSize: '0.8rem', color: 'var(--secondary)', display: 'inline-flex', alignItems: 'center', gap: '0.25rem', textDecoration: 'underline' }}>
-                      <ExternalLink size={12} /> View Link
-                    </a>
                   </div>
                   <div className="admin-job-actions" style={{ alignSelf: 'center' }}>
                     <button className="admin-btn admin-btn-edit" onClick={() => handleResourceEdit(res)}>Edit</button>
@@ -744,7 +751,7 @@ const CareersAdmin = () => {
                 </thead>
                 <tbody>
                   {leads.map((lead, idx) => (
-                    <tr key={idx} style={{ borderBottom: '1px solid var(--border)' }} className="lead-row">
+                    <tr key={lead.id || idx} style={{ borderBottom: '1px solid var(--border)' }} className="lead-row">
                       <td style={{ padding: '1rem', whiteSpace: 'nowrap' }}>{lead.date?.split('T')[0] || ''}</td>
                       <td style={{ padding: '1rem', fontWeight: '700', color: 'var(--primary)' }}>{lead.name}</td>
                       <td style={{ padding: '1rem' }}><a href={`mailto:${lead.email}`} style={{ textDecoration: 'underline', color: 'inherit' }}>{lead.email}</a></td>
@@ -757,7 +764,7 @@ const CareersAdmin = () => {
                       </td>
                       <td style={{ padding: '1rem', textAlign: 'center' }}>
                         <button 
-                          onClick={() => handleLeadDelete(idx)} 
+                          onClick={() => handleLeadDelete(lead.id)} 
                           style={{ background: 'none', border: 'none', color: '#dc3545', cursor: 'pointer', padding: '0.25rem' }}
                           title="Delete Lead"
                         >
@@ -786,16 +793,9 @@ const CareersAdmin = () => {
               <h4 style={{ color: 'var(--primary)', marginBottom: '0.75rem', display: 'flex', alignItems: 'center', gap: '0.4rem', fontSize: '1rem' }}>
                 <Key size={16} /> Admin Authentication
               </h4>
-              <div className="form-group" style={{ maxWidth: '350px' }}>
-                <label>Admin Dashboard Password *</label>
-                <input 
-                  type="text" 
-                  value={settingsForm.adminPassword} 
-                  onChange={(e) => setSettingsForm({...settingsForm, adminPassword: e.target.value})} 
-                  required 
-                  placeholder="tadbeer2025" 
-                />
-              </div>
+              <p style={{ color: 'var(--text-muted)', fontSize: '0.85rem', lineHeight: '1.5', margin: 0 }}>
+                Operational security is active. Admin credentials are managed securely via Supabase Auth. Password modifications should be performed directly within your Supabase Project Console.
+              </p>
             </div>
 
             {/* WhatsApp Integration */}
@@ -882,25 +882,13 @@ const CareersAdmin = () => {
               </div>
             </div>
 
-            {/* Supabase migration info */}
-            <div style={{ 
-              background: 'rgba(202,169,76,0.06)', border: '1px solid rgba(202,169,76,0.2)', 
-              borderRadius: '8px', padding: '1.25rem', marginBottom: '2rem', display: 'flex', gap: '0.75rem'
-            }}>
-              <div style={{ fontSize: '1.5rem' }}>⚡</div>
-              <div>
-                <h5 style={{ color: 'var(--primary)', margin: 0, fontWeight: '700', fontSize: '0.95rem' }}>Supabase Shift Ready</h5>
-                <p style={{ color: 'var(--text-muted)', fontSize: '0.8rem', lineHeight: '1.5', marginTop: '0.25rem' }}>
-                  A full database schema has been prepared in <strong>supabase_schema.sql</strong>. Shifting to Supabase will allow database storage for Job Listings, Resource Library materials, Lead Submissions, and System Settings, enabling remote APIs and serverless management.
-                </p>
-              </div>
-            </div>
-
             <button type="submit" className="btn btn-primary" style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', padding: '0.75rem 1.5rem' }}>
               <Save size={16} /> Save Settings
             </button>
           </form>
         </div>
+      )}
+        </>
       )}
       
       {/* Table highlight styling */}

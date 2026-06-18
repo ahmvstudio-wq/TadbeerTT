@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import ServicePageHero from '../components/ServicePageHero';
 import SectionHeader from '../components/SectionHeader';
 import { Users, FileText, Download, Briefcase, Award, ShieldCheck, TrendingUp } from 'lucide-react';
 import LeadCaptureModal from '../components/LeadCaptureModal';
+import { fetchResources } from '../supabaseService';
 
 const OmanizationComplianceSVG = () => (
   <svg viewBox="0 0 400 400" style={{ width: '100%', height: 'auto', maxBlockSize: '360px', background: 'rgba(24,79,91,0.02)', borderRadius: '16px', border: '1px solid var(--border)', padding: '1.5rem' }}>
@@ -71,32 +72,38 @@ const HumanCapitalPage = () => {
     }
   ];
 
-  const [resources] = useState(() => {
-    const stored = localStorage.getItem('tadbeer_resources');
-    if (stored) {
-      try {
-        const parsed = JSON.parse(stored);
-        const hrRes = parsed.filter(r => r.category === 'Human Capital');
-        if (hrRes.length > 0) {
-          return hrRes.map(r => ({
-            title: r.title,
-            type: r.type,
-            desc: r.desc || r.description || ''
-          }));
-        }
-      } catch (e) {
-        console.error(e);
+  const [resources, setResources] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  const FALLBACK_HR_RESOURCES = [
+    { title: "Omanization Compliance Guide 2026", type: "Guide", desc: "A practical checklist for meeting quotas and accessing government incentives." },
+    { title: "KPI Framework Template", type: "Template", desc: "Ready-to-use Excel templates for setting department and individual KPIs." },
+    { title: "Employee Engagement Playbook", type: "Playbook", desc: "25 proven strategies to increase retention in GCC companies." },
+    { title: "Leadership Development Guide", type: "Guide", desc: "How to identify and train the next generation of managers." },
+    { title: "Salary Benchmarking Report", type: "Report", desc: "Current market rates across 15 industries in Oman and UAE." },
+    { title: "HR Digital Transformation", type: "Playbook", desc: "The roadmap for moving from paper files to an integrated HRMS." }
+  ];
+
+  useEffect(() => {
+    const loadResources = async () => {
+      setLoading(true);
+      const data = await fetchResources();
+      const hrRes = data.filter(r => r.category === 'Human Capital');
+      if (hrRes.length > 0) {
+        setResources(hrRes.map(r => ({
+          title: r.title,
+          type: r.type,
+          desc: r.desc || r.description || '',
+          link: r.link,
+          thumbnail: r.thumbnail
+        })));
+      } else {
+        setResources(FALLBACK_HR_RESOURCES);
       }
-    }
-    return [
-      { title: "Omanization Compliance Guide 2026", type: "Guide", desc: "A practical checklist for meeting quotas and accessing government incentives." },
-      { title: "KPI Framework Template", type: "Template", desc: "Ready-to-use Excel templates for setting department and individual KPIs." },
-      { title: "Employee Engagement Playbook", type: "Playbook", desc: "25 proven strategies to increase retention in GCC companies." },
-      { title: "Leadership Development Guide", type: "Guide", desc: "How to identify and train the next generation of managers." },
-      { title: "Salary Benchmarking Report", type: "Report", desc: "Current market rates across 15 industries in Oman and UAE." },
-      { title: "HR Digital Transformation", type: "Playbook", desc: "The roadmap for moving from paper files to an integrated HRMS." }
-    ];
-  });
+      setLoading(false);
+    };
+    loadResources();
+  }, []);
 
   return (
     <div className="page-wrapper">
@@ -205,30 +212,48 @@ const HumanCapitalPage = () => {
         <div className="container">
           <SectionHeader label="Knowledge Center" title="Download Free HR Resources" subtitle="Access our library of templates, guides, and playbooks used by leading organizations." centered />
           
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '2rem', marginTop: '3rem' }}>
-            {resources.map((res, idx) => (
-              <motion.div 
-                key={idx}
-                initial={{ opacity: 0, scale: 0.95 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                style={{ background: 'white', borderRadius: 'var(--radius)', border: '1px solid var(--border)', padding: '2rem', display: 'flex', flexDirection: 'column' }}
-              >
-                <span style={{ display: 'inline-block', padding: '0.25rem 0.75rem', background: 'rgba(24,79,91,0.05)', color: 'var(--primary)', borderRadius: '50px', fontSize: '0.75rem', fontWeight: '600', textTransform: 'uppercase', marginBottom: '1rem', alignSelf: 'flex-start' }}>
-                  {res.type}
-                </span>
-                <h3 style={{ fontSize: '1.25rem', marginBottom: '1rem', color: 'var(--text-main)', lineHeight: '1.4' }}>{res.title}</h3>
-                <p style={{ color: 'var(--text-muted)', marginBottom: '2rem', flex: 1 }}>{res.desc}</p>
-                <button 
-                  onClick={() => handleDownload(res)}
-                  className="btn"
-                  style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem', width: '100%', background: 'var(--bg)', color: 'var(--primary)', border: '1px solid var(--border)', padding: '0.75rem' }}
+          {loading ? (
+            <div style={{ textAlign: 'center', padding: '4rem', color: 'var(--text-muted)' }}>
+              <div className="spinner" style={{ border: '3px solid rgba(24,79,91,0.1)', borderTop: '3px solid var(--primary)', borderRadius: '50%', width: '30px', height: '30px', animation: 'spin 1s linear infinite', margin: '0 auto 1rem' }}></div>
+              <p>Loading HR resources...</p>
+              <style>{`
+                @keyframes spin {
+                  0% { transform: rotate(0deg); }
+                  100% { transform: rotate(360deg); }
+                }
+              `}</style>
+            </div>
+          ) : (
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '2rem', marginTop: '3rem' }}>
+              {resources.map((res, idx) => (
+                <motion.div 
+                  key={idx}
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true }}
+                  style={{ background: 'white', borderRadius: 'var(--radius)', border: '1px solid var(--border)', padding: '2rem', display: 'flex', flexDirection: 'column' }}
                 >
-                  <Download size={16} /> Download Now
-                </button>
-              </motion.div>
-            ))}
-          </div>
+                  {res.thumbnail && (
+                    <div style={{ width: '100%', height: '140px', borderRadius: '8px', overflow: 'hidden', marginBottom: '1rem' }}>
+                      <img src={res.thumbnail} alt={res.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                    </div>
+                  )}
+                  <span style={{ display: 'inline-block', padding: '0.25rem 0.75rem', background: 'rgba(24,79,91,0.05)', color: 'var(--primary)', borderRadius: '50px', fontSize: '0.75rem', fontWeight: '600', textTransform: 'uppercase', marginBottom: '1rem', alignSelf: 'flex-start' }}>
+                    {res.type}
+                  </span>
+                  <h3 style={{ fontSize: '1.25rem', marginBottom: '1rem', color: 'var(--text-main)', lineHeight: '1.4' }}>{res.title}</h3>
+                  <p style={{ color: 'var(--text-muted)', marginBottom: '2rem', flex: 1 }}>{res.desc}</p>
+                  <button 
+                    onClick={() => handleDownload(res)}
+                    className="btn"
+                    style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem', width: '100%', background: 'var(--bg)', color: 'var(--primary)', border: '1px solid var(--border)', padding: '0.75rem' }}
+                  >
+                    <Download size={16} /> Download Now
+                  </button>
+                </motion.div>
+              ))}
+            </div>
+          )}
         </div>
       </section>
 
@@ -236,20 +261,20 @@ const HumanCapitalPage = () => {
       <section className="sp-section" style={{ padding: '4rem 5%', background: 'var(--primary)', color: 'white' }}>
         <div className="container" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '2rem', textAlign: 'center' }}>
           {[
-            { value: '94%', label: 'Omanization Compliance Rate' },
-            { value: '+42%', label: 'Average Talent Retention' },
-            { value: '-35%', label: 'Time-to-Hire Reduction' },
-            { value: '1,200+', label: 'GCC Professionals Placed' }
-          ].map((stat, idx) => (
+            { metric: "38%", label: "Average Retention Increase", desc: "Through structured career planning and culture transformation" },
+            { metric: "100%", label: "Omanization Compliance", desc: "Guaranteeing full adherence to the Ministry of Labour guidelines" },
+            { metric: "14 Days", label: "Average Time-to-Hire", desc: "Leveraging our database of pre-vetted Omani professionals" }
+          ].map((stat, i) => (
             <motion.div 
-              key={idx}
-              initial={{ opacity: 0, scale: 0.95 }}
-              whileInView={{ opacity: 1, scale: 1 }}
+              key={i}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: idx * 0.1 }}
+              style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}
             >
-              <div style={{ fontSize: '3rem', fontWeight: '800', color: 'var(--secondary)', marginBottom: '0.5rem' }}>{stat.value}</div>
-              <div style={{ fontSize: '0.9rem', textTransform: 'uppercase', letterSpacing: '1px', opacity: 0.8 }}>{stat.label}</div>
+              <div style={{ fontSize: '3rem', fontWeight: '800', color: 'var(--secondary)' }}>{stat.metric}</div>
+              <div style={{ fontSize: '1.1rem', fontWeight: '600' }}>{stat.label}</div>
+              <div style={{ fontSize: '0.9rem', opacity: 0.8, lineHeight: '1.5' }}>{stat.desc}</div>
             </motion.div>
           ))}
         </div>
@@ -269,6 +294,7 @@ const HumanCapitalPage = () => {
         onClose={() => setModalOpen(false)} 
         resourceTitle={selectedResource?.title} 
         resourceType={selectedResource?.type} 
+        resourceLink={selectedResource?.link}
       />
     </div>
   );

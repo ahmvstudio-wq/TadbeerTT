@@ -2,7 +2,11 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import ServicePageHero from '../components/ServicePageHero';
 import SectionHeader from '../components/SectionHeader';
-import { Target, TrendingUp, Users, Activity, ChevronRight, BarChart, Smartphone, Search, Mail } from 'lucide-react';
+import { Target, TrendingUp, Users, Activity, ChevronRight, BarChart, Smartphone, Search, Mail, Coffee, Sparkles, ShoppingCart, AlertCircle, Lightbulb, Megaphone, Globe, Video, Flame } from 'lucide-react';
+
+import gloriaJeansLogo from '../assets/clients/gloria-jeans.png';
+import alQurumPerfumesLogo from '../assets/clients/al-qurum-perfumes.png';
+import yallaLogo from '../assets/clients/yalla.png';
 
 const AcquisitionLoopSVG = () => (
   <svg viewBox="0 0 400 400" style={{ width: '100%', height: 'auto', maxBlockSize: '360px', background: 'rgba(24,79,91,0.02)', borderRadius: '16px', border: '1px solid var(--border)', padding: '1.5rem' }}>
@@ -136,6 +140,7 @@ const DigitalMarketingPage = () => {
     {
       client: "Gloria Jean's GCC",
       category: "Local Campaign",
+      logo: gloriaJeansLogo,
       challenge: "High ad spend with generic content was failing to drive actual foot traffic to cafes.",
       solution: "Hyper-local Arabic video ads with WhatsApp immediate voucher delivery.",
       metrics: [
@@ -146,6 +151,7 @@ const DigitalMarketingPage = () => {
     {
       client: "Al Qurum Perfumes",
       category: "Social Revamp",
+      logo: alQurumPerfumesLogo,
       challenge: "Premium brand image wasn't translating to digital platforms, losing market share to newer brands.",
       solution: "Complete visual overhaul and influencer-led storytelling campaigns.",
       metrics: [
@@ -156,6 +162,7 @@ const DigitalMarketingPage = () => {
     {
       client: "Regional E-commerce",
       category: "SEO Dominance",
+      logo: yallaLogo,
       challenge: "Relying entirely on paid ads for revenue, causing unsustainably high acquisition costs.",
       solution: "Technical SEO overhaul and Arabic content clustering strategy.",
       metrics: [
@@ -338,15 +345,26 @@ const DigitalMarketingPage = () => {
                 style={{ background: 'white', borderRadius: 'var(--radius)', border: '1px solid var(--border)', overflow: 'hidden', display: 'flex', flexDirection: 'column' }}
               >
                 <div style={{ padding: '2rem', flex: 1 }}>
-                  <span style={{ fontSize: '0.75rem', fontWeight: '700', color: 'var(--secondary)', textTransform: 'uppercase', letterSpacing: '1px' }}>{study.category}</span>
-                  <h3 style={{ fontSize: '1.5rem', marginTop: '0.5rem', marginBottom: '1.5rem' }}>{study.client}</h3>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
+                    <span style={{ fontSize: '0.75rem', fontWeight: '700', color: 'var(--secondary)', textTransform: 'uppercase', letterSpacing: '1px' }}>{study.category}</span>
+                    <div style={{ height: '32px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                      <img src={study.logo} alt={study.client} style={{ maxHeight: '28px', maxWidth: '90px', objectFit: 'contain' }} />
+                    </div>
+                  </div>
+                  <h3 style={{ fontSize: '1.5rem', marginTop: '0.5rem', marginBottom: '1.5rem', color: 'var(--primary)' }}>{study.client}</h3>
                   <div style={{ marginBottom: '1.5rem' }}>
-                    <strong style={{ display: 'block', fontSize: '0.9rem', color: 'var(--text-main)', marginBottom: '0.25rem' }}>The Challenge:</strong>
-                    <p style={{ color: 'var(--text-muted)', fontSize: '0.95rem' }}>{study.challenge}</p>
+                    <strong style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.9rem', color: 'var(--text-main)', marginBottom: '0.35rem' }}>
+                      <AlertCircle size={15} color="var(--secondary)" />
+                      The Challenge:
+                    </strong>
+                    <p style={{ color: 'var(--text-muted)', fontSize: '0.95rem', margin: 0, lineHeight: '1.45' }}>{study.challenge}</p>
                   </div>
                   <div>
-                    <strong style={{ display: 'block', fontSize: '0.9rem', color: 'var(--text-main)', marginBottom: '0.25rem' }}>Our Solution:</strong>
-                    <p style={{ color: 'var(--text-muted)', fontSize: '0.95rem' }}>{study.solution}</p>
+                    <strong style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.9rem', color: 'var(--text-main)', marginBottom: '0.35rem' }}>
+                      <Lightbulb size={15} color="var(--primary)" />
+                      Our Solution:
+                    </strong>
+                    <p style={{ color: 'var(--text-muted)', fontSize: '0.95rem', margin: 0, lineHeight: '1.45' }}>{study.solution}</p>
                   </div>
                 </div>
                 <div style={{ padding: '1.5rem 2rem', background: 'var(--bg)', borderTop: '1px solid var(--border)', display: 'flex', justifyContent: 'space-between' }}>
@@ -445,39 +463,68 @@ const DigitalMarketingPage = () => {
         <div className="container">
           <SectionHeader label="Integration Partners" title="Our Marketing Technology Stack" subtitle="We leverage and integrate with leading platforms to orchestrate your marketing engines." centered />
           
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))', gap: '1.5rem', marginTop: '3.5rem' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))', gap: '1.5rem', marginTop: '3.5rem' }}>
             {[
-              { name: 'Meta Ads Manager', desc: 'Facebook, Instagram & Messenger' },
-              { name: 'Google Marketing Platform', desc: 'Google Search, YouTube & GA4' },
-              { name: 'TikTok Ads Manager', desc: 'GCC target short-form campaigns' },
-              { name: 'Klaviyo', desc: 'Advanced email flow automation' },
-              { name: 'HubSpot CRM', desc: 'Full-funnel pipeline tracking' },
-              { name: 'SEMrush', desc: 'SEO intelligence & monitoring' },
-              { name: 'Hotjar', desc: 'Conversion rate optimization (CRO)' }
-            ].map((tech, idx) => (
-              <motion.div 
-                key={idx}
-                initial={{ opacity: 0, scale: 0.95 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: idx * 0.05 }}
-                style={{
-                  background: 'white',
-                  border: '1px solid var(--border)',
-                  borderRadius: '12px',
-                  padding: '1.5rem',
-                  textAlign: 'center',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                  minHeight: '100px'
-                }}
-              >
-                <div style={{ fontWeight: '700', color: 'var(--primary)', fontSize: '0.95rem', marginBottom: '0.25rem' }}>{tech.name}</div>
-                <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>{tech.desc}</div>
-              </motion.div>
-            ))}
+              { name: 'Meta Ads Manager', desc: 'Facebook, Instagram & Messenger', domain: 'facebook.com' },
+              { name: 'Google Marketing Platform', desc: 'Google Search, YouTube & GA4', domain: 'google.com' },
+              { name: 'TikTok Ads Manager', desc: 'GCC target short-form campaigns', domain: 'tiktok.com' },
+              { name: 'Klaviyo', desc: 'Advanced email flow automation', domain: 'klaviyo.com' },
+              { name: 'HubSpot CRM', desc: 'Full-funnel pipeline tracking', domain: 'hubspot.com' },
+              { name: 'SEMrush', desc: 'SEO intelligence & monitoring', domain: 'semrush.com' },
+              { name: 'Hotjar', desc: 'Conversion rate optimization (CRO)', domain: 'hotjar.com' }
+            ].map((tech, idx) => {
+              const iconUrl = `https://icon.horse/icon/${tech.domain}`;
+              return (
+                <motion.div 
+                  key={idx}
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: idx * 0.05 }}
+                  whileHover={{ y: -4, borderColor: 'var(--secondary)', boxShadow: '0 8px 24px rgba(202, 169, 76, 0.04)' }}
+                  style={{
+                    background: 'white',
+                    border: '1px solid var(--border)',
+                    borderRadius: '12px',
+                    padding: '1.5rem 1.25rem',
+                    textAlign: 'center',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    minHeight: '140px',
+                    cursor: 'pointer'
+                  }}
+                >
+                  <div style={{
+                    width: '40px',
+                    height: '40px',
+                    borderRadius: '50%',
+                    background: 'rgba(24, 79, 91, 0.03)',
+                    border: '1px solid rgba(24, 79, 91, 0.05)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    marginBottom: '0.85rem',
+                    transition: 'all 0.3s ease',
+                    overflow: 'hidden',
+                    padding: '6px'
+                  }}>
+                    <img 
+                      src={iconUrl} 
+                      alt="" 
+                      style={{ 
+                        width: '22px', 
+                        height: '22px', 
+                        objectFit: 'contain' 
+                      }} 
+                    />
+                  </div>
+                  <div style={{ fontWeight: '700', color: 'var(--primary)', fontSize: '0.92rem', marginBottom: '0.25rem', lineHeight: '1.3' }}>{tech.name}</div>
+                  <div style={{ fontSize: '0.72rem', color: 'var(--text-muted)', lineHeight: '1.3' }}>{tech.desc}</div>
+                </motion.div>
+              );
+            })}
           </div>
         </div>
       </section>

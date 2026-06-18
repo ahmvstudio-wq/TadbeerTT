@@ -34,7 +34,7 @@ const assessmentData = {
       { q: "Do you track marketing ROI?", opts: ["No tracking", "Basic metrics", "Attribution models", "Full-funnel analytics"] },
       { q: "How personalized is your marketing?", opts: ["One-size-fits-all", "Segmented", "Personalized", "AI-personalized"] },
       { q: "What content marketing do you do?", opts: ["None", "Occasional posts", "Regular content", "Strategic content engine"] },
-      { q: "How do you manage customer relationships?", opts: ["Spreadsheets", "Basic CRM", "Advanced CRM", "AI-enhanced CRM"] },
+      { q: "How do you manage customer relationships?", opts: ["Excel", "Basic CRM", "Advanced CRM", "AI-enhanced CRM"] },
       { q: "Rate your brand consistency across channels", opts: ["Inconsistent", "Somewhat", "Mostly consistent", "Fully unified"] }
     ]
   }

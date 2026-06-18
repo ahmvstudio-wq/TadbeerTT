@@ -5,7 +5,7 @@ import LeadCaptureModal from './LeadCaptureModal';
 const ROICalculator = () => {
   const [revenue, setRevenue] = useState(50000);
   const [employees, setEmployees] = useState(25);
-  const [manualHours, setManualHours] = useState(40);
+  const [manualHours, setManualHours] = useState(15);
   const [marketingSpend, setMarketingSpend] = useState(5000);
   const [modalOpen, setModalOpen] = useState(false);
 
@@ -19,6 +19,7 @@ const ROICalculator = () => {
 
   useEffect(() => {
     // 3.5 OMR/hr avg wage, 60% reduction in manual hours
+    // Multiply manual hours per employee by the number of employees
     const efficiencySavings = employees * manualHours * 3.5 * 0.6 * 52;
     // 2.4x multiplier on marketing
     const marketingReturn = marketingSpend * 2.4 * 12;
@@ -68,10 +69,10 @@ const ROICalculator = () => {
 
             <div className="roi-input-group">
               <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.5rem' }}>
-                <label style={{ fontWeight: '600', color: 'var(--text-main)', fontSize: '0.95rem' }}>Manual Process Hours / Week</label>
-                <span style={{ color: 'var(--secondary)', fontWeight: '700' }}>{manualHours} hrs</span>
+                <label style={{ fontWeight: '600', color: 'var(--text-main)', fontSize: '0.95rem' }}>Manual Hours / Employee per Week</label>
+                <span style={{ color: 'var(--secondary)', fontWeight: '700' }}>{manualHours} hrs/emp</span>
               </div>
-              <input type="range" min="5" max="200" step="5" value={manualHours} onChange={(e) => setManualHours(Number(e.target.value))} style={{ width: '100%', accentColor: 'var(--secondary)' }} />
+              <input type="range" min="1" max="40" step="1" value={manualHours} onChange={(e) => setManualHours(Number(e.target.value))} style={{ width: '100%', accentColor: 'var(--secondary)' }} />
             </div>
 
             <div className="roi-input-group">
@@ -79,7 +80,7 @@ const ROICalculator = () => {
                 <label style={{ fontWeight: '600', color: 'var(--text-main)', fontSize: '0.95rem' }}>Monthly Marketing Spend (OMR)</label>
                 <span style={{ color: 'var(--secondary)', fontWeight: '700' }}>{formatCurrency(marketingSpend)}</span>
               </div>
-              <input type="range" min="0" max="50000" step="500" value={marketingSpend} onChange={(e) => setMarketingSpend(Number(e.target.value))} style={{ width: '100%', accentColor: 'var(--secondary)' }} />
+              <input type="range" min="1000" max="100000" step="1000" value={marketingSpend} onChange={(e) => setMarketingSpend(Number(e.target.value))} style={{ width: '100%', accentColor: 'var(--secondary)' }} />
             </div>
             {/* Calculation Parameters & GCC Benchmarks */}
             <div className="roi-benchmarks-box" style={{ background: 'rgba(24,79,91,0.02)', border: '1px solid var(--border)', borderRadius: '12px', padding: '1.25rem', marginTop: '1rem' }}>

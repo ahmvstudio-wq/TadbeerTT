@@ -7,7 +7,7 @@ const questions = [
   {
     question: "How digitized are your core operations?",
     options: [
-      { text: "Mostly Manual (Paper/Spreadsheets)", value: 1 },
+      { text: "Mostly Manual (Paper/Excel)", value: 1 },
       { text: "Partially Digital (Siloed Software)", value: 2 },
       { text: "Mostly Digital (Integrated Systems)", value: 3 },
       { text: "Fully Digital (Automated Workflows)", value: 4 }
@@ -16,7 +16,7 @@ const questions = [
   {
     question: "How do you currently manage customer data?",
     options: [
-      { text: "Spreadsheets & Emails", value: 1 },
+      { text: "Excel & Emails", value: 1 },
       { text: "Basic CRM", value: 2 },
       { text: "Advanced CRM with Automation", value: 3 },
       { text: "AI-Enhanced Omnichannel System", value: 4 }

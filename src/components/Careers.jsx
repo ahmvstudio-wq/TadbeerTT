@@ -1,56 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-
-const DEFAULT_JOBS = [
-  {
-    id: '1',
-    title: 'Digital Marketing Specialist',
-    department: 'Marketing',
-    location: 'Muscat, Oman',
-    type: 'Full-time',
-    posted: '2025-06-01',
-    description: 'Lead bilingual digital marketing campaigns across social media, SEO, and paid advertising for our growing portfolio of GCC clients.',
-    requirements: ['3+ years in digital marketing', 'Fluent in English & Arabic', 'Experience with Meta Ads & Google Ads', 'Data-driven mindset'],
-    formUrl: ''
-  },
-  {
-    id: '2',
-    title: 'ERP Implementation Consultant',
-    department: 'Software Solutions',
-    location: 'Muscat, Oman',
-    type: 'Full-time',
-    posted: '2025-06-01',
-    description: 'Map client operations and implement enterprise software solutions including ERP, WMS, and HRMS across Omani businesses.',
-    requirements: ['5+ years in ERP consulting', 'Experience with Odoo, SAP, or Oracle', 'GCC business process knowledge', 'VAT compliance familiarity'],
-    formUrl: ''
-  },
-  {
-    id: '3',
-    title: 'AI Solutions Engineer',
-    department: 'AI & Technology',
-    location: 'Muscat, Oman / Remote',
-    type: 'Full-time',
-    posted: '2025-05-28',
-    description: 'Design, build, and deploy AI-powered solutions including chatbots, CCTV analytics, and lead generation systems for enterprise clients.',
-    requirements: ['3+ years in AI/ML engineering', 'Python, TensorFlow/PyTorch proficiency', 'NLP and computer vision experience', 'API design and deployment skills'],
-    formUrl: ''
-  }
-];
+import { fetchJobs } from '../supabaseService';
 
 const GOOGLE_FORM_URL = 'https://docs.google.com/forms/d/e/YOUR_FORM_ID/viewform';
 
 const Careers = () => {
   const [jobs, setJobs] = useState([]);
   const [expandedId, setExpandedId] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const stored = localStorage.getItem('tadbeer_jobs');
-    if (stored) {
-      setJobs(JSON.parse(stored));
-    } else {
-      setJobs(DEFAULT_JOBS);
-      localStorage.setItem('tadbeer_jobs', JSON.stringify(DEFAULT_JOBS));
-    }
+    const loadJobs = async () => {
+      setLoading(true);
+      const data = await fetchJobs();
+      setJobs(data);
+      setLoading(false);
+    };
+    loadJobs();
   }, []);
 
   const toggleJob = (id) => {
@@ -100,7 +66,18 @@ const Careers = () => {
             <h2 className="section-title" style={{ fontSize: '2.25rem' }}>Current Opportunities</h2>
           </motion.div>
 
-          {jobs.length === 0 ? (
+          {loading ? (
+            <div style={{ textAlign: 'center', padding: '3rem', color: 'var(--text-muted)' }}>
+              <div className="spinner" style={{ border: '3px solid rgba(24,79,91,0.1)', borderTop: '3px solid var(--primary)', borderRadius: '50%', width: '30px', height: '30px', animation: 'spin 1s linear infinite', margin: '0 auto 1rem' }}></div>
+              <p>Loading opportunities...</p>
+              <style>{`
+                @keyframes spin {
+                  0% { transform: rotate(0deg); }
+                  100% { transform: rotate(360deg); }
+                }
+              `}</style>
+            </div>
+          ) : jobs.length === 0 ? (
             <div className="no-jobs">
               <p>No open positions right now. Check back soon!</p>
             </div>
