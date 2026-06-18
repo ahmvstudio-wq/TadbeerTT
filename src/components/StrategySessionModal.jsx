@@ -137,7 +137,7 @@ const StrategySessionModal = ({ isOpen, onClose, initialIndustry = '' }) => {
   return (
     <AnimatePresence>
       {isOpen && (
-        <div style={{
+        <div className="strategy-modal-overlay" style={{
           position: 'fixed',
           top: 0,
           left: 0,
@@ -155,6 +155,7 @@ const StrategySessionModal = ({ isOpen, onClose, initialIndustry = '' }) => {
           <div style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0 }} onClick={onClose} />
 
           <motion.div
+            className="strategy-modal-panel"
             data-lenis-prevent
             initial={{ opacity: 0, scale: 0.9, y: 30 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
@@ -174,7 +175,7 @@ const StrategySessionModal = ({ isOpen, onClose, initialIndustry = '' }) => {
             }}
           >
             {/* Header section (Deep Teal Gradient) */}
-            <div style={{
+            <div className="strategy-modal-header" style={{
               background: 'linear-gradient(135deg, #184F5B 0%, #0e2f37 100%)',
               color: 'white',
               padding: '2rem 1.75rem 1.5rem',
@@ -231,7 +232,7 @@ const StrategySessionModal = ({ isOpen, onClose, initialIndustry = '' }) => {
             </div>
 
             {/* Scrollable Form Body */}
-            <div style={{
+            <div className="strategy-modal-body" style={{
               padding: '1.75rem',
               overflowY: 'auto',
               flex: 1,
@@ -243,12 +244,13 @@ const StrategySessionModal = ({ isOpen, onClose, initialIndustry = '' }) => {
             }}>
               {loading ? (
                 <motion.div 
+                  className="modal-processing-state"
                   key="loading"
                   initial={{ opacity: 0, scale: 0.95 }}
                   animate={{ opacity: 1, scale: 1 }}
                   style={{ textAlign: 'center', padding: '1.5rem 0' }}
                 >
-                  <div style={{ position: 'relative', width: '80px', height: '80px', margin: '0 auto 1.5rem', flexShrink: 0 }}>
+                  <div className="modal-progress-frame" style={{ position: 'relative', width: '80px', height: '80px', margin: '0 auto 1.5rem', flexShrink: 0 }}>
                     <svg width="80" height="80" viewBox="0 0 50 50">
                       <circle cx="25" cy="25" r="20" fill="none" stroke="rgba(24, 79, 91, 0.08)" strokeWidth="3" />
                       <motion.circle 
@@ -272,12 +274,13 @@ const StrategySessionModal = ({ isOpen, onClose, initialIndustry = '' }) => {
                 </motion.div>
               ) : success ? (
                 <motion.div 
+                  className="modal-success-state"
                   key="success"
                   initial={{ opacity: 0, scale: 0.95 }}
                   animate={{ opacity: 1, scale: 1 }}
                   style={{ textAlign: 'center', padding: '2rem 0' }}
                 >
-                  <div style={{ position: 'relative', width: '70px', height: '70px', margin: '0 auto 1.25rem' }}>
+                  <div className="modal-success-frame" style={{ position: 'relative', width: '70px', height: '70px', margin: '0 auto 1.25rem' }}>
                     <svg width="70" height="70" viewBox="0 0 50 50">
                       <motion.circle 
                         cx="25" cy="25" r="22" 
@@ -317,7 +320,7 @@ const StrategySessionModal = ({ isOpen, onClose, initialIndustry = '' }) => {
                   </div>
                 </motion.div>
               ) : (
-                <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
+                <form className="strategy-session-form" onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
                   {error && (
                     <div style={{ color: '#dc3545', background: 'rgba(220, 53, 69, 0.05)', border: '1px solid rgba(220, 53, 69, 0.2)', padding: '0.75rem 1rem', borderRadius: '8px', fontSize: '0.85rem', fontWeight: '500' }}>
                       {error}
@@ -367,7 +370,7 @@ const StrategySessionModal = ({ isOpen, onClose, initialIndustry = '' }) => {
                   </div>
 
                   {/* Split Row: Industry & Revenue */}
-                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
+                  <div className="strategy-form-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
                     <div style={{ display: 'flex', flexDirection: 'column', gap: '0.35rem' }}>
                       <label style={{ fontSize: '0.85rem', fontWeight: '600', color: 'var(--primary)' }}>Industry</label>
                       <select

@@ -1,4 +1,4 @@
-import React, { useEffect, useState, Suspense } from 'react';
+import React, { useEffect, useLayoutEffect, useRef, useState, Suspense } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import Lenis from 'lenis';
 import { AnimatePresence } from 'framer-motion';
@@ -19,6 +19,7 @@ import ReadinessScore from './components/ReadinessScore';
 import ROICalculator from './components/ROICalculator';
 import WhatsAppButton from './components/WhatsAppButton';
 import OnyxAssistant from './components/OnyxAssistant';
+import { canShowAutoPrompt, markAutoPromptShown } from './promptLimits';
 
 import Preloader from './components/Preloader';
 import StrategySessionModal from './components/StrategySessionModal';
@@ -67,6 +68,8 @@ function App() {
   const [loading, setLoading] = useState(true);
   const [strategyModalOpen, setStrategyModalOpen] = useState(false);
   const [selectedIndustry, setSelectedIndustry] = useState('');
+  const lenisRef = useRef(null);
+  const previousPageRef = useRef(`${location.pathname}${location.search}`);
 
   useEffect(() => {
     // Dismiss loading screen after 1.8 seconds
@@ -93,7 +96,7 @@ function App() {
       const dismissedTime = sessionStorage.getItem('strategyModalDismissedTime');
       if (!dismissedTime) return false;
       const elapsed = Date.now() - parseInt(dismissedTime, 10);
-      return elapsed < 25000; // 25 seconds cooldown for "really frequent" popups
+      return elapsed < 90000;
     };
 
     const isAlreadyLead = sessionStorage.getItem('leadSubmitted') === 'true';
@@ -102,61 +105,60 @@ function App() {
     const currentPath = location.pathname;
     const isHighValuePage = currentPath.includes('/services/') || currentPath.includes('/industries/') || currentPath === '/';
 
+    const openStrategyPrompt = () => {
+      if (isUnderCooldown() || strategyModalOpen || !isHighValuePage || !canShowAutoPrompt('strategy')) {
+        return false;
+      }
+
+      markAutoPromptShown('strategy');
+      setStrategyModalOpen(true);
+      return true;
+    };
+
     // 1. Exit Intent Trigger
     const handleMouseLeave = (e) => {
-      if (e.clientY < 15 && !isUnderCooldown() && !strategyModalOpen && isHighValuePage) {
-        setStrategyModalOpen(true);
+      if (e.clientY < 15) {
+        openStrategyPrompt();
       }
     };
     document.addEventListener('mouseleave', handleMouseLeave);
 
-    // 2. Scroll Depth Trigger (65% scroll depth)
+    // 2. Scroll Depth Trigger (70% scroll depth)
     let hasScrolled65 = false;
     const handleScroll = () => {
-      if (hasScrolled65 || isUnderCooldown() || strategyModalOpen || !isHighValuePage) return;
+      if (hasScrolled65) return;
 
       const scrollTop = window.scrollY || document.documentElement.scrollTop;
       const docHeight = document.documentElement.scrollHeight - window.innerHeight;
       if (docHeight <= 0) return;
 
       const scrollPercent = (scrollTop / docHeight) * 100;
-      if (scrollPercent >= 65) {
+      if (scrollPercent >= 70) {
         hasScrolled65 = true;
-        setStrategyModalOpen(true);
+        openStrategyPrompt();
       }
     };
     window.addEventListener('scroll', handleScroll);
 
-    // 3. Idle Time Trigger (12 seconds of inactivity)
+    // 3. Idle Time Trigger
     let idleTimer;
     const resetIdleTimer = () => {
       clearTimeout(idleTimer);
-      if (isUnderCooldown() || strategyModalOpen || !isHighValuePage) return;
       
       idleTimer = setTimeout(() => {
-        setStrategyModalOpen(true);
-      }, 12000); // 12 seconds idle
+        openStrategyPrompt();
+      }, 45000);
     };
 
     const activityEvents = ['mousemove', 'mousedown', 'scroll', 'keypress', 'touchstart'];
     activityEvents.forEach(evt => window.addEventListener(evt, resetIdleTimer));
     resetIdleTimer(); // start initially
 
-    // 4. Initial Timer fallback (5s)
-    const initialTimer = setTimeout(() => {
-      const hasShownInitial = sessionStorage.getItem('strategyPopupShownInitial');
-      if (!hasShownInitial && !strategyModalOpen) {
-        setStrategyModalOpen(true);
-        sessionStorage.setItem('strategyPopupShownInitial', 'true');
-      }
-    }, 5000);
-
     return () => {
       document.removeEventListener('mouseleave', handleMouseLeave);
       window.removeEventListener('scroll', handleScroll);
       activityEvents.forEach(evt => window.removeEventListener(evt, resetIdleTimer));
       clearTimeout(idleTimer);
-      clearTimeout(initialTimer);
     };
   }, [loading, location.pathname, strategyModalOpen]);
 
@@ -175,10 +177,20 @@ function App() {
     return () => window.removeEventListener('open-strategy-modal', handleOpenStrategy);
   }, []);
 
-  useEffect(() => {
-    if (!location.hash) {
-      window.scrollTo(0, 0);
-    } else {
+  useLayoutEffect(() => {
+    const pageKey = `${location.pathname}${location.search}`;
+    const isNewPage = previousPageRef.current !== pageKey;
+    const scrollToTop = () => {
+      lenisRef.current?.scrollTo?.(0, { immediate: true, force: true });
+      window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+      document.documentElement.scrollTop = 0;
+      document.body.scrollTop = 0;
+    };
+
+    if (isNewPage || !location.hash) {
+      scrollToTop();
+      requestAnimationFrame(scrollToTop);
+    } else if (location.hash) {
       setTimeout(() => {
         const id = location.hash.replace('#', '');
         const element = document.getElementById(id);
@@ -187,7 +199,9 @@ function App() {
         }
       }, 100);
     }
-  }, [location]);
+
+    previousPageRef.current = pageKey;
+  }, [location.pathname, location.search, location.hash]);
 
   useEffect(() => {
     const lenis = new Lenis({
@@ -201,6 +215,7 @@ function App() {
       touchMultiplier: 2,
       infinite: false,
     });
+    lenisRef.current = lenis;
 
     function raf(time) {
       lenis.raf(time);
@@ -211,6 +226,7 @@ function App() {
 
     return () => {
       lenis.destroy();
+      lenisRef.current = null;
     };
   }, []);
 

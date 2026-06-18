@@ -4,6 +4,7 @@ import { X, Send } from 'lucide-react';
 import AssessmentFlow from './AssessmentFlow';
 import LeadCaptureModal from './LeadCaptureModal';
 import { createLead } from '../supabaseService';
+import { canShowAutoPrompt, markAutoPromptShown } from '../promptLimits';
 
 const OnyxIcon = ({ size = 24, active = false }) => (
   <svg 
@@ -36,6 +37,10 @@ const OnyxAssistant = () => {
   // Conversational Lead Capture (CLC) states
   const [leadFlowStep, setLeadFlowStep] = useState(null); // 'ask_name' | 'ask_email' | 'ask_phone' | null
   const [leadFlowData, setLeadFlowData] = useState({ name: '', email: '', phone: '', topic: '' });
+
+  const markChatDismissed = () => {
+    sessionStorage.setItem('onyx_chat_dismissed', Date.now().toString());
+  };
 
   const getProactiveMessageForPage = (path) => {
     if (path.includes('ai-technology')) return '🤖 Ready to explore production-grade AI systems for your business?';
@@ -86,35 +91,54 @@ const OnyxAssistant = () => {
     const isUnderCooldown = () => {
       const dismissedTime = sessionStorage.getItem('onyx_chat_dismissed');
       if (!dismissedTime) return false;
-      const elapsed = Date.now() - parseInt(dismissedTime, 10);
-      return elapsed < 25000; // 25 seconds cooldown
+      const dismissedAt = Number.parseInt(dismissedTime, 10);
+      if (!Number.isFinite(dismissedAt)) return dismissedTime === 'true';
+      const elapsed = Date.now() - dismissedAt;
+      return elapsed < 90000;
     };
 
     const isLeadCaptured = () => {
       return sessionStorage.getItem('leadSubmitted') === 'true';
     };
 
-    // 1. Time-based: Proactive Toast after 2 seconds
-    const firstToastTimer = setTimeout(() => {
-      if (!isOpen && !isUnderCooldown()) {
-        setToastMessage(getProactiveMessageForPage(path));
-        setShowToast(true);
-      }
-    }, 2000);
+    const canTriggerChatPrompt = () => {
+      return !isOpen && !isUnderCooldown() && !isLeadCaptured() && canShowAutoPrompt('chat');
+    };
 
-    // 2. Time-based: Auto-open chat box after 6 seconds
-    const autoOpenTimer = setTimeout(() => {
-      if (!isOpen && !isUnderCooldown() && !isLeadCaptured()) {
-        setIsOpen(true);
+    const showChatToast = (message, autoHide = false) => {
+      if (!canTriggerChatPrompt()) return false;
+
+      const cleanMessage = message.includes('transformation architect')
+        ? '\uD83D\uDCDE Let\'s sync you with a transformation architect.'
+        : message;
+
+      markAutoPromptShown('chat');
+      setToastMessage(cleanMessage);
+      setShowToast(true);
+
+      if (autoHide) {
+        setTimeout(() => setShowToast(false), 5000);
       }
-    }, 6000);
+
+      return true;
+    };
+
+    // 1. Time-based: Proactive Toast
+    const firstToastTimer = setTimeout(() => {
+      showChatToast(getProactiveMessageForPage(path));
+    }, 9000);
+
+    // 2. Time-based: Follow-up prompt after sustained browsing
+    const followUpToastTimer = setTimeout(() => {
+      showChatToast('ðŸ“ž Let\'s sync you with a transformation architect.', true);
+    }, 30000);
 
     // 3. Scroll depth triggers
-    let hasScrolled35 = false;
-    let hasScrolled75 = false;
+    let hasScrolled50 = false;
+    let hasScrolled85 = false;
 
     const handleScroll = () => {
-      if (isOpen || isUnderCooldown()) return;
+      if (isOpen || isUnderCooldown() || isLeadCaptured()) return;
       
       const scrollTop = window.scrollY || document.documentElement.scrollTop;
       const docHeight = document.documentElement.scrollHeight - window.innerHeight;
@@ -122,49 +146,41 @@ const OnyxAssistant = () => {
       
       const scrollPercent = (scrollTop / docHeight) * 100;
 
-      // Scroll past 35%: Show toast
-      if (scrollPercent >= 35 && !hasScrolled35) {
-        hasScrolled35 = true;
+      // Scroll past 50%: Show toast
+      if (scrollPercent >= 50 && !hasScrolled50) {
+        hasScrolled50 = true;
+        if (!canTriggerChatPrompt()) return;
+        markAutoPromptShown('chat');
         setToastMessage('📊 Take our 2-minute assessment to receive a custom digital roadmap!');
         setShowToast(true);
       }
 
-      // Scroll past 75%: Auto-open chat box for Booking Session
-      if (scrollPercent >= 75 && !hasScrolled75 && !isLeadCaptured()) {
-        hasScrolled75 = true;
-        setIsOpen(true);
+      // Scroll past 85%: Show booking prompt
+      if (scrollPercent >= 85 && !hasScrolled85) {
+        hasScrolled85 = true;
+        showChatToast('ðŸ“ž Let\'s sync you with a transformation architect.', true);
       }
     };
     window.addEventListener('scroll', handleScroll);
 
     // 4. Exit Intent Trigger (Cursor leaves viewport top)
     const handleMouseLeave = (e) => {
-      if (e.clientY < 15 && !isOpen && !isUnderCooldown() && !isLeadCaptured()) {
-        setIsOpen(true);
-        setMessages(prev => {
-          if (prev.length <= 2) {
-            return [
-              { type: 'bot', text: "Wait! Don't miss out on your Free Strategy Audit. Let's get your GCC business roadmap in 2 minutes! May I know your name?" }
-            ];
-          }
-          return prev;
-        });
-        setLeadFlowStep('ask_name');
-        setLeadFlowData(prev => ({ ...prev, topic: 'Exit Intent Offer' }));
+      if (e.clientY < 15) {
+        showChatToast("Wait! Don't miss out on your Free Strategy Audit. Let's get your GCC business roadmap in 2 minutes!", true);
       }
     };
     document.addEventListener('mouseleave', handleMouseLeave);
 
-    // 5. Idle Detection Trigger (10 seconds idle)
+    // 5. Idle Detection Trigger
     let idleTimer;
     const resetIdleTimer = () => {
       clearTimeout(idleTimer);
-      if (isOpen || isUnderCooldown() || isLeadCaptured()) return;
-
       idleTimer = setTimeout(() => {
+        if (!canTriggerChatPrompt()) return;
+        markAutoPromptShown('chat');
         setToastMessage('💡 Still exploring? Ask me about our custom Odoo/ERP deployments or AI roadmap!');
         setShowToast(true);
-      }, 10000);
+      }, 45000);
     };
 
     const activityEvents = ['mousemove', 'mousedown', 'scroll', 'keypress', 'touchstart'];
@@ -173,16 +189,18 @@ const OnyxAssistant = () => {
 
     // 6. Text Copy Trigger
     const handleCopy = () => {
-      if (!isOpen && !isUnderCooldown()) {
+      if (canTriggerChatPrompt()) {
+        markAutoPromptShown('chat');
         setToastMessage('📋 Copying details? Let me email you the full whitepaper/PDF. Click here to chat!');
         setShowToast(true);
       }
     };
     document.addEventListener('copy', handleCopy);
 
-    // 7. Repeated Toast Loop: If chat is closed, cycle through messages every 20 seconds
+    // 7. Repeated Toast Loop: If chat is closed, cycle through messages occasionally
     const toastInterval = setInterval(() => {
-      if (!isOpen && !isUnderCooldown()) {
+      if (canTriggerChatPrompt()) {
+        markAutoPromptShown('chat');
         const extraMessages = [
           '📊 Need a custom digital transformation strategy?',
           '🤖 Want to test your business AI readiness score?',
@@ -194,11 +212,11 @@ const OnyxAssistant = () => {
         setShowToast(true);
         setTimeout(() => setShowToast(false), 5000);
       }
-    }, 20000);
+    }, 60000);
 
     return () => {
       clearTimeout(firstToastTimer);
-      clearTimeout(autoOpenTimer);
+      clearTimeout(followUpToastTimer);
       clearInterval(toastInterval);
       window.removeEventListener('scroll', handleScroll);
       document.removeEventListener('mouseleave', handleMouseLeave);
@@ -475,7 +493,7 @@ const OnyxAssistant = () => {
                     </div>
                   </div>
                 </div>
-                <button onClick={() => { setIsOpen(false); sessionStorage.setItem('onyx_chat_dismissed', 'true'); }} style={{ background: 'none', border: 'none', color: 'white', cursor: 'pointer' }}>
+                <button onClick={() => { setIsOpen(false); markChatDismissed(); }} style={{ background: 'none', border: 'none', color: 'white', cursor: 'pointer' }}>
                   <X size={20} />
                 </button>
               </div>
@@ -569,7 +587,7 @@ const OnyxAssistant = () => {
             const nextState = !isOpen;
             setIsOpen(nextState);
             if (!nextState) {
-              sessionStorage.setItem('onyx_chat_dismissed', 'true');
+              markChatDismissed();
             }
           }}
           whileHover={{ scale: 1.05 }}

@@ -4,6 +4,7 @@ const CustomCursor = () => {
   const cursorRef = useRef(null);
   const ringRef = useRef(null);
   const [isMobile, setIsMobile] = useState(true);
+  const [hasModalOpen, setHasModalOpen] = useState(false);
 
   useEffect(() => {
     const checkMobile = () => {
@@ -18,7 +19,20 @@ const CustomCursor = () => {
   }, []);
 
   useEffect(() => {
-    if (isMobile) return;
+    const checkModalOpen = () => {
+      setHasModalOpen(Boolean(document.querySelector('.lead-modal-overlay, .strategy-modal-overlay, .modal-backdrop-blur')));
+    };
+
+    checkModalOpen();
+
+    const observer = new MutationObserver(checkModalOpen);
+    observer.observe(document.body, { childList: true, subtree: true });
+
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (isMobile || hasModalOpen) return;
 
     const moveCursor = (e) => {
       const { clientX: x, clientY: y } = e;
@@ -95,9 +109,9 @@ const CustomCursor = () => {
       window.removeEventListener('mouseover', handleMouseOver);
       window.removeEventListener('mouseout', handleMouseOut);
     };
-  }, [isMobile]);
+  }, [isMobile, hasModalOpen]);
 
-  if (isMobile) return null;
+  if (isMobile || hasModalOpen) return null;
 
   return (
     <>

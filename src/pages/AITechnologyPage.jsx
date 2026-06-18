@@ -598,7 +598,7 @@ const AIDemoLeadModal = ({ isOpen, onClose }) => {
   return (
     <AnimatePresence>
       {isOpen && (
-        <div style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', zIndex: 1000, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '1rem' }}>
+        <div className="lead-modal-overlay" style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', zIndex: 1000, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '1rem' }}>
           <motion.div 
             initial={{ opacity: 0 }} 
             animate={{ opacity: 1 }} 
@@ -608,6 +608,7 @@ const AIDemoLeadModal = ({ isOpen, onClose }) => {
           />
           
           <motion.div
+            className="lead-modal-panel"
             data-lenis-prevent
             initial={{ opacity: 0, scale: 0.9, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
@@ -626,7 +627,7 @@ const AIDemoLeadModal = ({ isOpen, onClose }) => {
             }}
           >
             {/* Header */}
-            <div style={{ background: 'var(--primary)', color: 'white', padding: '1.5rem', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', borderTopLeftRadius: '16px', borderTopRightRadius: '16px' }}>
+            <div className="lead-modal-header" style={{ background: 'var(--primary)', color: 'white', padding: '1.5rem', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', borderTopLeftRadius: '16px', borderTopRightRadius: '16px' }}>
               <div>
                 <span style={{ fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '1px', opacity: 0.8 }}>AI assistant</span>
                 <h3 style={{ fontSize: '1.25rem', marginTop: '0.25rem', lineHeight: '1.4', color: 'white' }}>Build Your AI Advantage</h3>
@@ -636,7 +637,7 @@ const AIDemoLeadModal = ({ isOpen, onClose }) => {
               </button>
             </div>
 
-            <div style={{ 
+            <div className="lead-modal-body" style={{ 
               padding: '2rem',
               display: 'flex',
               flexDirection: 'column',
@@ -648,12 +649,13 @@ const AIDemoLeadModal = ({ isOpen, onClose }) => {
             }}>
               {loading ? (
                 <motion.div 
+                  className="modal-processing-state"
                   key="loading"
                   initial={{ opacity: 0, scale: 0.95 }}
                   animate={{ opacity: 1, scale: 1 }}
                   style={{ textAlign: 'center', padding: '1.5rem 0' }}
                 >
-                  <div style={{ position: 'relative', width: '80px', height: '80px', margin: '0 auto 1.5rem', flexShrink: 0 }}>
+                  <div className="modal-progress-frame" style={{ position: 'relative', width: '80px', height: '80px', margin: '0 auto 1.5rem', flexShrink: 0 }}>
                     <svg width="80" height="80" viewBox="0 0 50 50">
                       <circle cx="25" cy="25" r="20" fill="none" stroke="rgba(24, 79, 91, 0.08)" strokeWidth="3" />
                       <motion.circle 
@@ -677,12 +679,13 @@ const AIDemoLeadModal = ({ isOpen, onClose }) => {
                 </motion.div>
               ) : submitted ? (
                 <motion.div 
+                  className="modal-success-state"
                   key="success"
                   initial={{ opacity: 0, scale: 0.95 }}
                   animate={{ opacity: 1, scale: 1 }}
                   style={{ textAlign: 'center', padding: '1.5rem 0' }}
                 >
-                  <div style={{ position: 'relative', width: '70px', height: '70px', margin: '0 auto 1.25rem', flexShrink: 0 }}>
+                  <div className="modal-success-frame" style={{ position: 'relative', width: '70px', height: '70px', margin: '0 auto 1.25rem', flexShrink: 0 }}>
                     <svg width="70" height="70" viewBox="0 0 50 50">
                       <motion.circle 
                         cx="25" cy="25" r="22" 

@@ -97,7 +97,7 @@ const ROICalculator = () => {
           <div className="roi-output-card" style={{ background: 'var(--primary)', borderRadius: '16px', color: 'white', display: 'flex', flexDirection: 'column', justifyContent: 'center', padding: '2.5rem', boxSizing: 'border-box', overflow: 'hidden' }}>
             
             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginBottom: '1.5rem', width: '100%' }}>
-              <div style={{ position: 'relative', width: '160px', height: '160px', marginBottom: '1rem', flexShrink: 0 }}>
+              <div className="roi-impact-ring" style={{ position: 'relative', width: '160px', height: '160px', marginBottom: '1rem', flexShrink: 0 }}>
                 <svg viewBox="0 0 100 100" style={{ transform: 'rotate(-90deg)', width: '100%', height: '100%' }}>
                   <circle cx="50" cy="50" r="42" fill="none" stroke="rgba(255,255,255,0.08)" strokeWidth="6" />
                   <motion.circle 
@@ -114,18 +114,19 @@ const ROICalculator = () => {
                   />
                 </svg>
                 <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '10px', boxSizing: 'border-box' }}>
-                  <span style={{ fontSize: 'clamp(0.55rem, 2.5vw, 0.65rem)', textTransform: 'uppercase', letterSpacing: '1px', opacity: 0.8, marginBottom: '4px', textAlign: 'center', whiteSpace: 'nowrap' }}>Annual Impact</span>
+                  <span className="roi-impact-label" style={{ fontSize: 'clamp(0.55rem, 2.5vw, 0.65rem)', textTransform: 'uppercase', letterSpacing: '1px', opacity: 0.8, marginBottom: '4px', textAlign: 'center', whiteSpace: 'nowrap' }}>Annual Impact</span>
                   <motion.span 
+                    className="roi-impact-value"
                     key={results.totalImpact} 
                     initial={{ scale: 0.95, opacity: 0.8 }} 
                     animate={{ scale: 1, opacity: 1 }} 
                     style={{ 
-                      fontSize: String(formatCurrency(results.totalImpact)).length > 11 ? 'clamp(0.9rem, 4.5vw, 1.1rem)' : 'clamp(1.1rem, 5vw, 1.35rem)', 
+                      fontSize: String(formatCurrency(results.totalImpact)).length > 11 ? '0.95rem' : '1.15rem', 
                       fontWeight: '800', 
                       color: 'var(--secondary)',
                       whiteSpace: 'nowrap',
-                      overflow: 'hidden',
-                      textOverflow: 'ellipsis',
+                      overflow: 'visible',
+                      textOverflow: 'clip',
                       width: '100%',
                       textAlign: 'center',
                       display: 'block',
