@@ -4683,10 +4683,10 @@ html, body {
   }
 
   .roi-impact-value {
-    font-size: clamp(1.4rem, 7.5vw, 2.2rem) !important;
-    word-wrap: break-word !important;
-    overflow-wrap: break-word !important;
-    white-space: normal !important;
+    font-size: clamp(1rem, 5.5vw, 1.25rem) !important;
+    word-wrap: normal !important;
+    overflow-wrap: normal !important;
+    white-space: nowrap !important;
     max-width: 100% !important;
     display: block !important;
     text-align: center !important;
@@ -4973,9 +4973,12 @@ html, body {
     font-weight: 600 !important;
   }
   .faq-answer {
-    padding: 0 1rem 0.85rem !important;
+    padding: 0 1rem !important;
     font-size: 0.82rem !important;
     line-height: 1.4 !important;
+  }
+  .faq-item.active .faq-answer {
+    padding: 0 1rem 0.85rem !important;
   }
 }
 
@@ -5151,8 +5154,13 @@ html, body {
   }
 
   .industry-compact-item {
-    gap: 0.75rem !important;
-    align-items: center !important;
+    gap: 1rem !important;
+    align-items: flex-start !important;
+    padding: 1rem !important;
+    background: rgba(24, 79, 91, 0.02) !important;
+    border: 1px solid rgba(24, 79, 91, 0.05) !important;
+    border-radius: 12px !important;
+    margin-bottom: 0 !important;
   }
 
   .industry-name,
