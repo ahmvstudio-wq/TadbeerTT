@@ -88,7 +88,13 @@ const InboundAutomation = () => {
         </div>
 
         <div className="text-center" style={{ marginTop: '3rem' }}>
-          <a href="#contact" className="btn btn-primary" style={{ padding: '1rem 2.5rem' }}>Automate Your Pipeline</a>
+          <button 
+            onClick={(e) => { e.preventDefault(); window.dispatchEvent(new CustomEvent('open-strategy-modal')); }} 
+            className="btn btn-primary" 
+            style={{ padding: '1rem 2.5rem', cursor: 'pointer', border: 'none' }}
+          >
+            Apply for a Strategy Session
+          </button>
         </div>
       </div>
     </section>

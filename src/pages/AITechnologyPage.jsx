@@ -10,6 +10,7 @@ import {
   Sparkles, LineChart, AlertTriangle, Clock, Building2, Activity, Truck, X
 } from 'lucide-react';
 import { createLead } from '../supabaseService';
+import AIPipelineSimulator from '../components/AIPipelineSimulator';
 
 /* ──────────────────────────────────────────────
    DEMO DATA
@@ -505,33 +506,93 @@ const AIDemoLeadModal = ({ isOpen, onClose }) => {
   const [formData, setFormData] = useState({ name: '', company: '', email: '', phone: '', requirement: '' });
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [progress, setProgress] = useState(0);
+  const [loadingText, setLoadingText] = useState('Securing session context...');
+  const [error, setError] = useState('');
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
+    if (!formData.name || !formData.email || !formData.phone || !formData.requirement) {
+      setError('Please fill in all required fields (Name, Email, Phone, and Requirements).');
+      return;
+    }
+
     setLoading(true);
+    setProgress(0);
+    setLoadingText('Securing session context...');
+    setError('');
     
     const lead = {
       name: formData.name,
       email: formData.email,
       company: formData.company || null,
       phone: formData.phone || null,
-      resource: `AI Demo Enquiry: ${formData.requirement}`,
+      resource: 'AI Demo Enquiry',
+      bottleneck: formData.requirement || null,
+      source_url: window.location.pathname + window.location.hash,
       date: new Date().toISOString()
     };
     
-    const { error } = await createLead(lead);
-    setLoading(false);
-    if (!error) {
-      setSubmitted(true);
-      sessionStorage.setItem('ai_demo_lead_capture_submitted', 'true');
-      setTimeout(() => {
-        setSubmitted(false);
-        onClose();
-        setFormData({ name: '', company: '', email: '', phone: '', requirement: '' });
-      }, 3000);
-    } else {
-      alert('Something went wrong, please try again.');
-    }
+    // DB Call in parallel
+    const dbPromise = createLead(lead);
+
+    let currentProgress = 0;
+    const interval = setInterval(() => {
+      currentProgress += 5;
+      
+      if (currentProgress < 35) {
+        setLoadingText('Securing session context...');
+      } else if (currentProgress < 70) {
+        setLoadingText('Syncing requirements...');
+      } else if (currentProgress < 90) {
+        setLoadingText('Updating admin dashboard...');
+      }
+      
+      if (currentProgress >= 90) {
+        clearInterval(interval);
+        
+        dbPromise.then(({ error: dbError }) => {
+          if (!dbError) {
+            setProgress(100);
+            setLoadingText('Request synced!');
+            
+            setTimeout(() => {
+              setLoading(false);
+              setSubmitted(true);
+              sessionStorage.setItem('ai_demo_lead_capture_submitted', 'true');
+              
+              // Broadcast sync message locally
+              try {
+                const bc = new BroadcastChannel('tadbeer_leads_sync');
+                bc.postMessage({ event: 'new-lead', timestamp: Date.now() });
+                bc.close();
+              } catch(syncErr) {
+                console.warn('Sync broadcast failed:', syncErr);
+              }
+              // Also fire window event
+              window.dispatchEvent(new CustomEvent('lead-submitted', { detail: lead }));
+            }, 350);
+          } else {
+            console.error('Failed to save demo inquiry:', dbError);
+            setLoading(false);
+            setError('Something went wrong. Please check your connection and try again.');
+          }
+        });
+      } else {
+        setProgress(currentProgress);
+      }
+    }, 55);
+
+    // Auto close modal
+    setTimeout(() => {
+      setSubmitted(prev => {
+        if (prev) {
+          onClose();
+          setFormData({ name: '', company: '', email: '', phone: '', requirement: '' });
+        }
+        return false;
+      });
+    }, 5000);
   };
 
   return (
@@ -551,7 +612,18 @@ const AIDemoLeadModal = ({ isOpen, onClose }) => {
             initial={{ opacity: 0, scale: 0.9, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.9, y: 20 }}
-            style={{ background: 'white', borderRadius: '16px', width: '100%', maxWidth: '500px', position: 'relative', overflow: 'hidden', boxShadow: '0 25px 50px -12px rgba(0,0,0,0.25)' }}
+            style={{ 
+              background: 'white', 
+              borderRadius: '16px', 
+              width: '100%', 
+              maxWidth: '500px', 
+              position: 'relative', 
+              overflow: 'hidden', 
+              boxShadow: '0 25px 50px -12px rgba(0,0,0,0.25)',
+              maxHeight: '90vh',
+              display: 'flex',
+              flexDirection: 'column'
+            }}
           >
             {/* Header */}
             <div style={{ background: 'var(--primary)', color: 'white', padding: '1.5rem', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', borderTopLeftRadius: '16px', borderTopRightRadius: '16px' }}>
@@ -564,15 +636,96 @@ const AIDemoLeadModal = ({ isOpen, onClose }) => {
               </button>
             </div>
 
-            <div style={{ padding: '2rem' }}>
-              {submitted ? (
-                <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} style={{ textAlign: 'center', padding: '2rem 0' }}>
-                  <CheckCircle2 size={64} color="var(--secondary)" style={{ margin: '0 auto 1rem' }} />
-                  <h3 style={{ fontSize: '1.5rem', color: 'var(--primary)', marginBottom: '0.5rem' }}>Thank You!</h3>
-                  <p style={{ color: 'var(--text-muted)' }}>We've received your requirements. Our AI architect will review them and reach out to you shortly.</p>
+            <div style={{ 
+              padding: '2rem',
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: submitted || loading ? 'center' : 'flex-start',
+              minHeight: '350px',
+              position: 'relative',
+              overflowY: 'auto',
+              flex: 1
+            }}>
+              {loading ? (
+                <motion.div 
+                  key="loading"
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  style={{ textAlign: 'center', padding: '1.5rem 0' }}
+                >
+                  <div style={{ position: 'relative', width: '80px', height: '80px', margin: '0 auto 1.5rem', flexShrink: 0 }}>
+                    <svg width="80" height="80" viewBox="0 0 50 50">
+                      <circle cx="25" cy="25" r="20" fill="none" stroke="rgba(24, 79, 91, 0.08)" strokeWidth="3" />
+                      <motion.circle 
+                        cx="25" cy="25" r="20" fill="none" stroke="var(--primary)" strokeWidth="3"
+                        strokeDasharray="125"
+                        animate={{ strokeDashoffset: 125 - (125 * progress) / 100 }}
+                        transition={{ duration: 0.2, ease: "easeOut" }}
+                        style={{ originX: '25px', originY: '25px', rotate: -90 }}
+                      />
+                    </svg>
+                    <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.95rem', fontWeight: '700', color: 'var(--primary)', lineHeight: '1', margin: 0, padding: 0, whiteSpace: 'nowrap' }}>
+                      {progress}%
+                    </div>
+                  </div>
+                  <h3 style={{ color: 'var(--primary)', fontWeight: '700', fontSize: 'clamp(1rem, 4vw, 1.25rem)', marginBottom: '0.5rem', wordBreak: 'break-word', whiteSpace: 'normal', padding: '0 1rem' }}>
+                    {loadingText}
+                  </h3>
+                  <p style={{ color: 'var(--text-muted)', fontSize: '0.85rem' }}>
+                    Syncing AI requirements...
+                  </p>
+                </motion.div>
+              ) : submitted ? (
+                <motion.div 
+                  key="success"
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  style={{ textAlign: 'center', padding: '1.5rem 0' }}
+                >
+                  <div style={{ position: 'relative', width: '70px', height: '70px', margin: '0 auto 1.25rem', flexShrink: 0 }}>
+                    <svg width="70" height="70" viewBox="0 0 50 50">
+                      <motion.circle 
+                        cx="25" cy="25" r="22" 
+                        fill="none" stroke="var(--secondary)" strokeWidth="3"
+                        initial={{ pathLength: 0 }}
+                        animate={{ pathLength: 1 }}
+                        transition={{ duration: 0.8, ease: "easeOut" }}
+                      />
+                      <motion.path 
+                        d="M16,25 L22,31 L34,17" 
+                        fill="none" stroke="var(--secondary)" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round"
+                        initial={{ pathLength: 0 }}
+                        animate={{ pathLength: 1 }}
+                        transition={{ duration: 0.5, delay: 0.6, ease: "easeOut" }}
+                      />
+                      <motion.circle
+                        cx="25" cy="25" r="22"
+                        fill="none" stroke="var(--secondary)" strokeWidth="1"
+                        initial={{ scale: 1, opacity: 0.8 }}
+                        animate={{ scale: 1.4, opacity: 0 }}
+                        transition={{ duration: 1, delay: 0.8, ease: "easeOut" }}
+                      />
+                    </svg>
+                  </div>
+                  <h3 style={{ fontSize: '1.4rem', color: 'var(--primary)', fontWeight: '700', marginBottom: '0.5rem' }}>Thank You!</h3>
+                  <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem', lineHeight: '1.5', marginBottom: '0' }}>We've received your requirements. Our transformation architect will review them and reach out to you shortly.</p>
+                  
+                  <div style={{ position: 'absolute', bottom: 0, left: 0, height: '4px', background: 'var(--secondary)', width: '100%' }}>
+                    <motion.div 
+                      initial={{ width: '100%' }}
+                      animate={{ width: '0%' }}
+                      transition={{ duration: 4.65, ease: 'linear' }}
+                      style={{ height: '100%', background: 'var(--primary)', originX: 0 }}
+                    />
+                  </div>
                 </motion.div>
               ) : (
                 <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                  {error && (
+                    <div style={{ color: '#dc3545', background: 'rgba(220, 53, 69, 0.05)', border: '1px solid rgba(220, 53, 69, 0.2)', padding: '0.75rem 1rem', borderRadius: '8px', fontSize: '0.85rem', fontWeight: '500' }}>
+                      {error}
+                    </div>
+                  )}
                   <p style={{ color: 'var(--text-muted)', marginBottom: '1.25rem', fontSize: '0.95rem', lineHeight: '1.5' }}>
                     "Looking to build an AI system for your business? Tell us your requirements and we'll show you how we can help."
                   </p>
@@ -588,8 +741,8 @@ const AIDemoLeadModal = ({ isOpen, onClose }) => {
                       <input type="text" value={formData.company} onChange={e => setFormData({...formData, company: e.target.value})} style={{ width: '100%', padding: '0.75rem', borderRadius: '8px', border: '1px solid var(--border)', fontSize: '0.95rem', backgroundColor: '#FFFFFF', color: '#1C1B17' }} />
                     </div>
                     <div>
-                      <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: '600', marginBottom: '0.5rem', color: 'var(--text-main)' }}>Phone Number</label>
-                      <input type="tel" value={formData.phone} onChange={e => setFormData({...formData, phone: e.target.value})} style={{ width: '100%', padding: '0.75rem', borderRadius: '8px', border: '1px solid var(--border)', fontSize: '0.95rem', backgroundColor: '#FFFFFF', color: '#1C1B17' }} />
+                      <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: '600', marginBottom: '0.5rem', color: 'var(--text-main)' }}>Phone Number *</label>
+                      <input required type="tel" value={formData.phone} onChange={e => setFormData({...formData, phone: e.target.value})} style={{ width: '100%', padding: '0.75rem', borderRadius: '8px', border: '1px solid var(--border)', fontSize: '0.95rem', backgroundColor: '#FFFFFF', color: '#1C1B17' }} />
                     </div>
                   </div>
                   
@@ -772,6 +925,9 @@ const AITechnologyPage = () => {
         </div>
       </section>
 
+      {/* ═══════ AI Pipeline Simulator ═══════ */}
+      <AIPipelineSimulator />
+
       {/* ═══════ Interactive Workflow Demos ═══════ */}
       <section style={{ padding: 'var(--section-padding)', background: 'var(--bg)' }}>
         <div className="container">
@@ -838,7 +994,13 @@ const AITechnologyPage = () => {
           <SectionHeader label="Get Started" title="Ready to Build Your AI Advantage?" centered />
           <p style={{ fontSize: '1.15rem', color: 'var(--text-muted)', marginBottom: '2.5rem' }}>Book a free 30-minute strategy call. We'll identify 3 high-ROI AI use cases specific to your business — no strings attached.</p>
           <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
-            <a href="#contact" className="btn btn-primary" style={{ padding: '1rem 2.5rem', fontSize: '1.1rem' }}>Book Strategy Call</a>
+            <button 
+              onClick={(e) => { e.preventDefault(); window.dispatchEvent(new CustomEvent('open-strategy-modal')); }} 
+              className="btn btn-primary" 
+              style={{ padding: '1rem 2.5rem', fontSize: '1.1rem', cursor: 'pointer', border: 'none' }}
+            >
+              Apply for a Strategy Session
+            </button>
             <a href="/resources" className="btn btn-secondary" style={{ padding: '1rem 2.5rem', fontSize: '1.1rem' }}>Download AI Playbook</a>
           </div>
         </div>

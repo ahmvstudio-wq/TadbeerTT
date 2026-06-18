@@ -4899,3 +4899,34 @@ html, body {
   }
 }
 
+/* Playbook Banner Offset Styles */
+:root.has-banner .navbar {
+  top: 40px !important;
+}
+:root.has-banner .nav-mobile-drawer {
+  top: 40px !important;
+  height: calc(100vh - 40px) !important;
+}
+:root.has-banner main {
+  margin-top: 40px !important;
+}
+
+@media (max-width: 768px) {
+  :root.has-banner .navbar {
+    top: 54px !important;
+  }
+  :root.has-banner .nav-mobile-drawer {
+    top: 54px !important;
+    height: calc(100vh - 54px) !important;
+  }
+  :root.has-banner main {
+    margin-top: 54px !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .mobile-swipe-indicators {
+    display: flex !important;
+  }
+}
+

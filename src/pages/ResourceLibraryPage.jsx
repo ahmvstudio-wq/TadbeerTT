@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import ServicePageHero from '../components/ServicePageHero';
-import { Download, Filter, Search, ExternalLink, FileText, BookOpen, BarChart3 } from 'lucide-react';
+import { Download, Filter, Search, FileText, BookOpen, BarChart3 } from 'lucide-react';
 import { fetchResources } from '../supabaseService';
+import LeadCaptureModal from '../components/LeadCaptureModal';
 
 const getIconForType = (type) => {
   const t = type.toLowerCase();
@@ -15,6 +16,8 @@ const ResourceLibraryPage = () => {
   const [activeFilter, setActiveFilter] = useState('All');
   const [resources, setResources] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [modalOpen, setModalOpen] = useState(false);
+  const [selectedResource, setSelectedResource] = useState(null);
 
   useEffect(() => {
     const loadResources = async () => {
@@ -25,6 +28,11 @@ const ResourceLibraryPage = () => {
     };
     loadResources();
   }, []);
+
+  const handleDownload = (resource) => {
+    setSelectedResource(resource);
+    setModalOpen(true);
+  };
 
   const categories = ['All', 'Digital Transformation', 'SEO & Marketing', 'ERP & Software', 'Human Capital', 'Business Strategy', 'AI & Automation'];
 
@@ -37,7 +45,7 @@ const ResourceLibraryPage = () => {
       <ServicePageHero 
         title="Free Resource Library"
         subtitle="Expert Knowledge at Your Fingertips"
-        description="Access curated guides, reports, and courses from the world's leading institutions — Google, McKinsey, HBR, and more. All free. No sign-up required."
+        description="Access curated guides, reports, and courses from the world's leading institutions — Google, McKinsey, HBR, and more. All free. Enter your details to download instantly."
         breadcrumbs={['Home', 'Resources']}
       />
 
@@ -118,15 +126,13 @@ const ResourceLibraryPage = () => {
                       <h3 style={{ fontSize: '1.15rem', marginBottom: '1rem', color: 'var(--text-main)', lineHeight: '1.4' }}>{res.title}</h3>
                       <p style={{ color: 'var(--text-muted)', marginBottom: '2rem', flex: 1, fontSize: '0.9rem', lineHeight: '1.6' }}>{res.desc || res.description}</p>
                       
-                      <a 
-                        href={res.link}
-                        target="_blank"
-                        rel="noopener noreferrer"
+                      <button 
+                        onClick={() => handleDownload(res)}
                         className="btn"
-                        style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem', width: '100%', background: 'var(--primary)', color: 'white', border: 'none', padding: '0.75rem', borderRadius: '8px', fontWeight: '600', fontSize: '0.9rem' }}
+                        style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem', width: '100%', background: 'var(--primary)', color: 'white', border: 'none', padding: '0.75rem', borderRadius: '8px', fontWeight: '600', fontSize: '0.9rem', cursor: 'pointer' }}
                       >
-                        <ExternalLink size={16} /> Access Free Resource
-                      </a>
+                        <Download size={16} /> Access Free Resource
+                      </button>
                     </motion.div>
                   ))}
                 </AnimatePresence>
@@ -142,6 +148,14 @@ const ResourceLibraryPage = () => {
           )}
         </div>
       </section>
+
+      <LeadCaptureModal 
+        isOpen={modalOpen} 
+        onClose={() => setModalOpen(false)} 
+        resourceTitle={selectedResource?.title} 
+        resourceType={selectedResource?.category || selectedResource?.type} 
+        resourceLink={selectedResource?.link}
+      />
     </div>
   );
 };

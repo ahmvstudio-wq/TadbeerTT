@@ -52,33 +52,33 @@ const ROICalculator = () => {
           {/* Inputs */}
           <div className="roi-inputs-container" style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
             <div className="roi-input-group">
-              <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.5rem' }}>
-                <label style={{ fontWeight: '600', color: 'var(--text-main)', fontSize: '0.95rem' }}>Monthly Revenue (OMR)</label>
-                <span style={{ color: 'var(--secondary)', fontWeight: '700' }}>{formatCurrency(revenue)}</span>
+              <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.5rem', flexWrap: 'wrap', gap: '0.5rem' }}>
+                <label style={{ fontWeight: '600', color: 'var(--text-main)', fontSize: 'clamp(0.85rem, 3.5vw, 0.95rem)' }}>Monthly Revenue (OMR)</label>
+                <span style={{ color: 'var(--secondary)', fontWeight: '700', fontSize: 'clamp(0.85rem, 3.5vw, 1rem)', whiteSpace: 'nowrap' }}>{formatCurrency(revenue)}</span>
               </div>
               <input type="range" min="5000" max="500000" step="5000" value={revenue} onChange={(e) => setRevenue(Number(e.target.value))} style={{ width: '100%', accentColor: 'var(--secondary)' }} />
             </div>
 
             <div className="roi-input-group">
-              <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.5rem' }}>
-                <label style={{ fontWeight: '600', color: 'var(--text-main)', fontSize: '0.95rem' }}>Number of Employees</label>
-                <span style={{ color: 'var(--secondary)', fontWeight: '700' }}>{employees}</span>
+              <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.5rem', flexWrap: 'wrap', gap: '0.5rem' }}>
+                <label style={{ fontWeight: '600', color: 'var(--text-main)', fontSize: 'clamp(0.85rem, 3.5vw, 0.95rem)' }}>Number of Employees</label>
+                <span style={{ color: 'var(--secondary)', fontWeight: '700', fontSize: 'clamp(0.85rem, 3.5vw, 1rem)', whiteSpace: 'nowrap' }}>{employees}</span>
               </div>
               <input type="range" min="5" max="500" step="5" value={employees} onChange={(e) => setEmployees(Number(e.target.value))} style={{ width: '100%', accentColor: 'var(--secondary)' }} />
             </div>
 
             <div className="roi-input-group">
-              <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.5rem' }}>
-                <label style={{ fontWeight: '600', color: 'var(--text-main)', fontSize: '0.95rem' }}>Manual Hours / Employee per Week</label>
-                <span style={{ color: 'var(--secondary)', fontWeight: '700' }}>{manualHours} hrs/emp</span>
+              <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.5rem', flexWrap: 'wrap', gap: '0.5rem' }}>
+                <label style={{ fontWeight: '600', color: 'var(--text-main)', fontSize: 'clamp(0.85rem, 3.5vw, 0.95rem)' }}>Manual Hours / Employee per Week</label>
+                <span style={{ color: 'var(--secondary)', fontWeight: '700', fontSize: 'clamp(0.85rem, 3.5vw, 1rem)', whiteSpace: 'nowrap' }}>{manualHours} hrs/emp</span>
               </div>
               <input type="range" min="1" max="40" step="1" value={manualHours} onChange={(e) => setManualHours(Number(e.target.value))} style={{ width: '100%', accentColor: 'var(--secondary)' }} />
             </div>
 
             <div className="roi-input-group">
-              <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.5rem' }}>
-                <label style={{ fontWeight: '600', color: 'var(--text-main)', fontSize: '0.95rem' }}>Monthly Marketing Spend (OMR)</label>
-                <span style={{ color: 'var(--secondary)', fontWeight: '700' }}>{formatCurrency(marketingSpend)}</span>
+              <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.5rem', flexWrap: 'wrap', gap: '0.5rem' }}>
+                <label style={{ fontWeight: '600', color: 'var(--text-main)', fontSize: 'clamp(0.85rem, 3.5vw, 0.95rem)' }}>Monthly Marketing Spend (OMR)</label>
+                <span style={{ color: 'var(--secondary)', fontWeight: '700', fontSize: 'clamp(0.85rem, 3.5vw, 1rem)', whiteSpace: 'nowrap' }}>{formatCurrency(marketingSpend)}</span>
               </div>
               <input type="range" min="1000" max="100000" step="1000" value={marketingSpend} onChange={(e) => setMarketingSpend(Number(e.target.value))} style={{ width: '100%', accentColor: 'var(--secondary)' }} />
             </div>
@@ -94,37 +94,73 @@ const ROICalculator = () => {
           </div>
 
           {/* Outputs */}
-          <div className="roi-output-card" style={{ background: 'var(--primary)', borderRadius: '16px', color: 'white', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-            <div style={{ marginBottom: '2rem' }}>
-              <div style={{ fontSize: '0.9rem', textTransform: 'uppercase', letterSpacing: '1px', opacity: 0.8, marginBottom: '0.5rem' }}>Projected Annual Impact</div>
-              <motion.div className="roi-impact-value" key={results.totalImpact} initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} style={{ fontSize: '3.5rem', fontWeight: '800', color: 'var(--secondary)', lineHeight: '1.1' }}>
-                {formatCurrency(results.totalImpact)}
-              </motion.div>
+          <div className="roi-output-card" style={{ background: 'var(--primary)', borderRadius: '16px', color: 'white', display: 'flex', flexDirection: 'column', justifyContent: 'center', padding: '2.5rem', boxSizing: 'border-box', overflow: 'hidden' }}>
+            
+            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginBottom: '1.5rem', width: '100%' }}>
+              <div style={{ position: 'relative', width: '160px', height: '160px', marginBottom: '1rem', flexShrink: 0 }}>
+                <svg viewBox="0 0 100 100" style={{ transform: 'rotate(-90deg)', width: '100%', height: '100%' }}>
+                  <circle cx="50" cy="50" r="42" fill="none" stroke="rgba(255,255,255,0.08)" strokeWidth="6" />
+                  <motion.circle 
+                    cx="50" 
+                    cy="50" 
+                    r="42" 
+                    fill="none" 
+                    stroke="var(--secondary)" 
+                    strokeWidth="6"
+                    strokeDasharray="264"
+                    animate={{ strokeDashoffset: 264 - (264 * Math.min(results.totalImpact, 150000)) / 150000 }}
+                    transition={{ duration: 0.6, ease: "easeOut" }}
+                    strokeLinecap="round"
+                  />
+                </svg>
+                <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '10px', boxSizing: 'border-box' }}>
+                  <span style={{ fontSize: 'clamp(0.55rem, 2.5vw, 0.65rem)', textTransform: 'uppercase', letterSpacing: '1px', opacity: 0.8, marginBottom: '4px', textAlign: 'center', whiteSpace: 'nowrap' }}>Annual Impact</span>
+                  <motion.span 
+                    key={results.totalImpact} 
+                    initial={{ scale: 0.95, opacity: 0.8 }} 
+                    animate={{ scale: 1, opacity: 1 }} 
+                    style={{ 
+                      fontSize: String(formatCurrency(results.totalImpact)).length > 11 ? 'clamp(0.9rem, 4.5vw, 1.1rem)' : 'clamp(1.1rem, 5vw, 1.35rem)', 
+                      fontWeight: '800', 
+                      color: 'var(--secondary)',
+                      whiteSpace: 'nowrap',
+                      overflow: 'hidden',
+                      textOverflow: 'ellipsis',
+                      width: '100%',
+                      textAlign: 'center',
+                      display: 'block',
+                      lineHeight: '1.2'
+                    }}
+                  >
+                    {formatCurrency(results.totalImpact)}
+                  </motion.span>
+                </div>
+              </div>
             </div>
 
-            <div className="roi-results-subgrid" style={{ marginBottom: '3rem', borderTop: '1px solid rgba(255,255,255,0.1)', paddingTop: '2rem' }}>
+            <div className="roi-results-subgrid" style={{ marginBottom: '2.5rem', borderTop: '1px solid rgba(255,255,255,0.1)', paddingTop: '1.5rem', width: '100%' }}>
               <div>
                 <div style={{ fontSize: '0.8rem', opacity: 0.7, marginBottom: '0.25rem' }}>Efficiency Savings</div>
-                <div style={{ fontSize: '1.5rem', fontWeight: '600' }}>{formatCurrency(results.efficiencySavings)}</div>
+                <div style={{ fontSize: 'clamp(1.1rem, 4.5vw, 1.5rem)', fontWeight: '600', wordBreak: 'break-all', overflowWrap: 'break-word', lineHeight: '1.2' }}>{formatCurrency(results.efficiencySavings)}</div>
               </div>
               <div>
                 <div style={{ fontSize: '0.8rem', opacity: 0.7, marginBottom: '0.25rem' }}>Marketing ROI</div>
-                <div style={{ fontSize: '1.5rem', fontWeight: '600' }}>{formatCurrency(results.marketingReturn)}</div>
+                <div style={{ fontSize: 'clamp(1.1rem, 4.5vw, 1.5rem)', fontWeight: '600', wordBreak: 'break-all', overflowWrap: 'break-word', lineHeight: '1.2' }}>{formatCurrency(results.marketingReturn)}</div>
               </div>
             </div>
 
-            <div style={{ background: 'rgba(255,255,255,0.1)', padding: '1rem', borderRadius: '8px', display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '2rem' }}>
-              <div style={{ background: 'var(--secondary)', color: 'var(--primary)', width: '40px', height: '40px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: '700' }}>
+            <div style={{ background: 'rgba(255,255,255,0.1)', padding: '1rem', borderRadius: '8px', display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '2rem', width: '100%', boxSizing: 'border-box' }}>
+              <div style={{ background: 'var(--secondary)', color: 'var(--primary)', width: '40px', height: '40px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: '700', flexShrink: 0 }}>
                 {results.timeline}
               </div>
-              <div>
-                <div style={{ fontWeight: '600' }}>Month ROI Target</div>
-                <div style={{ fontSize: '0.85rem', opacity: 0.8 }}>Estimated time to positive cashflow</div>
+              <div style={{ textAlign: 'left' }}>
+                <div style={{ fontWeight: '600', fontSize: '0.95rem' }}>Month ROI Target</div>
+                <div style={{ fontSize: '0.8rem', opacity: 0.8 }}>Estimated time to positive cashflow</div>
               </div>
             </div>
 
-            <div style={{ display: 'flex', gap: '1rem' }}>
-              <button onClick={() => setModalOpen(true)} className="btn btn-primary" style={{ flex: 1, background: 'var(--secondary)', color: 'var(--primary)', borderColor: 'var(--secondary)' }}>
+            <div style={{ display: 'flex', gap: '1rem', width: '100%' }}>
+              <button onClick={() => setModalOpen(true)} className="btn btn-primary" style={{ flex: 1, background: 'var(--secondary)', color: 'var(--primary)', borderColor: 'var(--secondary)', border: 'none', cursor: 'pointer', width: '100%', justifyContent: 'center' }}>
                 Get Detailed Analysis
               </button>
             </div>

@@ -50,6 +50,10 @@ CREATE TABLE IF NOT EXISTS leads (
     company TEXT,
     phone TEXT,
     resource TEXT NOT NULL,
+    industry TEXT,
+    revenue TEXT,
+    bottleneck TEXT,
+    source_url TEXT,
     date TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()) NOT NULL
 );
 
@@ -100,13 +104,17 @@ RETURNS TABLE (
   company TEXT,
   phone TEXT,
   resource TEXT,
+  industry TEXT,
+  revenue TEXT,
+  bottleneck TEXT,
+  source_url TEXT,
   date TIMESTAMP WITH TIME ZONE
 ) AS $$
 BEGIN
   IF NOT verify_admin_password(pwd) THEN
     RAISE EXCEPTION 'Unauthorized admin access';
   END IF;
-  RETURN QUERY SELECT l.id, l.name, l.email, l.company, l.phone, l.resource, l.date FROM leads l ORDER BY l.date DESC;
+  RETURN QUERY SELECT l.id, l.name, l.email, l.company, l.phone, l.resource, l.industry, l.revenue, l.bottleneck, l.source_url, l.date FROM leads l ORDER BY l.date DESC;
 END;
 $$ LANGUAGE plpgsql SECURITY DEFINER;
 

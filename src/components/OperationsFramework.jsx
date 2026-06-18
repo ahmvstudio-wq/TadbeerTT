@@ -52,7 +52,13 @@ const OperationsFramework = () => {
             </p>
             
             <div className="ops-hero-actions">
-              <a href="#contact" className="btn btn-primary">Audit My AI Readiness</a>
+              <button 
+                onClick={(e) => { e.preventDefault(); window.dispatchEvent(new CustomEvent('open-strategy-modal')); }} 
+                className="btn btn-primary"
+                style={{ cursor: 'pointer', border: 'none' }}
+              >
+                Apply for a Strategy Session
+              </button>
               <a href="#services" className="btn btn-secondary-outline">View AI Capabilities</a>
             </div>
             

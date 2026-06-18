@@ -10,6 +10,7 @@ import {
   fetchSettings, updateSettings, defaultSettings, DEFAULT_RESOURCES,
   verifyAdminPassword
 } from '../supabaseService';
+import { supabase } from '../supabaseClient';
 
 const emptyJob = {
   title: '',
@@ -96,33 +97,95 @@ const CareersAdmin = () => {
 
   // 2. Load Datasets when Authenticated
   useEffect(() => {
-    if (authenticated) {
-      const loadTabAllData = async () => {
-        setLoading(true);
-        const pwd = getPassword();
-        try {
-          if (activeTab === 'jobs') {
-            const data = await fetchJobs();
-            setJobs(data);
-          } else if (activeTab === 'resources') {
-            const data = await fetchResources();
-            setResources(data);
-          } else if (activeTab === 'settings') {
-            const data = await fetchSettings();
-            setSettings(data);
-            setSettingsForm(data);
-          } else if (activeTab === 'leads') {
-            const data = await fetchLeads(pwd);
-            setLeads(data);
-          }
-        } catch (err) {
-          console.error('Error fetching tab data:', err);
-        } finally {
-          setLoading(false);
+    let subscription;
+    let syncChannel;
+
+    const loadTabAllData = async () => {
+      setLoading(true);
+      const pwd = getPassword();
+      try {
+        if (activeTab === 'jobs') {
+          const data = await fetchJobs();
+          setJobs(data);
+        } else if (activeTab === 'resources') {
+          const data = await fetchResources();
+          setResources(data);
+        } else if (activeTab === 'settings') {
+          const data = await fetchSettings();
+          setSettings(data);
+          setSettingsForm(data);
+        } else if (activeTab === 'leads') {
+          const data = await fetchLeads(pwd);
+          setLeads(data);
         }
-      };
+      } catch (err) {
+        console.error('Error fetching tab data:', err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    if (authenticated) {
       loadTabAllData();
+
+      // Enable Realtime Updates for Leads (Supabase server-side)
+      if (activeTab === 'leads') {
+        const pwd = getPassword();
+        subscription = supabase
+          .channel('leads-realtime-admin')
+          .on(
+            'postgres_changes',
+            { event: '*', schema: 'public', table: 'leads' },
+            async () => {
+              console.log('Supabase realtime update for leads received.');
+              const data = await fetchLeads(pwd);
+              setLeads(data);
+              triggerToast('New lead received in real-time!');
+            }
+          )
+          .subscribe();
+
+        // Browser local cross-tab sync
+        try {
+          syncChannel = new BroadcastChannel('tadbeer_leads_sync');
+          syncChannel.onmessage = async (event) => {
+            if (event.data && event.data.event === 'new-lead') {
+              console.log('BroadcastChannel sync event received, refreshing leads list...');
+              const data = await fetchLeads(pwd);
+              setLeads(data);
+              triggerToast('New lead received in real-time!');
+            }
+          };
+        } catch (bcErr) {
+          console.warn('BroadcastChannel not supported in admin:', bcErr);
+        }
+
+        // Same page event listener
+        const handleSamePageLeadSubmit = async () => {
+          console.log('Same-page lead-submitted event received, refreshing leads list...');
+          const data = await fetchLeads(pwd);
+          setLeads(data);
+          triggerToast('New lead received in real-time!');
+        };
+        window.addEventListener('lead-submitted', handleSamePageLeadSubmit);
+
+        return () => {
+          if (subscription) {
+            supabase.removeChannel(subscription);
+          }
+          if (syncChannel) {
+            syncChannel.close();
+          }
+          window.removeEventListener('lead-submitted', handleSamePageLeadSubmit);
+        };
+      }
     }
+
+    return () => {
+      if (subscription) {
+        supabase.removeChannel(subscription);
+      }
+    };
   }, [authenticated, activeTab]);
 
   const triggerToast = (msg) => {
@@ -280,6 +343,46 @@ const CareersAdmin = () => {
     }
   };
 
+  const handlePopulateDefaults = async () => {
+    if (!window.confirm('This will seed the database with the 12 default resources. Proceed?')) {
+      return;
+    }
+    setLoading(true);
+    const pwd = getPassword();
+    let successCount = 0;
+    
+    try {
+      for (const res of DEFAULT_RESOURCES) {
+        const resourceData = {
+          title: res.title,
+          category: res.category,
+          type: res.type,
+          desc: res.desc,
+          link: res.link,
+          external: res.external !== false,
+          thumbnail: res.thumbnail || ''
+        };
+        const { error } = await createResource(pwd, resourceData);
+        if (!error) {
+          successCount++;
+        }
+      }
+      
+      if (successCount > 0) {
+        triggerToast(`Successfully added ${successCount} default resources!`);
+        const data = await fetchResources();
+        setResources(data);
+      } else {
+        triggerToast('Failed to seed default resources. Verify your connection.');
+      }
+    } catch (err) {
+      console.error('Error seeding defaults:', err);
+      triggerToast('Error seeding default resources.');
+    } finally {
+      setLoading(false);
+    }
+  };
+
   // Leads Actions
   const handleLeadDelete = async (id) => {
     if (window.confirm('Delete this lead entry?')) {
@@ -311,17 +414,21 @@ const CareersAdmin = () => {
 
   const handleExportCSV = () => {
     if (leads.length === 0) return;
-    const headers = ['Date', 'Name', 'Email', 'Company', 'Phone', 'Resource'];
+    const headers = ['Date', 'Name', 'Email', 'Company', 'Phone', 'Resource/Type', 'Source Page', 'Industry', 'Revenue Range', 'Bottleneck/Requirement'];
     const rows = leads.map(l => [
       l.date?.split('T')[0] || '',
       l.name || '',
       l.email || '',
       l.company || '',
       l.phone || '',
-      l.resource || ''
+      l.resource || '',
+      l.source_url || '',
+      l.industry || '',
+      l.revenue || '',
+      l.bottleneck || ''
     ]);
     const csvContent = "data:text/csv;charset=utf-8," 
-      + [headers.join(','), ...rows.map(e => e.map(val => `"${val.replace(/"/g, '""')}"`).join(','))].join('\n');
+      + [headers.join(','), ...rows.map(e => e.map(val => `"${(val || '').toString().replace(/"/g, '""')}"`).join(','))].join('\n');
     const encodedUri = encodeURI(csvContent);
     const link = document.createElement("a");
     link.setAttribute("href", encodedUri);
@@ -673,7 +780,12 @@ const CareersAdmin = () => {
               <div style={{ textAlign: 'center', padding: '3rem', border: '1px dashed var(--border)', borderRadius: '12px', background: '#fff' }}>
                 <BookOpen size={40} style={{ color: 'var(--text-muted)', opacity: 0.3, marginBottom: '1rem' }} />
                 <h4 style={{ margin: 0, color: 'var(--text-main)' }}>No resources added</h4>
-                <p style={{ color: 'var(--text-muted)', fontSize: '0.85rem', marginTop: '0.25rem' }}>Click "+ Add New Resource" to add materials.</p>
+                <p style={{ color: 'var(--text-muted)', fontSize: '0.85rem', marginTop: '0.25rem', marginBottom: '1.25rem' }}>
+                  Click "+ Add New Resource" to add materials, or load the default resource library templates.
+                </p>
+                <button type="button" className="btn btn-secondary" onClick={handlePopulateDefaults} style={{ fontSize: '0.9rem', padding: '0.6rem 1.5rem' }}>
+                  Populate Default Resources
+                </button>
               </div>
             ) : (
               resources.map(res => (
@@ -745,7 +857,11 @@ const CareersAdmin = () => {
                     <th style={{ padding: '1rem' }}>Email</th>
                     <th style={{ padding: '1rem' }}>Company</th>
                     <th style={{ padding: '1rem' }}>Phone</th>
-                    <th style={{ padding: '1rem' }}>Resource Request</th>
+                    <th style={{ padding: '1rem' }}>Source Page</th>
+                    <th style={{ padding: '1rem' }}>Industry</th>
+                    <th style={{ padding: '1rem' }}>Revenue</th>
+                    <th style={{ padding: '1rem' }}>Bottleneck / Details</th>
+                    <th style={{ padding: '1rem' }}>Type</th>
                     <th style={{ padding: '1rem', textAlign: 'center' }}>Action</th>
                   </tr>
                 </thead>
@@ -753,12 +869,24 @@ const CareersAdmin = () => {
                   {leads.map((lead, idx) => (
                     <tr key={lead.id || idx} style={{ borderBottom: '1px solid var(--border)' }} className="lead-row">
                       <td style={{ padding: '1rem', whiteSpace: 'nowrap' }}>{lead.date?.split('T')[0] || ''}</td>
-                      <td style={{ padding: '1rem', fontWeight: '700', color: 'var(--primary)' }}>{lead.name}</td>
+                      <td style={{ padding: '1rem', fontWeight: '700', color: 'var(--primary)', whiteSpace: 'nowrap' }}>{lead.name}</td>
                       <td style={{ padding: '1rem' }}><a href={`mailto:${lead.email}`} style={{ textDecoration: 'underline', color: 'inherit' }}>{lead.email}</a></td>
                       <td style={{ padding: '1rem' }}>{lead.company || <span style={{ color: 'var(--text-muted)', fontStyle: 'italic' }}>N/A</span>}</td>
-                      <td style={{ padding: '1rem' }}>{lead.phone ? <a href={`tel:${lead.phone}`} style={{ color: 'inherit' }}>{lead.phone}</a> : <span style={{ color: 'var(--text-muted)', fontStyle: 'italic' }}>N/A</span>}</td>
+                      <td style={{ padding: '1rem', whiteSpace: 'nowrap' }}>{lead.phone ? <a href={`tel:${lead.phone}`} style={{ color: 'inherit' }}>{lead.phone}</a> : <span style={{ color: 'var(--text-muted)', fontStyle: 'italic' }}>N/A</span>}</td>
                       <td style={{ padding: '1rem', fontSize: '0.85rem' }}>
-                        <span style={{ display: 'inline-block', background: 'rgba(24,79,91,0.05)', padding: '0.2rem 0.5rem', borderRadius: '4px', color: 'var(--primary)', fontWeight: '600' }}>
+                        {lead.source_url ? (
+                          <span style={{ color: 'var(--text-muted)' }}>{lead.source_url}</span>
+                        ) : (
+                          <span style={{ color: 'var(--text-muted)', fontStyle: 'italic' }}>Direct / Home</span>
+                        )}
+                      </td>
+                      <td style={{ padding: '1rem', fontWeight: '600' }}>{lead.industry || <span style={{ color: 'var(--text-muted)', fontStyle: 'italic' }}>N/A</span>}</td>
+                      <td style={{ padding: '1rem' }}>{lead.revenue || <span style={{ color: 'var(--text-muted)', fontStyle: 'italic' }}>N/A</span>}</td>
+                      <td style={{ padding: '1rem', fontSize: '0.85rem', maxWidth: '220px', wordBreak: 'break-word' }}>
+                        {lead.bottleneck || <span style={{ color: 'var(--text-muted)', fontStyle: 'italic' }}>None</span>}
+                      </td>
+                      <td style={{ padding: '1rem', fontSize: '0.85rem' }}>
+                        <span style={{ display: 'inline-block', background: 'rgba(24,79,91,0.05)', padding: '0.2rem 0.5rem', borderRadius: '4px', color: 'var(--primary)', fontWeight: '600', whiteSpace: 'nowrap' }}>
                           {lead.resource}
                         </span>
                       </td>

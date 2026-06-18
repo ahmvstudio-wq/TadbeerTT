@@ -25,14 +25,15 @@ const CTA = () => {
         <p className="cta-subtitle">
           One honest conversation with an expert who understands your market. No contracts. No pressure.
         </p>
-        <motion.a 
-          href="#contact"
+        <motion.button 
+          onClick={(e) => { e.preventDefault(); window.dispatchEvent(new CustomEvent('open-strategy-modal')); }}
           className="cta-btn"
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
+          style={{ cursor: 'pointer', border: 'none' }}
         >
-          Book Your Free Strategy Call →
-        </motion.a>
+          Apply for a Strategy Session →
+        </motion.button>
       </motion.div>
     </section>
   );

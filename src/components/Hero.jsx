@@ -147,21 +147,21 @@ const Hero = () => {
             className="hero-buttons"
           >
             <motion.a 
-              href="#contact"
+              href="#readiness-score"
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.97 }}
               className="btn btn-primary hero-cta-btn"
-              style={{ fontSize: '1.05rem', padding: '1rem 2rem' }}
+              style={{ fontSize: '1.05rem', padding: '1rem 2.25rem' }}
             >
-              Book Free Consultation →
+              Take Business Assessment →
             </motion.a>
-            <motion.a 
-              href="#services"
+            <motion.button 
+              onClick={() => window.dispatchEvent(new CustomEvent('open-strategy-modal'))}
               whileHover={{ opacity: 0.7 }}
-              style={{ color: 'var(--primary)', fontWeight: '500', borderBottom: '1.5px solid var(--primary)', paddingBottom: '2px' }}
+              style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--primary)', fontWeight: '600', borderBottom: '1.5px solid var(--primary)', paddingBottom: '2px', fontSize: '0.95rem' }}
             >
-              Explore Services ↓
-            </motion.a>
+              Apply for a Strategy Session
+            </motion.button>
           </motion.div>
 
         </motion.div>

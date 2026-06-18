@@ -178,7 +178,13 @@ const Navbar = () => {
 
         <div className="nav-actions">
           <span className="lang-switch">العربية</span>
-          <a href="#contact" className="btn btn-primary nav-cta-btn" style={{ padding: '0.65rem 1.25rem', fontSize: '0.9rem' }}>Book Consultation</a>
+          <button 
+            onClick={(e) => { e.preventDefault(); window.dispatchEvent(new CustomEvent('open-strategy-modal')); }} 
+            className="btn btn-primary nav-cta-btn" 
+            style={{ padding: '0.65rem 1.25rem', fontSize: '0.9rem', cursor: 'pointer', border: 'none' }}
+          >
+            Apply for a Strategy Session
+          </button>
           
           <button 
             className={`nav-toggle ${mobileOpen ? 'open' : ''}`} 
@@ -213,7 +219,13 @@ const Navbar = () => {
 
         </div>
         <div className="nav-mobile-footer" style={{ padding: '2rem' }}>
-          <a href="#contact" className="btn btn-primary" style={{ width: '100%', justifyContent: 'center' }} onClick={() => setMobileOpen(false)}>Book Consultation</a>
+          <button 
+            onClick={(e) => { e.preventDefault(); setMobileOpen(false); window.dispatchEvent(new CustomEvent('open-strategy-modal')); }} 
+            className="btn btn-primary" 
+            style={{ width: '100%', justifyContent: 'center', cursor: 'pointer', border: 'none' }}
+          >
+            Apply for a Strategy Session
+          </button>
         </div>
       </div>
     </>

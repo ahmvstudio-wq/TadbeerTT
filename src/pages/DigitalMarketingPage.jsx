@@ -534,7 +534,13 @@ const DigitalMarketingPage = () => {
         <div className="container" style={{ maxWidth: '800px' }}>
           <h2 style={{ fontSize: '2.5rem', color: 'var(--primary)', marginBottom: '1.5rem' }}>Ready to Transform Your Marketing?</h2>
           <p style={{ fontSize: '1.15rem', color: 'var(--text-muted)', marginBottom: '2.5rem' }}>Stop guessing and start growing. Book a consultation with our marketing experts today.</p>
-          <a href="#contact" className="btn btn-primary" style={{ padding: '1rem 2.5rem', fontSize: '1.1rem' }}>Book Free Consultation</a>
+          <button 
+            onClick={(e) => { e.preventDefault(); window.dispatchEvent(new CustomEvent('open-strategy-modal')); }} 
+            className="btn btn-primary" 
+            style={{ padding: '1rem 2.5rem', fontSize: '1.1rem', cursor: 'pointer', border: 'none' }}
+          >
+            Apply for a Strategy Session
+          </button>
         </div>
       </section>
     </div>

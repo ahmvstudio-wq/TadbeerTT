@@ -285,7 +285,13 @@ const HumanCapitalPage = () => {
         <div className="container" style={{ maxWidth: '800px' }}>
           <h2 style={{ fontSize: '2.5rem', color: 'var(--primary)', marginBottom: '1.5rem' }}>Need Hands-On HR Support?</h2>
           <p style={{ fontSize: '1.15rem', color: 'var(--text-muted)', marginBottom: '2.5rem' }}>From organizational restructuring to executive search, our consultants are ready to assist.</p>
-          <a href="#contact" className="btn btn-primary" style={{ padding: '1rem 2.5rem', fontSize: '1.1rem' }}>Speak with an HR Expert</a>
+          <button 
+            onClick={(e) => { e.preventDefault(); window.dispatchEvent(new CustomEvent('open-strategy-modal')); }} 
+            className="btn btn-primary" 
+            style={{ padding: '1rem 2.5rem', fontSize: '1.1rem', cursor: 'pointer', border: 'none' }}
+          >
+            Apply for a Strategy Session
+          </button>
         </div>
       </section>
 

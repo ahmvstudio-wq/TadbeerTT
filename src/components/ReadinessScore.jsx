@@ -205,6 +205,25 @@ const ReadinessScore = () => {
   const [showResults, setShowResults] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
 
+  // Keyboard controls for Typeform feel (A, B, C, D)
+  React.useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (showResults || modalOpen) return;
+      const key = e.key.toLowerCase();
+      const optionsMapping = { a: 1, b: 2, c: 3, d: 4 };
+      if (key in optionsMapping) {
+        const optionValue = optionsMapping[key];
+        const currentOptions = questions[currentQuestion].options;
+        const matchingOption = currentOptions.find(o => o.value === optionValue);
+        if (matchingOption) {
+          handleSelect(currentQuestion, optionValue);
+        }
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [currentQuestion, showResults, modalOpen]);
+
   const handleSelect = (qIndex, value) => {
     setAnswers({ ...answers, [qIndex]: value });
     setTimeout(() => {
@@ -213,13 +232,12 @@ const ReadinessScore = () => {
       } else {
         setShowResults(true);
       }
-    }, 400);
+    }, 450);
   };
 
   const calculateScore = () => {
     let total = 0;
     Object.values(answers).forEach(val => total += val);
-    // Max score is 20 (5 questions * 4). Multiply by 5 to get out of 100
     return total * 5;
   };
 
@@ -257,11 +275,28 @@ const ReadinessScore = () => {
           viewport={{ once: true, margin: "-10%" }}
           transition={{ type: "spring", bounce: 0.15, duration: 1.0 }}
           className="readiness-card"
-          style={{ background: 'white', borderRadius: '16px', border: '1px solid var(--border)', padding: '2.5rem', boxShadow: '0 10px 30px rgba(0,0,0,0.02)' }}
+          style={{ 
+            background: 'white', 
+            borderRadius: '16px', 
+            border: '1px solid var(--border)', 
+            padding: '2.5rem', 
+            boxShadow: '0 10px 30px rgba(0,0,0,0.02)',
+            minHeight: '520px',
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'center'
+          }}
         >
           <AnimatePresence mode="wait">
             {!showResults ? (
-              <motion.div key="questions" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }} className="assessment-layout">
+              <motion.div 
+                key={currentQuestion} 
+                initial={{ opacity: 0, x: 50 }} 
+                animate={{ opacity: 1, x: 0 }} 
+                exit={{ opacity: 0, x: -50 }} 
+                transition={{ duration: 0.35, ease: 'easeInOut' }}
+                className="assessment-layout"
+              >
                 {/* Left Column: SVG Illustration representing current question */}
                 <div className="assessment-illustration-wrapper">
                   {currentQuestion === 0 && <OperationsIllustration />}
@@ -293,7 +328,7 @@ const ReadinessScore = () => {
                           key={i}
                           onClick={() => handleSelect(currentQuestion, opt.value)}
                           style={{
-                            padding: '1rem',
+                            padding: '0.85rem 1rem',
                             textAlign: 'left',
                             background: isSelected ? 'rgba(202,169,76,0.08)' : 'white',
                             border: isSelected ? '1.5px solid var(--secondary)' : '1px solid var(--border)',
@@ -308,7 +343,25 @@ const ReadinessScore = () => {
                             fontSize: '0.9rem'
                           }}
                         >
-                          {opt.text}
+                          <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                            <div style={{
+                              width: '28px',
+                              height: '28px',
+                              borderRadius: '6px',
+                              border: isSelected ? '1px solid var(--secondary)' : '1px solid var(--border)',
+                              background: isSelected ? 'var(--secondary)' : '#F9F8F3',
+                              color: isSelected ? 'var(--primary)' : 'var(--text-muted)',
+                              display: 'flex',
+                              alignItems: 'center',
+                              justifyContent: 'center',
+                              fontWeight: '700',
+                              fontSize: '0.8rem',
+                              transition: 'all 0.2s'
+                            }}>
+                              {String.fromCharCode(65 + i)}
+                            </div>
+                            <span>{opt.text}</span>
+                          </div>
                           {isSelected && <CheckCircle2 size={16} color="var(--secondary)" />}
                         </button>
                       )
@@ -384,9 +437,13 @@ const ReadinessScore = () => {
                         <button onClick={() => setModalOpen(true)} className="btn btn-primary" style={{ padding: '0.75rem 1.5rem', fontSize: '0.95rem' }}>
                           Get Full Detailed Report
                         </button>
-                        <a href="#contact" className="btn" style={{ padding: '0.75rem 1.5rem', fontSize: '0.95rem', border: '1px solid var(--border)' }}>
-                          Book Expert Consultation
-                        </a>
+                        <button 
+                          onClick={(e) => { e.preventDefault(); window.dispatchEvent(new CustomEvent('open-strategy-modal')); }} 
+                          className="btn" 
+                          style={{ padding: '0.75rem 1.5rem', fontSize: '0.95rem', border: '1px solid var(--border)', cursor: 'pointer', background: 'none' }}
+                        >
+                          Apply for a Strategy Session
+                        </button>
                       </div>
                       <button onClick={reset} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem', background: 'none', border: 'none', color: 'var(--text-muted)', cursor: 'pointer', margin: '1.5rem auto 0', fontSize: '0.85rem' }}>
                         <RotateCcw size={14} /> Retake Assessment
@@ -399,7 +456,12 @@ const ReadinessScore = () => {
           </AnimatePresence>
         </motion.div>
       </div>
-      <LeadCaptureModal isOpen={modalOpen} onClose={() => setModalOpen(false)} resourceTitle="Transformation Readiness Report" resourceType="Assessment Report" />
+      <LeadCaptureModal 
+        isOpen={modalOpen} 
+        onClose={() => setModalOpen(false)} 
+        resourceTitle={`Transformation Readiness Report (Score: ${calculateScore()}%)`} 
+        resourceType="Assessment Report" 
+      />
     </section>
   );
 };

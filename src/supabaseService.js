@@ -359,13 +359,12 @@ export const fetchLeads = async (pwd) => {
 
 export const createLead = async (lead) => {
   try {
-    const { data, error } = await supabase
+    const { error } = await supabase
       .from('leads')
-      .insert([lead])
-      .select();
+      .insert([lead]);
 
     if (error) throw error;
-    return { data: data[0], error: null };
+    return { data: null, error: null };
   } catch (err) {
     console.error('Error creating lead:', err);
     return { data: null, error: err };

@@ -1,5 +1,60 @@
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
+
+const AnimatedStat = ({ text, duration = 800 }) => {
+  const [displayValue, setDisplayValue] = useState(text);
+  const elementRef = useRef(null);
+  const hasAnimated = useRef(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const entry = entries[0];
+        if (entry.isIntersecting && !hasAnimated.current) {
+          hasAnimated.current = true;
+          startAnimation();
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    if (elementRef.current) {
+      observer.observe(elementRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, [text]);
+
+  const startAnimation = () => {
+    const match = text.match(/([0-9.]+)/);
+    if (!match) {
+      setDisplayValue(text);
+      return;
+    }
+    const numStr = match[0];
+    const target = parseFloat(numStr);
+    const prefix = text.substring(0, match.index);
+    const suffix = text.substring(match.index + numStr.length);
+
+    let startTimestamp = null;
+    const step = (timestamp) => {
+      if (!startTimestamp) startTimestamp = timestamp;
+      const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+      const currentVal = Math.floor(progress * target);
+      setDisplayValue(`${prefix}${currentVal}${suffix}`);
+      if (progress < 1) {
+        window.requestAnimationFrame(step);
+      } else {
+        setDisplayValue(text);
+      }
+    };
+    window.requestAnimationFrame(step);
+  };
+
+  return <span ref={elementRef}>{displayValue}</span>;
+};
+
 
 // SVG Illustration for Healthcare
 const HealthcareIllustration = ({ style }) => (
@@ -317,46 +372,55 @@ const INDUSTRIES_DATA = [
   {
     illustration: <HealthcareIllustration />,
     title: 'Healthcare',
-    desc: 'AI-driven diagnostics integration and digital operational workflow automation.'
+    desc: 'AI-driven diagnostics integration and digital operational workflow automation.',
+    path: '/industries/healthcare'
   },
   {
     illustration: <RealEstateIllustration />,
     title: 'Real Estate',
-    desc: 'PropTech solutions, secure transaction flows, and automated lead intelligence.'
+    desc: 'PropTech solutions, secure transaction flows, and automated lead intelligence.',
+    path: '/industries/real-estate'
   },
   {
     illustration: <LogisticsIllustration />,
     title: 'Logistics & Supply Chain',
-    desc: 'Custom fleet management, real-time tracking, and automated supply chain operations.'
+    desc: 'Custom fleet management, real-time tracking, and automated supply chain operations.',
+    path: '/industries/logistics'
   },
   {
     illustration: <RetailIllustration />,
     title: 'E-Commerce',
-    desc: 'Scalable omnichannel platforms with deep ERP integrations and dynamic inventory systems.'
+    desc: 'Scalable omnichannel platforms with deep ERP integrations and dynamic inventory systems.',
+    path: '/industries/ecommerce'
   },
   {
     illustration: <ConstructionIllustration />,
     title: 'Construction',
-    desc: 'Automated project management tracking, resource allocation, and material compliance portals.'
+    desc: 'Automated project management tracking, resource allocation, and material compliance portals.',
+    path: '/industries/construction'
   },
   {
     illustration: <ManufacturingIllustration />,
     title: 'Manufacturing',
-    desc: 'Smart inventory control, custom ERP platforms, and predictive maintenance tracking systems.'
+    desc: 'Smart inventory control, custom ERP platforms, and predictive maintenance tracking systems.',
+    path: '/industries/manufacturing'
   },
   {
     illustration: <GovernmentIllustration />,
     title: 'Government & Public Sector',
-    desc: 'Secure, high-compliance portals and digital governance solutions for Oman Vision 2040.'
+    desc: 'Secure, high-compliance portals and digital governance solutions for Oman Vision 2040.',
+    path: '/industries/government'
   },
   {
     illustration: <CorporateIllustration />,
     title: 'Professional Services',
-    desc: 'Enterprise-grade resource planning, custom CRM, and secure data infrastructure.'
+    desc: 'Enterprise-grade resource planning, custom CRM, and secure data infrastructure.',
+    path: '/industries/professional-services'
   }
 ];
 
 const About = () => {
+  const navigate = useNavigate();
   return (
     <section id="about" className="about-narrative-section" style={{ padding: '3.5rem 0' }}>
       <div className="container">
@@ -385,7 +449,12 @@ const About = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ type: "spring", bounce: 0.1, duration: 0.8, delay: i * 0.05 }}
-                  whileHover={{ x: 6 }}
+                  whileHover={{ x: 6, scale: 1.02 }}
+                  onClick={() => {
+                    navigate(v.path);
+                    window.scrollTo(0, 0);
+                  }}
+                  style={{ cursor: 'pointer' }}
                 >
                   <div className="industry-icon-box">
                     {v.illustration}
@@ -416,7 +485,7 @@ const About = () => {
               viewport={{ once: true }}
               transition={{ type: "spring", bounce: 0.15, duration: 1.0, delay: stat.delay }}
             >
-              <h3 className="stat-value-digits">{stat.metric}</h3>
+              <h3 className="stat-value-digits"><AnimatedStat text={stat.metric} /></h3>
               <h4 className="stat-label-title">{stat.label}</h4>
               <p className="stat-description-info">{stat.desc}</p>
             </motion.div>

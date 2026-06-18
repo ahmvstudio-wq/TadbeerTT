@@ -143,6 +143,39 @@ const OurWork = () => {
     setViewState('problem'); // Reset to problem when switching projects
   };
 
+  const touchStartX = React.useRef(0);
+  const touchEndX = React.useRef(0);
+
+  const handleTouchStart = (e) => {
+    touchStartX.current = e.targetTouches[0].clientX;
+  };
+
+  const handleTouchMove = (e) => {
+    touchEndX.current = e.targetTouches[0].clientX;
+  };
+
+  const handleTouchEnd = () => {
+    if (!touchStartX.current || !touchEndX.current) return;
+    const diffX = touchStartX.current - touchEndX.current;
+    const swipeThreshold = 50;
+
+    if (diffX > swipeThreshold) {
+      if (activeProjectIdx < projects.length - 1) {
+        handleProjectSwitch(activeProjectIdx + 1);
+      } else {
+        handleProjectSwitch(0);
+      }
+    } else if (diffX < -swipeThreshold) {
+      if (activeProjectIdx > 0) {
+        handleProjectSwitch(activeProjectIdx - 1);
+      } else {
+        handleProjectSwitch(projects.length - 1);
+      }
+    }
+    touchStartX.current = 0;
+    touchEndX.current = 0;
+  };
+
   return (
     <section id="work" className="work-section" style={{ padding: '6rem 0', background: 'var(--bg)' }}>
       <div className="container" style={{ maxWidth: '1440px', padding: '0 5%' }}>
@@ -186,7 +219,12 @@ const OurWork = () => {
           </div>
 
           {/* Right: The Data Viewport */}
-          <div className="work-viewport">
+          <div 
+            className="work-viewport"
+            onTouchStart={handleTouchStart}
+            onTouchMove={handleTouchMove}
+            onTouchEnd={handleTouchEnd}
+          >
             
             {/* Background Image Layer (Crossfades) */}
             <AnimatePresence mode="wait">
@@ -305,6 +343,22 @@ const OurWork = () => {
                   
                 </motion.div>
               </AnimatePresence>
+
+              {/* Mobile swipe indicators */}
+              <div className="mobile-swipe-indicators" style={{ display: 'none', gap: '8px', justifyContent: 'center', marginTop: '2rem' }}>
+                {projects.map((_, idx) => (
+                  <div 
+                    key={idx} 
+                    style={{
+                      width: '8px', 
+                      height: '8px', 
+                      borderRadius: '50%', 
+                      background: activeProjectIdx === idx ? 'var(--secondary)' : 'rgba(28, 27, 23, 0.15)',
+                      transition: 'background-color 0.2s'
+                    }} 
+                  />
+                ))}
+              </div>
 
             </div>
           </div>

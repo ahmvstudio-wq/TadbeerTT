@@ -372,7 +372,13 @@ const SoftwareSolutionsPage = () => {
         <div className="container" style={{ maxWidth: '800px' }}>
           <h2 style={{ fontSize: '2.5rem', color: 'var(--primary)', marginBottom: '1.5rem' }}>Ready to Upgrade Your Systems?</h2>
           <p style={{ fontSize: '1.15rem', color: 'var(--text-muted)', marginBottom: '2.5rem' }}>Stop wrestling with spreadsheets. Let us build the unified platform your business deserves.</p>
-          <a href="#contact" className="btn btn-primary" style={{ padding: '1rem 2.5rem', fontSize: '1.1rem' }}>Get A System Audit</a>
+          <button 
+            onClick={(e) => { e.preventDefault(); window.dispatchEvent(new CustomEvent('open-strategy-modal')); }} 
+            className="btn btn-primary" 
+            style={{ padding: '1rem 2.5rem', fontSize: '1.1rem', cursor: 'pointer', border: 'none' }}
+          >
+            Apply for a Strategy Session
+          </button>
         </div>
       </section>
     </div>

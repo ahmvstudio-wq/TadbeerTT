@@ -1,6 +1,7 @@
-import React, { useEffect, Suspense } from 'react';
+import React, { useEffect, useState, Suspense } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import Lenis from 'lenis';
+import { AnimatePresence } from 'framer-motion';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import Clients from './components/Clients';
@@ -19,22 +20,41 @@ import ROICalculator from './components/ROICalculator';
 import WhatsAppButton from './components/WhatsAppButton';
 import OnyxAssistant from './components/OnyxAssistant';
 
+import Preloader from './components/Preloader';
+import StrategySessionModal from './components/StrategySessionModal';
+import PlaybookBanner from './components/PlaybookBanner';
+import CustomCursor from './components/CustomCursor';
+
+import OmanizationCheck from './components/OmanizationCheck';
+import AIPipelineSimulator from './components/AIPipelineSimulator';
+import OurWork from './components/OurWork';
+
 const DigitalMarketingPage = React.lazy(() => import('./pages/DigitalMarketingPage'));
 const SoftwareSolutionsPage = React.lazy(() => import('./pages/SoftwareSolutionsPage'));
 const HumanCapitalPage = React.lazy(() => import('./pages/HumanCapitalPage'));
 const AITechnologyPage = React.lazy(() => import('./pages/AITechnologyPage'));
 const ResourceLibraryPage = React.lazy(() => import('./pages/ResourceLibraryPage'));
 
+const HealthcareIndustryPage = React.lazy(() => import('./pages/HealthcareIndustryPage'));
+const RealEstateIndustryPage = React.lazy(() => import('./pages/RealEstateIndustryPage'));
+const LogisticsIndustryPage = React.lazy(() => import('./pages/LogisticsIndustryPage'));
+const EcommerceIndustryPage = React.lazy(() => import('./pages/EcommerceIndustryPage'));
+const ConstructionIndustryPage = React.lazy(() => import('./pages/ConstructionIndustryPage'));
+const ManufacturingIndustryPage = React.lazy(() => import('./pages/ManufacturingIndustryPage'));
+const GovernmentIndustryPage = React.lazy(() => import('./pages/GovernmentIndustryPage'));
+const ProfessionalServicesIndustryPage = React.lazy(() => import('./pages/ProfessionalServicesIndustryPage'));
+
 function HomePage() {
   return (
     <>
       <Hero />
       <Clients />
+      <ReadinessScore />
       <About />
       <Services />
-      <ReadinessScore />
-      <Process />
       <ROICalculator />
+      <Process />
+      <OmanizationCheck />
       <TechPartners />
       <FAQ />
       <CTA />
@@ -44,6 +64,116 @@ function HomePage() {
 
 function App() {
   const location = useLocation();
+  const [loading, setLoading] = useState(true);
+  const [strategyModalOpen, setStrategyModalOpen] = useState(false);
+  const [selectedIndustry, setSelectedIndustry] = useState('');
+
+  useEffect(() => {
+    // Dismiss loading screen after 1.8 seconds
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 1800);
+    return () => clearTimeout(timer);
+  }, []);
+
+  // Handle lead submission events globally to suppress modals once converted
+  useEffect(() => {
+    const handleLeadSubmitted = () => {
+      sessionStorage.setItem('leadSubmitted', 'true');
+    };
+    window.addEventListener('lead-submitted', handleLeadSubmitted);
+    return () => window.removeEventListener('lead-submitted', handleLeadSubmitted);
+  }, []);
+
+  useEffect(() => {
+    if (loading || strategyModalOpen) return;
+
+    // Helper to check if modal is currently dismissed and within the cooldown period
+    const isUnderCooldown = () => {
+      const dismissedTime = sessionStorage.getItem('strategyModalDismissedTime');
+      if (!dismissedTime) return false;
+      const elapsed = Date.now() - parseInt(dismissedTime, 10);
+      return elapsed < 25000; // 25 seconds cooldown for "really frequent" popups
+    };
+
+    const isAlreadyLead = sessionStorage.getItem('leadSubmitted') === 'true';
+    if (isAlreadyLead) return;
+
+    const currentPath = location.pathname;
+    const isHighValuePage = currentPath.includes('/services/') || currentPath.includes('/industries/') || currentPath === '/';
+
+    // 1. Exit Intent Trigger
+    const handleMouseLeave = (e) => {
+      if (e.clientY < 15 && !isUnderCooldown() && !strategyModalOpen && isHighValuePage) {
+        setStrategyModalOpen(true);
+      }
+    };
+    document.addEventListener('mouseleave', handleMouseLeave);
+
+    // 2. Scroll Depth Trigger (65% scroll depth)
+    let hasScrolled65 = false;
+    const handleScroll = () => {
+      if (hasScrolled65 || isUnderCooldown() || strategyModalOpen || !isHighValuePage) return;
+
+      const scrollTop = window.scrollY || document.documentElement.scrollTop;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      if (docHeight <= 0) return;
+
+      const scrollPercent = (scrollTop / docHeight) * 100;
+      if (scrollPercent >= 65) {
+        hasScrolled65 = true;
+        setStrategyModalOpen(true);
+      }
+    };
+    window.addEventListener('scroll', handleScroll);
+
+    // 3. Idle Time Trigger (12 seconds of inactivity)
+    let idleTimer;
+    const resetIdleTimer = () => {
+      clearTimeout(idleTimer);
+      if (isUnderCooldown() || strategyModalOpen || !isHighValuePage) return;
+      
+      idleTimer = setTimeout(() => {
+        setStrategyModalOpen(true);
+      }, 12000); // 12 seconds idle
+    };
+
+    const activityEvents = ['mousemove', 'mousedown', 'scroll', 'keypress', 'touchstart'];
+    activityEvents.forEach(evt => window.addEventListener(evt, resetIdleTimer));
+    resetIdleTimer(); // start initially
+
+    // 4. Initial Timer fallback (5s)
+    const initialTimer = setTimeout(() => {
+      const hasShownInitial = sessionStorage.getItem('strategyPopupShownInitial');
+      if (!hasShownInitial && !strategyModalOpen) {
+        setStrategyModalOpen(true);
+        sessionStorage.setItem('strategyPopupShownInitial', 'true');
+      }
+    }, 5000);
+
+    return () => {
+      document.removeEventListener('mouseleave', handleMouseLeave);
+      window.removeEventListener('scroll', handleScroll);
+      activityEvents.forEach(evt => window.removeEventListener(evt, resetIdleTimer));
+      clearTimeout(idleTimer);
+      clearTimeout(initialTimer);
+    };
+  }, [loading, location.pathname, strategyModalOpen]);
+
+  useEffect(() => {
+    // Listen to custom events to open the Strategy Modal globally
+    const handleOpenStrategy = (e) => {
+      if (e.detail?.industry) {
+        setSelectedIndustry(e.detail.industry);
+      } else {
+        setSelectedIndustry('');
+      }
+      setStrategyModalOpen(true);
+    };
+
+    window.addEventListener('open-strategy-modal', handleOpenStrategy);
+    return () => window.removeEventListener('open-strategy-modal', handleOpenStrategy);
+  }, []);
 
   useEffect(() => {
     if (!location.hash) {
@@ -86,6 +216,7 @@ function App() {
 
   return (
     <>
+      <PlaybookBanner />
       <Navbar />
       <main>
         <Suspense fallback={<div style={{height: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center'}}>Loading...</div>}>
@@ -95,6 +226,16 @@ function App() {
             <Route path="/services/software-solutions" element={<SoftwareSolutionsPage />} />
             <Route path="/services/human-capital" element={<HumanCapitalPage />} />
             <Route path="/services/ai-technology" element={<AITechnologyPage />} />
+            
+            <Route path="/industries/healthcare" element={<HealthcareIndustryPage />} />
+            <Route path="/industries/real-estate" element={<RealEstateIndustryPage />} />
+            <Route path="/industries/logistics" element={<LogisticsIndustryPage />} />
+            <Route path="/industries/ecommerce" element={<EcommerceIndustryPage />} />
+            <Route path="/industries/construction" element={<ConstructionIndustryPage />} />
+            <Route path="/industries/manufacturing" element={<ManufacturingIndustryPage />} />
+            <Route path="/industries/government" element={<GovernmentIndustryPage />} />
+            <Route path="/industries/professional-services" element={<ProfessionalServicesIndustryPage />} />
+
             <Route path="/resources" element={<ResourceLibraryPage />} />
             <Route path="/careers" element={<Careers />} />
             <Route path="/admin" element={<CareersAdmin />} />
@@ -104,6 +245,18 @@ function App() {
       <Footer />
       <WhatsAppButton />
       <OnyxAssistant />
+      <StrategySessionModal 
+        isOpen={strategyModalOpen} 
+        onClose={() => {
+          setStrategyModalOpen(false);
+          sessionStorage.setItem('strategyModalDismissedTime', Date.now().toString());
+        }} 
+        initialIndustry={selectedIndustry} 
+      />
+      <CustomCursor />
+      <AnimatePresence>
+        {loading && <Preloader key="preloader" />}
+      </AnimatePresence>
     </>
   );
 }
