@@ -428,7 +428,7 @@ const OnyxAssistant = () => {
 
   return (
     <>
-      <div style={{ position: 'fixed', bottom: '24px', right: '24px', zIndex: 999, display: 'flex', flexDirection: 'column', alignItems: 'flex-end' }}>
+      <div className="onyx-assistant-shell" style={{ position: 'fixed', bottom: '24px', right: '24px', zIndex: 999, display: 'flex', flexDirection: 'column', alignItems: 'flex-end' }}>
         
         {/* Proactive Toast */}
         <AnimatePresence>
@@ -583,6 +583,7 @@ const OnyxAssistant = () => {
 
         {/* Trigger Button */}
         <motion.button
+          className="onyx-trigger-button"
           onClick={() => {
             const nextState = !isOpen;
             setIsOpen(nextState);

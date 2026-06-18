@@ -196,6 +196,7 @@ const Hero = () => {
 
       {/* Scroll Indicator */}
       <motion.div 
+        className="hero-scroll-indicator"
         style={{ position: 'absolute', bottom: '2rem', left: '50%', transform: 'translateX(-50%)', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.75rem' }}
         initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 2, duration: 1 }}
       >

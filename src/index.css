@@ -4993,14 +4993,14 @@ html, body {
 
 @media (max-width: 768px) {
   :root.has-banner .navbar {
-    top: 54px !important;
+    top: 44px !important;
   }
   :root.has-banner .nav-mobile-drawer {
-    top: 54px !important;
-    height: calc(100vh - 54px) !important;
+    top: 44px !important;
+    height: calc(100vh - 44px) !important;
   }
   :root.has-banner main {
-    margin-top: 54px !important;
+    margin-top: 44px !important;
   }
 }
 
@@ -5012,6 +5012,44 @@ html, body {
 
 /* Final mobile containment pass */
 @media (max-width: 768px) {
+  .playbook-top-banner {
+    min-height: 44px !important;
+    padding: 0.4rem 2.5rem 0.4rem 0.75rem !important;
+    flex-wrap: nowrap !important;
+    justify-content: space-between !important;
+    gap: 0.5rem !important;
+    text-align: left !important;
+  }
+
+  .playbook-top-banner > span {
+    min-width: 0 !important;
+    flex: 1 1 auto !important;
+  }
+
+  .playbook-top-banner > span > span:first-child {
+    display: none !important;
+  }
+
+  .playbook-top-banner > span > span:last-child {
+    display: block !important;
+    font-size: 0.78rem !important;
+    line-height: 1.2 !important;
+    white-space: normal !important;
+    overflow-wrap: normal !important;
+  }
+
+  .playbook-top-banner button:not(:last-child) {
+    flex: 0 0 auto !important;
+    margin-left: 0 !important;
+    padding: 0.42rem 0.55rem !important;
+    font-size: 0.72rem !important;
+    white-space: nowrap !important;
+  }
+
+  .playbook-top-banner button:last-child {
+    right: 0.5rem !important;
+  }
+
   *,
   *::before,
   *::after {
@@ -5038,7 +5076,33 @@ html, body {
   }
 
   .hero-split {
-    gap: 1.5rem !important;
+    gap: 1.15rem !important;
+  }
+
+  .hero-section {
+    min-height: auto !important;
+    padding-top: 5.35rem !important;
+    padding-bottom: 2.25rem !important;
+  }
+
+  :root.has-banner .hero-section {
+    padding-top: 4.75rem !important;
+  }
+
+  .hero-scroll-indicator {
+    display: none !important;
+  }
+
+  .navbar {
+    min-height: 64px !important;
+  }
+
+  .navbar .main-logo {
+    height: 48px !important;
+  }
+
+  .navbar.scrolled .main-logo {
+    height: 42px !important;
   }
 
   .hero-pillars-strip {
@@ -5046,7 +5110,8 @@ html, body {
     grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
     gap: 0.5rem !important;
     width: 100% !important;
-    max-width: 340px !important;
+    max-width: 330px !important;
+    margin-bottom: 1rem !important;
   }
 
   .hero-pillars-strip > div {
@@ -5060,8 +5125,8 @@ html, body {
   .cta-btn {
     width: 100% !important;
     max-width: 340px !important;
-    min-height: 44px !important;
-    padding: 0.9rem 1rem !important;
+    min-height: 42px !important;
+    padding: 0.8rem 1rem !important;
     font-size: 0.95rem !important;
     white-space: normal !important;
     text-align: center !important;
@@ -5070,6 +5135,9 @@ html, body {
   .hero-image-overlay {
     align-items: flex-start !important;
     padding: 0.75rem !important;
+    bottom: 0.75rem !important;
+    left: 0.75rem !important;
+    right: 0.75rem !important;
   }
 
   .hero-image-overlay div {
@@ -5281,6 +5349,33 @@ html, body {
     height: min(560px, calc(100dvh - 112px)) !important;
     max-height: calc(100dvh - 112px) !important;
   }
+
+  .onyx-assistant-shell {
+    right: 12px !important;
+    bottom: calc(12px + env(safe-area-inset-bottom)) !important;
+  }
+
+  .whatsapp-float {
+    width: 44px !important;
+    height: 44px !important;
+    left: 12px !important;
+    bottom: calc(12px + env(safe-area-inset-bottom)) !important;
+  }
+
+  .whatsapp-float svg {
+    width: 25px !important;
+    height: 25px !important;
+  }
+
+  .onyx-trigger-button {
+    width: 46px !important;
+    height: 46px !important;
+  }
+
+  .onyx-trigger-button > div {
+    width: 10px !important;
+    height: 10px !important;
+  }
 }
 
 @media (max-width: 420px) {
@@ -5294,7 +5389,24 @@ html, body {
   }
 
   .hero-image-container {
-    height: 200px !important;
+    height: 190px !important;
+    margin-top: 1.25rem !important;
+  }
+
+  .hero-title {
+    font-size: clamp(1.55rem, 7.6vw, 1.9rem) !important;
+  }
+
+  .hero-pillars-strip {
+    max-width: 310px !important;
+  }
+
+  .hero-pillars-strip > div {
+    padding: 0.42rem 0.45rem !important;
+  }
+
+  .hero-pillars-strip span {
+    font-size: 0.78rem !important;
   }
 
   .section-title,
