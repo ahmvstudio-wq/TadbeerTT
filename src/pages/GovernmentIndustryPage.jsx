@@ -7,12 +7,12 @@ const GovernmentIndustryPage = () => {
     <IndustryPageTemplate 
       industryName="Government"
       heroSubtitle="Public Portal Modernization & Secure Bilingual Document Pipelines"
-      heroDescription="Secure, compliant digital transformation systems that process citizen applications, digitalize paper registries, and automate service portals under GCC data guidelines."
+      heroDescription="Oman's public sector has set clear digital modernisation objectives under Vision 2040. The challenge for government entities is not ambition — it is implementation. Secure systems, bilingual interfaces, and sovereign data architectures are not optional considerations. They are preconditions."
       illustration={GovernmentIllustration}
       metrics={[
-        { value: "-60%", label: "Service Processing Delay" },
-        { value: "100%", label: "Data Sovereignty Compliance" },
-        { value: "-50%", label: "Manual Form Ingestion" }
+        { value: "Reduced", label: "Service Processing Delay" },
+        { value: "Full", label: "Data Sovereignty Compliance" },
+        { value: "Faster", label: "Manual Form Ingestion" }
       ]}
       challenges={[
         {

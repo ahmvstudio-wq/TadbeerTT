@@ -242,10 +242,10 @@ const ReadinessScore = () => {
   };
 
   const getResultContent = (score) => {
-    if (score <= 40) return { phase: "Foundation Phase", desc: "Significant transformation opportunities. Start by digitizing core manual processes." };
-    if (score <= 60) return { phase: "Growth Phase", desc: "Ready for strategic upgrades. Focus on integrating your siloed systems." };
-    if (score <= 80) return { phase: "Acceleration Phase", desc: "Optimize and scale. Implement automation to reduce manual workloads." };
-    return { phase: "Innovation Phase", desc: "Lead your industry. Explore AI and predictive analytics." };
+    if (score <= 40) return { phase: "Foundation Phase", desc: "Critical infrastructure gaps detected. Start by digitizing core manual processes." };
+    if (score <= 60) return { phase: "Growth Phase", desc: "Siloed systems are causing operational drag. Focus on deep integration." };
+    if (score <= 80) return { phase: "Acceleration Phase", desc: "Your architecture is solid. Implement workflow automation to maximize margin." };
+    return { phase: "Innovation Phase", desc: "Your systems are ready for scale. Focus on predictive AI and data-driven market expansion." };
   };
 
   const reset = () => {
@@ -265,8 +265,8 @@ const ReadinessScore = () => {
           viewport={{ once: true, margin: "-10%" }}
           transition={{ type: "spring", bounce: 0.1, duration: 1.2 }}
         >
-          <span className="section-label">INTERACTIVE ASSESSMENT</span>
-          <h2 className="section-title">How Ready Is Your Business for Transformation?</h2>
+          <span className="section-label">Assessment</span>
+          <h2 className="section-title">Are Your Systems Ready to Scale?</h2>
         </motion.div>
 
         <motion.div 
@@ -403,32 +403,32 @@ const ReadinessScore = () => {
                           <h4 style={{ fontSize: '0.9rem', fontWeight: '700', color: '#166534', marginBottom: '0.5rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>⚡ Quick Wins</h4>
                           <p style={{ fontSize: '0.8rem', color: 'var(--text-muted)', margin: 0, lineHeight: '1.4' }}>
                             {score <= 50 
-                              ? 'Consolidate manual files into standard Excel/Google templates and set up basic automation on shared folders.' 
-                              : 'Deploy pre-built API connectors to link your web forms directly to customer tracking sheets.'}
+                              ? 'Consolidate data into unified cloud environments.' 
+                              : 'Deploy custom API connectors to bridge existing platforms.'}
                           </p>
                         </div>
                         <div style={{ background: 'rgba(202,169,76,0.03)', border: '1px solid rgba(202,169,76,0.15)', borderRadius: '12px', padding: '1.25rem' }}>
                           <h4 style={{ fontSize: '0.9rem', fontWeight: '700', color: 'var(--secondary)', marginBottom: '0.5rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>🎯 Strategic Priorities</h4>
                           <p style={{ fontSize: '0.8rem', color: 'var(--text-muted)', margin: 0, lineHeight: '1.4' }}>
                             {score <= 50 
-                              ? 'Map all operational steps to design a unified database and plan an Odoo ERP Sandbox deployment.'
-                              : 'Upgrade to a centralized ERP module flow to unify CRM, Sales, and Procurement into a single dashboard.'}
+                              ? 'Map all operational bottlenecks and deploy a centralized ERP sandbox.'
+                              : 'Upgrade to a unified CRM/ERP pipeline for seamless data flow.'}
                           </p>
                         </div>
                         <div style={{ background: 'rgba(24,79,91,0.03)', border: '1px solid rgba(24,79,91,0.15)', borderRadius: '12px', padding: '1.25rem' }}>
                           <h4 style={{ fontSize: '0.9rem', fontWeight: '700', color: 'var(--primary)', marginBottom: '0.5rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>🏛️ Compliance Actions</h4>
                           <p style={{ fontSize: '0.8rem', color: 'var(--text-muted)', margin: 0, lineHeight: '1.4' }}>
                             {score <= 50 
-                              ? 'Prepare local labor compliance templates and design structured role bands for local GCC hires.'
-                              : 'Refine your Ministry of Labour Omanization compliance metrics and setup dashboard alerts for quota tracking.'}
+                              ? 'Digitize labor compliance and structure role matrices for local talent.'
+                              : 'Automate Ministry of Labour quota tracking and performance metrics.'}
                           </p>
                         </div>
                         <div style={{ background: 'rgba(139,92,246,0.03)', border: '1px solid rgba(139,92,246,0.15)', borderRadius: '12px', padding: '1.25rem' }}>
                           <h4 style={{ fontSize: '0.9rem', fontWeight: '700', color: '#6d28d9', marginBottom: '0.5rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>🤖 AI & Scaling</h4>
                           <p style={{ fontSize: '0.8rem', color: 'var(--text-muted)', margin: 0, lineHeight: '1.4' }}>
                             {score <= 50 
-                              ? 'Scope high-ROI AI use cases like custom OCR invoice extractors or basic lead triage bots.'
-                              : 'Implement agentic CRM integrations, bilingual RAG systems for document lookup, and demand prediction.'}
+                              ? 'Deploy basic automation for invoicing and lead triage.'
+                              : 'Implement agentic workflows, RAG document systems, and demand forecasting.'}
                           </p>
                         </div>
                       </div>
@@ -442,7 +442,7 @@ const ReadinessScore = () => {
                           className="btn" 
                           style={{ padding: '0.75rem 1.5rem', fontSize: '0.95rem', border: '1px solid var(--border)', cursor: 'pointer', background: 'none' }}
                         >
-                          Apply for a Strategy Session
+                          Request a Consultation
                         </button>
                       </div>
                       <button onClick={reset} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem', background: 'none', border: 'none', color: 'var(--text-muted)', cursor: 'pointer', margin: '1.5rem auto 0', fontSize: '0.85rem' }}>

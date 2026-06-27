@@ -12,8 +12,8 @@ const projects = [
       headline: "Losing Track of Inventory",
       desc: "They were relying on paper logs and spreadsheets across three different warehouses. This led to shipping delays, missing stock, and the team wasting days just matching numbers before tax audits.",
       metrics: [
-        { label: "Shipping Delays", value: "18%", icon: TrendingDown },
-        { label: "Wasted Audit Time", value: "120+ Hrs", icon: Activity }
+        { label: "Shipping Delays", value: "High", icon: TrendingDown },
+        { label: "Wasted Audit Time", value: "Extensive", icon: Activity }
       ],
       image: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=1600&q=80&auto=format"
     },
@@ -21,8 +21,8 @@ const projects = [
       headline: "Live Inventory System",
       desc: "We mapped out how their team works and set up a simple digital system with barcode scanners. Now, every coil of rope is tracked the moment it's made, and tax reports are generated automatically.",
       metrics: [
-        { label: "Error Reduction", value: "95%", icon: TrendingUp },
-        { label: "Dispatch Speed", value: "4 Hrs", icon: ShieldCheck }
+        { label: "Error Reduction", value: "Significant", icon: TrendingUp },
+        { label: "Dispatch Speed", value: "Rapid", icon: ShieldCheck }
       ],
       image: "https://images.unsplash.com/photo-1581092795360-fd1ca04f0952?w=1600&q=80&auto=format"
     }
@@ -45,8 +45,8 @@ const projects = [
       headline: "Targeted Local Campaigns",
       desc: "We created Arabic video ads that felt highly local and only showed them to people near the stores. We used WhatsApp to send immediate coffee vouchers, tracking exactly who visited after seeing an ad.",
       metrics: [
-        { label: "Ad Return (ROAS)", value: "4.2x", icon: TrendingUp },
-        { label: "Cost Per Customer", value: "-58%", icon: TrendingDown }
+        { label: "Ad Return (ROAS)", value: "High", icon: TrendingUp },
+        { label: "Cost Per Customer", value: "Reduced", icon: TrendingDown }
       ],
       image: "https://images.unsplash.com/photo-1525648199074-cee30ba79a4a?w=1600&q=80&auto=format"
     }
@@ -60,7 +60,7 @@ const projects = [
       headline: "Long Wait Times for Support",
       desc: "Customers were waiting over 24 minutes on the phone. The support staff was completely burned out from answering the exact same basic billing questions all day, losing the trust of subscribers.",
       metrics: [
-        { label: "Average Wait", value: "24m+", icon: Activity },
+        { label: "Average Wait", value: "Long", icon: Activity },
         { label: "Agent Burnout", value: "Critical", icon: AlertCircle }
       ],
       image: "https://images.unsplash.com/photo-1549923746-c502d488b3ea?w=1600&q=80&auto=format"
@@ -69,8 +69,8 @@ const projects = [
       headline: "Smart Local Chatbot",
       desc: "We built an automated chat system that actually understands local dialects. It securely connects to their billing system to instantly answer customer account questions without ever needing a human agent.",
       metrics: [
-        { label: "Instant Answers", value: "65%", icon: TrendingUp },
-        { label: "Wait Time Drop", value: "0m", icon: ShieldCheck }
+        { label: "Instant Answers", value: "Majority", icon: TrendingUp },
+        { label: "Wait Time Drop", value: "Eliminated", icon: ShieldCheck }
       ],
       image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=1600&q=80&auto=format"
     }
@@ -93,8 +93,8 @@ const projects = [
       headline: "Clear Roles & Fast-Track Training",
       desc: "We completely fixed their job descriptions and set clear performance targets. We updated their salaries to match the market and created a training program specifically to help local Omanis step into leadership.",
       metrics: [
-        { label: "Turnover Drop", value: "42%", icon: TrendingDown },
-        { label: "Omanization", value: "100%", icon: CheckCircle2 }
+        { label: "Turnover Drop", value: "Significant", icon: TrendingDown },
+        { label: "Omanization", value: "Complete", icon: CheckCircle2 }
       ],
       image: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1600&q=80&auto=format"
     }

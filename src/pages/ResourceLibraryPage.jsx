@@ -43,9 +43,9 @@ const ResourceLibraryPage = () => {
   return (
     <div className="page-wrapper">
       <ServicePageHero 
-        title="Free Resource Library"
-        subtitle="Expert Knowledge at Your Fingertips"
-        description="Access curated guides, reports, and courses from the world's leading institutions — Google, McKinsey, HBR, and more. All free. Enter your details to download instantly."
+        title="Resource Library"
+        subtitle="Research, frameworks, and practical guides for business leaders navigating the Omani and GCC operating environment."
+        description=""
         breadcrumbs={['Home', 'Resources']}
       />
 

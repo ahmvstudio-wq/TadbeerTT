@@ -53,22 +53,22 @@ const HumanCapitalPage = () => {
     {
       title: "Talent Retention",
       icon: <Users size={24} />,
-      desc: "Stop losing your best people to competitors. We build compensation, culture, and growth frameworks that keep top talent engaged."
+      desc: "Compensation structures, career frameworks, and culture programmes designed to reduce attrition. The cost of losing a trained employee is rarely fully calculated until it is paid."
     },
     {
       title: "Performance Management",
       icon: <TrendingUp size={24} />,
-      desc: "Move beyond annual reviews. We implement continuous OKR tracking and real-time performance systems."
+      desc: "Continuous OKR-based systems that replace the annual review with something that influences behaviour throughout the year."
     },
     {
-      title: "Organizational Design",
+      title: "Organisational Design",
       icon: <Briefcase size={24} />,
-      desc: "Restructure your teams for maximum agility and clarity, eliminating bottlenecks and overlapping responsibilities."
+      desc: "Reporting lines redesigned for clarity. Responsibilities defined with precision. The ambiguity that slows decisions is removed."
     },
     {
-      title: "Compliance & Omanization",
+      title: "Omanization & Compliance",
       icon: <ShieldCheck size={24} />,
-      desc: "Navigate local labor laws effortlessly and build sustainable pipelines for national talent development."
+      desc: "Ministry of Labour requirements met through genuine national talent development, not quota-filling. The difference is in what the organisation looks like two years later."
     }
   ];
 
@@ -109,15 +109,15 @@ const HumanCapitalPage = () => {
     <div className="page-wrapper">
       <ServicePageHero 
         title="Human Capital"
-        subtitle="People-First Transformation"
-        description="Great strategy fails without the right people to execute it. We help you attract, retain, and develop the talent needed to drive your business forward in the GCC market."
+        subtitle="Organisational Capability That Outlasts Any Consulting Engagement"
+        description="Technology can be replaced. Strategies can be revised. The people an organisation develops, structures, and retains become its most durable competitive asset. In Oman's operating environment, that requires specific expertise — in national talent development, Ministry of Labour compliance, and building people structures that sustain performance rather than depending on it from a few individuals."
         breadcrumbs={['Home', 'Services', 'Human Capital']}
       />
 
       {/* Best Practices */}
       <section className="sp-section" style={{ padding: '3.5rem 5%' }}>
         <div className="container">
-          <SectionHeader label="Our Approach" title="Modern HR Strategies" centered />
+          <SectionHeader label="Our Approach" title="People Strategy That Fits the GCC Market" centered />
           
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '3rem', marginTop: '3rem', alignItems: 'center' }}>
             {/* Left: Illustration */}
@@ -163,7 +163,7 @@ const HumanCapitalPage = () => {
       {/* GCC HR Transformation Pipeline */}
       <section className="sp-section" style={{ padding: 'var(--section-padding)' }}>
         <div className="container">
-          <SectionHeader label="Our Framework" title="The GCC HR Transformation Roadmap" centered />
+          <SectionHeader label="Our Framework" title="A Four-Phase HR Transformation" centered />
           
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '2rem', marginTop: '3.5rem', position: 'relative' }}>
             {[
@@ -210,7 +210,7 @@ const HumanCapitalPage = () => {
       {/* Resources Library */}
       <section className="sp-section" style={{ padding: 'var(--section-padding)', background: 'var(--bg)' }}>
         <div className="container">
-          <SectionHeader label="Knowledge Center" title="Download Free HR Resources" subtitle="Access our library of templates, guides, and playbooks used by leading organizations." centered />
+          <SectionHeader label="Knowledge Centre" title="HR Resources for GCC Organisations" subtitle="Practical templates and frameworks for business leaders managing people in Oman and the region." centered />
           
           {loading ? (
             <div style={{ textAlign: 'center', padding: '4rem', color: 'var(--text-muted)' }}>
@@ -261,9 +261,9 @@ const HumanCapitalPage = () => {
       <section className="sp-section" style={{ padding: '4rem 5%', background: 'var(--primary)', color: 'white' }}>
         <div className="container" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '2rem', textAlign: 'center' }}>
           {[
-            { metric: "38%", label: "Average Retention Increase", desc: "Through structured career planning and culture transformation" },
-            { metric: "100%", label: "Omanization Compliance", desc: "Guaranteeing full adherence to the Ministry of Labour guidelines" },
-            { metric: "14 Days", label: "Average Time-to-Hire", desc: "Leveraging our database of pre-vetted Omani professionals" }
+            { metric: "Multiple", label: "Active Clients with HR Programmes", desc: "Logistics, government, and professional services" },
+            { metric: "Full", label: "Omanization Compliance Rate", desc: "Across all client engagements within the agreed programme timeline" },
+            { metric: "Rapid", label: "Average Time-to-Hire", desc: "Supported by a pre-vetted network of qualified Omani professionals" }
           ].map((stat, i) => (
             <motion.div 
               key={i}
@@ -283,14 +283,14 @@ const HumanCapitalPage = () => {
       {/* CTA */}
       <section className="sp-section" style={{ padding: 'var(--section-padding)', textAlign: 'center' }}>
         <div className="container" style={{ maxWidth: '800px' }}>
-          <h2 style={{ fontSize: '2.5rem', color: 'var(--primary)', marginBottom: '1.5rem' }}>Need Hands-On HR Support?</h2>
-          <p style={{ fontSize: '1.15rem', color: 'var(--text-muted)', marginBottom: '2.5rem' }}>From organizational restructuring to executive search, our consultants are ready to assist.</p>
+          <h2 style={{ fontSize: '2.5rem', color: 'var(--primary)', marginBottom: '1.5rem' }}>Experienced HR Support, When You Need It</h2>
+          <p style={{ fontSize: '1.15rem', color: 'var(--text-muted)', marginBottom: '2.5rem' }}>Restructuring, executive search, compliance planning — or a combination of all three.</p>
           <button 
             onClick={(e) => { e.preventDefault(); window.dispatchEvent(new CustomEvent('open-strategy-modal')); }} 
             className="btn btn-primary" 
             style={{ padding: '1rem 2.5rem', fontSize: '1.1rem', cursor: 'pointer', border: 'none' }}
           >
-            Apply for a Strategy Session
+            Request a Strategy Session
           </button>
         </div>
       </section>

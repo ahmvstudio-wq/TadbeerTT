@@ -7,12 +7,12 @@ const ConstructionIndustryPage = () => {
     <IndustryPageTemplate 
       industryName="Construction"
       heroSubtitle="Site Management Portals & Digital Subcontractor Pipelines"
-      heroDescription="Connecting construction projects through centralized site logs, subcontractor portals, automated material receipts processing, and Primavera integrations."
+      heroDescription="On a construction project in Oman, the decisions that determine profitability are rarely made at the boardroom level. They are made on site, in procurement, and in the daily coordination between teams. Information that reaches the right people at the right time changes outcomes. Most of it currently does not."
       illustration={ConstructionIllustration}
       metrics={[
-        { value: "-15%", label: "Schedule Latency" },
-        { value: "+22%", label: "Subcontractor SLA Compliance" },
-        { value: "-12%", label: "Material Waste Reduction" }
+        { value: "Reduced", label: "Schedule Latency" },
+        { value: "Higher", label: "Subcontractor SLA Compliance" },
+        { value: "Lower", label: "Material Waste Reduction" }
       ]}
       challenges={[
         {

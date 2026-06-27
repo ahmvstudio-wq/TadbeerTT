@@ -21,9 +21,9 @@ const CTA = () => {
         transition={{ duration: 0.8 }}
       >
         <span className="section-label" style={{ color: 'var(--secondary)' }}>The Next Step | الخطوة التالية</span>
-        <h2 className="cta-title">Every Day You Wait, Competitors Get Further Ahead.</h2>
+        <h2 className="cta-title">Transformation That Lasts Starts With One Honest Conversation.</h2>
         <p className="cta-subtitle">
-          One honest conversation with an expert who understands your market. No contracts. No pressure.
+          No contracts. No pressure. A direct discussion with someone who knows this market.
         </p>
         <motion.button 
           onClick={(e) => { e.preventDefault(); window.dispatchEvent(new CustomEvent('open-strategy-modal')); }}
@@ -32,7 +32,7 @@ const CTA = () => {
           whileTap={{ scale: 0.95 }}
           style={{ cursor: 'pointer', border: 'none' }}
         >
-          Apply for a Strategy Session →
+          Request a Strategy Session →
         </motion.button>
       </motion.div>
     </section>

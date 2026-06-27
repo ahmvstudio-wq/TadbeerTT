@@ -141,33 +141,33 @@ const DigitalMarketingPage = () => {
       client: "Gloria Jean's GCC",
       category: "Local Campaign",
       logo: gloriaJeansLogo,
-      challenge: "High ad spend with generic content was failing to drive actual foot traffic to cafes.",
-      solution: "Hyper-local Arabic video ads with WhatsApp immediate voucher delivery.",
+      challenge: "High media spend was not generating foot traffic. Generic content was reaching the right platforms but not the right people in the right way.",
+      solution: "Hyper-local Arabic video advertising, with WhatsApp-delivered vouchers at the point of campaign engagement.",
       metrics: [
-        { label: "ROAS", value: "4.2x", icon: <TrendingUp size={16} /> },
-        { label: "Cost Per Acquisition", value: "-58%", icon: <Activity size={16} /> }
+        { label: "ROAS", value: "High", icon: <TrendingUp size={16} /> },
+        { label: "Cost Per Acquisition", value: "Reduced", icon: <Activity size={16} /> }
       ]
     },
     {
       client: "Al Qurum Perfumes",
       category: "Social Revamp",
       logo: alQurumPerfumesLogo,
-      challenge: "Premium brand image wasn't translating to digital platforms, losing market share to newer brands.",
-      solution: "Complete visual overhaul and influencer-led storytelling campaigns.",
+      challenge: "A genuine premium brand identity was not translating to digital. Newer, less established brands were gaining ground simply by showing up more effectively online.",
+      solution: "A complete visual and content overhaul, with a structured influencer programme built around authentic storytelling rather than reach alone.",
       metrics: [
-        { label: "Engagement", value: "+310%", icon: <Users size={16} /> },
-        { label: "Online Sales", value: "+145%", icon: <Target size={16} /> }
+        { label: "Engagement", value: "Increased", icon: <Users size={16} /> },
+        { label: "Online Sales", value: "Higher", icon: <Target size={16} /> }
       ]
     },
     {
       client: "Regional E-commerce",
       category: "SEO Dominance",
       logo: yallaLogo,
-      challenge: "Relying entirely on paid ads for revenue, causing unsustainably high acquisition costs.",
-      solution: "Technical SEO overhaul and Arabic content clustering strategy.",
+      challenge: "All customer acquisition was paid. The cost was climbing, the margin was shrinking, and there was no organic foundation to fall back on.",
+      solution: "A full technical SEO overhaul and Arabic content strategy built around how the target audience actually searched.",
       metrics: [
-        { label: "Organic Traffic", value: "+280%", icon: <Search size={16} /> },
-        { label: "CAC Reduction", value: "45%", icon: <TrendingUp size={16} /> }
+        { label: "Organic Traffic", value: "Surged", icon: <Search size={16} /> },
+        { label: "CAC Reduction", value: "Significant", icon: <TrendingUp size={16} /> }
       ]
     }
   ];
@@ -219,15 +219,15 @@ const DigitalMarketingPage = () => {
     <div className="page-wrapper">
       <ServicePageHero 
         title="Digital Marketing"
-        subtitle="Data-Driven Growth Engines"
-        description="We don't just run ads. We build comprehensive, multi-channel acquisition engines that turn strangers into loyal brand advocates using data, culture, and creativity."
+        subtitle="Acquisition Infrastructure for the Omani and GCC Market"
+        description="Campaigns that stop when budgets stop are not acquisition systems — they are rented visibility. The work here is to build the marketing infrastructure that generates consistent demand over time: structured, measurable, bilingual, and built around how the market actually behaves."
         breadcrumbs={['Home', 'Services', 'Digital Marketing']}
       />
 
       {/* Highlights Section */}
       <section className="sp-section" style={{ padding: '3.5rem 5%' }}>
         <div className="container">
-          <SectionHeader label="Capabilities" title="Full-Funnel Marketing" centered />
+          <SectionHeader label="Capabilities" title="Full-Funnel Marketing That Compounds" centered />
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '3rem', marginTop: '3rem', alignItems: 'center' }}>
             {/* Left: Illustration */}
             <motion.div initial={{ opacity: 0, scale: 0.95 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} style={{ display: 'flex', justifyContent: 'center' }}>
@@ -239,25 +239,25 @@ const DigitalMarketingPage = () => {
               <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="card" style={{ padding: '1.5rem', background: 'white', borderRadius: 'var(--radius)', border: '1px solid var(--border)' }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '0.75rem' }}>
                   <Target size={24} color="var(--primary)" />
-                  <h3 style={{ fontSize: '1.15rem', margin: 0, fontWeight: '700' }}>Strategy First</h3>
+                  <h3 style={{ fontSize: '1.15rem', margin: 0, fontWeight: '700' }}>Strategy Precedes Spend</h3>
                 </div>
-                <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem', margin: 0, lineHeight: '1.5' }}>We map out your customer journey, identifying the exact touchpoints needed to drive conversions before spending a single rial on ads.</p>
+                <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem', margin: 0, lineHeight: '1.5' }}>The customer's decision journey is mapped before a rial goes to media. This is not methodology — it is how avoidable waste is avoided.</p>
               </motion.div>
               
               <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }} className="card" style={{ padding: '1.5rem', background: 'white', borderRadius: 'var(--radius)', border: '1px solid var(--border)' }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '0.75rem' }}>
                   <BarChart size={24} color="var(--secondary)" />
-                  <h3 style={{ fontSize: '1.15rem', margin: 0, fontWeight: '700' }}>Performance Driven</h3>
+                  <h3 style={{ fontSize: '1.15rem', margin: 0, fontWeight: '700' }}>Performance as the Standard</h3>
                 </div>
-                <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem', margin: 0, lineHeight: '1.5' }}>Every campaign is tracked, measured, and optimized for ROI. If it doesn't generate revenue or clear brand equity, we cut it.</p>
+                <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem', margin: 0, lineHeight: '1.5' }}>Every campaign is tracked against revenue and brand equity targets. Spend without a clear return does not survive the next review.</p>
               </motion.div>
               
               <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.2 }} className="card" style={{ padding: '1.5rem', background: 'white', borderRadius: 'var(--radius)', border: '1px solid var(--border)' }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '0.75rem' }}>
                   <Users size={24} color="var(--primary)" />
-                  <h3 style={{ fontSize: '1.15rem', margin: 0, fontWeight: '700' }}>Culturally Native</h3>
+                  <h3 style={{ fontSize: '1.15rem', margin: 0, fontWeight: '700' }}>Market-Specific by Design</h3>
                 </div>
-                <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem', margin: 0, lineHeight: '1.5' }}>Deep understanding of Omani and GCC nuances ensures your messaging resonates authentically with local audiences.</p>
+                <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem', margin: 0, lineHeight: '1.5' }}>Omani and GCC audiences have a specific relationship with brand trust, language, and digital behaviour. Generic frameworks do not account for that. This one does.</p>
               </motion.div>
             </div>
           </div>
@@ -267,7 +267,7 @@ const DigitalMarketingPage = () => {
       {/* Campaigns Tabs */}
       <section className="sp-section" style={{ padding: 'var(--section-padding)', background: 'white' }}>
         <div className="container">
-          <SectionHeader label="Our Arsenal" title="Multi-Channel Expertise" centered />
+          <SectionHeader label="Our Capabilities" title="Multi-Channel Marketing Systems" centered />
           
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: '3rem' }}>
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem', justifyContent: 'center', marginBottom: '3rem' }}>
@@ -333,7 +333,7 @@ const DigitalMarketingPage = () => {
       {/* Case Studies */}
       <section className="sp-section" style={{ padding: 'var(--section-padding)' }}>
         <div className="container">
-          <SectionHeader label="Proven Results" title="Case Studies" />
+          <SectionHeader label="Proven Results" title="Three Engagements. Three Different Challenges." />
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '2rem', marginTop: '3rem' }}>
             {caseStudies.map((study, idx) => (
               <motion.div 
@@ -362,7 +362,7 @@ const DigitalMarketingPage = () => {
                   <div>
                     <strong style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.9rem', color: 'var(--text-main)', marginBottom: '0.35rem' }}>
                       <Lightbulb size={15} color="var(--primary)" />
-                      Our Solution:
+                      Response:
                     </strong>
                     <p style={{ color: 'var(--text-muted)', fontSize: '0.95rem', margin: 0, lineHeight: '1.45' }}>{study.solution}</p>
                   </div>
@@ -386,15 +386,15 @@ const DigitalMarketingPage = () => {
       {/* Campaign Execution Lifecycle */}
       <section className="sp-section" style={{ padding: 'var(--section-padding)' }}>
         <div className="container">
-          <SectionHeader label="Our Methodology" title="Campaign Execution Lifecycle" centered />
+          <SectionHeader label="Our Methodology" title="How a Campaign Is Built" centered />
           
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '2rem', marginTop: '3.5rem' }}>
             {[
-              { step: '01', title: 'Audit & Market Research', desc: 'We dissect your historical ad account metrics, run competitor share-of-voice analyses, and map GCC customer search intent.' },
-              { step: '02', title: 'Bilingual Creative Production', desc: 'Our team scripts and produces high-converting Arabic & English video assets, UGC briefs, and copy tailored to local dialects.' },
-              { step: '03', title: 'Media Buying & Launch', desc: 'Deploying structured, value-optimized campaigns across Google Search, Meta Ads, and TikTok with tight budget controls.' },
-              { step: '04', title: 'Attribution & Optimization', desc: 'Configuring clean server-side tracking (UTMs, CAPI) and custom real-time dashboards to measure true acquisition costs.' },
-              { step: '05', title: 'Scaling & Multipliers', desc: 'Doubling down on winning creatives and audiences while scaling budget dynamically to maintain targeted ROAS guidelines.' }
+              { step: '01', title: 'Audit & Market Analysis', desc: 'Historical account data reviewed, competitor share-of-voice mapped, GCC customer search intent understood before anything is built.' },
+              { step: '02', title: 'Bilingual Creative Production', desc: 'Arabic and English assets produced for the platform and the audience — not translated from one language and placed on another.' },
+              { step: '03', title: 'Media Buying & Activation', desc: 'Structured campaigns deployed with disciplined budget controls and clear performance benchmarks from day one.' },
+              { step: '04', title: 'Attribution & Measurement', desc: 'Server-side tracking, Conversions API, and real-time dashboards configured to show where revenue is actually coming from.' },
+              { step: '05', title: 'Optimisation & Scaling', desc: 'What performs is scaled. What does not is cut. Budget follows results, not plans.' }
             ].map((lifecycle, idx) => (
               <motion.div 
                 key={idx}
@@ -440,19 +440,19 @@ const DigitalMarketingPage = () => {
       <section className="sp-section" style={{ padding: '4rem 5%', background: 'var(--primary)', color: 'white' }}>
         <div className="container" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '2rem', textAlign: 'center' }}>
           <motion.div initial={{ opacity: 0, scale: 0.9 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }}>
-            <div style={{ fontSize: '3rem', fontWeight: '800', color: 'var(--secondary)', marginBottom: '0.5rem' }}>4.2x</div>
+            <div style={{ fontSize: '3rem', fontWeight: '800', color: 'var(--secondary)', marginBottom: '0.5rem' }}>Strong</div>
             <div style={{ fontSize: '0.9rem', textTransform: 'uppercase', letterSpacing: '1px', opacity: 0.8 }}>Average ROAS</div>
           </motion.div>
           <motion.div initial={{ opacity: 0, scale: 0.9 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ delay: 0.1 }}>
-            <div style={{ fontSize: '3rem', fontWeight: '800', color: 'var(--secondary)', marginBottom: '0.5rem' }}>-58%</div>
+            <div style={{ fontSize: '3rem', fontWeight: '800', color: 'var(--secondary)', marginBottom: '0.5rem' }}>Significant</div>
             <div style={{ fontSize: '0.9rem', textTransform: 'uppercase', letterSpacing: '1px', opacity: 0.8 }}>Cost Reduction</div>
           </motion.div>
           <motion.div initial={{ opacity: 0, scale: 0.9 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ delay: 0.2 }}>
-            <div style={{ fontSize: '3rem', fontWeight: '800', color: 'var(--secondary)', marginBottom: '0.5rem' }}>300%</div>
+            <div style={{ fontSize: '3rem', fontWeight: '800', color: 'var(--secondary)', marginBottom: '0.5rem' }}>Rapid</div>
             <div style={{ fontSize: '0.9rem', textTransform: 'uppercase', letterSpacing: '1px', opacity: 0.8 }}>Organic Growth</div>
           </motion.div>
           <motion.div initial={{ opacity: 0, scale: 0.9 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ delay: 0.3 }}>
-            <div style={{ fontSize: '3rem', fontWeight: '800', color: 'var(--secondary)', marginBottom: '0.5rem' }}>85%</div>
+            <div style={{ fontSize: '3rem', fontWeight: '800', color: 'var(--secondary)', marginBottom: '0.5rem' }}>High</div>
             <div style={{ fontSize: '0.9rem', textTransform: 'uppercase', letterSpacing: '1px', opacity: 0.8 }}>Lead Quality Score</div>
           </motion.div>
         </div>
@@ -461,7 +461,7 @@ const DigitalMarketingPage = () => {
       {/* Tech Stack Integrations */}
       <section className="sp-section" style={{ padding: 'var(--section-padding)', background: 'var(--bg)' }}>
         <div className="container">
-          <SectionHeader label="Integration Partners" title="Our Marketing Technology Stack" subtitle="We leverage and integrate with leading platforms to orchestrate your marketing engines." centered />
+          <SectionHeader label="Integration Partners" title="Marketing Technology Stack" subtitle="Integrated with the platforms that power serious marketing operations." centered />
           
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))', gap: '1.5rem', marginTop: '3.5rem' }}>
             {[
@@ -532,14 +532,14 @@ const DigitalMarketingPage = () => {
       {/* CTA */}
       <section className="sp-section" style={{ padding: 'var(--section-padding)', textAlign: 'center' }}>
         <div className="container" style={{ maxWidth: '800px' }}>
-          <h2 style={{ fontSize: '2.5rem', color: 'var(--primary)', marginBottom: '1.5rem' }}>Ready to Transform Your Marketing?</h2>
-          <p style={{ fontSize: '1.15rem', color: 'var(--text-muted)', marginBottom: '2.5rem' }}>Stop guessing and start growing. Book a consultation with our marketing experts today.</p>
+          <h2 style={{ fontSize: '2.5rem', color: 'var(--primary)', marginBottom: '1.5rem' }}>Ready for a Marketing System That Performs Consistently?</h2>
+          <p style={{ fontSize: '1.15rem', color: 'var(--text-muted)', marginBottom: '2.5rem' }}>A structured engagement, accountable to results.</p>
           <button 
             onClick={(e) => { e.preventDefault(); window.dispatchEvent(new CustomEvent('open-strategy-modal')); }} 
             className="btn btn-primary" 
             style={{ padding: '1rem 2.5rem', fontSize: '1.1rem', cursor: 'pointer', border: 'none' }}
           >
-            Apply for a Strategy Session
+            Request a Strategy Session
           </button>
         </div>
       </section>

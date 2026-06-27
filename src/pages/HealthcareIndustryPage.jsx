@@ -7,12 +7,12 @@ const HealthcareIndustryPage = () => {
     <IndustryPageTemplate 
       industryName="Healthcare"
       heroSubtitle="Clinical Workflow Digitization & Patient Lifecycle Optimization"
-      heroDescription="GCC-compliant digital systems designed to integrate healthcare databases, automate administrative records (EHR), optimize clinic scheduling, and streamline patient communications."
+      heroDescription="The pressure on healthcare providers in Oman is not primarily technological — it is operational. Every hour a clinical team spends on scheduling, data entry, and record retrieval is an hour not spent on patients. The systems here are designed to return that time to the people who trained to use it differently."
       illustration={HealthcareIllustration}
       metrics={[
-        { value: "-35%", label: "Process Latency" },
-        { value: "92%", label: "Record Archival Accuracy" },
-        { value: "22%", label: "Schedule Utilization Increase" }
+        { value: "Reduced", label: "Process Latency" },
+        { value: "High", label: "Record Archival Accuracy" },
+        { value: "Optimized", label: "Schedule Utilization Increase" }
       ]}
       challenges={[
         {

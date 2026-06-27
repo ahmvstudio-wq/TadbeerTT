@@ -372,49 +372,49 @@ const INDUSTRIES_DATA = [
   {
     illustration: <HealthcareIllustration />,
     title: 'Healthcare',
-    desc: 'AI-driven diagnostics integration and digital operational workflow automation.',
+    desc: 'Advanced diagnostics integration and secure digital workflow automation.',
     path: '/industries/healthcare'
   },
   {
     illustration: <RealEstateIllustration />,
     title: 'Real Estate',
-    desc: 'PropTech solutions, secure transaction flows, and automated lead intelligence.',
+    desc: 'PropTech infrastructure, transaction management, and portfolio analytics.',
     path: '/industries/real-estate'
   },
   {
     illustration: <LogisticsIllustration />,
     title: 'Logistics & Supply Chain',
-    desc: 'Custom fleet management, real-time tracking, and automated supply chain operations.',
+    desc: 'Integrated fleet management, real-time tracking, and supply chain optimization.',
     path: '/industries/logistics'
   },
   {
     illustration: <RetailIllustration />,
     title: 'E-Commerce',
-    desc: 'Scalable omnichannel platforms with deep ERP integrations and dynamic inventory systems.',
+    desc: 'Scalable digital retail platforms with deep ERP and inventory synchronization.',
     path: '/industries/ecommerce'
   },
   {
     illustration: <ConstructionIllustration />,
     title: 'Construction',
-    desc: 'Automated project management tracking, resource allocation, and material compliance portals.',
+    desc: 'Comprehensive project tracking, resource planning, and compliance systems.',
     path: '/industries/construction'
   },
   {
     illustration: <ManufacturingIllustration />,
     title: 'Manufacturing',
-    desc: 'Smart inventory control, custom ERP platforms, and predictive maintenance tracking systems.',
+    desc: 'Intelligent inventory control, custom ERP platforms, and maintenance planning.',
     path: '/industries/manufacturing'
   },
   {
     illustration: <GovernmentIllustration />,
     title: 'Government & Public Sector',
-    desc: 'Secure, high-compliance portals and digital governance solutions for Oman Vision 2040.',
+    desc: 'Secure public sector portals and digital governance solutions.',
     path: '/industries/government'
   },
   {
     illustration: <CorporateIllustration />,
     title: 'Professional Services',
-    desc: 'Enterprise-grade resource planning, custom CRM, and secure data infrastructure.',
+    desc: 'Enterprise resource planning, corporate CRM, and data security.',
     path: '/industries/professional-services'
   }
 ];
@@ -425,6 +425,32 @@ const About = () => {
     <section id="about" className="about-narrative-section" style={{ padding: '3.5rem 0' }}>
       <div className="container">
         
+        {/* ─── Why Tadbeer Exists ─── */}
+        <div style={{ marginBottom: '5rem', maxWidth: '800px', margin: '0 auto 5rem' }}>
+          <motion.div 
+            className="text-center"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ type: "spring", bounce: 0.1, duration: 1.2 }}
+            style={{ marginBottom: '2.5rem' }}
+          >
+            <span className="section-label">Why Tadbeer Exists</span>
+            <h2 className="section-title" style={{ fontSize: '2.2rem', marginBottom: '1.5rem' }}>We Build Systems That Outlast Us.</h2>
+          </motion.div>
+          
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ type: "spring", bounce: 0.1, duration: 1.2, delay: 0.2 }}
+            style={{ color: 'var(--text-muted)', fontSize: '1.05rem', lineHeight: '1.7', textAlign: 'center' }}
+          >
+            <p style={{ marginBottom: '1.5rem' }}>Businesses across Oman and the GCC don’t fail because they lack ambition; they stall because their internal systems cannot support their growth.</p>
+            <p>At Tadbeer, we do not just deliver consultancy decks. We architect the underlying digital infrastructure, optimize human capital, and deploy the growth systems required for organizations to scale profitably and predictably.</p>
+          </motion.div>
+        </div>
+
         {/* ─── Values ─── */}
         <div style={{ marginBottom: '5rem' }}>
           <motion.div 
@@ -435,8 +461,8 @@ const About = () => {
             transition={{ type: "spring", bounce: 0.1, duration: 1.2 }}
             style={{ marginBottom: '3.5rem' }}
           >
-            <span className="section-label">Industries We Serve</span>
-            <h2 className="section-title">Perfectly Effect Based.</h2>
+            <span className="section-label">Industry Expertise</span>
+            <h2 className="section-title">Driving Sector-Specific Transformation.</h2>
           </motion.div>
 
           <div className="industries-panel">
@@ -472,10 +498,10 @@ const About = () => {
         {/* ─── Key Metrics ─── */}
         <div className="company-stats-strip">
           {[
-            { metric: "15+", label: "Active GCC Clients", desc: "Leading entities in F&B, Logistics, and Governance", delay: 0.1 },
-            { metric: "40+", label: "Transforms Delivered", desc: "Custom systems implemented, fully operational", delay: 0.2 },
-            { metric: "1M+ OMR", label: "Client Capital Guided", desc: "Ensuring high-efficiency, maximum return pipelines", delay: 0.3 },
-            { metric: "Vision 2040", label: "Compliance Benchmark", desc: "Strictly aligned with national business standards", delay: 0.4 }
+            { metric: "Multiple", label: "Active GCC Clients", desc: "Trusted by leading enterprises across the region", delay: 0.1 },
+            { metric: "Proven", label: "Systems Delivered", desc: "Scalable infrastructures and operational frameworks", delay: 0.2 },
+            { metric: "Strategic", label: "Client Capital Guided", desc: "Maximizing resource efficiency and strategic ROI", delay: 0.3 },
+            { metric: "Vision 2040", label: "Omanization Aligned", desc: "Committed to the Sultanate's long-term economic objectives", delay: 0.4 }
           ].map((stat, i) => (
             <motion.div 
               key={i}

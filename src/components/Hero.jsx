@@ -2,6 +2,9 @@ import React from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useRef } from 'react';
 import { Compass, Cpu, Users, Target } from 'lucide-react';
+import omanAir from '../assets/clients/oman-air.png';
+import ministryOfAwqaf from '../assets/clients/ministry-of-awqaf.png';
+import alHarrasi from '../assets/clients/al-harrasi-rope-factory.png';
 
 
 const Hero = () => {
@@ -72,13 +75,14 @@ const Hero = () => {
       <div className="hero-split">
         {/* Left: Text */}
         <motion.div className="hero-text" style={{ y: y1, opacity }}>
+
+
           <motion.div
-            initial={{ opacity: 0, y: 15 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, ease: [0.25, 0.1, 0.25, 1] }}
-          >
-            <span className="section-label">🇴🇲 MUSCAT, OMAN → GCC → GLOBAL</span>
-          </motion.div>
+            initial={{ width: 0 }}
+            animate={{ width: '40px' }}
+            transition={{ duration: 1, delay: 0.1, ease: "easeOut" }}
+            style={{ height: '3px', background: 'var(--secondary)', marginBottom: '1.5rem', borderRadius: '2px' }}
+          />
 
           <motion.h1 
             className="hero-title"
@@ -164,6 +168,34 @@ const Hero = () => {
             </motion.button>
           </motion.div>
 
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1.2, delay: 0.7, ease: [0.25, 0.1, 0.25, 1] }}
+            style={{ marginTop: '3rem', display: 'flex', alignItems: 'center', gap: '1.25rem' }}
+          >
+            <div style={{ display: 'flex', alignItems: 'center' }}>
+              {[omanAir, ministryOfAwqaf, alHarrasi].map((logoSrc, i) => (
+                <div key={i} style={{ 
+                  width: '42px', height: '42px', borderRadius: '50%', 
+                  background: '#ffffff', border: '2px solid white', 
+                  marginLeft: i === 0 ? '0' : '-14px',
+                  display: 'flex', alignItems: 'center', justifyContent: 'center',
+                  boxShadow: '0 2px 10px rgba(0,0,0,0.06)', zIndex: 4-i,
+                  overflow: 'hidden'
+                }}>
+                  <img src={logoSrc} alt="Client Logo" style={{ width: '100%', height: '100%', objectFit: 'cover', transform: 'scale(1.4)' }} />
+                </div>
+              ))}
+            </div>
+            <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '3px' }}>
+                {[1,2,3,4,5].map(star => <span key={star} style={{ color: 'var(--secondary)', fontSize: '0.9rem', lineHeight: '1' }}>★</span>)}
+              </div>
+              <span style={{ fontSize: '0.8rem', color: 'var(--text-main)', fontWeight: '600', marginTop: '4px', letterSpacing: '0.5px' }}>Trusted by Leading GCC Organizations</span>
+            </div>
+          </motion.div>
+
         </motion.div>
 
         {/* Right: Image */}
@@ -194,16 +226,15 @@ const Hero = () => {
         </motion.div>
       </div>
 
-      {/* Scroll Indicator */}
+      {/* Subtle Scroll Indicator */}
       <motion.div 
-        className="hero-scroll-indicator"
-        style={{ position: 'absolute', bottom: '2rem', left: '50%', transform: 'translateX(-50%)', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.75rem' }}
-        initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 2, duration: 1 }}
+        style={{ position: 'absolute', bottom: '3rem', left: '5%', display: 'flex', alignItems: 'center', gap: '1rem', zIndex: 10 }}
+        initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.5, duration: 1 }}
       >
-        <span style={{ fontSize: '0.6rem', color: 'var(--text-muted)', letterSpacing: '3px', textTransform: 'uppercase', fontWeight: '600' }}>Scroll</span>
-        <div style={{ width: '1px', height: '40px', background: 'var(--border)', position: 'relative', overflow: 'hidden' }}>
+        <span style={{ fontSize: '0.65rem', color: 'var(--primary)', letterSpacing: '3px', textTransform: 'uppercase', transform: 'rotate(-90deg)', transformOrigin: 'left', opacity: 0.7 }}>Scroll</span>
+        <div style={{ width: '1px', height: '60px', background: 'rgba(24, 79, 91, 0.1)', position: 'relative', overflow: 'hidden' }}>
           <motion.div 
-            style={{ width: '100%', height: '50%', background: 'var(--secondary)', position: 'absolute', top: 0, left: 0 }}
+            style={{ width: '100%', height: '50%', background: 'var(--primary)', position: 'absolute', top: 0, left: 0 }}
             animate={{ y: ['-100%', '200%'] }} transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
           />
         </div>

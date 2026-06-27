@@ -43,8 +43,8 @@ const ROICalculator = () => {
       <div className="container">
         <div className="text-center" style={{ marginBottom: '4rem' }}>
           <span className="section-label">CALCULATE YOUR POTENTIAL</span>
-          <h2 className="section-title">Discover Your Transformation ROI</h2>
-          <p style={{ color: 'var(--text-muted)', fontSize: '1.15rem', marginTop: '1rem' }}>See how much your business could save and earn with the right technology and strategy.</p>
+          <h2 className="section-title">Model the Return Before You Commit</h2>
+          <p style={{ color: 'var(--text-muted)', fontSize: '1.15rem', marginTop: '1rem' }}>Enter your current operational data to estimate the financial impact of the right systems and strategy investment for your business.</p>
         </div>
 
         <div className="roi-calc-grid">
@@ -162,7 +162,7 @@ const ROICalculator = () => {
 
             <div style={{ display: 'flex', gap: '1rem', width: '100%' }}>
               <button onClick={() => setModalOpen(true)} className="btn btn-primary" style={{ flex: 1, background: 'var(--secondary)', color: 'var(--primary)', borderColor: 'var(--secondary)', border: 'none', cursor: 'pointer', width: '100%', justifyContent: 'center' }}>
-                Get Detailed Analysis
+                Request a Detailed Analysis
               </button>
             </div>
           </div>

@@ -278,32 +278,32 @@ const ReportingDemo = () => {
 
   const fakeResults = {
     'What was our best-performing ad campaign last quarter?': {
-      answer: 'The "GCC Digital Leaders" LinkedIn campaign generated the highest ROI at 4.7x ROAS, bringing in 142 qualified leads with a CPA of OMR 12.40.',
+      answer: 'The "GCC Digital Leaders" LinkedIn campaign generated the highest ROI with strong ROAS, bringing in multiple qualified leads with a reduced CPA.',
       chart: [30, 55, 42, 85, 70, 95],
       labels: ['Google Ads', 'Meta Ads', 'LinkedIn Org.', 'LinkedIn Paid', 'TikTok', 'Email'],
       highlight: 3,
-      metric: { label: 'Best ROAS', value: '4.7x' }
+      metric: { label: 'Best ROAS', value: 'High' }
     },
     'Show me employee turnover by department': {
-      answer: 'Engineering has the lowest turnover at 4%, while Customer Support is highest at 22%. The company average is 11%, below the GCC industry benchmark of 15%.',
+      answer: 'Engineering has the lowest turnover, while Customer Support is highest. The company average is below the GCC industry benchmark.',
       chart: [22, 14, 8, 4, 18, 11],
       labels: ['Support', 'Sales', 'Marketing', 'Engineering', 'Operations', 'Average'],
       highlight: 5,
-      metric: { label: 'Avg Turnover', value: '11%' }
+      metric: { label: 'Avg Turnover', value: 'Low' }
     },
     'Which products had the highest margin this month?': {
-      answer: 'Custom AI Solutions had the highest gross margin at 78%, followed by ERP Consulting at 65%. Hardware resale remains the lowest margin line at 12%.',
+      answer: 'Custom AI Solutions had the highest gross margin, followed by ERP Consulting. Hardware resale remains the lowest margin line.',
       chart: [78, 65, 52, 45, 38, 12],
       labels: ['AI Solutions', 'ERP Consult', 'Marketing', 'HRMS', 'WMS', 'Hardware'],
       highlight: 0,
-      metric: { label: 'Top Margin', value: '78%' }
+      metric: { label: 'Top Margin', value: 'Strong' }
     },
     'Compare Q1 revenue vs Q1 last year': {
-      answer: 'Q1 2026 revenue is OMR 412,000, up 34% from Q1 2025 (OMR 307,000). Growth was driven primarily by AI solutions (+120%) and digital marketing (+45%).',
+      answer: 'Q1 revenue has increased significantly from last year. Growth was driven primarily by AI solutions and digital marketing.',
       chart: [307, 412],
       labels: ['Q1 2025', 'Q1 2026'],
       highlight: 1,
-      metric: { label: 'YoY Growth', value: '+34%' }
+      metric: { label: 'YoY Growth', value: 'Positive' }
     },
   };
 
@@ -391,19 +391,19 @@ const OutreachDemo = () => {
     'Gulf Logistics LLC': {
       painPoints: ['Manual shipment tracking across 3 warehouses', 'No CRM — leads tracked in spreadsheets', 'Website hasn\'t been updated in 2 years'],
       decisionMaker: { name: 'Khalid Al-Rawahi', title: 'COO', linkedin: true },
-      emailDraft: 'Subject: Cutting Logistics Costs by 40% with WMS Automation\n\nHi Khalid,\n\nI noticed Gulf Logistics is managing multi-warehouse operations. Our WMS clients typically see a 40% reduction in picking errors within 90 days.\n\nWould a 15-minute demo be useful?',
+      emailDraft: 'Subject: Cutting Logistics Costs with WMS Automation\n\nHi Khalid,\n\nI noticed Gulf Logistics is managing multi-warehouse operations. Our WMS clients typically see a significant reduction in picking errors within the first quarter.\n\nWould a brief demo be useful?',
       score: 87,
     },
     'Al Jazeera Foods': {
       painPoints: ['High inventory spoilage rate (est. 18%)', 'Social media presence but no conversion funnel', 'Hiring challenges — high turnover in retail staff'],
       decisionMaker: { name: 'Sara Mohammed', title: 'Marketing Director', linkedin: true },
-      emailDraft: 'Subject: How GCC F&B Brands Are Cutting Spoilage by 42%\n\nHi Sara,\n\nAl Jazeera\'s product range is impressive. Our demand forecasting AI has helped similar F&B brands reduce waste by 42%.\n\nCan I share a 3-minute case study?',
+      emailDraft: 'Subject: How GCC F&B Brands Are Cutting Spoilage\n\nHi Sara,\n\nAl Jazeera\'s product range is impressive. Our demand forecasting AI has helped similar F&B brands reduce waste significantly.\n\nCan I share a brief case study?',
       score: 74,
     },
     'Oman National Eng.': {
       painPoints: ['Complex project cost tracking across 12 active sites', 'Compliance reporting takes 2 weeks per quarter', 'No digital HR — payroll is semi-manual'],
       decisionMaker: { name: 'Hamad Al-Balushi', title: 'CFO', linkedin: false },
-      emailDraft: 'Subject: Automating Project Cost Tracking for Construction Firms\n\nHi Hamad,\n\nWith 12 active sites, real-time cost visibility must be challenging. Our ERP implementations for construction firms deliver live project P&L dashboards.\n\nWorth a quick conversation?',
+      emailDraft: 'Subject: Automating Project Cost Tracking for Construction Firms\n\nHi Hamad,\n\nWith multiple active sites, real-time cost visibility must be challenging. Our ERP implementations for construction firms deliver live project P&L dashboards.\n\nWorth a quick conversation?',
       score: 91,
     },
   };
@@ -811,16 +811,16 @@ const AITechnologyPage = () => {
   return (
     <div className="page-wrapper">
       <ServicePageHero 
-        title="AI & Next-Gen Technology"
-        subtitle="Enterprise AI That Delivers Results"
-        description="Move beyond generic chatbots. We build secure, production-ready AI systems — from autonomous sales agents to cognitive data pipelines — that solve real business problems and generate measurable ROI."
+        title="AI & Technology"
+        subtitle="Automation That Earns Its Place in the Business"
+        description="The most durable AI applications are not the most visible ones. They are the ones running inside the workflows that matter most — reducing the manual effort that compounds over years, improving the quality of decisions made on incomplete information, and building operational capacity that does not require adding headcount to sustain it."
         breadcrumbs={['Home', 'Services', 'AI Technology']}
       />
 
       {/* AI Systems Showcase */}
       <section className="sp-section" style={{ padding: 'var(--section-padding)' }}>
         <div className="container">
-          <SectionHeader label="Our Capabilities" title="Enterprise AI Solutions" centered />
+          <SectionHeader label="Our Capabilities" title="AI Applications That Solve Defined Problems" centered />
           
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '2rem', marginTop: '3.5rem' }}>
             {[
@@ -828,50 +828,50 @@ const AITechnologyPage = () => {
                 title: 'Healthcare AI',
                 icon: <Activity size={28} />,
                 problem: 'Patient scheduling inefficiencies, administrative bottlenecks, and high diagnostic wait times.',
-                solution: 'Predictive patient flow analytics, secure bilingual EHR indexing, and automated appointment optimization systems.',
-                outcome: '38% reduction in no-shows and significantly streamlined clinical operations.'
+                solution: 'Predictive scheduling, bilingual health record indexing, and appointment automation.',
+                outcome: 'Measurable improvement in patient flow and clinical throughput.'
               },
               {
                 title: 'Real Estate AI',
                 icon: <Building2 size={28} />,
                 problem: 'Agents losing hours on unqualified enquiries and cold property leads.',
-                solution: 'Intelligent WhatsApp scoring agents that pre-qualify and match buyer profiles with active listings.',
-                outcome: '2.8x increase in sales close rates and zero lead leakage.'
+                solution: 'Intelligent WhatsApp qualification systems that assess buyer intent and match profiles to live listings.',
+                outcome: 'More time for brokers where it counts.'
               },
               {
                 title: 'Logistics AI',
                 icon: <Truck size={28} />,
                 problem: 'Manual route planning, inaccurate dispatch times, and high warehouse picking errors.',
-                solution: 'Machine learning route optimization engines and intelligent warehouse tracking systems.',
-                outcome: '40% reduction in picking errors and optimized delivery turnaround times.'
+                solution: 'Machine learning route optimisation and warehouse tracking.',
+                outcome: 'Improved picking accuracy, faster turnaround.'
               },
               {
                 title: 'Sales Automation',
                 icon: <Workflow size={28} />,
                 problem: 'Sales teams wasting 70% of their day on manual follow-ups and CRM updates.',
-                solution: 'Multi-channel agentic outreach sequences that auto-schedule meetings and update customer databases in real-time.',
-                outcome: '4x increase in outreach volume and structured pipeline tracking.'
+                solution: 'AI-powered outreach sequences that handle follow-up and CRM updates automatically.',
+                outcome: 'Higher volume, consistent pipeline visibility.'
               },
               {
                 title: 'Lead Qualification',
                 icon: <Target size={28} />,
                 problem: 'Inbound leads cooling down due to slow manual response times.',
-                solution: 'Instant omnichannel qualification bots that score and route high-intent leads in under 2 minutes.',
-                outcome: '60% faster response times and improved lead-to-opportunity conversion.'
+                solution: 'Omnichannel qualification systems that assess and route high-intent leads promptly.',
+                outcome: 'Fewer lost conversations.'
               },
               {
                 title: 'AI Reporting',
                 icon: <BarChart3 size={28} />,
                 problem: 'Executive teams waiting days for data analysts to compile performance reports.',
-                solution: 'Natural language data queries that generate real-time charts and revenue attribution reports.',
-                outcome: 'Hallucination-free insights instantly accessible in plain English or Arabic.'
+                solution: 'Natural language query systems generating structured reports from live data.',
+                outcome: 'Business intelligence in English or Arabic, when it is needed.'
               },
               {
                 title: 'AI Assistants',
                 icon: <Bot size={28} />,
                 problem: 'Internal teams bogged down by repetitive customer support and operational QA enquiries.',
-                solution: 'High-context RAG-enabled workspace assistants with strict role-based access security.',
-                outcome: '80% automated resolution of internal support requests and instant knowledge retrieval.'
+                solution: 'Contextual workspace assistants with role-based access controls.',
+                outcome: 'A meaningful proportion of internal queries handled without human involvement.'
               }
             ].map((system, idx) => (
               <motion.div
@@ -934,7 +934,7 @@ const AITechnologyPage = () => {
       {/* ═══════ Interactive Workflow Demos ═══════ */}
       <section style={{ padding: 'var(--section-padding)', background: 'var(--bg)' }}>
         <div className="container">
-          <SectionHeader label="Interactive Demonstrations" title="See Our AI Systems In Action" subtitle="These aren't mockups. Click through real workflow simulations to experience what our AI systems do for businesses like yours." centered />
+          <SectionHeader label="Interactive Demonstrations" title="See the Systems Working" subtitle="Live workflow simulations. Not pitch decks — working demonstrations of what these systems do in practice." centered />
 
           {/* Workflow Selector Tabs */}
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.75rem', justifyContent: 'center', marginBottom: '3rem' }}>

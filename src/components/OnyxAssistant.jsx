@@ -80,7 +80,7 @@ const OnyxAssistant = () => {
       return `Welcome! Are you looking to upgrade operations in the ${formatted} sector? I can guide you through a dedicated digital audit.`;
     }
     
-    return "Hello! I'm Onyx, your AI business consultant. 👋";
+    return "I’m Onyx. I connect GCC companies with the strategy, software, and talent required to scale. How can I direct you?";
   };
 
   // Triggers Effect (Scroll, Time, Exit-intent, Idle, Copy text)
@@ -151,7 +151,7 @@ const OnyxAssistant = () => {
         hasScrolled50 = true;
         if (!canTriggerChatPrompt()) return;
         markAutoPromptShown('chat');
-        setToastMessage('📊 Take our 2-minute assessment to receive a custom digital roadmap!');
+        setToastMessage('A good strategy is useless if the system can’t execute it. Are your systems ready?');
         setShowToast(true);
       }
 
@@ -166,7 +166,7 @@ const OnyxAssistant = () => {
     // 4. Exit Intent Trigger (Cursor leaves viewport top)
     const handleMouseLeave = (e) => {
       if (e.clientY < 15) {
-        showChatToast("Wait! Don't miss out on your Free Strategy Audit. Let's get your GCC business roadmap in 2 minutes!", true);
+        showChatToast("We don’t just consult. We build the architecture. Let’s talk.", true);
       }
     };
     document.addEventListener('mouseleave', handleMouseLeave);
@@ -178,7 +178,7 @@ const OnyxAssistant = () => {
       idleTimer = setTimeout(() => {
         if (!canTriggerChatPrompt()) return;
         markAutoPromptShown('chat');
-        setToastMessage('💡 Still exploring? Ask me about our custom Odoo/ERP deployments or AI roadmap!');
+        setToastMessage('Oman Vision 2040 requires more than digitalization. It requires operational excellence. Let’s assess your readiness.');
         setShowToast(true);
       }, 45000);
     };
@@ -202,10 +202,9 @@ const OnyxAssistant = () => {
       if (canTriggerChatPrompt()) {
         markAutoPromptShown('chat');
         const extraMessages = [
-          '📊 Need a custom digital transformation strategy?',
-          '🤖 Want to test your business AI readiness score?',
-          '💡 Check our custom service blueprints!',
-          '📞 Let\'s sync you with a transformation architect.'
+          'A good strategy is useless if the system can’t execute it. Are your systems ready?',
+          'We don’t just consult. We build the architecture. Let’s talk.',
+          'Oman Vision 2040 requires more than digitalization. It requires operational excellence. Let’s assess your readiness.'
         ];
         const randomMsg = extraMessages[Math.floor(Math.random() * extraMessages.length)];
         setToastMessage(randomMsg);
@@ -489,7 +488,7 @@ const OnyxAssistant = () => {
                   <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
                     <h3 style={{ fontSize: '1.1rem', margin: 0, lineHeight: '1.2', color: 'white', fontWeight: 'bold' }}>Onyx</h3>
                     <div style={{ fontSize: '0.75rem', opacity: 0.9, display: 'flex', alignItems: 'center', gap: '4px', marginTop: '2px' }}>
-                      <div style={{ width: '8px', height: '8px', background: '#22c55e', borderRadius: '50%' }} /> Online
+                      <div style={{ width: '8px', height: '8px', background: '#22c55e', borderRadius: '50%' }} /> Transformation Architect
                     </div>
                   </div>
                 </div>
@@ -521,10 +520,10 @@ const OnyxAssistant = () => {
                     {/* Quick Options */}
                     {msg.isOptions && !activeAssessment && (
                       <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', marginTop: '0.75rem', width: '100%' }}>
-                        <button onClick={() => handleQuickReply('Digital Transformation Assessment', 'digital-transformation')} className="onyx-quick-btn">📊 Digital Transformation Assessment</button>
-                        <button onClick={() => handleQuickReply('AI Readiness Score', 'ai-readiness')} className="onyx-quick-btn">🤖 AI Readiness Score</button>
-                        <button onClick={() => handleQuickReply('Marketing Maturity Check', 'marketing-maturity')} className="onyx-quick-btn">📈 Marketing Maturity Check</button>
-                        <button onClick={() => handleQuickReply('Explore Services', 'services')} className="onyx-quick-btn">💡 Explore Our Services</button>
+                        <button onClick={() => handleQuickReply('I need to audit our current systems.', 'digital-transformation')} className="onyx-quick-btn">📊 I need to audit our current systems.</button>
+                        <button onClick={() => handleQuickReply('I need to develop custom software.', 'ai-readiness')} className="onyx-quick-btn">💻 I need to develop custom software.</button>
+                        <button onClick={() => handleQuickReply('I need to restructure our talent model.', 'marketing-maturity')} className="onyx-quick-btn">👥 I need to restructure our talent model.</button>
+                        <button onClick={() => handleQuickReply('I need a complete digital transformation roadmap.', 'services')} className="onyx-quick-btn">🗺️ I need a complete digital transformation roadmap.</button>
                       </div>
                     )}
 

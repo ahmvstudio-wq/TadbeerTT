@@ -6,24 +6,24 @@ const FAQ = () => {
 
   const faqs = [
     {
-      q: "\"We've tried consultants before — it didn't work.\"",
-      a: "Most consultants deliver a report, not a result. We don't exit at strategy — we stay accountable through full implementation. Results are the only thing we measure."
+      q: "We have engaged consultants before and the results didn't last.",
+      a: "That is the most common reason organisations come here. Strategy without implementation accountability produces documentation, not change. Every Tadbeer engagement is structured around sustained outcomes — the work does not conclude when the report is submitted."
     },
     {
-      q: "\"Are we the right size for this?\"",
-      a: "We work with startups finding their footing, mid-size companies ready to scale, and enterprises preparing for expansion. What matters is your ambition, not your current size."
+      q: "Are we the right size for this?",
+      a: "Scale is not the criterion. The organisations Tadbeer works with range from growth-stage businesses finding their operational footing to established enterprises preparing for the next stage of expansion. What matters is whether the objective is serious."
     },
     {
-      q: "\"Is Tadbeer local or just international consulting with a local office?\"",
-      a: "Born in Muscat, post-Ramadan 2025. Built because the GCC deserved better than generic frameworks. We are local by design, global by expertise."
+      q: "Is this a local firm or an international firm with a local office?",
+      a: "Founded in Muscat in 2025. Built here because organisations in Oman and the GCC needed a firm that understood this market from the inside — not one that arrived with frameworks designed for a different operating environment."
     },
     {
-      q: "\"Will the tech solutions work in our specific business?\"",
-      a: "Every solution begins with a full operational analysis. We configure for your specific processes, team, and compliance requirements — never out of a box."
+      q: "Will these solutions work for our specific context?",
+      a: "Every engagement begins with a detailed analysis of your processes, your team, your compliance requirements, and the specific constraints of your industry. The configuration follows from that."
     },
     {
-      q: "\"What does the first step cost?\"",
-      a: "Your first consultation is completely free, no commitment. If we can't demonstrate value in the first conversation, we haven't earned the right to ask for more."
+      q: "What does the first step cost?",
+      a: "Nothing. If the first conversation does not demonstrate clear value, there is no basis for proposing anything further. That is the standard applied to every initial engagement."
     }
   ];
 
@@ -39,7 +39,7 @@ const FAQ = () => {
           style={{ marginBottom: '2rem' }}
         >
           <span className="section-label">FAQ | أسئلة شائعة</span>
-          <h2 className="section-title">Honest Answers to<br />Real Questions.</h2>
+          <h2 className="section-title">The Questions Worth<br />Answering Directly.</h2>
         </motion.div>
         
         <div className="faq-layout">

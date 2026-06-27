@@ -46,9 +46,9 @@ const Careers = () => {
           transition={{ duration: 0.8 }}
         >
           <span className="section-label">Careers | الوظائف</span>
-          <h1 className="section-title" style={{ fontSize: '3rem' }}>Build the Future<br />of Business in Oman.</h1>
+          <h1 className="section-title" style={{ fontSize: '3rem' }}>Join the Team That Stays to the End.</h1>
           <p style={{ color: 'var(--text-muted)', fontSize: '1.15rem', maxWidth: '600px', margin: '1rem auto 0' }}>
-            Join a team of globally experienced consultants, technologists, and transformation architects.
+            At Tadbeer, the engagement does not close when the strategy is presented. It closes when the results are embedded. If that is the standard of work you want to be part of, there may be a role here for you.
           </p>
         </motion.div>
       </section>
@@ -156,25 +156,25 @@ const Careers = () => {
             transition={{ duration: 0.6 }}
           >
             <span className="section-label">Life at Tadbeer</span>
-            <h2 className="section-title" style={{ fontSize: '2.25rem' }}>Where Impact Meets Purpose.</h2>
+            <h2 className="section-title" style={{ fontSize: '2.25rem' }}>A Practice Built on Completion, Not Delivery.</h2>
           </motion.div>
 
           <div className="culture-grid">
             {[
               {
                 image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?w=500&q=80&auto=format',
-                title: 'Collaborative Environment',
-                desc: 'Work alongside experts from across the globe.'
+                title: 'Work That Goes the Distance',
+                desc: 'Every engagement has a clear standard of completion. The team is accountable to it.'
               },
               {
                 image: 'https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=500&q=80&auto=format',
-                title: 'Continuous Growth',
-                desc: 'Learn cutting-edge technologies every day.'
+                title: 'Genuine Development',
+                desc: 'Working across strategy, technology, and people — in a market that requires understanding all three at once.'
               },
               {
                 image: 'https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=500&q=80&auto=format',
-                title: 'Real Impact',
-                desc: 'Transform businesses across the GCC.'
+                title: 'Real Operational Impact',
+                desc: 'The work changes how organisations in Oman function. That is a meaningful thing to be part of.'
               }
             ].map((card, i) => (
               <motion.div 

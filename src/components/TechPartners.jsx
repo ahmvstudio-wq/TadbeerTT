@@ -87,11 +87,10 @@ const TechPartners = () => {
         <div className="tp-header">
           <span className="section-label">Ecosystem</span>
           <h2 className="section-title tp-title">
-            Technology &amp; Service <span className="tp-accent">Partners</span>
+            Technology & Platform <span className="tp-accent">Partners</span>
           </h2>
           <p className="tp-subtitle">
-            We integrate and work with 50+ industry-leading platforms to deliver
-            end-to-end digital transformation for our clients.
+            The platforms are chosen for what the client needs — not what is easiest to sell. Tadbeer integrates with more than 50 enterprise-grade platforms.
           </p>
         </div>
 

@@ -7,12 +7,12 @@ const RealEstateIndustryPage = () => {
     <IndustryPageTemplate 
       industryName="Real Estate"
       heroSubtitle="CRM Customization & Omnichannel Lead Management Systems"
-      heroDescription="Streamlining lead processing, inventory matching, off-plan developer portals, and CRM automations for property developers and brokerages across the GCC."
+      heroDescription="Property transactions in Oman take longer than they should — not because buyers are uncommitted, but because the operational infrastructure between enquiry and agreement is too slow, too manual, and too fragmented. The work here is to close that gap."
       illustration={RealEstateIllustration}
       metrics={[
-        { value: "2.4x", label: "Inquiry Response Speed" },
-        { value: "100%", label: "CRM Lead Capture" },
-        { value: "-50%", label: "Lead Qualification Time" }
+        { value: "Faster", label: "Inquiry Response Speed" },
+        { value: "Full", label: "CRM Lead Capture" },
+        { value: "Reduced", label: "Lead Qualification Time" }
       ]}
       challenges={[
         {

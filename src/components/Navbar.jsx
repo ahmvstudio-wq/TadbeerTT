@@ -170,7 +170,8 @@ const Navbar = () => {
             </AnimatePresence>
           </div>
 
-          <Link to="/#about">About</Link>
+          <Link to="/#industries">Industries</Link>
+          <Link to="/#about">About Us</Link>
           <Link to="/resources">Resources</Link>
           <Link to="/careers">Careers</Link>
           <Link to="/#contact">Contact</Link>
@@ -183,7 +184,7 @@ const Navbar = () => {
             className="btn btn-primary nav-cta-btn" 
             style={{ padding: '0.65rem 1.25rem', fontSize: '0.9rem', cursor: 'pointer', border: 'none' }}
           >
-            Apply for a Strategy Session
+            Request a Consultation
           </button>
           
           <button 
@@ -211,6 +212,7 @@ const Navbar = () => {
           </div>
 
           <div style={{ borderTop: '1px solid var(--border)', paddingTop: '2rem', display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
+            <Link to="/#industries" onClick={() => setMobileOpen(false)} style={{ fontSize: '1.25rem', fontWeight: '500', color: 'var(--primary)' }}>Industries</Link>
             <Link to="/#about" onClick={() => setMobileOpen(false)} style={{ fontSize: '1.25rem', fontWeight: '500', color: 'var(--primary)' }}>About Us</Link>
             <Link to="/resources" onClick={() => setMobileOpen(false)} style={{ fontSize: '1.25rem', fontWeight: '500', color: 'var(--primary)' }}>Resources</Link>
             <Link to="/careers" onClick={() => setMobileOpen(false)} style={{ fontSize: '1.25rem', fontWeight: '500', color: 'var(--primary)' }}>Careers</Link>
@@ -224,7 +226,7 @@ const Navbar = () => {
             className="btn btn-primary" 
             style={{ width: '100%', justifyContent: 'center', cursor: 'pointer', border: 'none' }}
           >
-            Apply for a Strategy Session
+            Request a Consultation
           </button>
         </div>
       </div>

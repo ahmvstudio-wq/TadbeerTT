@@ -24,30 +24,30 @@ const OmanizationCheck = () => {
   const getStatus = () => {
     if (isHighRisk) {
       return {
-        label: "Critical Action Needed",
+        label: "Non-compliant",
         color: "#ef4444",
         bg: "rgba(239, 68, 68, 0.05)",
         border: "rgba(239, 68, 68, 0.2)",
         icon: <ShieldAlert size={20} color="#ef4444" />,
-        desc: "Your entity is well below the default 30% Ministry of Labour compliance quota. High risk of visa bans, work permit suspensions, and audit flags."
+        desc: "Your current ratio falls below the Ministry of Labour threshold. The regulatory exposure is real and manageable — but it requires a structured plan, not a short-term response."
       };
     } else if (!isCompliant) {
       return {
-        label: "Partial Compliance Warn",
+        label: "Approaching compliance",
         color: "#f59e0b",
         bg: "rgba(245, 158, 11, 0.05)",
         border: "rgba(245, 158, 11, 0.2)",
         icon: <ShieldWarning size={20} color="#f59e0b" />,
-        desc: "You are approaching target ranges but remain below Omani private sector targets. Consider structured Omani development pipelines to bridge key gaps."
+        desc: "The gap is closeable. A national talent development programme with clear timelines and defined roles addresses this systematically."
       };
     } else {
       return {
-        label: "Target Compliant",
+        label: "Fully compliant",
         color: "#10b981",
         bg: "rgba(16, 185, 129, 0.05)",
         border: "rgba(16, 185, 129, 0.2)",
         icon: <ShieldCheck size={20} color="#10b981" />,
-        desc: "Excellent. Your business meets standard compliance metrics, granting eligibility for fast-track government clearance and green-channel work permits."
+        desc: "Your organisation meets current requirements. The next step is ensuring compliance infrastructure is built to sustain this as the business grows."
       };
     }
   };
@@ -62,9 +62,9 @@ const OmanizationCheck = () => {
       <div className="container">
         
         <div className="text-center" style={{ marginBottom: '4rem' }}>
-          <span className="section-label">🇴🇲 GCC COMPLIANCE AUDIT</span>
-          <h2 className="section-title">Omanization Compliance Check</h2>
-          <p style={{ color: 'var(--text-muted)', fontSize: '1.15rem', marginTop: '1rem' }}>Evaluate your workforce metrics against Omani Ministry of Labour private sector quota benchmarks instantly.</p>
+          <span className="section-label">GCC COMPLIANCE AUDIT</span>
+          <h2 className="section-title">Omanization Readiness Check</h2>
+          <p style={{ color: 'var(--text-muted)', fontSize: '1.15rem', marginTop: '1rem' }}>Organisations that manage Omanization proactively spend less time on it than those who manage it reactively. Enter your current figures to see where you stand.</p>
         </div>
 
         <div className="roi-calc-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '3rem', maxWidth: '1000px', margin: '0 auto' }}>
@@ -177,7 +177,7 @@ const OmanizationCheck = () => {
               className="btn btn-primary" 
               style={{ width: '100%', padding: '0.85rem', cursor: 'pointer', border: 'none', background: status.color, color: 'white' }}
             >
-              Get Compliance Blueprint
+              Request a Compliance Roadmap
             </button>
 
           </div>

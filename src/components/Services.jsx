@@ -8,40 +8,40 @@ const servicesData = [
     id: "marketing",
     titleEn: "Digital Marketing",
     titleAr: "التسويق الرقمي",
-    desc: "Bilingual, data-driven marketing ecosystems — not campaigns. We build brand authority and inbound leads that compound.",
+    desc: "Campaigns end. Acquisition systems do not. The work is to build the marketing infrastructure that generates consistent inbound demand over time — structured, measurable, bilingual, and aligned to how Omani and GCC audiences actually make decisions.",
     icon: Target,
     image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80&auto=format",
-    items: ["Data-Driven Strategy", "Bilingual Social Media", "AI Content & Automation", "Performance Analytics"],
+    items: ["Data-Driven Strategy", "Bilingual Social Media (Arabic / English)", "AI-Assisted Content Production", "Performance Analytics & Attribution"],
     path: "/services/digital-marketing"
   },
   {
     id: "software",
     titleEn: "Software Solutions",
     titleAr: "حلول برمجية",
-    desc: "VAT-compliant, enterprise-proven systems. We map your operation first, then implement, configure, train, and support.",
+    desc: "A system that does not fit how the business operates will not be used for long. Every implementation begins with understanding the process — then configuring the technology to match it, not the other way around.",
     icon: Layers,
     image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&q=80&auto=format",
-    items: ["ERP Integration", "Warehouse Management", "HRMS & LMS", "POS & Vendor Systems"],
+    items: ["ERP Implementation (Odoo / SAP)", "Warehouse Management Systems", "HRMS & Learning Management", "POS & Vendor Management Systems"],
     path: "/services/software-solutions"
   },
   {
     id: "ai",
-    titleEn: "AI & Next-Gen Tech",
-    titleAr: "تقنيات الذكاء الاصطناعي",
-    desc: "Enterprise-grade AI operations as a service. We deploy custom LLM applications, autonomous agentic workflows, and machine learning models to supercharge operational bandwidth.",
+    titleEn: "AI & Technology",
+    titleAr: "التقنيات المتقدمة",
+    desc: "The most valuable AI applications in a business are rarely the most visible ones. They are the ones embedded in the workflows that run every day — quietly reducing manual effort, improving decision quality, and producing results that accumulate over time.",
     icon: Cpu,
     image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&q=80&auto=format",
-    items: ["Agentic AI Workflows", "Custom LLM Applications", "Operational ML Pipelines", "Cognitive Automation"],
+    items: ["Intelligent Workflow Automation", "Custom AI Application Development", "Operational Machine Learning Pipelines", "AI-Powered Process Improvement"],
     path: "/services/ai-technology"
   },
   {
     id: "talent",
     titleEn: "Human Capital",
     titleAr: "إدارة رأس المال البشري",
-    desc: "Omanization-aligned, people-first HCM strategy. Because your people ARE the business strategy.",
+    desc: "Organisations outlast the technology they deploy and the strategies they adopt. They do not outlast structural people problems. Omanization compliance, retention, performance management, and organisational design are not HR functions — they are business continuity functions.",
     icon: Users,
     image: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&q=80&auto=format",
-    items: ["Org Development", "Recruitment & Onboarding", "Training Programs", "Retention Strategy"],
+    items: ["Organisational Design & Development", "Recruitment & Onboarding Systems", "Training & Development Programmes", "Retention & Compensation Strategy"],
     path: "/services/human-capital"
   }
 ];
@@ -124,10 +124,10 @@ const Services = () => {
           viewport={{ once: true, margin: "-100px" }}
           transition={{ type: "spring", bounce: 0.1, duration: 1.2 }}
         >
-          <span className="section-label">Our Capabilities | خدماتنا</span>
-          <h2 className="section-title">Four Pillars of<br />Business Transformation.</h2>
+          <span className="section-label">Our Capabilities | كفاءاتنا الأساسية</span>
+          <h2 className="section-title">Four Capabilities.<br />One Partner Who Stays.</h2>
           <p style={{ color: 'var(--text-muted)', fontSize: '1.15rem', maxWidth: '600px', margin: '1rem auto 0' }}>
-            A premium network of operational architects, software engineers, and growth consultants, aligned to Oman Vision 2040.
+            Strategy without execution is planning. Technology without adoption is cost. People without structure are potential. Each of Tadbeer's four service areas is built on the belief that the real work begins after the first decision.
           </p>
         </motion.div>
 
@@ -200,11 +200,8 @@ const Services = () => {
           transition={{ duration: 0.8 }}
         >
           <div style={{ position: 'relative', zIndex: 2 }}>
-            <p style={{ fontSize: '1.35rem', fontWeight: '600', marginBottom: '0.5rem', color: '#fff' }}>
-              Complete Integration. Zero Friction.
-            </p>
-            <p style={{ fontSize: '1.05rem', opacity: 0.9, color: 'rgba(255,255,255,0.85)' }}>
-              From initial operational audit to final code deploy — Tadbeer assumes full responsibility.
+            <p style={{ fontSize: '1.15rem', fontWeight: '500', marginBottom: '0', color: '#fff', lineHeight: '1.6' }}>
+              From the first operational audit to the final system deployment — one team, one point of accountability, one standard of completion.
             </p>
           </div>
         </motion.div>

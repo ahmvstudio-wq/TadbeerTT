@@ -7,12 +7,12 @@ const LogisticsIndustryPage = () => {
     <IndustryPageTemplate 
       industryName="Logistics & Supply Chain"
       heroSubtitle="Fleet Management Digitization & Automated Supply Chain Pipelines"
-      heroDescription="Enterprise-grade fleet optimization systems, document parsing, and warehouse management (WMS) integrations designed to connect GCC distribution networks."
+      heroDescription="Logistics operations do not fail dramatically. They erode — through small inaccuracies, slow routes, and manual processes that each cost a little, until the cumulative effect shows up in margins and delivery performance. Sustained operational discipline requires systems, not attention."
       illustration={LogisticsIllustration}
       metrics={[
-        { value: "-18%", label: "Fuel & Fleet Operations Cost" },
-        { value: "99.4%", label: "SLA Tracking Success" },
-        { value: "-40%", label: "Paperwork Processing Time" }
+        { value: "Lower", label: "Fuel & Fleet Operations Cost" },
+        { value: "Consistent", label: "SLA Tracking Success" },
+        { value: "Reduced", label: "Paperwork Processing Time" }
       ]}
       challenges={[
         {

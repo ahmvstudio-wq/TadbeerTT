@@ -7,12 +7,12 @@ const ManufacturingIndustryPage = () => {
     <IndustryPageTemplate 
       industryName="Manufacturing"
       heroSubtitle="Industrial IoT Integrations & Factory Floor Digitalization"
-      heroDescription="Integrating sensor telemetry, automated inventory workflows, and quality logging software to centralize manufacturing operations and ERP databases."
+      heroDescription="Manufacturing performance in Oman is increasingly determined by what happens between production runs — the quality of planning, the reliability of maintenance, and the discipline of inventory management. None of these improve through effort alone. They improve through structured systems."
       illustration={ManufacturingIllustration}
       metrics={[
-        { value: "-45%", label: "Quality Inspection Delays" },
-        { value: "99.1%", label: "Factory Data Uptime" },
-        { value: "-25%", label: "Operational Waste" }
+        { value: "Fewer", label: "Quality Inspection Delays" },
+        { value: "Reliable", label: "Factory Data Uptime" },
+        { value: "Reduced", label: "Operational Waste" }
       ]}
       challenges={[
         {

@@ -7,12 +7,12 @@ const ProfessionalServicesIndustryPage = () => {
     <IndustryPageTemplate 
       industryName="Professional Services"
       heroSubtitle="Contract Management & Enterprise Knowledge Retrieval Systems"
-      heroDescription="Digitalizing consulting, legal, and financial operations with document indexing, automated contract reviews, and template generators."
+      heroDescription="In consulting, legal, and financial advisory firms, the scarcest resource is experienced professional time. The question is how much of it is spent on work that requires judgment, and how much is spent on retrieval, formatting, and administration that a structured system could handle instead."
       illustration={ProfessionalServicesIllustration}
       metrics={[
-        { value: "-80%", label: "Contract Audit Duration" },
-        { value: "+30%", label: "Consulting Delivery Capacity" },
-        { value: "< 2 mins", label: "To Retrieve Internal Assets" }
+        { value: "Faster", label: "Contract Audit Duration" },
+        { value: "Higher", label: "Consulting Delivery Capacity" },
+        { value: "Instant", label: "To Retrieve Internal Assets" }
       ]}
       challenges={[
         {

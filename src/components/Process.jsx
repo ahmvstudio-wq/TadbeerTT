@@ -5,31 +5,31 @@ const Process = () => {
   const steps = [
     { 
       num: '01',
-      title: "Free Consultation", 
-      desc: "A genuine, expert-led conversation to understand your business and biggest obstacles.", 
+      title: "Initial Consultation", 
+      desc: "A direct conversation to understand your business, your priorities, and the obstacles that are currently costing you the most.", 
     },
     { 
       num: '02',
-      title: "Deep Analysis", 
-      desc: "We diagnose root causes across operations, marketing, tech, and team structure.", 
+      title: "Operational Analysis", 
+      desc: "Root causes examined across operations, technology, marketing, and organisational structure. Not symptoms — causes.", 
     },
     { 
       num: '03',
-      title: "Custom Roadmap", 
-      desc: "AI-driven market research shapes your personalised transformation blueprint.", 
+      title: "Strategic Architecture", 
+      desc: "We design the system required to solve the problem, aligning technology choices and human capital requirements to your specific commercial goals.", 
     },
     { 
       num: '04',
-      title: "Hands-On Delivery", 
-      desc: "We stay until every element is embedded, performing, and delivering results.", 
+      title: "Deployment & Handoff", 
+      desc: "We implement the solution, train your people, and remain accountable until the system is operational and the results are measurable.", 
     }
   ];
 
   const whyCards = [
-    { title: 'Global Expertise, Local Heart', desc: 'International standards with genuine GCC cultural intelligence.', icon: '🌍' },
-    { title: 'One Team. Full Accountability.', desc: 'No handoffs. No multiple vendors. We own it all.', icon: '🔗' },
-    { title: 'AI at Every Stage', desc: 'AI accelerates every phase — from research to execution.', icon: '🤖' },
-    { title: 'Your Vision. Your Blueprint.', desc: 'Built around you — not a template that worked for someone else.', icon: '🧭' }
+    { title: 'Local Knowledge, International Standards', desc: 'Built in Muscat. Shaped by years of working with organisations across Oman and the GCC. The frameworks are international. The understanding of this market is not generic.', icon: '🌍' },
+    { title: 'Single-Firm Accountability', desc: 'One team. One point of contact. No handoffs to implementation partners who were not in the original conversation.', icon: '🔗' },
+    { title: 'Technology That Serves the Business', desc: 'Advanced tools are used at every stage — not because they are impressive, but because they make the work more accurate, faster, and more durable.', icon: '⚙️' },
+    { title: 'Configured to Your Operation', desc: 'Every engagement is designed from the ground up. A framework that worked in a different sector, or a different country, is a starting point at best.', icon: '🧭' }
   ];
 
   return (
@@ -52,8 +52,8 @@ const Process = () => {
           transition={{ type: "spring", bounce: 0.1, duration: 1.2 }}
           style={{ marginBottom: '1rem' }}
         >
-          <span className="section-label">How We Work | كيف نعمل</span>
-          <h2 className="section-title">From Conversation<br />to Transformation.</h2>
+          <span className="section-label">How We Work | منهجيتنا</span>
+          <h2 className="section-title">Four Stages. No Handoffs.<br />No Early Exits.</h2>
         </motion.div>
 
         {/* Process Steps */}
@@ -111,7 +111,7 @@ const Process = () => {
                 style={{ marginBottom: '2rem' }}
               >
                 <span className="section-label">Why Tadbeer</span>
-                <h2 style={{ fontSize: '2rem', color: 'var(--primary)', lineHeight: '1.2' }}>4 Reasons Clients Don't Go Anywhere Else.</h2>
+                <h2 style={{ fontSize: '2rem', color: 'var(--primary)', lineHeight: '1.2' }}>The Difference Is in What Happens After the Proposal.</h2>
               </motion.div>
 
               <div className="why-cards">

@@ -530,7 +530,7 @@ const IndustryPageTemplate = ({
           </h2>
           
           <p style={{ fontSize: '1.15rem', color: 'rgba(255,255,255,0.8)', marginBottom: '2.5rem', lineHeight: '1.6' }}>
-            {ctaDescription || "Book an expert strategy session today to discover how Tadbeer's digital pipelines can solve your specific bottleneck."}
+            {ctaDescription || "Schedule a consultation with our experts to discover how Tadbeer's digital pipelines can resolve your operational bottlenecks."}
           </p>
           
           <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>

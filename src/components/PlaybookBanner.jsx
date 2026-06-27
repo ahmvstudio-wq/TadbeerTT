@@ -95,7 +95,7 @@ const PlaybookBanner = () => {
               onMouseEnter={(e) => e.currentTarget.style.opacity = '0.9'}
               onMouseLeave={(e) => e.currentTarget.style.opacity = '1'}
             >
-              <Download size={12} /> Get Playbook
+              <Download size={12} /> Download the Playbook
             </button>
 
             <button

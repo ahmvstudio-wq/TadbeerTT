@@ -38,32 +38,32 @@ const SoftwareSolutionsPage = () => {
     {
       title: "ERP Implementation",
       icon: <Server size={24} />,
-      desc: "End-to-end deployment of Odoo and SAP to unify your finance, inventory, and operations into a single source of truth."
+      desc: "Odoo and SAP deployed as a single source of operational truth. Finance, inventory, and operations connected, not siloed."
     },
     {
       title: "Warehouse Management",
       icon: <PackageSearch size={24} />,
-      desc: "Barcode integration, automated routing, and real-time inventory tracking to eliminate stockouts and picking errors."
+      desc: "Barcode integration, automated routing, real-time inventory. Fewer errors. Better throughput. Less time spent correcting what should have been right the first time."
     },
     {
       title: "HRMS & Payroll",
       icon: <Users size={24} />,
-      desc: "GCC-compliant payroll engines, attendance tracking, and employee self-service portals."
+      desc: "GCC-compliant payroll, attendance management, and employee self-service portals. Built for Omani regulatory requirements and the people who use them daily."
     },
     {
       title: "Custom Development",
       icon: <Settings size={24} />,
-      desc: "Bespoke web and mobile applications engineered specifically for your unique operational bottlenecks."
+      desc: "For the operational bottlenecks no standard system was designed to solve."
     },
     {
       title: "POS Systems",
       icon: <ShoppingCart size={24} />,
-      desc: "Enterprise-grade retail and restaurant point-of-sale systems featuring offline mode, multi-branch sync, and unified inventory tracking."
+      desc: "Retail and food & beverage point-of-sale, with offline mode, multi-branch synchronisation, and inventory that does not require manual reconciliation."
     },
     {
       title: "Procurement Management",
       icon: <Briefcase size={24} />,
-      desc: "Streamlined vendor bidding, automated purchase order workflows, and smart contract management to control spending and optimize supply chain costs."
+      desc: "Vendor workflows, automated purchase orders, and contract management. Cost control is a system discipline, not a management effort."
     }
   ];
 
@@ -71,15 +71,15 @@ const SoftwareSolutionsPage = () => {
     <div className="page-wrapper">
       <ServicePageHero 
         title="Software Solutions"
-        subtitle="Enterprise Systems That Scale"
-        description="We don't just sell software; we engineer business operating systems. From custom web applications to full-scale ERP deployments, we build the digital infrastructure your company needs to grow without chaos."
+        subtitle="Systems That Fit the Business. Not the Other Way Around."
+        description="A system that does not reflect how the business actually operates will not change how it operates. Every implementation begins with an audit of the process — then configuration follows. From ERP deployments to custom applications, the work is to build infrastructure that the business relies on, rather than works around."
         breadcrumbs={['Home', 'Services', 'Software Solutions']}
       />
 
       {/* Product Showcases */}
       <section className="sp-section" style={{ padding: '3.5rem 5%' }}>
         <div className="container">
-          <SectionHeader label="Our Expertise" title="Systems Built For Growth" centered />
+          <SectionHeader label="Our Expertise" title="Systems Built for How the Business Works" centered />
           
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '3rem', marginTop: '3rem', alignItems: 'center' }}>
             {/* Left: Illustration */}
@@ -166,14 +166,14 @@ const SoftwareSolutionsPage = () => {
 
                       <div className="demo-grid-3">
                         {[
-                          { label: 'Total Revenue', value: 'OMR 124,500', trend: '+14%' },
-                          { label: 'Total Expenses', value: 'OMR 42,100', trend: '-2%' },
-                          { label: 'Net Profit', value: 'OMR 82,400', trend: '+8%' }
+                          { metric: "Multiple", label: "Core Platforms", desc: "Specialised in ERP, CRM, HRMS, WMS, and custom portals" },
+                          { metric: "Full", label: "Local Deployment", desc: "Option for on-premises hosting to meet GCC data laws" },
+                          { metric: "API-First", label: "Architecture", desc: "Seamless integration with your existing legacy systems" }
                         ].map((stat, i) => (
                           <div key={i} style={{ background: 'white', padding: '1.5rem', borderRadius: '12px', border: '1px solid #e2e8f0', boxShadow: '0 4px 6px -1px rgba(0,0,0,0.05)' }}>
                             <div style={{ color: '#64748b', fontSize: '0.85rem', marginBottom: '0.5rem' }}>{stat.label}</div>
-                            <div style={{ fontSize: '1.75rem', fontWeight: 'bold', color: 'var(--primary)', marginBottom: '0.5rem' }}>{stat.value}</div>
-                            <div style={{ color: stat.trend.includes('+') ? '#22c55e' : '#ef4444', fontSize: '0.8rem', fontWeight: '600', display: 'flex', alignItems: 'center', gap: '0.25rem' }}><TrendingUp size={14}/> {stat.trend} vs last month</div>
+                            <div style={{ fontSize: '1.75rem', fontWeight: 'bold', color: 'var(--primary)', marginBottom: '0.5rem' }}>{stat.metric}</div>
+                            <div style={{ color: '#64748b', fontSize: '0.8rem', lineHeight: '1.4' }}>{stat.desc}</div>
                           </div>
                         ))}
                       </div>
@@ -267,14 +267,14 @@ const SoftwareSolutionsPage = () => {
       {/* Workflow Showcase */}
       <section className="sp-section" style={{ padding: 'var(--section-padding)' }}>
         <div className="container">
-          <SectionHeader label="Our Process" title="How We Engineer Solutions" centered />
+          <SectionHeader label="Our Process" title="How an Implementation Actually Works" centered />
           
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '2rem', marginTop: '3.5rem', position: 'relative' }}>
             {[
-              { step: '01', title: 'Requirements & Discovery', desc: 'We shadow your teams, auditing existing workflows to identify the exact friction points and bottlenecks.' },
-              { step: '02', title: 'Architecture & Design', desc: 'Our engineers design a scalable database schema, wireframes, and deployment plan tailored to your load requirements.' },
-              { step: '03', title: 'Implementation & Integration', desc: 'Bespoke code is written, modules configured, and APIs integrated with thorough unit testing and QA cycles.' },
-              { step: '04', title: 'Deployment & Support', desc: 'Smooth production launch with employee training sessions and 24/7 hypercare support to ensure zero downtime.' }
+              { step: '01', title: 'Requirements Discovery', desc: 'Teams are observed. Workflows are audited. The problems worth solving are distinguished from the ones worth tolerating.' },
+              { step: '02', title: 'Architecture Design', desc: "A scalable schema and deployment plan matched to the organisation's load, compliance requirements, and growth trajectory." },
+              { step: '03', title: 'Build, Integration & Testing', desc: 'Custom code, configured modules, integrated APIs. All components tested before anything reaches production.' },
+              { step: '04', title: 'Go-Live & Ongoing Support', desc: 'A structured launch. Employee training. Documentation. Dedicated support through the transition and beyond.' }
             ].map((item, idx) => (
               <motion.div 
                 key={idx}
@@ -370,14 +370,14 @@ const SoftwareSolutionsPage = () => {
       {/* CTA */}
       <section className="sp-section" style={{ padding: 'var(--section-padding)', textAlign: 'center' }}>
         <div className="container" style={{ maxWidth: '800px' }}>
-          <h2 style={{ fontSize: '2.5rem', color: 'var(--primary)', marginBottom: '1.5rem' }}>Ready to Upgrade Your Systems?</h2>
-          <p style={{ fontSize: '1.15rem', color: 'var(--text-muted)', marginBottom: '2.5rem' }}>Stop wrestling with spreadsheets. Let us build the unified platform your business deserves.</p>
+          <h2 style={{ fontSize: '2.5rem', color: 'var(--primary)', marginBottom: '1.5rem' }}>Ready to Move Beyond Spreadsheets?</h2>
+          <p style={{ fontSize: '1.15rem', color: 'var(--text-muted)', marginBottom: '2.5rem' }}>An operational assessment costs nothing. A system that actually works changes the business.</p>
           <button 
             onClick={(e) => { e.preventDefault(); window.dispatchEvent(new CustomEvent('open-strategy-modal')); }} 
             className="btn btn-primary" 
             style={{ padding: '1rem 2.5rem', fontSize: '1.1rem', cursor: 'pointer', border: 'none' }}
           >
-            Apply for a Strategy Session
+            Request a Strategy Session
           </button>
         </div>
       </section>

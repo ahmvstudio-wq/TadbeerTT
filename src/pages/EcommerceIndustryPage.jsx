@@ -7,12 +7,12 @@ const EcommerceIndustryPage = () => {
     <IndustryPageTemplate 
       industryName="E-Commerce"
       heroSubtitle="Omnichannel Portal Integrations & Automated Order Workflows"
-      heroDescription="Optimizing retail business systems through Shopify/Magento setups, automated ERP integrations, dynamic stock synchronization, and customer self-service portals."
+      heroDescription="Retail growth online is no longer a strategic option in Oman — it is a market expectation. The organisations gaining ground are not the ones with the best storefronts. They are the ones with the most reliable operations behind them."
       illustration={EcommerceIllustration}
       metrics={[
-        { value: "+28%", label: "Order Processing Speed" },
-        { value: "-35%", label: "Support Case Volume" },
-        { value: "94%", label: "Inventory Data Sync Rate" }
+        { value: "Faster", label: "Order Processing Speed" },
+        { value: "Lower", label: "Support Case Volume" },
+        { value: "Reliable", label: "Inventory Data Sync Rate" }
       ]}
       challenges={[
         {

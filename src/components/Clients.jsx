@@ -201,7 +201,7 @@ const Clients = () => {
             marginBottom: '0.75rem',
             letterSpacing: '-0.5px'
           }}>
-            Our Clients
+            Our Systems Power Leading GCC Organisations.
           </h2>
           <p style={{ 
             color: 'var(--text-muted)', 
@@ -211,7 +211,7 @@ const Clients = () => {
             maxWidth: '620px',
             margin: '0 auto'
           }}>
-            Forward-thinking brands trust Tadbeer to drive scalable growth and digital transformation. We partner with companies ready to build sustainable operational loops.
+            From government sectors to enterprise conglomerates, we implement the infrastructure that drives economic growth and operational stability.
           </p>
         </div>
 
