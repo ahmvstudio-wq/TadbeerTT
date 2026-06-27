@@ -30,7 +30,7 @@ const Preloader = () => {
         <img
           src="/logo.png"
           alt="Tadbeer Transformation"
-          style={{ height: '140px', width: 'auto', display: 'block' }}
+          style={{ height: '80px', width: 'auto', display: 'block' }}
         />
       </motion.div>
 
