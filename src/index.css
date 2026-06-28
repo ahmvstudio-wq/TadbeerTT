@@ -5463,6 +5463,9 @@ html, body {
   .about-interactive-row {
     flex-direction: column !important;
     gap: 1.5rem !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
   }
   .about-tabs-col {
     flex-direction: row !important;
@@ -5471,6 +5474,13 @@ html, body {
     padding-bottom: 0.5rem;
     -webkit-overflow-scrolling: touch;
     scroll-snap-type: x mandatory;
+    flex: none !important;
+    width: 100% !important;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .about-tabs-col::-webkit-scrollbar {
+    display: none;
   }
   .about-tab-item {
     flex: 0 0 auto;
@@ -5480,5 +5490,12 @@ html, body {
   .about-content-card {
     padding: 2rem 1.5rem !important;
     min-height: auto !important;
+    flex: none !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+  }
+  .highlights-grid {
+    grid-template-columns: 1fr !important;
   }
 }
