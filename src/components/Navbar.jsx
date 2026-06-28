@@ -5,10 +5,10 @@ import { ChevronDown, ArrowRight } from 'lucide-react';
 import Logo from './Logo';
 
 const serviceLinks = [
-  { label: 'Digital Marketing', path: '/services/digital-marketing', desc: 'Data-driven growth engines' },
   { label: 'Software Solutions', path: '/services/software-solutions', desc: 'Enterprise systems that scale' },
-  { label: 'Human Capital', path: '/services/human-capital', desc: 'People-first transformation' },
   { label: 'AI Technology', path: '/services/ai-technology', desc: 'Enterprise AI that delivers results' },
+  { label: 'Digital Marketing', path: '/services/digital-marketing', desc: 'Data-driven growth engines' },
+  { label: 'Human Capital', path: '/services/human-capital', desc: 'People-first transformation' },
 ];
 
 const Navbar = () => {
