@@ -25,8 +25,9 @@ const Preloader = () => {
         position: 'fixed',
         top: 0,
         left: 0,
-        width: '100vw',
-        height: '100vh',
+        right: 0,
+        bottom: 0,
+        height: '100dvh',
         backgroundColor: '#FCFBFA', // Premium warm cream
         zIndex: 999999,
         overflow: 'hidden',
@@ -126,7 +127,8 @@ const Preloader = () => {
           alignItems: 'center',
           gap: '1.25rem',
           maxWidth: '440px',
-          width: '90%'
+          width: '90%',
+          marginTop: '-6dvh'
         }}
       >
         {/* Emblem Image */}
