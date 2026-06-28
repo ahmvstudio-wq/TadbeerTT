@@ -265,6 +265,29 @@ function App() {
       <Footer />
       <WhatsAppButton />
       <OnyxAssistant />
+      
+      {/* Mobile Floating Strategy CTA */}
+      <motion.button
+        className="btn btn-primary mobile-strategy-fab"
+        onClick={() => setStrategyModalOpen(true)}
+        initial={{ opacity: 0, scale: 0.8 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ delay: 1 }}
+        style={{
+          position: 'fixed',
+          bottom: '5rem', // above onyx assistant
+          right: '1.5rem',
+          zIndex: 99,
+          boxShadow: '0 8px 20px rgba(79, 142, 247, 0.4)',
+          borderRadius: '50px',
+          padding: '0.8rem 1.5rem',
+          fontWeight: '700',
+          fontSize: '0.85rem'
+        }}
+      >
+        Strategy Session
+      </motion.button>
+
       <StrategySessionModal 
         isOpen={strategyModalOpen} 
         onClose={() => {
