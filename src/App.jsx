@@ -76,10 +76,10 @@ function App() {
   const previousPageRef = useRef(`${location.pathname}${location.search}`);
 
   useEffect(() => {
-    // Dismiss loading screen after 1.8 seconds
+    // Dismiss loading screen after 2.6 seconds
     const timer = setTimeout(() => {
       setLoading(false);
-    }, 1800);
+    }, 2600);
     return () => clearTimeout(timer);
   }, []);
 
