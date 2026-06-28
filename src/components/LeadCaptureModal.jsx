@@ -55,13 +55,13 @@ const LeadCaptureModal = ({ isOpen, onClose, onSubmit, resourceTitle, resourceTy
         dbPromise.then(({ error: dbError }) => {
           if (dbError) {
             console.error('Failed to save lead:', dbError);
-            setLoading(false);
-            setError('Something went wrong. Please check your connection and try again.');
-          } else {
-            setProgress(100);
-            setLoadingText('Success!');
-            
-            setTimeout(() => {
+            // Non-blocking: We log the error but still proceed to deliver the PDF
+          }
+          
+          setProgress(100);
+          setLoadingText('Success!');
+          
+          setTimeout(() => {
               setLoading(false);
               setSubmitted(true);
               if (onSubmit) onSubmit(formData);
@@ -87,7 +87,6 @@ const LeadCaptureModal = ({ isOpen, onClose, onSubmit, resourceTitle, resourceTy
               // Also fire a window event for same-tab updates
               window.dispatchEvent(new CustomEvent('lead-submitted', { detail: lead }));
             }, 350);
-          }
         });
       } else {
         setProgress(currentProgress);

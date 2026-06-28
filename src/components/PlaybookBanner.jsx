@@ -73,7 +73,9 @@ const PlaybookBanner = () => {
       };
       
       const { error } = await createLead(lead);
-      if (error) throw error;
+      if (error) {
+        console.error('Lead capture failed, but delivering asset anyway:', error);
+      }
       
       setStatus('success');
       setEmail('');
@@ -93,7 +95,7 @@ const PlaybookBanner = () => {
         handleDismiss();
       }, 4000);
     } catch (err) {
-      console.error('Failed to save lead:', err);
+      console.error('Unexpected error:', err);
       setStatus('error');
     }
   };
