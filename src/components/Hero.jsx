@@ -171,41 +171,24 @@ const Hero = () => {
               href="#readiness-score"
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.97 }}
-              className="btn btn-primary hero-cta-btn"
-              style={{ fontSize: '1.05rem', padding: '1rem 2.25rem' }}
+              className="hero-btn-primary"
             >
               Take the Business Assessment →
             </motion.a>
             <motion.button 
               onClick={() => window.dispatchEvent(new CustomEvent('open-playbook-modal'))}
-              whileHover={{ 
-                scale: 1.03, 
-                backgroundColor: 'rgba(202,169,76,0.06)',
-                borderColor: 'var(--secondary)'
-              }}
+              whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.97 }}
-              style={{ 
-                background: 'none', 
-                border: '1.5px solid var(--secondary)', 
-                borderRadius: '6px',
-                cursor: 'pointer', 
-                color: 'var(--primary)', 
-                fontWeight: '700', 
-                padding: '0.9rem 1.75rem', 
-                fontSize: '0.95rem',
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '8px',
-                transition: 'background-color 0.2s, border-color 0.2s'
-              }}
+              className="hero-btn-secondary"
             >
               <span>Download the Playbook</span>
               <Download size={15} style={{ strokeWidth: 2.5, color: 'var(--secondary)' }} />
             </motion.button>
             <motion.button 
               onClick={() => window.dispatchEvent(new CustomEvent('open-strategy-modal'))}
-              whileHover={{ opacity: 0.7 }}
-              style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--primary)', fontWeight: '600', borderBottom: '1.5px solid var(--primary)', paddingBottom: '2px', fontSize: '0.95rem' }}
+              whileHover={{ opacity: 0.75 }}
+              whileTap={{ scale: 0.97 }}
+              className="hero-btn-link"
             >
               Apply for a Strategy Session
             </motion.button>
