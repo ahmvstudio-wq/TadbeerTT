@@ -183,7 +183,13 @@ const ROICalculator = () => {
 
         </div>
       </div>
-      <LeadCaptureModal isOpen={modalOpen} onClose={() => setModalOpen(false)} resourceTitle="Detailed ROI Analysis Report" resourceType="Custom Report" />
+      <LeadCaptureModal 
+        isOpen={modalOpen} 
+        onClose={() => setModalOpen(false)} 
+        resourceTitle="Detailed ROI Analysis Report" 
+        resourceType="Custom Report" 
+        resourceLink="/assets/ROI_Financial_Friction_Analysis.pdf"
+      />
     </section>
   );
 };

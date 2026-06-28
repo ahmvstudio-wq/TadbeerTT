@@ -79,6 +79,15 @@ const PlaybookBanner = () => {
       setEmail('');
       window.dispatchEvent(new CustomEvent('lead-submitted', { detail: lead }));
       
+      // Trigger static resource delivery
+      const link = document.createElement('a');
+      link.href = '/assets/GCC_Digital_Transformation_Playbook.pdf';
+      link.target = '_blank';
+      link.download = 'GCC_Enterprise_Digital_Transformation_Playbook.pdf';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      
       // Auto close after success
       setTimeout(() => {
         handleDismiss();
@@ -251,7 +260,7 @@ const PlaybookBanner = () => {
         onClose={() => setModalOpen(false)}
         resourceTitle="GCC Enterprise Digital Transformation Playbook"
         resourceType="Playbook"
-        resourceLink="#"
+        resourceLink="/assets/GCC_Digital_Transformation_Playbook.pdf"
       />
     </>
   );

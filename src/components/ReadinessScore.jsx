@@ -461,6 +461,7 @@ const ReadinessScore = () => {
         onClose={() => setModalOpen(false)} 
         resourceTitle={`Transformation Readiness Report (Score: ${calculateScore()}%)`} 
         resourceType="Assessment Report" 
+        resourceLink={`/assets/Readiness_Action_Plan_${getResultContent(calculateScore()).phase.split(' ')[0]}.pdf`}
       />
     </section>
   );
