@@ -42,9 +42,9 @@ const ROICalculator = () => {
     <section id="roi-calculator" className="roi-section" style={{ padding: 'var(--section-padding)', background: 'white' }}>
       <div className="container">
         <div className="text-center" style={{ marginBottom: '4rem' }}>
-          <span className="section-label">CALCULATE YOUR POTENTIAL</span>
-          <h2 className="section-title">Model the Return Before You Commit</h2>
-          <p style={{ color: 'var(--text-muted)', fontSize: '1.15rem', marginTop: '1rem' }}>Enter your current operational data to estimate the financial impact of the right systems and strategy investment for your business.</p>
+          <span className="section-label">ROI</span>
+          <h2 className="section-title">Calculate the cost of operational friction.</h2>
+          <p style={{ color: 'var(--text-muted)', fontSize: '1.15rem', marginTop: '1rem', maxWidth: '750px', margin: '1rem auto 0' }}>Manual effort, rework, slow approvals, and unclear ownership create hidden cost. Use the ROI model to estimate the annual impact of stronger systems and execution. Then request a detailed analysis tailored to your operation.</p>
         </div>
 
         <div className="roi-calc-grid">
@@ -160,8 +160,22 @@ const ROICalculator = () => {
               </div>
             </div>
 
-            <div style={{ display: 'flex', gap: '1rem', width: '100%' }}>
-              <button onClick={() => setModalOpen(true)} className="btn btn-primary" style={{ flex: 1, background: 'var(--secondary)', color: 'var(--primary)', borderColor: 'var(--secondary)', border: 'none', cursor: 'pointer', width: '100%', justifyContent: 'center' }}>
+            <div style={{ display: 'flex', gap: '1rem', width: '100%', flexWrap: 'wrap' }}>
+              <button 
+                onClick={() => {
+                  const element = document.getElementById('roi-calculator');
+                  if (element) element.scrollIntoView({ behavior: 'smooth' });
+                }} 
+                className="btn" 
+                style={{ flex: 1, border: '1px solid var(--secondary)', background: 'none', color: 'white', cursor: 'pointer', justifyContent: 'center' }}
+              >
+                Model Your ROI
+              </button>
+              <button 
+                onClick={() => setModalOpen(true)} 
+                className="btn btn-primary" 
+                style={{ flex: 1, background: 'var(--secondary)', color: 'var(--primary)', borderColor: 'var(--secondary)', border: 'none', cursor: 'pointer', justifyContent: 'center' }}
+              >
                 Request a Detailed Analysis
               </button>
             </div>

@@ -372,86 +372,272 @@ const INDUSTRIES_DATA = [
   {
     illustration: <HealthcareIllustration />,
     title: 'Healthcare',
-    desc: 'Advanced diagnostics integration and secure digital workflow automation.',
+    desc: 'Secure workflows, stronger reporting, and improved service quality.',
     path: '/industries/healthcare'
   },
   {
     illustration: <RealEstateIllustration />,
     title: 'Real Estate',
-    desc: 'PropTech infrastructure, transaction management, and portfolio analytics.',
+    desc: 'Better transaction operations, portfolio visibility, and internal controls.',
     path: '/industries/real-estate'
   },
   {
     illustration: <LogisticsIllustration />,
-    title: 'Logistics & Supply Chain',
-    desc: 'Integrated fleet management, real-time tracking, and supply chain optimization.',
+    title: 'Logistics and Supply Chain',
+    desc: 'Improved tracking, faster coordination, fewer delays caused by manual handovers.',
     path: '/industries/logistics'
   },
   {
     illustration: <RetailIllustration />,
-    title: 'E-Commerce',
-    desc: 'Scalable digital retail platforms with deep ERP and inventory synchronization.',
+    title: 'E-commerce and Retail',
+    desc: 'Integrated ordering, inventory, and customer experience foundations.',
     path: '/industries/ecommerce'
   },
   {
     illustration: <ConstructionIllustration />,
     title: 'Construction',
-    desc: 'Comprehensive project tracking, resource planning, and compliance systems.',
+    desc: 'Stronger governance, compliance workflows, and project control.',
     path: '/industries/construction'
   },
   {
     illustration: <ManufacturingIllustration />,
     title: 'Manufacturing',
-    desc: 'Intelligent inventory control, custom ERP platforms, and maintenance planning.',
+    desc: 'ERP aligned operations, inventory control, maintenance planning, clear accountability.',
     path: '/industries/manufacturing'
   },
   {
     illustration: <GovernmentIllustration />,
-    title: 'Government & Public Sector',
-    desc: 'Secure public sector portals and digital governance solutions.',
+    title: 'Government and Public Sector',
+    desc: 'Secure governance foundations with measurable service delivery.',
     path: '/industries/government'
-  },
-  {
-    illustration: <CorporateIllustration />,
-    title: 'Professional Services',
-    desc: 'Enterprise resource planning, corporate CRM, and data security.',
-    path: '/industries/professional-services'
   }
 ];
 
 const About = () => {
   const navigate = useNavigate();
+  const [activeTab, setActiveTab] = useState(0);
+  const [progress, setProgress] = useState(0);
+  const isHoveredRef = useRef(false);
+  const autoRotateInterval = 8000;
+  const stepTime = 100;
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      if (isHoveredRef.current) return;
+      setProgress((prev) => {
+        if (prev >= 100) {
+          setActiveTab((curr) => (curr + 1) % 3);
+          return 0;
+        }
+        return prev + (stepTime / autoRotateInterval) * 100;
+      });
+    }, stepTime);
+    return () => clearInterval(timer);
+  }, [activeTab]);
+
+  const handleTabClick = (index) => {
+    setActiveTab(index);
+    setProgress(0);
+  };
+
+  const tabs = [
+    {
+      id: 0,
+      label: "Who We Are",
+      title: "A transformation partner built for Omani realities.",
+      subtitle: "Strategic consulting meets hands-on execution.",
+      body: "Tadbeer supports organisational and business transformation across strategy, technology, marketing, and human capital. We focus on root causes, build practical roadmaps, support implementation, and strengthen internal capability so improvements last.",
+      highlights: [
+        "4-Pillar Integration (Strategy, Tech, Marketing, People)",
+        "Implementation-led operational accountability",
+        "Built specifically for Oman Vision 2040 objectives"
+      ]
+    },
+    {
+      id: 1,
+      label: "Why Tadbeer",
+      title: "Businesses stall when capacity cannot support growth.",
+      subtitle: "Building the operating systems of tomorrow.",
+      body: "Growth needs more than ideas. It needs an operating system. Clear priorities. Defined ownership. Fit for purpose tools. Adoption by people. A delivery rhythm that keeps execution consistent.",
+      highlights: [
+        "KPI governance & structured operational ownership",
+        "Pragmatic tool configuration rather than generic setups",
+        "Sustainable capability building so results stay local"
+      ]
+    },
+    {
+      id: 2,
+      label: "Who We Serve",
+      title: "Built for SMEs, family businesses, and enterprises.",
+      subtitle: "Tailored to Omani scale and governance.",
+      body: "Some organisations need structure to professionalise and scale. Others need systems to gain control and visibility. Whether you are strengthening a growing family business or modernising a large organisation, the requirement is the same. Practical systems that match how work happens in Oman, including bilingual operations, governance requirements, and real decision constraints.",
+      highlights: [
+        "Bilingual operational frameworks (Arabic & English)",
+        "Succession & modern corporate governance models",
+        "Practical design aligned with local workforce realities"
+      ]
+    }
+  ];
+
   return (
-    <section id="about" className="about-narrative-section" style={{ padding: '3.5rem 0' }}>
+    <section id="about" className="about-narrative-section" style={{ padding: '6rem 0' }}>
       <div className="container">
         
-        {/* ─── Why Tadbeer Exists ─── */}
-        <div style={{ marginBottom: '5rem', maxWidth: '800px', margin: '0 auto 5rem' }}>
-          <motion.div 
-            className="text-center"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ type: "spring", bounce: 0.1, duration: 1.2 }}
-            style={{ marginBottom: '2.5rem' }}
-          >
-            <span className="section-label">Why Tadbeer Exists</span>
-            <h2 className="section-title" style={{ fontSize: '2.2rem', marginBottom: '1.5rem' }}>We Build Systems That Outlast Us.</h2>
-          </motion.div>
-          
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ type: "spring", bounce: 0.1, duration: 1.2, delay: 0.2 }}
-            style={{ color: 'var(--text-muted)', fontSize: '1.05rem', lineHeight: '1.7', textAlign: 'center' }}
-          >
-            <p style={{ marginBottom: '1.5rem' }}>Businesses across Oman and the GCC don’t fail because they lack ambition; they stall because their internal systems cannot support their growth.</p>
-            <p>At Tadbeer, we do not just deliver consultancy decks. We architect the underlying digital infrastructure, optimize human capital, and deploy the growth systems required for organizations to scale profitably and predictably.</p>
-          </motion.div>
+        {/* Narrative Interactive Segment */}
+        <div 
+          onMouseEnter={() => { isHoveredRef.current = true; }}
+          onMouseLeave={() => { isHoveredRef.current = false; }}
+          className="about-interactive-row"
+          style={{ 
+            display: 'flex', 
+            gap: '3rem', 
+            marginBottom: '6rem',
+            alignItems: 'stretch'
+          }}
+        >
+          {/* Left Column: Tab list */}
+          <div style={{
+            flex: '1 1 35%',
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '1rem',
+            justifyContent: 'center'
+          }} className="about-tabs-col">
+            {tabs.map((tab) => {
+              const isActive = activeTab === tab.id;
+              return (
+                <div
+                  key={tab.id}
+                  onClick={() => handleTabClick(tab.id)}
+                  style={{
+                    padding: '1.5rem',
+                    background: isActive ? 'white' : 'rgba(24,79,91,0.02)',
+                    border: isActive ? '1px solid var(--secondary)' : '1px solid var(--border)',
+                    borderLeft: isActive ? '4px solid var(--secondary)' : '1px solid var(--border)',
+                    borderRadius: '10px',
+                    cursor: 'pointer',
+                    position: 'relative',
+                    overflow: 'hidden',
+                    transition: 'all 0.3s ease',
+                    boxShadow: isActive ? '0 8px 20px rgba(202,169,76,0.06)' : 'none'
+                  }}
+                  className="about-tab-item"
+                >
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+                    <span style={{ 
+                      fontSize: '0.85rem', 
+                      fontWeight: '800', 
+                      color: isActive ? 'var(--secondary)' : 'var(--text-muted)' 
+                    }}>
+                      0{tab.id + 1}
+                    </span>
+                    <h4 style={{ 
+                      margin: 0, 
+                      fontSize: '1.1rem', 
+                      fontWeight: '700', 
+                      color: isActive ? 'var(--primary)' : 'var(--text-muted)' 
+                    }}>
+                      {tab.label}
+                    </h4>
+                  </div>
+                  
+                  {/* Dynamic Progress Bar */}
+                  {isActive && (
+                    <div style={{
+                      position: 'absolute',
+                      bottom: 0,
+                      left: 0,
+                      height: '3px',
+                      background: 'var(--secondary)',
+                      width: `${progress}%`,
+                      transition: 'width 0.1s linear'
+                    }} />
+                  )}
+                </div>
+              );
+            })}
+          </div>
+
+          {/* Right Column: Display Card */}
+          <div style={{
+            flex: '1 1 65%',
+            background: 'white',
+            border: '1px solid var(--border)',
+            borderRadius: '16px',
+            padding: '3rem',
+            boxShadow: '0 10px 30px rgba(0,0,0,0.02)',
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'space-between',
+            position: 'relative',
+            minHeight: '380px'
+          }} className="about-content-card">
+            {/* Background design pattern */}
+            <div style={{
+              position: 'absolute',
+              top: 0,
+              right: 0,
+              width: '120px',
+              height: '120px',
+              background: 'radial-gradient(circle, rgba(202,169,76,0.04) 0%, transparent 70%)',
+              pointerEvents: 'none'
+            }} />
+
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
+              <span className="section-label" style={{ color: 'var(--secondary)', alignSelf: 'flex-start' }}>
+                {tabs[activeTab].label}
+              </span>
+              
+              <motion.div
+                key={activeTab}
+                initial={{ opacity: 0, y: 15 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5 }}
+                style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}
+              >
+                <h3 style={{ fontSize: '1.75rem', color: 'var(--primary)', fontWeight: '800', lineHeight: '1.3', margin: 0 }}>
+                  {tabs[activeTab].title}
+                </h3>
+                <h5 style={{ fontSize: '0.95rem', color: 'var(--secondary)', fontWeight: '600', margin: 0, textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+                  {tabs[activeTab].subtitle}
+                </h5>
+                <p style={{ color: 'var(--text-muted)', fontSize: '0.95rem', lineHeight: '1.6', margin: 0 }}>
+                  {tabs[activeTab].body}
+                </p>
+                
+                {/* Visual Highlights Grid */}
+                <div style={{ 
+                  display: 'grid', 
+                  gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', 
+                  gap: '1rem', 
+                  marginTop: '1.5rem',
+                  borderTop: '1px solid var(--border)',
+                  paddingTop: '1.5rem'
+                }} className="highlights-grid">
+                  {tabs[activeTab].highlights.map((highlight, idx) => (
+                    <div key={idx} style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                      <div style={{
+                        width: '6px',
+                        height: '6px',
+                        borderRadius: '50%',
+                        background: 'var(--secondary)',
+                        flexShrink: 0
+                      }} />
+                      <span style={{ fontSize: '0.85rem', color: 'var(--text-main)', fontWeight: '600' }}>
+                        {highlight}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              </motion.div>
+            </div>
+          </div>
         </div>
 
-        {/* ─── Values ─── */}
+        {/* Divider line */}
+        <div style={{ height: '1px', background: 'var(--border)', margin: '0 auto 5rem', maxWidth: '1000px' }} />
+
+        {/* ─── Industries ─── */}
         <div style={{ marginBottom: '5rem' }}>
           <motion.div 
             className="text-center"
@@ -461,8 +647,8 @@ const About = () => {
             transition={{ type: "spring", bounce: 0.1, duration: 1.2 }}
             style={{ marginBottom: '3.5rem' }}
           >
-            <span className="section-label">Industry Expertise</span>
-            <h2 className="section-title">Driving Sector-Specific Transformation.</h2>
+            <span className="section-label" style={{ color: 'var(--secondary)' }}>Industries</span>
+            <h2 className="section-title">Sector aware transformation. Designed for Oman.</h2>
           </motion.div>
 
           <div className="industries-panel">

@@ -266,7 +266,7 @@ const ReadinessScore = () => {
           transition={{ type: "spring", bounce: 0.1, duration: 1.2 }}
         >
           <span className="section-label">Assessment</span>
-          <h2 className="section-title">Are Your Systems Ready to Scale?</h2>
+          <h2 className="section-title">Are your systems ready to scale?</h2>
         </motion.div>
 
         <motion.div 

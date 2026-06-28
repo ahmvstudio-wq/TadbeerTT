@@ -5,43 +5,48 @@ import { ArrowRight, Target, Layers, Cpu, Users } from 'lucide-react';
 
 const servicesData = [
   {
-    id: "marketing",
-    titleEn: "Digital Marketing",
-    titleAr: "التسويق الرقمي",
-    desc: "Campaigns end. Acquisition systems do not. The work is to build the marketing infrastructure that generates consistent inbound demand over time — structured, measurable, bilingual, and aligned to how Omani and GCC audiences actually make decisions.",
+    id: "strategy",
+    titleEn: "Strategy",
+    subtitle: "Strategy and Operating Model",
+    desc: "Clarify direction, priorities, governance, and KPIs so execution becomes consistent.",
     icon: Target,
     image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80&auto=format",
-    items: ["Data-Driven Strategy", "Bilingual Social Media (Arabic / English)", "AI-Assisted Content Production", "Performance Analytics & Attribution"],
-    path: "/services/digital-marketing"
+    items: [],
+    path: "#"
   },
   {
-    id: "software",
-    titleEn: "Software Solutions",
-    titleAr: "حلول برمجية",
-    desc: "A system that does not fit how the business operates will not be used for long. Every implementation begins with understanding the process — then configuring the technology to match it, not the other way around.",
+    id: "technology",
+    titleEn: "Technology and Systems",
+    subtitle: "Software Solutions",
+    desc: "We start with process, then configure technology around it so teams adopt it and outcomes are measurable.",
     icon: Layers,
     image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&q=80&auto=format",
-    items: ["ERP Implementation (Odoo / SAP)", "Warehouse Management Systems", "HRMS & Learning Management", "POS & Vendor Management Systems"],
+    items: [
+      "ERP implementation including Odoo and SAP.",
+      "CRM and workflow systems.",
+      "Learning management systems.",
+      "Visitor management automation and integrations."
+    ],
     path: "/services/software-solutions"
   },
   {
-    id: "ai",
-    titleEn: "AI & Technology",
-    titleAr: "التقنيات المتقدمة",
-    desc: "The most valuable AI applications in a business are rarely the most visible ones. They are the ones embedded in the workflows that run every day — quietly reducing manual effort, improving decision quality, and producing results that accumulate over time.",
+    id: "marketing",
+    titleEn: "Marketing and Customer Engagement",
+    subtitle: "Marketing Foundations",
+    desc: "We build marketing infrastructure that generates consistent inbound demand. It is structured, measurable, and aligned with how customers decide in Oman.",
     icon: Cpu,
     image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&q=80&auto=format",
-    items: ["Intelligent Workflow Automation", "Custom AI Application Development", "Operational Machine Learning Pipelines", "AI-Powered Process Improvement"],
-    path: "/services/ai-technology"
+    items: [],
+    path: "/services/digital-marketing"
   },
   {
-    id: "talent",
-    titleEn: "Human Capital",
-    titleAr: "إدارة رأس المال البشري",
-    desc: "Organisations outlast the technology they deploy and the strategies they adopt. They do not outlast structural people problems. Omanization compliance, retention, performance management, and organisational design are not HR functions — they are business continuity functions.",
+    id: "people",
+    titleEn: "People and Organisational Structuring",
+    subtitle: "Human Capital",
+    desc: "Organisational design. Recruitment and onboarding systems. Training programs. Retention and compensation strategy so performance becomes repeatable.",
     icon: Users,
     image: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&q=80&auto=format",
-    items: ["Organisational Design & Development", "Recruitment & Onboarding Systems", "Training & Development Programmes", "Retention & Compensation Strategy"],
+    items: [],
     path: "/services/human-capital"
   }
 ];
@@ -62,20 +67,17 @@ const useMousePositionInCard = () => {
 
 // SVG Overlays for cards
 const ServiceSVGOverlay = ({ type }) => {
-  if (type === "marketing") {
+  if (type === "strategy") {
     return (
       <svg viewBox="0 0 200 200" className="card-blueprint-svg">
         <path d="M20,180 Q100,50 180,20" fill="none" stroke="rgba(202,169,76,0.3)" strokeWidth="1.5" strokeDasharray="3 3" />
         <circle cx="20" cy="180" r="4" fill="var(--secondary)" />
         <circle cx="100" cy="115" r="4" fill="var(--primary)" />
         <circle cx="180" cy="20" r="5" fill="var(--secondary)" />
-        <polygon points="60,40 140,40 120,90 80,90" fill="none" stroke="rgba(24,79,91,0.2)" strokeWidth="1" />
-        <line x1="80" y1="90" x2="80" y2="150" stroke="rgba(24,79,91,0.2)" strokeWidth="1" />
-        <line x1="120" y1="90" x2="120" y2="150" stroke="rgba(24,79,91,0.2)" strokeWidth="1" />
       </svg>
     );
   }
-  if (type === "software") {
+  if (type === "technology") {
     return (
       <svg viewBox="0 0 200 200" className="card-blueprint-svg">
         <rect x="30" y="30" width="40" height="30" rx="3" fill="none" stroke="rgba(202,169,76,0.3)" strokeWidth="1" />
@@ -85,7 +87,7 @@ const ServiceSVGOverlay = ({ type }) => {
       </svg>
     );
   }
-  if (type === "ai") {
+  if (type === "marketing") {
     return (
       <svg viewBox="0 0 200 200" className="card-blueprint-svg">
         <circle cx="100" cy="100" r="10" fill="none" stroke="var(--secondary)" strokeWidth="1" />
@@ -124,10 +126,10 @@ const Services = () => {
           viewport={{ once: true, margin: "-100px" }}
           transition={{ type: "spring", bounce: 0.1, duration: 1.2 }}
         >
-          <span className="section-label">Our Capabilities | كفاءاتنا الأساسية</span>
-          <h2 className="section-title">Four Capabilities.<br />One Partner Who Stays.</h2>
-          <p style={{ color: 'var(--text-muted)', fontSize: '1.15rem', maxWidth: '600px', margin: '1rem auto 0' }}>
-            Strategy without execution is planning. Technology without adoption is cost. People without structure are potential. Each of Tadbeer's four service areas is built on the belief that the real work begins after the first decision.
+          <span className="section-label">Our Capabilities</span>
+          <h2 className="section-title">Four capabilities. One accountable partner.</h2>
+          <p style={{ color: 'var(--text-muted)', fontSize: '1.15rem', maxWidth: '700px', margin: '1rem auto 0' }}>
+            Strategy without execution stays on paper. Technology without adoption becomes cost. People without structure cannot perform at scale. We bring these together through one accountable team.
           </p>
         </motion.div>
 
@@ -135,18 +137,8 @@ const Services = () => {
         <div className="services-grid">
           {servicesData.map((service, index) => {
             const IconComponent = service.icon;
-            return (
-              <MotionLink 
-                key={service.id}
-                to={service.path}
-                className="service-card"
-                onMouseMove={handleMouseMove}
-                initial={{ opacity: 0, y: 40 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-50px" }}
-                transition={{ type: "spring", bounce: 0.15, duration: 0.9, delay: index * 0.08 }}
-                style={{ textDecoration: 'none', color: 'inherit', display: 'flex', flexDirection: 'column' }}
-              >
+            const cardContent = (
+              <>
                 {/* Photo with SVG overlay container */}
                 <div className="card-photo-wrapper">
                   <img 
@@ -165,29 +157,65 @@ const Services = () => {
 
                 <div className="service-card-body" style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
                   <div>
-                    <div className="title-row">
-                      <h3 className="service-title">{service.titleEn}</h3>
-                      <span className="service-arabic">{service.titleAr}</span>
+                    <div className="title-row" style={{ display: 'flex', flexDirection: 'column', gap: '4px', alignItems: 'flex-start' }}>
+                      <h3 className="service-title" style={{ fontSize: '1.25rem', color: 'var(--primary)', fontWeight: '800' }}>{service.titleEn}</h3>
+                      <span className="service-arabic" style={{ fontSize: '0.8rem', color: 'var(--secondary)', fontWeight: '600', textTransform: 'uppercase', letterSpacing: '0.5px' }}>{service.subtitle}</span>
                     </div>
-                    <p className="service-desc">{service.desc}</p>
+                    <p className="service-desc" style={{ fontSize: '0.9rem', color: 'var(--text-muted)', marginTop: '0.5rem', lineHeight: '1.5' }}>{service.desc}</p>
                     
-                    <ul className="service-list">
-                      {service.items.map((item, i) => (
-                        <li key={i}>
-                          <span className="gold-bullet">•</span>
-                          <span>{item}</span>
-                        </li>
-                      ))}
-                    </ul>
+                    {service.items && service.items.length > 0 && (
+                      <ul className="service-list" style={{ marginTop: '0.75rem', display: 'flex', flexDirection: 'column', gap: '0.35rem' }}>
+                        {service.items.map((item, i) => (
+                          <li key={i} style={{ display: 'flex', alignItems: 'flex-start', gap: '6px', fontSize: '0.85rem', color: 'var(--text-main)' }}>
+                            <span className="gold-bullet" style={{ color: 'var(--secondary)', fontWeight: 'bold' }}>•</span>
+                            <span>{item}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    )}
                   </div>
 
                   <div className="learn-more-action-trigger" style={{ marginTop: '1.5rem' }}>
-                    <span>Inspect Details</span>
+                    <span>{service.path === '#' ? 'Apply for a strategy session' : 'Inspect Details'}</span>
                     <ArrowRight size={16} className="arrow-trig" />
                   </div>
                 </div>
-              </MotionLink>
+              </>
             );
+
+            if (service.path.startsWith('/')) {
+              return (
+                <MotionLink 
+                  key={service.id}
+                  to={service.path}
+                  className="service-card"
+                  onMouseMove={handleMouseMove}
+                  initial={{ opacity: 0, y: 40 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-50px" }}
+                  transition={{ type: "spring", bounce: 0.15, duration: 0.9, delay: index * 0.08 }}
+                  style={{ textDecoration: 'none', color: 'inherit', display: 'flex', flexDirection: 'column' }}
+                >
+                  {cardContent}
+                </MotionLink>
+              );
+            } else {
+              return (
+                <motion.div 
+                  key={service.id}
+                  onClick={() => window.dispatchEvent(new CustomEvent('open-strategy-modal'))}
+                  className="service-card"
+                  onMouseMove={handleMouseMove}
+                  initial={{ opacity: 0, y: 40 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-50px" }}
+                  transition={{ type: "spring", bounce: 0.15, duration: 0.9, delay: index * 0.08 }}
+                  style={{ textDecoration: 'none', color: 'inherit', display: 'flex', flexDirection: 'column', cursor: 'pointer' }}
+                >
+                  {cardContent}
+                </motion.div>
+              );
+            }
           })}
         </div>
 
@@ -198,11 +226,19 @@ const Services = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.8 }}
+          style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', textAlign: 'center', padding: '3rem 2rem', gap: '1.5rem' }}
         >
-          <div style={{ position: 'relative', zIndex: 2 }}>
-            <p style={{ fontSize: '1.15rem', fontWeight: '500', marginBottom: '0', color: '#fff', lineHeight: '1.6' }}>
+          <div style={{ position: 'relative', zIndex: 2, maxWidth: '700px' }}>
+            <p style={{ fontSize: '1.2rem', fontWeight: '600', marginBottom: '1.5rem', color: '#fff', lineHeight: '1.6' }}>
               From the first operational audit to the final system deployment — one team, one point of accountability, one standard of completion.
             </p>
+            <a 
+              href="#readiness-score" 
+              className="btn btn-primary"
+              style={{ background: 'var(--secondary)', color: 'var(--primary)', border: 'none', display: 'inline-flex', padding: '0.85rem 2.25rem' }}
+            >
+              Take the Business Assessment
+            </a>
           </div>
         </motion.div>
 

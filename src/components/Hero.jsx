@@ -90,9 +90,25 @@ const Hero = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1.2, delay: 0.2, ease: [0.25, 0.1, 0.25, 1] }}
           >
-            Turn Great Ideas Into{' '}
-            <span className="accent">Dominant Brands.</span>
+            Scale your business with <span className="accent">clarity and control.</span>
           </motion.h1>
+
+          <motion.p
+            className="hero-subtitle"
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1.2, delay: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
+            style={{
+              fontSize: '1.05rem',
+              color: 'var(--text-muted)',
+              lineHeight: '1.6',
+              marginTop: '1rem',
+              marginBottom: '1.5rem',
+              maxWidth: '540px'
+            }}
+          >
+            Tadbeer helps Omani SMEs, family businesses, and enterprises strengthen strategy, systems, people, and execution so growth becomes measurable, predictable, and aligned with Oman Vision 2040.
+          </motion.p>
 
           {/* Focus Pillars Strip - Extremely minimal and space-efficient */}
           <motion.div 
@@ -149,6 +165,7 @@ const Hero = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1.2, delay: 0.5, ease: [0.25, 0.1, 0.25, 1] }}
             className="hero-buttons"
+            style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem', alignItems: 'center' }}
           >
             <motion.a 
               href="#readiness-score"
@@ -157,7 +174,7 @@ const Hero = () => {
               className="btn btn-primary hero-cta-btn"
               style={{ fontSize: '1.05rem', padding: '1rem 2.25rem' }}
             >
-              Take Business Assessment →
+              Take the Business Assessment →
             </motion.a>
             <motion.button 
               onClick={() => window.dispatchEvent(new CustomEvent('open-strategy-modal'))}
@@ -165,6 +182,13 @@ const Hero = () => {
               style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--primary)', fontWeight: '600', borderBottom: '1.5px solid var(--primary)', paddingBottom: '2px', fontSize: '0.95rem' }}
             >
               Apply for a Strategy Session
+            </motion.button>
+            <motion.button 
+              onClick={() => window.dispatchEvent(new CustomEvent('open-playbook-modal'))}
+              whileHover={{ opacity: 0.7 }}
+              style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--primary)', fontWeight: '600', borderBottom: '1.5px solid var(--primary)', paddingBottom: '2px', fontSize: '0.95rem' }}
+            >
+              Download the Playbook
             </motion.button>
           </motion.div>
 

@@ -62,9 +62,9 @@ const OmanizationCheck = () => {
       <div className="container">
         
         <div className="text-center" style={{ marginBottom: '4rem' }}>
-          <span className="section-label">GCC COMPLIANCE AUDIT</span>
-          <h2 className="section-title">Omanization Readiness Check</h2>
-          <p style={{ color: 'var(--text-muted)', fontSize: '1.15rem', marginTop: '1rem' }}>Organisations that manage Omanization proactively spend less time on it than those who manage it reactively. Enter your current figures to see where you stand.</p>
+          <span className="section-label">Compliance</span>
+          <h2 className="section-title">Omanization readiness check.</h2>
+          <p style={{ color: 'var(--text-muted)', fontSize: '1.15rem', marginTop: '1rem', maxWidth: '750px', margin: '1rem auto 0' }}>Omanization is easier when managed proactively. Enter your workforce figures to see where you stand, then request a practical roadmap aligned to your sector realities.</p>
         </div>
 
         <div className="roi-calc-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '3rem', maxWidth: '1000px', margin: '0 auto' }}>
@@ -172,7 +172,7 @@ const OmanizationCheck = () => {
             <button 
               onClick={(e) => {
                 e.preventDefault();
-                window.dispatchEvent(new CustomEvent('open-strategy-modal', { detail: { industry: 'Professional Services' } }));
+                window.dispatchEvent(new CustomEvent('open-strategy-modal', { detail: { industry: 'Human Capital' } }));
               }}
               className="btn btn-primary" 
               style={{ width: '100%', padding: '0.85rem', cursor: 'pointer', border: 'none', background: status.color, color: 'white' }}

@@ -5013,26 +5013,26 @@ html, body {
 
 /* Playbook Banner Offset Styles */
 :root.has-banner .navbar {
-  top: 40px !important;
+  top: var(--banner-height, 40px) !important;
 }
 :root.has-banner .nav-mobile-drawer {
-  top: 40px !important;
-  height: calc(100vh - 40px) !important;
+  top: var(--banner-height, 40px) !important;
+  height: calc(100vh - var(--banner-height, 40px)) !important;
 }
 :root.has-banner main {
-  margin-top: 40px !important;
+  margin-top: var(--banner-height, 40px) !important;
 }
 
 @media (max-width: 768px) {
   :root.has-banner .navbar {
-    top: 44px !important;
+    top: var(--banner-height, 44px) !important;
   }
   :root.has-banner .nav-mobile-drawer {
-    top: 44px !important;
-    height: calc(100vh - 44px) !important;
+    top: var(--banner-height, 44px) !important;
+    height: calc(100vh - var(--banner-height, 44px)) !important;
   }
   :root.has-banner main {
-    margin-top: 44px !important;
+    margin-top: var(--banner-height, 44px) !important;
   }
 }
 
@@ -5455,5 +5455,30 @@ html, body {
   .modal-progress-frame {
     width: 76px !important;
     height: 76px !important;
+  }
+}
+
+/* Interactive About section responsiveness */
+@media (max-width: 768px) {
+  .about-interactive-row {
+    flex-direction: column !important;
+    gap: 1.5rem !important;
+  }
+  .about-tabs-col {
+    flex-direction: row !important;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding-bottom: 0.5rem;
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x mandatory;
+  }
+  .about-tab-item {
+    flex: 0 0 auto;
+    scroll-snap-align: start;
+    padding: 0.75rem 1.25rem !important;
+  }
+  .about-content-card {
+    padding: 2rem 1.5rem !important;
+    min-height: auto !important;
   }
 }

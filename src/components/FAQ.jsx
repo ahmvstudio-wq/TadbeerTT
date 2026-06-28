@@ -6,24 +6,20 @@ const FAQ = () => {
 
   const faqs = [
     {
-      q: "We have engaged consultants before and the results didn't last.",
-      a: "That is the most common reason organisations come here. Strategy without implementation accountability produces documentation, not change. Every Tadbeer engagement is structured around sustained outcomes — the work does not conclude when the report is submitted."
+      q: "We have worked with consultants before. Results did not last.",
+      a: "That usually happens when work stops at recommendations. We focus on systems, adoption, and accountability. We stay involved until outcomes are measurable."
     },
     {
-      q: "Are we the right size for this?",
-      a: "Scale is not the criterion. The organisations Tadbeer works with range from growth-stage businesses finding their operational footing to established enterprises preparing for the next stage of expansion. What matters is whether the objective is serious."
+      q: "Will this work for our specific context in Oman.",
+      a: "Yes. We do not copy frameworks. We diagnose first, then design around your workflows, compliance requirements, and your team’s ability to adopt change."
     },
     {
-      q: "Is this a local firm or an international firm with a local office?",
-      a: "Founded in Muscat in 2025. Built here because organisations in Oman and the GCC needed a firm that understood this market from the inside — not one that arrived with frameworks designed for a different operating environment."
+      q: "Do you support implementation or only strategy.",
+      a: "We support the full journey. Consultation, analysis, roadmap, implementation support, and capability building."
     },
     {
-      q: "Will these solutions work for our specific context?",
-      a: "Every engagement begins with a detailed analysis of your processes, your team, your compliance requirements, and the specific constraints of your industry. The configuration follows from that."
-    },
-    {
-      q: "What does the first step cost?",
-      a: "Nothing. If the first conversation does not demonstrate clear value, there is no basis for proposing anything further. That is the standard applied to every initial engagement."
+      q: "What is the first step.",
+      a: "Start with the Business Assessment. If there is a strong fit, we follow with a structured strategy session and a clear proposal."
     }
   ];
 
@@ -36,10 +32,10 @@ const FAQ = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.6 }}
-          style={{ marginBottom: '2rem' }}
+          style={{ marginBottom: '4rem' }}
         >
-          <span className="section-label">FAQ | أسئلة شائعة</span>
-          <h2 className="section-title">The Questions Worth<br />Answering Directly.</h2>
+          <span className="section-label">FAQ</span>
+          <h2 className="section-title">Frequently asked questions</h2>
         </motion.div>
         
         <div className="faq-layout">

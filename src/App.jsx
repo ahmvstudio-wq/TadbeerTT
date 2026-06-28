@@ -29,6 +29,8 @@ import CustomCursor from './components/CustomCursor';
 import OmanizationCheck from './components/OmanizationCheck';
 import AIPipelineSimulator from './components/AIPipelineSimulator';
 import OurWork from './components/OurWork';
+import Proof from './components/Proof';
+import CaseStudies from './components/CaseStudies';
 
 const DigitalMarketingPage = React.lazy(() => import('./pages/DigitalMarketingPage'));
 const SoftwareSolutionsPage = React.lazy(() => import('./pages/SoftwareSolutionsPage'));
@@ -52,11 +54,13 @@ function HomePage() {
       <Clients />
       <ReadinessScore />
       <About />
+      <Proof />
       <Services />
-      <ROICalculator />
       <Process />
+      <ROICalculator />
       <OmanizationCheck />
       <TechPartners />
+      <CaseStudies />
       <FAQ />
       <CTA />
     </>

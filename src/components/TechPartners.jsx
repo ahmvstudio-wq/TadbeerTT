@@ -87,10 +87,10 @@ const TechPartners = () => {
         <div className="tp-header">
           <span className="section-label">Ecosystem</span>
           <h2 className="section-title tp-title">
-            Technology & Platform <span className="tp-accent">Partners</span>
+            Technology and platform partners.
           </h2>
-          <p className="tp-subtitle">
-            The platforms are chosen for what the client needs — not what is easiest to sell. Tadbeer integrates with more than 50 enterprise-grade platforms.
+          <p className="tp-subtitle" style={{ maxWidth: '750px', margin: '1rem auto 0' }}>
+            We are platform agnostic. Tools are chosen based on what your business needs, not what is easiest to sell. We can work with your current stack or recommend the right fit tools to support adoption, reporting, and scalability. Logos as defined and shared.
           </p>
         </div>
 
