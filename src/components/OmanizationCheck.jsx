@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ShieldAlert, ShieldAlert as ShieldWarning, ShieldCheck, HelpCircle } from 'lucide-react';
-import LeadCaptureModal from './LeadCaptureModal';
 
 const OmanizationCheck = () => {
-  const [modalOpen, setModalOpen] = useState(false);
   const [totalStaff, setTotalStaff] = useState(60);
   const [omaniStaff, setOmaniStaff] = useState(12);
   const [complianceRate, setComplianceRate] = useState(20);
@@ -174,7 +172,7 @@ const OmanizationCheck = () => {
             <button 
               onClick={(e) => {
                 e.preventDefault();
-                setModalOpen(true);
+                window.dispatchEvent(new CustomEvent('open-strategy-modal', { detail: { industry: 'Human Capital' } }));
               }}
               className="btn btn-primary" 
               style={{ width: '100%', padding: '0.85rem', cursor: 'pointer', border: 'none', background: status.color, color: 'white' }}
@@ -187,13 +185,6 @@ const OmanizationCheck = () => {
         </div>
 
       </div>
-      <LeadCaptureModal 
-        isOpen={modalOpen} 
-        onClose={() => setModalOpen(false)} 
-        resourceTitle="Customized Compliance & Technology Roadmap" 
-        resourceType="Compliance Report" 
-        resourceLink="/assets/Omanization_Compliance_Roadmap.pdf"
-      />
     </section>
   );
 };

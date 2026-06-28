@@ -73,29 +73,18 @@ const PlaybookBanner = () => {
       };
       
       const { error } = await createLead(lead);
-      if (error) {
-        console.error('Lead capture failed, but delivering asset anyway:', error);
-      }
+      if (error) throw error;
       
       setStatus('success');
       setEmail('');
       window.dispatchEvent(new CustomEvent('lead-submitted', { detail: lead }));
-      
-      // Trigger static resource delivery
-      const link = document.createElement('a');
-      link.href = '/assets/GCC_Digital_Transformation_Playbook.pdf';
-      link.target = '_blank';
-      link.download = 'GCC_Enterprise_Digital_Transformation_Playbook.pdf';
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
       
       // Auto close after success
       setTimeout(() => {
         handleDismiss();
       }, 4000);
     } catch (err) {
-      console.error('Unexpected error:', err);
+      console.error('Failed to save lead:', err);
       setStatus('error');
     }
   };
@@ -262,7 +251,7 @@ const PlaybookBanner = () => {
         onClose={() => setModalOpen(false)}
         resourceTitle="GCC Enterprise Digital Transformation Playbook"
         resourceType="Playbook"
-        resourceLink="/assets/GCC_Digital_Transformation_Playbook.pdf"
+        resourceLink="#"
       />
     </>
   );
