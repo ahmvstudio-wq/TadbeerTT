@@ -5,19 +5,19 @@ import { ArrowRight } from 'lucide-react';
 
 const cases = [
   {
-    title: 'Retail Transformation',
-    desc: 'Operational audit plus training and retention strategy to support recovery and structured expansion.',
-    image: 'https://images.unsplash.com/photo-1578916171728-46686eac8d58?w=600&q=80&auto=format'
+    title: 'Al Harrasi Rope Factory',
+    desc: 'Replaced paper logs with a live inventory system and barcode scanners, eliminating shipping delays and audit friction.',
+    image: 'https://images.unsplash.com/photo-1581092795360-fd1ca04f0952?w=600&q=80&auto=format'
   },
   {
-    title: 'Digital Presence Build',
-    desc: 'Positioning plus website and online platform to improve visibility and reach.',
-    image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&q=80&auto=format'
+    title: 'Gloria Jean\'s GCC',
+    desc: 'Created targeted Arabic video campaigns and WhatsApp vouchers, driving significant foot traffic and maximizing ad return.',
+    image: 'https://images.unsplash.com/photo-1525648199074-cee30ba79a4a?w=600&q=80&auto=format'
   },
   {
-    title: 'Process Automation',
-    desc: 'Automated visitor management with real time tracking to improve efficiency and visitor experience.',
-    image: 'https://images.unsplash.com/photo-1551434678-e076c223a692?w=600&q=80&auto=format'
+    title: 'Regional Telecom Operator',
+    desc: 'Built a smart local chatbot that understands regional dialects, eliminating wait times and reducing agent burnout.',
+    image: 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=600&q=80&auto=format'
   }
 ];
 
@@ -90,8 +90,8 @@ const CaseStudies = () => {
                   </p>
                 </div>
                 
-                <Link 
-                  to="/resources" 
+                <a 
+                  href="#work" 
                   style={{ 
                     display: 'inline-flex', 
                     alignItems: 'center', 
@@ -99,11 +99,12 @@ const CaseStudies = () => {
                     fontSize: '0.85rem', 
                     fontWeight: '700', 
                     color: 'var(--primary)',
-                    alignSelf: 'flex-start'
+                    alignSelf: 'flex-start',
+                    textDecoration: 'none'
                   }}
                 >
                   View details <ArrowRight size={14} />
-                </Link>
+                </a>
               </div>
             </motion.div>
           ))}
@@ -111,13 +112,13 @@ const CaseStudies = () => {
 
         {/* CTA Button */}
         <div style={{ textAlign: 'center' }}>
-          <Link 
-            to="/resources" 
+          <a 
+            href="#work" 
             className="btn btn-primary"
-            style={{ padding: '1rem 2.5rem', fontSize: '1rem' }}
+            style={{ padding: '1rem 2.5rem', fontSize: '1rem', display: 'inline-block', textDecoration: 'none' }}
           >
-            Read Case Studies
-          </Link>
+            Explore Data Console
+          </a>
         </div>
 
       </div>

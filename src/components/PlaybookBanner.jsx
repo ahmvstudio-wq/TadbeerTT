@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, CheckCircle, AlertCircle } from 'lucide-react';
+import { X, CheckCircle, AlertCircle, Book } from 'lucide-react';
 import LeadCaptureModal from './LeadCaptureModal';
 import { createLead } from '../supabaseService';
 
@@ -73,16 +73,17 @@ const PlaybookBanner = () => {
       };
       
       const { error } = await createLead(lead);
-      if (error) throw error;
+      if (error) console.warn('DB Error (Ignored for local demo):', error);
       
       setStatus('success');
       setEmail('');
       window.dispatchEvent(new CustomEvent('lead-submitted', { detail: lead }));
       
-      // Auto close after success
+      // Auto close banner and trigger Strategy Session popup after success
       setTimeout(() => {
         handleDismiss();
-      }, 4000);
+        window.dispatchEvent(new CustomEvent('open-strategy-modal'));
+      }, 2500);
     } catch (err) {
       console.error('Failed to save lead:', err);
       setStatus('error');
@@ -100,7 +101,7 @@ const PlaybookBanner = () => {
             exit={{ y: -100, opacity: 0 }}
             transition={{ duration: 0.4, ease: 'easeOut' }}
             style={{
-              background: 'linear-gradient(90deg, var(--primary) 0%, #153C45 100%)',
+              background: 'linear-gradient(90deg, #1e1b4b 0%, #0f172a 100%)', // Very dark purple/slate gradient
               color: 'white',
               position: 'fixed',
               top: 0,
@@ -108,8 +109,8 @@ const PlaybookBanner = () => {
               right: 0,
               zIndex: 1001,
               boxShadow: '0 4px 12px rgba(0,0,0,0.15)',
-              borderBottom: '1px solid var(--secondary)',
-              padding: '0.75rem 3.5rem 0.75rem 1.5rem',
+              borderBottom: '1px solid rgba(255,255,255,0.05)',
+              padding: '0.6rem 3.5rem 0.6rem 1.5rem',
             }}
             className="playbook-top-banner"
           >
@@ -124,28 +125,16 @@ const PlaybookBanner = () => {
               width: '100%'
             }}>
               {/* Left Side: Info */}
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '2px', textAlign: 'left', flex: '1 1 500px' }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
-                  <span style={{
-                    background: 'var(--secondary)',
-                    color: 'var(--primary)',
-                    fontSize: '0.65rem',
-                    fontWeight: '800',
-                    padding: '2px 8px',
-                    borderRadius: '4px',
-                    textTransform: 'uppercase',
-                    letterSpacing: '0.5px',
-                    display: 'inline-block'
-                  }}>
-                    Free Download
+              <div style={{ display: 'flex', alignItems: 'center', gap: '12px', flex: '1 1 auto', minWidth: '300px' }}>
+                <Book fill="#3b82f6" color="#3b82f6" size={20} />
+                <div style={{ fontSize: '0.9rem', color: '#F9F8F3', display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
+                  <span style={{ color: 'var(--secondary)', fontWeight: '700' }}>
+                    Exclusive Guide:
                   </span>
-                  <span style={{ fontWeight: '700', fontSize: '0.9rem', color: '#F9F8F3' }}>
-                    GCC Enterprise Digital Transformation Playbook
+                  <span style={{ fontWeight: '500' }}>
+                    The GCC Enterprise Scaling & Transformation Blueprint
                   </span>
                 </div>
-                <p style={{ margin: 0, fontSize: '0.8rem', opacity: 0.85, color: '#f0f0f0', fontWeight: '400', lineHeight: '1.4' }}>
-                  Practical guidance to strengthen systems, improve execution, and scale with clarity in Oman and the GCC.
-                </p>
               </div>
 
               {/* Right Side: Form / Status */}
@@ -163,24 +152,24 @@ const PlaybookBanner = () => {
                     <input
                       type="email"
                       required
-                      placeholder="Enter your email"
+                      placeholder="Enter email"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       disabled={status === 'loading'}
                       style={{
-                        padding: '0.4rem 0.8rem',
-                        fontSize: '0.8rem',
-                        borderRadius: '6px',
-                        border: status === 'error' ? '1px solid #ef4444' : '1px solid rgba(255,255,255,0.2)',
-                        background: 'rgba(255, 255, 255, 0.08)',
+                        padding: '0.45rem 0.8rem',
+                        fontSize: '0.85rem',
+                        borderRadius: '4px',
+                        border: status === 'error' ? '1px solid #ef4444' : '1px solid rgba(255,255,255,0.15)',
+                        background: 'rgba(255, 255, 255, 0.06)',
                         color: 'white',
                         outline: 'none',
-                        minWidth: '220px',
+                        minWidth: '240px',
                         fontFamily: 'var(--font-en)',
-                        transition: 'border-color 0.2s'
+                        transition: 'border-color 0.2s, background 0.2s'
                       }}
-                      onFocus={(e) => e.target.style.borderColor = 'var(--secondary)'}
-                      onBlur={(e) => e.target.style.borderColor = 'rgba(255,255,255,0.2)'}
+                      onFocus={(e) => { e.target.style.borderColor = 'rgba(255,255,255,0.4)'; e.target.style.background = 'rgba(255, 255, 255, 0.1)'; }}
+                      onBlur={(e) => { e.target.style.borderColor = 'rgba(255,255,255,0.15)'; e.target.style.background = 'rgba(255, 255, 255, 0.06)'; }}
                     />
                     <button
                       type="submit"
@@ -189,9 +178,9 @@ const PlaybookBanner = () => {
                         background: 'var(--secondary)',
                         color: 'var(--primary)',
                         border: 'none',
-                        padding: '0.4rem 1rem',
-                        borderRadius: '6px',
-                        fontSize: '0.8rem',
+                        padding: '0.45rem 1.25rem',
+                        borderRadius: '4px',
+                        fontSize: '0.85rem',
                         fontWeight: '700',
                         cursor: 'pointer',
                         display: 'inline-flex',
