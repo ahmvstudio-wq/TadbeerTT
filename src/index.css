@@ -5499,3 +5499,18 @@ html, body {
     grid-template-columns: 1fr !important;
   }
 }
+
+/* Hero buttons responsive layout */
+@media (max-width: 480px) {
+  .hero-buttons {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    width: 100% !important;
+    gap: 0.75rem !important;
+  }
+  .hero-buttons > * {
+    width: 100% !important;
+    justify-content: center !important;
+    text-align: center !important;
+  }
+}

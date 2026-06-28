@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useRef } from 'react';
-import { Compass, Cpu, Users, Target } from 'lucide-react';
+import { Compass, Cpu, Users, Target, Download } from 'lucide-react';
 import omanAir from '../assets/clients/oman-air.png';
 import ministryOfAwqaf from '../assets/clients/ministry-of-awqaf.png';
 import alHarrasi from '../assets/clients/al-harrasi-rope-factory.png';
@@ -177,18 +177,37 @@ const Hero = () => {
               Take the Business Assessment →
             </motion.a>
             <motion.button 
+              onClick={() => window.dispatchEvent(new CustomEvent('open-playbook-modal'))}
+              whileHover={{ 
+                scale: 1.03, 
+                backgroundColor: 'rgba(202,169,76,0.06)',
+                borderColor: 'var(--secondary)'
+              }}
+              whileTap={{ scale: 0.97 }}
+              style={{ 
+                background: 'none', 
+                border: '1.5px solid var(--secondary)', 
+                borderRadius: '6px',
+                cursor: 'pointer', 
+                color: 'var(--primary)', 
+                fontWeight: '700', 
+                padding: '0.9rem 1.75rem', 
+                fontSize: '0.95rem',
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '8px',
+                transition: 'background-color 0.2s, border-color 0.2s'
+              }}
+            >
+              <span>Download the Playbook</span>
+              <Download size={15} style={{ strokeWidth: 2.5, color: 'var(--secondary)' }} />
+            </motion.button>
+            <motion.button 
               onClick={() => window.dispatchEvent(new CustomEvent('open-strategy-modal'))}
               whileHover={{ opacity: 0.7 }}
               style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--primary)', fontWeight: '600', borderBottom: '1.5px solid var(--primary)', paddingBottom: '2px', fontSize: '0.95rem' }}
             >
               Apply for a Strategy Session
-            </motion.button>
-            <motion.button 
-              onClick={() => window.dispatchEvent(new CustomEvent('open-playbook-modal'))}
-              whileHover={{ opacity: 0.7 }}
-              style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--primary)', fontWeight: '600', borderBottom: '1.5px solid var(--primary)', paddingBottom: '2px', fontSize: '0.95rem' }}
-            >
-              Download the Playbook
             </motion.button>
           </motion.div>
 
