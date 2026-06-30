@@ -99,16 +99,17 @@ const PlaybookBanner = () => {
       <style>{`
         @media (max-width: 768px) {
           .playbook-top-banner {
-            padding: 0.8rem 2.2rem 0.8rem 1rem !important;
+            padding: 1.2rem 2.2rem 1.2rem 1.2rem !important;
           }
           .playbook-banner-content {
             flex-direction: column !important;
-            gap: 0.75rem !important;
+            align-items: center !important;
+            gap: 0.85rem !important;
             text-align: center !important;
             padding-right: 0 !important;
           }
           .playbook-banner-text {
-            font-size: 0.8rem !important;
+            font-size: 0.82rem !important;
             line-height: 1.45 !important;
             text-align: center !important;
             display: block !important;
@@ -122,23 +123,28 @@ const PlaybookBanner = () => {
             justify-content: center !important;
           }
           .playbook-inline-form form {
+            flex-direction: column !important;
+            align-items: center !important;
             width: 100% !important;
-            justify-content: center !important;
-            gap: 0.5rem !important;
+            gap: 0.6rem !important;
           }
           .playbook-inline-form input {
-            min-width: 160px !important;
-            flex: 1 !important;
-            max-width: 220px !important;
-            font-size: 0.8rem !important;
-            padding: 0.4rem 0.6rem !important;
+            width: 100% !important;
+            max-width: 280px !important;
+            font-size: 0.82rem !important;
+            padding: 0.5rem 0.8rem !important;
+            text-align: center !important;
           }
           .playbook-inline-form button {
-            padding: 0.4rem 1rem !important;
-            font-size: 0.8rem !important;
+            width: 100% !important;
+            max-width: 280px !important;
+            justify-content: center !important;
+            padding: 0.55rem 1rem !important;
+            font-size: 0.82rem !important;
           }
           #dismiss-button {
-            top: 12px !important;
+            top: 10px !important;
+            right: 8px !important;
             transform: none !important;
           }
         }
