@@ -99,20 +99,47 @@ const PlaybookBanner = () => {
       <style>{`
         @media (max-width: 768px) {
           .playbook-top-banner {
-            padding: 0.55rem 2.5rem 0.55rem 1rem !important;
-            cursor: pointer;
+            padding: 0.8rem 2.2rem 0.8rem 1rem !important;
+          }
+          .playbook-banner-content {
+            flex-direction: column !important;
+            gap: 0.75rem !important;
+            text-align: center !important;
+            padding-right: 0 !important;
           }
           .playbook-banner-text {
-            font-size: 0.74rem !important;
-            text-align: left !important;
-            display: inline-block !important;
-            max-width: 90% !important;
-            white-space: nowrap !important;
-            overflow: hidden !important;
-            text-overflow: ellipsis !important;
+            font-size: 0.8rem !important;
+            line-height: 1.45 !important;
+            text-align: center !important;
+            display: block !important;
+            max-width: 100% !important;
+            white-space: normal !important;
+            overflow: visible !important;
           }
           .playbook-inline-form {
-            display: none !important;
+            display: flex !important;
+            width: 100% !important;
+            justify-content: center !important;
+          }
+          .playbook-inline-form form {
+            width: 100% !important;
+            justify-content: center !important;
+            gap: 0.5rem !important;
+          }
+          .playbook-inline-form input {
+            min-width: 160px !important;
+            flex: 1 !important;
+            max-width: 220px !important;
+            font-size: 0.8rem !important;
+            padding: 0.4rem 0.6rem !important;
+          }
+          .playbook-inline-form button {
+            padding: 0.4rem 1rem !important;
+            font-size: 0.8rem !important;
+          }
+          #dismiss-button {
+            top: 12px !important;
+            transform: none !important;
           }
         }
       `}</style>
@@ -137,25 +164,21 @@ const PlaybookBanner = () => {
               padding: '0.65rem 3.5rem 0.65rem 1.5rem',
             }}
             className="playbook-top-banner"
-            onClick={(e) => {
-              // On mobile (where the inline form is hidden), clicking the banner itself opens the signup modal
-              if (window.innerWidth <= 768) {
-                if (e.target.closest('#dismiss-button')) return;
-                setModalOpen(true);
-              }
-            }}
           >
-            <div style={{
-              maxWidth: '1250px',
-              margin: '0 auto',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center', // Centered cluster layout matching the reference
-              flexWrap: 'wrap',
-              gap: '1.2rem',
-              width: '100%',
-              paddingRight: '1rem'
-            }}>
+            <div 
+              className="playbook-banner-content"
+              style={{
+                maxWidth: '1250px',
+                margin: '0 auto',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center', // Centered cluster layout matching the reference
+                flexWrap: 'wrap',
+                gap: '1.2rem',
+                width: '100%',
+                paddingRight: '1rem'
+              }}
+            >
               {/* Centered Content: Icon, Text, and Form inline */}
               <div style={{ 
                 display: 'flex', 
