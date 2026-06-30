@@ -11,7 +11,12 @@ const servicesData = [
     desc: "Clarify direction, priorities, governance, and KPIs so execution becomes consistent.",
     icon: Target,
     image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80&auto=format",
-    items: [],
+    items: [
+      "Vision alignment, corporate scaling strategy, and market positioning.",
+      "Operating model design, governance frameworks, and delegation policies.",
+      "Executive dashboards and department-level OKRs / KPIs setup.",
+      "Feasibility assessments, market entry studies, and business planning."
+    ],
     path: "#"
   },
   {
@@ -25,7 +30,8 @@ const servicesData = [
       "ERP implementation including Odoo and SAP.",
       "CRM and workflow systems.",
       "Learning management systems.",
-      "Visitor management automation and integrations."
+      "Visitor management automation and integrations.",
+      "Legacy system migrations and bespoke software engineering."
     ],
     path: "/services/software-solutions"
   },
@@ -36,7 +42,12 @@ const servicesData = [
     desc: "We build marketing infrastructure that generates consistent inbound demand. It is structured, measurable, and aligned with how customers decide in Oman.",
     icon: Cpu,
     image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&q=80&auto=format",
-    items: [],
+    items: [
+      "Performance marketing and multi-channel lead acquisition engines.",
+      "Brand messaging, positioning, and identity guidelines.",
+      "Marketing automation workflows (email, CRM integration, WhatsApp).",
+      "Localised SEO strategies, content creation, and journey mapping."
+    ],
     path: "/services/digital-marketing"
   },
   {
@@ -46,7 +57,12 @@ const servicesData = [
     desc: "Organisational design. Recruitment and onboarding systems. Training programs. Retention and compensation strategy so performance becomes repeatable.",
     icon: Users,
     image: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&q=80&auto=format",
-    items: [],
+    items: [
+      "Organisational restructuring, hierarchy design, and grading structures.",
+      "Modern talent acquisition, onboarding playbooks, and training tracks.",
+      "Performance measurement models, appraisal schemes, and bonus structures.",
+      "Culture engineering, retention strategies, and talent reviews."
+    ],
     path: "/services/human-capital"
   }
 ];

@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Financial Friction Analysis | Tadbeer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #184F5B;
+            --secondary: #CAA94C;
+            --bg: #FCFBFA;
+            --text-main: #333333;
+            --text-muted: #666666;
+            --danger: #dc3545;
+            --success: #198754;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #E9ECEF;
+            color: var(--text-main);
+            line-height: 1.6;
+            margin: 0;
+            padding: 2rem;
+            display: flex;
+            justify-content: center;
+        }
+        .document-container {
+            background-color: #ffffff;
+            width: 100%;
+            max-width: 850px;
+            padding: 4rem 5rem;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            border-top: 8px solid var(--primary);
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid #eeeeee;
+        }
+        .logo-placeholder {
+            color: var(--secondary);
+            font-weight: 700;
+            font-size: 1.5rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 2rem;
+        }
+        h1 {
+            color: var(--primary);
+            font-size: 2.2rem;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+        }
+        .subtitle {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+        .metric-card {
+            background-color: var(--bg);
+            border: 1px solid rgba(24, 79, 91, 0.1);
+            padding: 2rem;
+            border-radius: 8px;
+            text-align: center;
+        }
+        .metric-title {
+            font-size: 1rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+        .metric-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+        }
+        .text-danger { color: var(--danger); }
+        .text-success { color: var(--success); }
+        
+        h2 {
+            color: var(--primary);
+            font-size: 1.5rem;
+            margin-top: 2.5rem;
+            margin-bottom: 1rem;
+            border-left: 4px solid var(--secondary);
+            padding-left: 1rem;
+        }
+        p {
+            margin-bottom: 1.2rem;
+            text-align: justify;
+        }
+        .footer {
+            margin-top: 4rem;
+            padding-top: 2rem;
+            border-top: 1px solid #eeeeee;
+            text-align: center;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+        @media print {
+            body { background-color: #ffffff; padding: 0; margin: 0; display: block; width: 100%; height: auto; }
+            .document-container { box-shadow: none; padding: 2.5cm 2.5cm; max-width: 100%; width: 100%; border-top: none; box-sizing: border-box; }
+        }
+    </style>
+</head>
+<body>
+    <div class="document-container">
+        <div class="header">
+            <div class="logo-placeholder">TADBEER TRANSFORMATIONS</div>
+            <h1>Financial Friction Analysis Report</h1>
+            <div class="subtitle">Customized Operational Diagnostic for the <span id="sector-display" style="font-weight: 700; color: var(--secondary);">Sector</span> Industry</div>
+        </div>
+
+        <p>Based on your provided organizational parameters (a workforce of <strong id="workforce-display">0</strong> employees), we have calculated the hidden financial cost of operational friction caused by manual processes, disconnected systems, and redundant data entry.</p>
+
+        <div class="metrics-grid">
+            <div class="metric-card">
+                <div class="metric-title">Estimated Annual Friction Cost</div>
+                <div class="metric-value text-danger">OMR <span id="loss-display">0</span></div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-title">Potential Recovered Value</div>
+                <div class="metric-value text-success">OMR <span id="savings-display">0</span></div>
+            </div>
+        </div>
+
+        <h2>The Mechanics of Operational Friction</h2>
+        <p>Our research across GCC enterprises indicates that the average employee loses approximately <strong id="hours-display">0</strong> hours annually to non-value-adding tasks. These include:</p>
+        <ul>
+            <li>Hunting for data across siloed systems (Excel, legacy ERPs, emails).</li>
+            <li>Re-entering identical data into multiple unintegrated platforms.</li>
+            <li>Waiting for manual, paper-based, or WhatsApp-driven approval chains.</li>
+            <li>Manually compiling end-of-month financial and operational reports.</li>
+        </ul>
+
+        <h2>Strategic Recommendation</h2>
+        <p>This financial leak is rarely visible on a P&L statement because it is buried within payroll costs. However, by deploying modular automation and establishing a Single Source of Truth (SSOT) architecture, you can recover up to 85% of this lost capital.</p>
+        <p>This recovered bandwidth can be immediately redirected toward revenue-generating activities, driving geometric growth without increasing headcount.</p>
+
+        <!-- High-value booking CTA -->
+        <div class="cta-box" style="margin-top: 3rem; background-color: #FCFBFA; border: 2px dashed #CAA94C; padding: 2rem; border-radius: 8px; text-align: center;">
+            <h3 style="color: #184F5B; margin-top: 0; font-size: 1.3rem;">Stop the Capital Leak</h3>
+            <p style="text-align: center; font-size: 0.95rem; margin-bottom: 1.5rem; color: #555555; line-height: 1.6;">
+                Ready to recapture OMR <span id="savings-display-cta">38,250</span> in lost operational value? Schedule a 1-on-1 operational audit with our enterprise systems architects.
+            </p>
+            <a href="https://tadbeer.tt/" style="display: inline-block; background-color: #184F5B; color: #ffffff; text-decoration: none; padding: 0.8rem 2rem; border-radius: 6px; font-weight: 700; font-size: 0.95rem; box-shadow: 0 4px 12px rgba(24, 79, 91, 0.2);">
+                Book a Free ROI Consultation
+            </a>
+        </div>
+
+        <div class="footer">
+            <p>&copy; 2026 Tadbeer Transformations. Custom Generated Financial Report.</p>
+        </div>
+    </div>
+
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        
+        // Populate parameters with fallbacks
+        document.getElementById('loss-display').textContent = params.get('loss') || '45,000';
+        const savingsVal = params.get('savings') || '38,250';
+        document.getElementById('savings-display').textContent = savingsVal;
+        document.getElementById('savings-display-cta').textContent = savingsVal;
+        document.getElementById('hours-display').textContent = params.get('hours') || '520';
+        document.getElementById('workforce-display').textContent = params.get('workforce') || '50';
+        document.getElementById('sector-display').textContent = params.get('sector') || 'Enterprise';
+
+        // Auto trigger print dialogue for PDF saving if requested
+        if (params.get('print') === 'true') {
+            setTimeout(() => { window.print(); }, 500);
+        }
+    </script>
+</body>
+</html>

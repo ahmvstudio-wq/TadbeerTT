@@ -47,111 +47,57 @@ export const DEFAULT_JOBS = [
 export const DEFAULT_RESOURCES = [
   { 
     id: '1',
-    title: "Google's Digital Marketing & E-commerce Certificate", 
-    category: "SEO & Marketing", 
-    type: "Free Course", 
-    desc: "Google's official free professional certificate covering SEO, SEM, email marketing, and analytics — industry recognized.", 
-    link: "https://grow.google/certificates/digital-marketing-ecommerce/",
-    external: true
+    title: "The GCC Enterprise Scaling & Automation Playbook", 
+    category: "Digital Transformation", 
+    type: "Playbook (PDF)", 
+    desc: "A comprehensive framework for auditing, designing, and automating operations for GCC enterprises. Learn how to automate 70% of manual processes and scale profitably.", 
+    link: "/assets/GCC_Digital_Transformation_Playbook.pdf",
+    external: false
   },
   { 
     id: '2',
-    title: "HubSpot: The Ultimate Guide to AI in Marketing", 
-    category: "AI & Automation", 
-    type: "Free Guide", 
-    desc: "Comprehensive guide on leveraging AI for content creation, lead scoring, customer segmentation, and campaign optimization.", 
-    link: "https://blog.hubspot.com/marketing/ai-marketing",
-    external: true
+    title: "Omanization Compliance Roadmap & Quota Guide", 
+    category: "Human Capital", 
+    type: "Compliance Handbook (PDF)", 
+    desc: "Navigate the updated Oman Labour Law with confidence. A practical step-by-step guide to calculating quotas, passing audits, and structuring local talent pipelines.", 
+    link: "/assets/Omanization_Compliance_Roadmap.pdf",
+    external: false
   },
   { 
     id: '3',
-    title: "McKinsey: The State of AI — Global Survey", 
-    category: "Digital Transformation", 
-    type: "Report", 
-    desc: "McKinsey's latest global survey on AI adoption, ROI benchmarks, and implementation strategies across industries.", 
-    link: "https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai",
-    external: true
+    title: "Financial Friction & ROI Analysis Framework", 
+    category: "Business Strategy", 
+    type: "Analytical Guide (PDF)", 
+    desc: "Identify where your enterprise is losing hours and capital to operational leaks. Includes templates to calculate the financial ROI of your technology investments.", 
+    link: "/assets/ROI_Financial_Friction_Analysis.pdf",
+    external: false
   },
   { 
     id: '4',
-    title: "Odoo ERP Implementation Playbook", 
-    category: "ERP & Software", 
-    type: "Free Guide", 
-    desc: "Step-by-step deployment playbook for Odoo ERP covering configuration, data migration, user training, and go-live.", 
-    link: "https://www.odoo.com/documentation/17.0/",
-    external: true
+    title: "Enterprise Scaling Action Plan: Growth Phase", 
+    category: "AI & Automation", 
+    type: "Action Plan (PDF)", 
+    desc: "A blueprint for Omani enterprises looking to deploy custom AI agents, automated customer engagement systems, and scale workflows during rapid expansion.", 
+    link: "/assets/Readiness_Action_Plan_Growth.pdf",
+    external: false
   },
   { 
     id: '5',
-    title: "SHRM: Future of Work — HR Trends 2025-2026", 
-    category: "Human Capital", 
-    type: "Report", 
-    desc: "SHRM's comprehensive analysis of workforce trends, hybrid work models, employee engagement, and talent acquisition.", 
-    link: "https://www.shrm.org/topics-tools/news/future-of-work",
-    external: true
+    title: "ERP Adoption & Software Evaluation Matrix", 
+    category: "ERP & Software", 
+    type: "Evaluation Guide (PDF)", 
+    desc: "A structured methodology for selecting and implementing ERP systems (Odoo, SAP, Dynamics) to ensure high organizational adoption and zero implementation downtime.", 
+    link: "/assets/ERP_Adoption_Evaluation_Matrix.pdf",
+    external: false
   },
   { 
     id: '6',
-    title: "Google Analytics 4 Complete Guide", 
+    title: "Digital Marketing CAC Optimization Blueprint", 
     category: "SEO & Marketing", 
-    type: "Free Course", 
-    desc: "Master GA4 with Google's free Skillshop courses — from setup and event tracking to advanced attribution models.", 
-    link: "https://skillshop.withgoogle.com/intl/en/analytics",
-    external: true
-  },
-  { 
-    id: '7',
-    title: "Harvard Business Review: Scaling AI", 
-    category: "Business Strategy", 
-    type: "Article Collection", 
-    desc: "HBR's curated collection of articles on building an AI-first organization, overcoming adoption barriers, and measuring ROI.", 
-    link: "https://hbr.org/topic/subject/ai-and-machine-learning",
-    external: true
-  },
-  { 
-    id: '8',
-    title: "Microsoft: AI Transformation Playbook", 
-    category: "AI & Automation", 
-    type: "Free Guide", 
-    desc: "Microsoft's blueprint for enterprise AI adoption covering use case identification, governance, and responsible deployment.", 
-    link: "https://www.microsoft.com/en-us/ai/ai-business-school",
-    external: true
-  },
-  { 
-    id: '9',
-    title: "Deloitte: GCC Economic Outlook & Digital Economy", 
-    category: "Business Strategy", 
-    type: "Report", 
-    desc: "Analysis of GCC economic diversification, Oman Vision 2040, and digital economy growth opportunities.", 
-    link: "https://www2.deloitte.com/xe/en/pages/about-deloitte/topics/gcc-country-reports.html",
-    external: true
-  },
-  { 
-    id: '10',
-    title: "Coursera: Google Project Management Certificate", 
-    category: "Business Strategy", 
-    type: "Free Course", 
-    desc: "Free professional certificate from Google covering agile methodologies, stakeholder management, and project execution.", 
-    link: "https://www.coursera.org/professional-certificates/google-project-management",
-    external: true
-  },
-  { 
-    id: '11',
-    title: "ILO: Labour Market Reports — Arab States", 
-    category: "Human Capital", 
-    type: "Report", 
-    desc: "International Labour Organization data on employment trends, wage benchmarking, and Omanization compliance.", 
-    link: "https://www.ilo.org/arabstates",
-    external: true
-  },
-  { 
-    id: '12',
-    title: "Salesforce: State of Marketing Report", 
-    category: "Digital Transformation", 
-    type: "Report", 
-    desc: "Salesforce's annual survey of 4,800+ marketers on AI adoption, personalization, data strategy, and ROI measurement.", 
-    link: "https://www.salesforce.com/resources/research-reports/state-of-marketing/",
-    external: true
+    type: "Marketing Guide (PDF)", 
+    desc: "Unlock predictable inbound demand in the Omani and GCC markets. Learn how to optimize customer acquisition costs and structure data-driven performance campaigns.", 
+    link: "/assets/Digital_Marketing_CAC_Blueprint.pdf",
+    external: false
   }
 ];
 
@@ -271,7 +217,19 @@ export const fetchResources = async () => {
       .order('created_at', { ascending: false });
 
     if (error) throw error;
-    return data;
+    
+    // Filter out old external redirects to protect brand experience, and merge with premium defaults
+    const dbResources = data ? data.filter(r => !r.external) : [];
+    
+    // Combine defaults and non-external db resources (avoiding duplicate IDs)
+    const combined = [...DEFAULT_RESOURCES];
+    dbResources.forEach(res => {
+      if (!combined.some(c => c.id === res.id || c.title.toLowerCase() === res.title.toLowerCase())) {
+        combined.push(res);
+      }
+    });
+    
+    return combined;
   } catch (err) {
     console.error('Error fetching resources:', err);
     return DEFAULT_RESOURCES;

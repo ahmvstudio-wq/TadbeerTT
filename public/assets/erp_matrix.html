@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ERP Adoption & Software Evaluation Matrix | Tadbeer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #184F5B;
+            --secondary: #CAA94C;
+            --bg: #FCFBFA;
+            --text-main: #333333;
+            --text-muted: #666666;
+            --border: #E5E7EB;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #ffffff;
+            color: var(--text-main);
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+        .document-container {
+            max-width: 100%;
+            width: 100%;
+            padding: 2.5cm 2.5cm;
+            box-sizing: border-box;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid #eeeeee;
+        }
+        .logo-placeholder {
+            color: var(--secondary);
+            font-weight: 700;
+            font-size: 1.5rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 2rem;
+        }
+        h1 {
+            color: var(--primary);
+            font-size: 2.2rem;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+        }
+        .subtitle {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+        h2 {
+            color: var(--primary);
+            font-size: 1.5rem;
+            margin-top: 2.5rem;
+            margin-bottom: 1rem;
+            border-left: 4px solid var(--secondary);
+            padding-left: 1rem;
+        }
+        p {
+            margin-bottom: 1.2rem;
+            text-align: justify;
+        }
+        .matrix-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+            font-size: 0.9rem;
+        }
+        .matrix-table th, .matrix-table td {
+            border: 1px solid var(--border);
+            padding: 0.8rem 1rem;
+            text-align: left;
+        }
+        .matrix-table th {
+            background-color: var(--primary);
+            color: white;
+            font-weight: 600;
+        }
+        .matrix-table tr:nth-child(even) {
+            background-color: #F9F9F9;
+        }
+        .bullet-list {
+            margin-bottom: 1.5rem;
+            padding-left: 1.5rem;
+        }
+        .bullet-list li {
+            margin-bottom: 0.5rem;
+        }
+        .cta-box {
+            margin-top: 3rem;
+            background-color: #FCFBFA;
+            border: 2px dashed #CAA94C;
+            padding: 2rem;
+            border-radius: 8px;
+            text-align: center;
+        }
+        .footer {
+            margin-top: 4rem;
+            padding-top: 2rem;
+            border-top: 1px solid #eeeeee;
+            text-align: center;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+        @media print {
+            body { background-color: #ffffff; padding: 0; margin: 0; display: block; width: 100%; height: auto; }
+            .document-container { box-shadow: none; padding: 2.5cm 2.5cm; max-width: 100%; width: 100%; border-top: none; box-sizing: border-box; }
+        }
+    </style>
+</head>
+<body>
+    <div class="document-container">
+        <div class="header">
+            <div class="logo-placeholder">TADBEER TRANSFORMATIONS</div>
+            <h1>ERP Selection & Software Evaluation Matrix</h1>
+            <div class="subtitle">A Structured Methodology for GCC Enterprise Systems Planning</div>
+        </div>
+
+        <h2>Executive Overview</h2>
+        <p>Selecting an Enterprise Resource Planning (ERP) platform is one of the most capital-intensive and strategically critical decisions a business leader will make. Over 60% of ERP implementations exceed their budget, and 50% fail to achieve their planned operational improvements due to one core flaw: <strong>matching the business to the software, rather than evaluating how the software maps to the process.</strong></p>
+
+        <h2>The Software Evaluation Matrix</h2>
+        <p>This evaluation matrix compares the three most common ERP platforms deployed within mid-market and enterprise operations in the GCC region:</p>
+
+        <table class="matrix-table">
+            <thead>
+                <tr>
+                    <th>Evaluation Criteria</th>
+                    <th>Odoo Enterprise</th>
+                    <th>Microsoft Dynamics 365</th>
+                    <th>SAP S/4HANA</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <strong>Target Segment</strong>
+                    <td>SMEs & Growing Mid-Market</td>
+                    <td>Mid-Market & Large Enterprise</td>
+                    <td>Large Scale Global Enterprise</td>
+                </tr>
+                <tr>
+                    <strong>VAT & Compliance</strong>
+                    <td>Excellent (Oman VAT Ready)</td>
+                    <td>Highly Configurable</td>
+                    <td>Fully Compliant (Complex Setup)</td>
+                </tr>
+                <tr>
+                    <strong>Customizability</strong>
+                    <td>Modular & Highly Flexible</td>
+                    <td>Moderate (Relies on Power Platform)</td>
+                    <td>Rigid (Requires Custom ABAP code)</td>
+                </tr>
+                <tr>
+                    <strong>Implementation Speed</strong>
+                    <td>Fast (3 to 6 months)</td>
+                    <td>Medium (6 to 12 months)</td>
+                    <td>Slow (12 to 24+ months)</td>
+                </tr>
+                <tr>
+                    <strong>TCO (Cost Barrier)</strong>
+                    <td>Low to Moderate</td>
+                    <td>High License & Partner Cost</td>
+                    <td>Very High (Enterprise Capital Only)</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>Three Golden Rules of ERP Implementation</h2>
+        <ul class="bullet-list">
+            <li><strong>Rule 1: Freeze Your Processes First.</strong> Do not write a single line of code or sign a software contract until your standard operating procedures (SOPs) are documented and optimized manually.</li>
+            <li><strong>Rule 2: Prioritize User Adoption.</strong> The most technically perfect system is useless if your team rejects it. Involve department heads early in the sandbox phase to ensure workflows feel intuitive.</li>
+            <li><strong>Rule 3: Establish a Master Data Plan.</strong> Migrating bad data into a new ERP is a recipe for system collapse. Clean, validate, and structure your client and inventory records prior to launch.</li>
+        </ul>
+
+        <!-- High-value booking CTA -->
+        <div class="cta-box">
+            <h3 style="color: #184F5B; margin-top: 0; font-size: 1.3rem;">Avoid Implementation Failure</h3>
+            <p style="text-align: center; font-size: 0.95rem; margin-bottom: 1.5rem; color: #555555; line-height: 1.6;">
+                Selecting the wrong system costs months and thousands in license fees. Speak to our independent enterprise architects for an unbiased system mapping assessment.
+            </p>
+            <a href="https://tadbeer.tt/" style="display: inline-block; background-color: #184F5B; color: #ffffff; text-decoration: none; padding: 0.8rem 2rem; border-radius: 6px; font-weight: 700; font-size: 0.95rem; box-shadow: 0 4px 12px rgba(24, 79, 91, 0.2);">
+                Book a Free ERP Consultation
+            </a>
+        </div>
+
+        <div class="footer">
+            <p>&copy; 2026 Tadbeer Transformations. Custom Systems Evaluation Report.</p>
+        </div>
+    </div>
+</body>
+</html>

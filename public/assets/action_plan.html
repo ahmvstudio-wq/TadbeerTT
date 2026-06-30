@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Business Readiness Action Plan | Tadbeer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #184F5B;
+            --secondary: #CAA94C;
+            --bg: #FCFBFA;
+            --text-main: #333333;
+            --text-muted: #666666;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #E9ECEF;
+            color: var(--text-main);
+            line-height: 1.6;
+            margin: 0;
+            padding: 2rem;
+            display: flex;
+            justify-content: center;
+        }
+        .document-container {
+            background-color: #ffffff;
+            width: 100%;
+            max-width: 850px;
+            padding: 4rem 5rem;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            border-top: 8px solid var(--primary);
+            display: none; /* Hidden until phase loads */
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid #eeeeee;
+        }
+        .logo-placeholder {
+            color: var(--secondary);
+            font-weight: 700;
+            font-size: 1.5rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 2rem;
+        }
+        h1 {
+            color: var(--primary);
+            font-size: 2.2rem;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+        }
+        .phase-badge {
+            display: inline-block;
+            background-color: var(--secondary);
+            color: #ffffff;
+            padding: 0.4rem 1.2rem;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 1rem;
+        }
+        .subtitle {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+        h2 {
+            color: var(--primary);
+            font-size: 1.5rem;
+            margin-top: 2.5rem;
+            margin-bottom: 1rem;
+            border-left: 4px solid var(--secondary);
+            padding-left: 1rem;
+        }
+        p {
+            margin-bottom: 1.2rem;
+            text-align: justify;
+        }
+        .action-box {
+            background-color: var(--bg);
+            border: 1px solid rgba(24, 79, 91, 0.1);
+            padding: 1.5rem;
+            border-radius: 6px;
+            margin-bottom: 1.5rem;
+        }
+        .action-box h3 {
+            color: var(--primary);
+            margin-top: 0;
+            margin-bottom: 0.5rem;
+        }
+        .footer {
+            margin-top: 4rem;
+            padding-top: 2rem;
+            border-top: 1px solid #eeeeee;
+            text-align: center;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+        @media print {
+            body { background-color: #ffffff; padding: 0; margin: 0; display: block; width: 100%; height: auto; }
+            .document-container { box-shadow: none; padding: 2.5cm 2.5cm; max-width: 100%; width: 100%; border-top: none; box-sizing: border-box; }
+        }
+    </style>
+</head>
+<body>
+    <div class="document-container" id="doc-container">
+        <div class="header">
+            <div class="logo-placeholder">TADBEER TRANSFORMATIONS</div>
+            <div class="phase-badge" id="phase-badge">Phase</div>
+            <h1>Your Custom Readiness Action Plan</h1>
+            <div class="subtitle" id="subtitle-text">Tailored strategy based on your organizational diagnostic.</div>
+        </div>
+
+        <h2>Diagnostic Summary</h2>
+        <p id="summary-text"></p>
+
+        <h2>Immediate Action Priorities (Next 30 Days)</h2>
+        <div class="action-box">
+            <h3 id="priority-1-title">Priority 1</h3>
+            <p id="priority-1-text">Details</p>
+        </div>
+        <div class="action-box">
+            <h3 id="priority-2-title">Priority 2</h3>
+            <p id="priority-2-text">Details</p>
+        </div>
+
+        <h2>Long-Term Strategic Objective</h2>
+        <p id="long-term-text"></p>
+
+        <!-- High-value booking CTA -->
+        <div class="cta-box" style="margin-top: 3rem; background-color: #FCFBFA; border: 2px dashed #CAA94C; padding: 2rem; border-radius: 8px; text-align: center;">
+            <h3 style="color: #184F5B; margin-top: 0; font-size: 1.3rem;">Accelerate Your Scale Strategy</h3>
+            <p style="text-align: center; font-size: 0.95rem; margin-bottom: 1.5rem; color: #555555; line-height: 1.6;">
+                This blueprint outline serves as a baseline. To integrate these custom pipelines and systems directly into your operations, schedule a session with our advisory team.
+            </p>
+            <a href="https://tadbeer.tt/" style="display: inline-block; background-color: #184F5B; color: #ffffff; text-decoration: none; padding: 0.8rem 2rem; border-radius: 6px; font-weight: 700; font-size: 0.95rem; box-shadow: 0 4px 12px rgba(24, 79, 91, 0.2);">
+                Book a Free 1-on-1 Strategy Session
+            </a>
+        </div>
+
+        <div class="footer">
+            <p>&copy; 2026 Tadbeer Transformations. Custom Generated Report.</p>
+        </div>
+    </div>
+
+    <script>
+        const contentData = {
+            foundation: {
+                badge: "Foundation Phase",
+                subtitle: "Establishing the core operational baseline.",
+                summary: "Your organization is currently relying heavily on manual processes (Excel, WhatsApp) and individual heroics. While this works in the early stages, it creates massive bottlenecks as you scale. Your immediate goal is to establish standardized processes and eliminate isolated data silos.",
+                p1Title: "Map Core Processes",
+                p1Text: "Document your top 3 most frequent workflows (e.g., approvals, inventory requests). Identify where data has to be manually re-entered across different systems.",
+                p2Title: "Implement Basic Cloud Collaboration",
+                p2Text: "Transition away from WhatsApp for formal approvals. Implement a centralized cloud workspace (Google Workspace / Microsoft 365) to centralize document control.",
+                longTerm: "The objective for the next 6 months is to prepare the organization for a centralized ERP system by instilling a culture of documented processes and data discipline."
+            },
+            growth: {
+                badge: "Growth Phase",
+                subtitle: "Connecting fragmented systems and empowering teams.",
+                summary: "You have basic digital tools in place, but they are disconnected. Your teams are spending excessive time reconciling data between systems, leading to delayed reporting. Your focus must shift from 'having tools' to 'integrating tools'.",
+                p1Title: "Audit System Integrations",
+                p1Text: "Identify the gaps between your accounting software, CRM, and operational tools. Determine where APIs can be utilized to push data automatically rather than exporting/importing CSVs.",
+                p2Title: "Establish Single Source of Truth",
+                p2Text: "Select one primary system (likely your ERP) that will serve as the undisputed master record for financial and operational data.",
+                longTerm: "By integrating your core systems, you will reclaim 15-20% of your workforce's time currently lost to manual data reconciliation, redirecting it toward growth initiatives."
+            },
+            acceleration: {
+                badge: "Acceleration Phase",
+                subtitle: "Leveraging automation and advanced analytics.",
+                summary: "Your core systems are integrated and functional. The next frontier is leveraging automation to remove human touchpoints from routine tasks, and utilizing your data warehouse for proactive, rather than reactive, decision-making.",
+                p1Title: "Deploy Workflow Automation",
+                p1Text: "Identify highly predictable, repetitive approval chains and automate them using specialized middleware or ERP built-in workflow engines.",
+                p2Title: "Develop Executive Dashboards",
+                p2Text: "Build real-time BI (Business Intelligence) dashboards that track your KPIs live, removing the need for end-of-month manual reporting cycles.",
+                longTerm: "Your strategic goal is to achieve 'Management by Exception', where executives only intervene when automated systems flag anomalies, dramatically increasing leadership bandwidth."
+            },
+            innovation: {
+                badge: "Innovation Phase",
+                subtitle: "Driving market disruption through advanced technology.",
+                summary: "You are operating at a highly efficient digital level. Your operations are automated and data-driven. The focus now is leveraging predictive technologies (AI/ML) and creating entirely new digital revenue streams or unmatched customer experiences.",
+                p1Title: "Explore Predictive AI Models",
+                p1Text: "Utilize historical operational data to build predictive models for inventory forecasting, customer churn, or dynamic pricing.",
+                p2Title: "Digital Ecosystem Expansion",
+                p2Text: "Extend your digital architecture outward. Build customer-facing portals or supplier integrations that lock in your ecosystem and create high switching costs for competitors.",
+                longTerm: "Maintain your position as an industry leader by continuously adopting emerging technologies that align with the high-tech mandate of Oman Vision 2040."
+            }
+        };
+
+        const params = new URLSearchParams(window.location.search);
+        let phase = params.get('phase') || 'foundation';
+        phase = phase.toLowerCase();
+        
+        if (!contentData[phase]) phase = 'foundation';
+
+        const data = contentData[phase];
+        
+        document.getElementById('phase-badge').textContent = data.badge;
+        document.getElementById('subtitle-text').textContent = data.subtitle;
+        document.getElementById('summary-text').textContent = data.summary;
+        document.getElementById('priority-1-title').textContent = data.p1Title;
+        document.getElementById('priority-1-text').textContent = data.p1Text;
+        document.getElementById('priority-2-title').textContent = data.p2Title;
+        document.getElementById('priority-2-text').textContent = data.p2Text;
+        document.getElementById('long-term-text').textContent = data.longTerm;
+
+        // Show container
+        document.getElementById('doc-container').style.display = 'block';
+
+        // Auto trigger print dialogue for PDF saving if requested
+        if (params.get('print') === 'true') {
+            setTimeout(() => { window.print(); }, 500);
+        }
+    </script>
+</body>
+</html>

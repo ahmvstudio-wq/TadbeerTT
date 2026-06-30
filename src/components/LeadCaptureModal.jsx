@@ -65,12 +65,18 @@ const LeadCaptureModal = ({ isOpen, onClose, onSubmit, resourceTitle, resourceTy
               setSubmitted(true);
               if (onSubmit) onSubmit(formData);
               
-              // Try to open download link (might be blocked, which is why we have the button fallback)
+              // Programmatic file download trigger to bypass popup blockers
               if (resourceLink) {
                 try {
-                  window.open(resourceLink, '_blank');
+                  const link = document.createElement('a');
+                  link.href = resourceLink;
+                  const filename = resourceLink.split('/').pop() || 'download.pdf';
+                  link.setAttribute('download', filename);
+                  document.body.appendChild(link);
+                  link.click();
+                  document.body.removeChild(link);
                 } catch (err) {
-                  console.warn('Popup blocked:', err);
+                  console.warn('Download trigger failed:', err);
                 }
               }
               
@@ -93,8 +99,8 @@ const LeadCaptureModal = ({ isOpen, onClose, onSubmit, resourceTitle, resourceTy
       }
     }, 55);
 
-    // Auto close after success
-    const closeTimeout = resourceLink ? 6000 : 3500;
+    // Auto close after success (extended to 45 seconds to let users read and book a call)
+    const closeTimeout = resourceLink ? 45000 : 3500;
     setTimeout(() => {
       setSubmitted(prev => {
         if (prev) {
@@ -132,7 +138,7 @@ const LeadCaptureModal = ({ isOpen, onClose, onSubmit, resourceTitle, resourceTy
               position: 'relative', 
               overflow: 'hidden', 
               boxShadow: '0 25px 50px -12px rgba(0,0,0,0.25)',
-              maxHeight: '90vh',
+              maxHeight: '95vh',
               display: 'flex',
               flexDirection: 'column'
             }}
@@ -194,10 +200,10 @@ const LeadCaptureModal = ({ isOpen, onClose, onSubmit, resourceTitle, resourceTy
                   key="success"
                   initial={{ opacity: 0, scale: 0.95 }}
                   animate={{ opacity: 1, scale: 1 }}
-                  style={{ textAlign: 'center', padding: '1rem 0 1.5rem' }}
+                  style={{ textAlign: 'center', padding: '0.5rem 0 1rem' }}
                 >
-                  <div className="modal-success-frame" style={{ position: 'relative', width: '70px', height: '70px', margin: '0 auto 1.25rem', flexShrink: 0 }}>
-                    <svg width="70" height="70" viewBox="0 0 50 50">
+                  <div className="modal-success-frame" style={{ position: 'relative', width: '60px', height: '60px', margin: '0 auto 1rem', flexShrink: 0 }}>
+                    <svg width="60" height="60" viewBox="0 0 50 50">
                       <motion.circle 
                         cx="25" cy="25" r="22" 
                         fill="none" stroke="var(--secondary)" strokeWidth="3"
@@ -212,27 +218,15 @@ const LeadCaptureModal = ({ isOpen, onClose, onSubmit, resourceTitle, resourceTy
                         animate={{ pathLength: 1 }}
                         transition={{ duration: 0.5, delay: 0.6, ease: "easeOut" }}
                       />
-                      <motion.circle
-                        cx="25" cy="25" r="22"
-                        fill="none" stroke="var(--secondary)" strokeWidth="1"
-                        initial={{ scale: 1, opacity: 0.8 }}
-                        animate={{ scale: 1.4, opacity: 0 }}
-                        transition={{ duration: 1, delay: 0.8, ease: "easeOut" }}
-                      />
                     </svg>
                   </div>
-                  <h3 style={{ fontSize: '1.4rem', color: 'var(--primary)', fontWeight: '700', marginBottom: '0.25rem' }}>Download Authorized!</h3>
-                  <p style={{ color: 'var(--text-muted)', fontSize: '0.85rem', marginBottom: '1rem' }}>
-                    Your resource link is ready.
+                  <h3 style={{ fontSize: '1.3rem', color: 'var(--primary)', fontWeight: '700', marginBottom: '0.25rem' }}>Download Authorized!</h3>
+                  <p style={{ color: 'var(--text-muted)', fontSize: '0.85rem', marginBottom: '1.25rem' }}>
+                    Your guide is ready to download.
                   </p>
                   
-                  <div style={{ background: '#F4F7F6', borderRadius: '8px', padding: '0.75rem', fontSize: '0.85rem', color: 'var(--text-main)', border: '1px solid var(--border)', marginBottom: '1.25rem', textAlign: 'left', width: '100%', boxSizing: 'border-box', overflow: 'hidden' }}>
-                    <div style={{ fontWeight: '600', color: 'var(--primary)', marginBottom: '0.15rem' }}>Captured Contact Info:</div>
-                    <div style={{ fontFamily: 'monospace', color: '#184F5B', wordBreak: 'break-all', overflowWrap: 'break-word', fontSize: '0.8rem' }}>{formData.email}</div>
-                  </div>
-
                   {resourceLink && (
-                    <div style={{ marginTop: '0.5rem' }}>
+                    <div style={{ marginBottom: '1.25rem' }}>
                       <a 
                         href={resourceLink} 
                         target="_blank" 
@@ -244,29 +238,80 @@ const LeadCaptureModal = ({ isOpen, onClose, onSubmit, resourceTitle, resourceTy
                           justifyContent: 'center', 
                           gap: '0.5rem', 
                           width: '100%', 
-                          padding: '0.85rem', 
+                          padding: '0.8rem', 
                           borderRadius: '8px', 
                           textDecoration: 'none',
-                          boxShadow: '0 4px 12px rgba(24, 79, 91, 0.25)',
-                          background: 'linear-gradient(135deg, #184F5B 0%, #1e6372 100%)',
-                          color: 'white',
-                          fontWeight: '600'
+                          boxShadow: '0 4px 12px rgba(202, 169, 76, 0.15)',
+                          background: 'linear-gradient(135deg, var(--secondary) 0%, var(--secondary-light) 100%)',
+                          color: 'var(--primary)',
+                          fontWeight: '700',
+                          fontSize: '0.9rem'
                         }}
                       >
-                        <span>Download Resource Now</span>
+                        <span>Download PDF Blueprint</span>
                         <span>→</span>
                       </a>
-                      <p style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginTop: '0.5rem' }}>
-                        If the download didn't start automatically, click the button above.
-                      </p>
                     </div>
                   )}
+
+                  {/* High Value Book a Call CTA */}
+                  <div style={{
+                    background: '#F9F8F3',
+                    border: '1.5px solid rgba(202, 169, 76, 0.3)',
+                    borderRadius: '10px',
+                    padding: '1.1rem',
+                    textAlign: 'left',
+                    boxShadow: '0 4px 15px rgba(0,0,0,0.02)',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: '0.65rem',
+                    marginTop: '0.5rem'
+                  }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                      <span style={{ fontSize: '1.1rem' }}>💡</span>
+                      <h4 style={{ margin: 0, fontSize: '0.92rem', color: 'var(--primary)', fontWeight: '700' }}>
+                        Accelerate Your Implementation
+                      </h4>
+                    </div>
+                    <p style={{ margin: 0, fontSize: '0.8rem', color: 'var(--text-muted)', lineHeight: '1.45' }}>
+                      Applying these blueprints requires aligning technology with your specific operations. Book a live 1-on-1 session to customize the scaling playbook for your organization.
+                    </p>
+                    <button
+                      onClick={() => {
+                        onClose();
+                        setTimeout(() => {
+                          window.dispatchEvent(new CustomEvent('open-strategy-modal'));
+                        }, 300);
+                      }}
+                      style={{
+                        background: 'var(--primary)',
+                        color: 'white',
+                        border: 'none',
+                        padding: '0.65rem 1rem',
+                        borderRadius: '6px',
+                        fontSize: '0.82rem',
+                        fontWeight: '700',
+                        cursor: 'pointer',
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        gap: '6px',
+                        transition: 'all 0.2s ease',
+                        width: '100%',
+                        fontFamily: 'var(--font-en)'
+                      }}
+                      onMouseEnter={(e) => e.currentTarget.style.opacity = '0.9'}
+                      onMouseLeave={(e) => e.currentTarget.style.opacity = '1'}
+                    >
+                      Book Free Strategy Session
+                    </button>
+                  </div>
 
                   <div style={{ position: 'absolute', bottom: 0, left: 0, height: '4px', background: 'var(--secondary)', width: '100%' }}>
                     <motion.div 
                       initial={{ width: '100%' }}
                       animate={{ width: '0%' }}
-                      transition={{ duration: resourceLink ? 6 : 3.5, ease: 'linear' }}
+                      transition={{ duration: 45, ease: 'linear' }}
                       style={{ height: '100%', background: 'var(--primary)', originX: 0 }}
                     />
                   </div>

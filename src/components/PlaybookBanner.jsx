@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, CheckCircle, AlertCircle, Book } from 'lucide-react';
+import { X, CheckCircle, AlertCircle, Sparkles } from 'lucide-react';
 import LeadCaptureModal from './LeadCaptureModal';
 import { createLead } from '../supabaseService';
 
@@ -12,10 +12,8 @@ const PlaybookBanner = () => {
   const bannerRef = useRef(null);
 
   useEffect(() => {
-    const isDismissed = localStorage.getItem('playbook_banner_dismissed');
-    if (!isDismissed) {
-      setIsVisible(true);
-    }
+    // Temporarily forcing visibility for review
+    setIsVisible(true);
   }, []);
 
   // Measure and set banner height dynamically
@@ -31,7 +29,6 @@ const PlaybookBanner = () => {
       }
     };
 
-    // Delay measurement slightly to ensure DOM render layout settles
     const timer = setTimeout(updateBannerHeight, 50);
 
     window.addEventListener('resize', updateBannerHeight);
@@ -74,12 +71,19 @@ const PlaybookBanner = () => {
       
       const { error } = await createLead(lead);
       if (error) console.warn('DB Error (Ignored for local demo):', error);
+
+      // Programmatic file download trigger
+      const link = document.createElement('a');
+      link.href = '/assets/GCC_Digital_Transformation_Playbook.pdf';
+      link.setAttribute('download', 'GCC_Digital_Transformation_Playbook.pdf');
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
       
       setStatus('success');
       setEmail('');
       window.dispatchEvent(new CustomEvent('lead-submitted', { detail: lead }));
       
-      // Auto close banner and trigger Strategy Session popup after success
       setTimeout(() => {
         handleDismiss();
         window.dispatchEvent(new CustomEvent('open-strategy-modal'));
@@ -99,53 +103,59 @@ const PlaybookBanner = () => {
             initial={{ y: -100, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             exit={{ y: -100, opacity: 0 }}
-            transition={{ duration: 0.4, ease: 'easeOut' }}
+            transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
             style={{
-              background: 'linear-gradient(90deg, #1e1b4b 0%, #0f172a 100%)', // Very dark purple/slate gradient
+              background: 'linear-gradient(135deg, #123e47 0%, #0a252b 100%)', // Premium dark slate/teal matching Tadbeer's theme
               color: 'white',
               position: 'fixed',
               top: 0,
               left: 0,
               right: 0,
               zIndex: 1001,
-              boxShadow: '0 4px 12px rgba(0,0,0,0.15)',
-              borderBottom: '1px solid rgba(255,255,255,0.05)',
-              padding: '0.6rem 3.5rem 0.6rem 1.5rem',
+              boxShadow: '0 4px 20px rgba(0,0,0,0.2)',
+              borderBottom: '2px solid var(--secondary)',
+              padding: '0.65rem 3.5rem 0.65rem 1.5rem',
             }}
             className="playbook-top-banner"
           >
             <div style={{
-              maxWidth: '1200px',
+              maxWidth: '1250px',
               margin: '0 auto',
               display: 'flex',
               alignItems: 'center',
-              justifyContent: 'space-between',
+              justifyContent: 'center', // Centered cluster layout matching the reference
               flexWrap: 'wrap',
-              gap: '1rem',
-              width: '100%'
+              gap: '1.2rem',
+              width: '100%',
+              paddingRight: '1rem'
             }}>
-              {/* Left Side: Info */}
-              <div style={{ display: 'flex', alignItems: 'center', gap: '12px', flex: '1 1 auto', minWidth: '300px' }}>
-                <Book fill="#3b82f6" color="#3b82f6" size={20} />
-                <div style={{ fontSize: '0.9rem', color: '#F9F8F3', display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
+              {/* Centered Content: Icon, Text, and Form inline */}
+              <div style={{ 
+                display: 'flex', 
+                alignItems: 'center', 
+                gap: '10px', 
+                flexWrap: 'wrap',
+                justifyContent: 'center'
+              }}>
+                <div style={{ fontSize: '0.88rem', color: '#F9F8F3', display: 'flex', alignItems: 'center', gap: '6px', flexWrap: 'wrap' }}>
                   <span style={{ color: 'var(--secondary)', fontWeight: '700' }}>
-                    Exclusive Guide:
+                    Revealed:
                   </span>
                   <span style={{ fontWeight: '500' }}>
-                    The GCC Enterprise Scaling & Transformation Blueprint
+                    How Top GCC Enterprises Automate 70% of Operations & Scale Without Friction
                   </span>
                 </div>
               </div>
 
-              {/* Right Side: Form / Status */}
-              <div style={{ flex: '0 1 auto', display: 'flex', alignItems: 'center' }}>
+              {/* Centered Form */}
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                 {status === 'success' ? (
                   <motion.div 
                     initial={{ opacity: 0, scale: 0.95 }}
                     animate={{ opacity: 1, scale: 1 }}
                     style={{ color: 'var(--secondary)', fontWeight: '700', fontSize: '0.85rem', display: 'flex', alignItems: 'center', gap: '6px' }}
                   >
-                    <CheckCircle size={16} /> PDF Authorized! Opening download...
+                    <CheckCircle size={16} /> Access Granted! Starting Download...
                   </motion.div>
                 ) : (
                   <form onSubmit={handleInlineSubmit} style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flexWrap: 'wrap' }}>
@@ -159,42 +169,57 @@ const PlaybookBanner = () => {
                       style={{
                         padding: '0.45rem 0.8rem',
                         fontSize: '0.85rem',
-                        borderRadius: '4px',
-                        border: status === 'error' ? '1px solid #ef4444' : '1px solid rgba(255,255,255,0.15)',
-                        background: 'rgba(255, 255, 255, 0.06)',
+                        borderRadius: '6px',
+                        border: status === 'error' ? '1px solid #ef4444' : '1px solid rgba(255,255,255,0.2)',
+                        background: 'rgba(255, 255, 255, 0.08)',
                         color: 'white',
                         outline: 'none',
-                        minWidth: '240px',
+                        minWidth: '220px',
                         fontFamily: 'var(--font-en)',
-                        transition: 'border-color 0.2s, background 0.2s'
+                        transition: 'all 0.3s ease'
                       }}
-                      onFocus={(e) => { e.target.style.borderColor = 'rgba(255,255,255,0.4)'; e.target.style.background = 'rgba(255, 255, 255, 0.1)'; }}
-                      onBlur={(e) => { e.target.style.borderColor = 'rgba(255,255,255,0.15)'; e.target.style.background = 'rgba(255, 255, 255, 0.06)'; }}
+                      onFocus={(e) => { 
+                        e.target.style.borderColor = 'var(--secondary)'; 
+                        e.target.style.background = 'rgba(255, 255, 255, 0.15)';
+                        e.target.style.boxShadow = '0 0 0 3px rgba(202, 169, 76, 0.2)';
+                      }}
+                      onBlur={(e) => { 
+                        e.target.style.borderColor = 'rgba(255,255,255,0.2)'; 
+                        e.target.style.background = 'rgba(255, 255, 255, 0.08)';
+                        e.target.style.boxShadow = 'none';
+                      }}
                     />
                     <button
                       type="submit"
                       disabled={status === 'loading'}
                       style={{
-                        background: 'var(--secondary)',
+                        background: 'linear-gradient(135deg, var(--secondary) 0%, var(--secondary-light) 100%)',
                         color: 'var(--primary)',
                         border: 'none',
-                        padding: '0.45rem 1.25rem',
-                        borderRadius: '4px',
+                        padding: '0.45rem 1.1rem',
+                        borderRadius: '6px',
                         fontSize: '0.85rem',
                         fontWeight: '700',
                         cursor: 'pointer',
                         display: 'inline-flex',
                         alignItems: 'center',
                         gap: '6px',
-                        transition: 'opacity 0.2s, transform 0.1s',
+                        boxShadow: '0 2px 8px rgba(202, 169, 76, 0.2)',
+                        transition: 'all 0.3s ease',
                         fontFamily: 'var(--font-en)'
                       }}
-                      onMouseEnter={(e) => e.currentTarget.style.opacity = '0.9'}
-                      onMouseLeave={(e) => e.currentTarget.style.opacity = '1'}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.transform = 'translateY(-1px)';
+                        e.currentTarget.style.boxShadow = '0 4px 12px rgba(202, 169, 76, 0.4)';
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.transform = 'translateY(0)';
+                        e.currentTarget.style.boxShadow = '0 2px 8px rgba(202, 169, 76, 0.2)';
+                      }}
                       onMouseDown={(e) => e.currentTarget.style.transform = 'scale(0.97)'}
                       onMouseUp={(e) => e.currentTarget.style.transform = 'scale(1)'}
                     >
-                      {status === 'loading' ? 'Sending...' : 'Get PDF'}
+                      {status === 'loading' ? 'Securing...' : 'Get PDF'}
                     </button>
                     
                     {status === 'error' && (
@@ -247,3 +272,4 @@ const PlaybookBanner = () => {
 };
 
 export default PlaybookBanner;
+

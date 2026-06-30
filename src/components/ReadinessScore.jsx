@@ -461,6 +461,13 @@ const ReadinessScore = () => {
         onClose={() => setModalOpen(false)} 
         resourceTitle={`Transformation Readiness Report (Score: ${calculateScore()}%)`} 
         resourceType="Assessment Report" 
+        resourceLink={(() => {
+          const score = calculateScore();
+          if (score <= 40) return "/assets/Readiness_Action_Plan_Foundation.pdf";
+          if (score <= 60) return "/assets/Readiness_Action_Plan_Growth.pdf";
+          if (score <= 80) return "/assets/Readiness_Action_Plan_Acceleration.pdf";
+          return "/assets/Readiness_Action_Plan_Innovation.pdf";
+        })()}
       />
     </section>
   );

@@ -100,7 +100,7 @@ function App() {
       const dismissedTime = sessionStorage.getItem('strategyModalDismissedTime');
       if (!dismissedTime) return false;
       const elapsed = Date.now() - parseInt(dismissedTime, 10);
-      return elapsed < 90000;
+      return elapsed < 45000; // Decreased cooldown to 45 seconds
     };
 
     const isAlreadyLead = sessionStorage.getItem('leadSubmitted') === 'true';
@@ -151,7 +151,7 @@ function App() {
       
       idleTimer = setTimeout(() => {
         openStrategyPrompt();
-      }, 45000);
+      }, 30000); // Decreased idle trigger to 30 seconds
     };
 
     const activityEvents = ['mousemove', 'mousedown', 'scroll', 'keypress', 'touchstart'];

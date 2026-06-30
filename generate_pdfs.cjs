@@ -35,6 +35,10 @@ const generatePdfs = async () => {
         
         await renderPdf('omanization_roadmap.html', 'percentage=20&status=yellow&sector=Enterprise', 'Omanization_Compliance_Roadmap.pdf');
 
+        // New specialized resource blueprints
+        await renderPdf('erp_matrix.html', null, 'ERP_Adoption_Evaluation_Matrix.pdf');
+        await renderPdf('cac_blueprint.html', null, 'Digital_Marketing_CAC_Blueprint.pdf');
+
     } catch (err) {
         console.error(err);
     } finally {
