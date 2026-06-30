@@ -96,6 +96,26 @@ const PlaybookBanner = () => {
 
   return (
     <>
+      <style>{`
+        @media (max-width: 768px) {
+          .playbook-top-banner {
+            padding: 0.55rem 2.5rem 0.55rem 1rem !important;
+            cursor: pointer;
+          }
+          .playbook-banner-text {
+            font-size: 0.74rem !important;
+            text-align: left !important;
+            display: inline-block !important;
+            max-width: 90% !important;
+            white-space: nowrap !important;
+            overflow: hidden !important;
+            text-overflow: ellipsis !important;
+          }
+          .playbook-inline-form {
+            display: none !important;
+          }
+        }
+      `}</style>
       <AnimatePresence>
         {isVisible && (
           <motion.div
@@ -117,6 +137,13 @@ const PlaybookBanner = () => {
               padding: '0.65rem 3.5rem 0.65rem 1.5rem',
             }}
             className="playbook-top-banner"
+            onClick={(e) => {
+              // On mobile (where the inline form is hidden), clicking the banner itself opens the signup modal
+              if (window.innerWidth <= 768) {
+                if (e.target.closest('#dismiss-button')) return;
+                setModalOpen(true);
+              }
+            }}
           >
             <div style={{
               maxWidth: '1250px',
@@ -137,7 +164,7 @@ const PlaybookBanner = () => {
                 flexWrap: 'wrap',
                 justifyContent: 'center'
               }}>
-                <div style={{ fontSize: '0.88rem', color: '#F9F8F3', display: 'flex', alignItems: 'center', gap: '6px', flexWrap: 'wrap' }}>
+                <div className="playbook-banner-text" style={{ fontSize: '0.88rem', color: '#F9F8F3', display: 'flex', alignItems: 'center', gap: '6px', flexWrap: 'wrap' }}>
                   <span style={{ color: 'var(--secondary)', fontWeight: '700' }}>
                     Revealed:
                   </span>
@@ -148,7 +175,7 @@ const PlaybookBanner = () => {
               </div>
 
               {/* Centered Form */}
-              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <div className="playbook-inline-form" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                 {status === 'success' ? (
                   <motion.div 
                     initial={{ opacity: 0, scale: 0.95 }}
@@ -234,6 +261,7 @@ const PlaybookBanner = () => {
 
             {/* Dismiss Button */}
             <button
+              id="dismiss-button"
               onClick={handleDismiss}
               style={{
                 background: 'none',
