@@ -99,23 +99,27 @@ const PlaybookBanner = () => {
       <style>{`
         @media (max-width: 768px) {
           .playbook-top-banner {
-            padding: 1.2rem 2.2rem 1.2rem 1.2rem !important;
+            padding: 0.65rem 2.2rem 0.65rem 1rem !important;
           }
           .playbook-banner-content {
             flex-direction: column !important;
             align-items: center !important;
-            gap: 0.85rem !important;
+            gap: 0.5rem !important;
             text-align: center !important;
             padding-right: 0 !important;
           }
+          .desktop-text {
+            display: none !important;
+          }
+          .mobile-text {
+            display: inline !important;
+          }
           .playbook-banner-text {
-            font-size: 0.82rem !important;
-            line-height: 1.45 !important;
+            font-size: 0.8rem !important;
+            line-height: 1.35 !important;
             text-align: center !important;
             display: block !important;
             max-width: 100% !important;
-            white-space: normal !important;
-            overflow: visible !important;
           }
           .playbook-inline-form {
             display: flex !important;
@@ -123,29 +127,27 @@ const PlaybookBanner = () => {
             justify-content: center !important;
           }
           .playbook-inline-form form {
-            flex-direction: column !important;
+            flex-direction: row !important;
             align-items: center !important;
-            width: 100% !important;
-            gap: 0.6rem !important;
+            justify-content: center !important;
+            gap: 0.4rem !important;
+            width: auto !important;
           }
           .playbook-inline-form input {
-            width: 100% !important;
-            max-width: 280px !important;
-            font-size: 0.82rem !important;
-            padding: 0.5rem 0.8rem !important;
-            text-align: center !important;
+            width: 170px !important;
+            font-size: 0.8rem !important;
+            padding: 0.4rem 0.6rem !important;
+            text-align: left !important;
           }
           .playbook-inline-form button {
-            width: 100% !important;
-            max-width: 280px !important;
-            justify-content: center !important;
-            padding: 0.55rem 1rem !important;
-            font-size: 0.82rem !important;
+            width: auto !important;
+            padding: 0.4rem 1rem !important;
+            font-size: 0.8rem !important;
           }
           #dismiss-button {
-            top: 10px !important;
+            top: 50% !important;
             right: 8px !important;
-            transform: none !important;
+            transform: translateY(-50%) !important;
           }
         }
       `}</style>
@@ -197,8 +199,11 @@ const PlaybookBanner = () => {
                   <span style={{ color: 'var(--secondary)', fontWeight: '700' }}>
                     Revealed:
                   </span>
-                  <span style={{ fontWeight: '500' }}>
+                  <span className="desktop-text" style={{ fontWeight: '500' }}>
                     How Top GCC Enterprises Automate 70% of Operations & Scale Without Friction
+                  </span>
+                  <span className="mobile-text" style={{ fontWeight: '500', display: 'none' }}>
+                    Download the GCC Scaling & Automation Playbook
                   </span>
                 </div>
               </div>
