@@ -5993,3 +5993,94 @@ section[id], div[id], [id] {
     display: none !important;
   }
 }
+
+/* ========================================
+   Social Proof Toasts
+   ======================================== */
+.social-proof-toast {
+  position: fixed;
+  bottom: 6rem; /* Moved up to clear the WhatsApp button */
+  left: 1.5rem;
+  z-index: 1000;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  padding: 1.25rem 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  max-width: 360px;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.spt-icons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.spt-icon-primary {
+  width: 40px;
+  height: 40px;
+  background: var(--secondary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 10px rgba(202, 169, 76, 0.2);
+}
+
+.spt-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.spt-message {
+  font-size: 0.9rem;
+  color: var(--text-main);
+  line-height: 1.4;
+  margin: 0;
+}
+
+.spt-message strong {
+  font-weight: 700;
+  color: var(--primary);
+}
+
+.spt-time {
+  font-size: 0.8rem;
+  color: #9ca3af;
+  font-weight: 500;
+}
+
+.spt-close {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  background: none;
+  border: none;
+  color: #d1d5db;
+  font-size: 1.25rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: color 0.2s ease;
+  padding: 0.25rem;
+}
+
+.spt-close:hover {
+  color: #9ca3af;
+}
+
+/* Mobile Adjustments for Toast */
+@media (max-width: 768px) {
+  .social-proof-toast {
+    bottom: 5rem; /* Above the sticky mobile CTA */
+    left: 1rem;
+    right: 1rem;
+    max-width: none;
+    padding: 1rem;
+    gap: 1rem;
+  }
+}

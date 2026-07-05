@@ -25,6 +25,7 @@ import Preloader from './components/Preloader';
 import StrategySessionModal from './components/StrategySessionModal';
 import PlaybookBanner from './components/PlaybookBanner';
 import CustomCursor from './components/CustomCursor';
+import SocialProofToasts from './components/SocialProofToasts';
 
 import OmanizationCheck from './components/OmanizationCheck';
 import AIPipelineSimulator from './components/AIPipelineSimulator';
@@ -362,6 +363,7 @@ function App() {
         }} 
         initialIndustry={selectedIndustry} 
       />
+      <SocialProofToasts />
       <CustomCursor />
       <AnimatePresence>
         {loading && <Preloader key="preloader" />}

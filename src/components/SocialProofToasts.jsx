@@ -1,73 +1,101 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { Check } from 'lucide-react';
 
-const messages = [
-  { city: 'Muscat', action: 'just completed the Business Assessment' },
-  { city: 'Salalah', action: 'downloaded the Transformation Playbook' },
-  { city: 'Sohar', action: 'requested a Strategy Session' },
-  { city: 'Nizwa', action: 'just completed the Business Assessment' },
-  { city: 'Sur', action: 'downloaded the Transformation Playbook' },
-  { city: 'Muscat', action: 'requested a Strategy Session' },
-  { city: 'Barka', action: 'just completed the ROI analysis' },
-  { city: 'Ibri', action: 'downloaded the Transformation Playbook' },
-  { city: 'Seeb', action: 'just completed the Business Assessment' },
-  { city: 'Ruwi', action: 'requested a Strategy Session' },
+const rawMessages = [
+  "A Muscat-based construction company just booked a Growth Strategy Session",
+  "Someone from a Sohar manufacturing plant downloaded the Transformation Playbook",
+  "A real estate developer in Salalah just used the ROI Calculator",
+  "New Business Assessment completed by a logistics enterprise in Nizwa",
+  "A heavy machinery supplier from Barka just scheduled a consultation",
+  "An oil & gas operator in Ibri just checked their Business Readiness Score",
+  "A regional retail chain (Muscat) completed their operational audit",
+  "Just now: A healthcare provider in Seeb calculated their potential ROI",
+  "A Muscat facility management firm downloaded the Growth Playbook",
+  "New Strategy Session booked by a prominent Oman construction group"
 ];
 
 const SocialProofToasts = () => {
-  const [currentToast, setCurrentToast] = useState(null);
-  const [messageIndex, setMessageIndex] = useState(0);
+  const [currentMessage, setCurrentMessage] = useState(null);
+  const [isVisible, setIsVisible] = useState(false);
+  
+  // Keep track of recent messages to avoid immediate repeats
+  const recentIndices = useRef([]);
 
   useEffect(() => {
-    // Don't show if lead already submitted
     if (sessionStorage.getItem('leadSubmitted') === 'true') return;
 
-    // Initial delay of 25 seconds before first toast
     const initialDelay = setTimeout(() => {
-      showToast();
-    }, 25000);
+      showNextToast();
+    }, 10000);
 
     return () => clearTimeout(initialDelay);
   }, []);
 
-  const showToast = () => {
-    setCurrentToast(messages[messageIndex % messages.length]);
-    setMessageIndex(prev => prev + 1);
+  const getRandomMessage = () => {
+    let newIndex;
+    // Try to find an index we haven't used recently
+    do {
+      newIndex = Math.floor(Math.random() * rawMessages.length);
+    } while (recentIndices.current.includes(newIndex) && recentIndices.current.length < rawMessages.length - 1);
+    
+    // Keep track of the last 4 messages shown
+    recentIndices.current.push(newIndex);
+    if (recentIndices.current.length > 4) {
+      recentIndices.current.shift();
+    }
+    
+    // Generate a slightly randomized time (between 1 and 15 minutes ago, or "Just now")
+    const timeMins = Math.floor(Math.random() * 15);
+    const timeStr = timeMins === 0 ? "Just now" : `${timeMins} mins ago`;
+    
+    return { text: rawMessages[newIndex], time: timeStr };
+  };
 
-    // Auto-hide after 5 seconds
+  const showNextToast = () => {
+    setCurrentMessage(getRandomMessage());
+    setIsVisible(true);
+
+    // Auto hide after 6 seconds
     setTimeout(() => {
-      setCurrentToast(null);
-
-      // Show next toast after 35-50 seconds (randomized)
-      const nextDelay = 35000 + Math.random() * 15000;
+      setIsVisible(false);
+      
+      // Next toast delay (10-20 seconds) 
+      const nextDelay = 10000 + Math.random() * 10000;
       setTimeout(() => {
         if (sessionStorage.getItem('leadSubmitted') !== 'true') {
-          showToast();
+          showNextToast();
         }
       }, nextDelay);
-    }, 5000);
+    }, 6000);
   };
 
   return (
     <AnimatePresence>
-      {currentToast && (
+      {isVisible && currentMessage && (
         <motion.div
           className="social-proof-toast"
-          initial={{ x: -120, opacity: 0 }}
-          animate={{ x: 0, opacity: 1 }}
-          exit={{ x: -120, opacity: 0 }}
-          transition={{ type: 'spring', bounce: 0.2, duration: 0.6 }}
+          initial={{ y: 50, opacity: 0, scale: 0.9 }}
+          animate={{ y: 0, opacity: 1, scale: 1 }}
+          exit={{ y: 20, opacity: 0, scale: 0.95 }}
+          transition={{ type: 'spring', damping: 25, stiffness: 200 }}
         >
-          <div className="spt-dot" />
-          <div className="spt-content">
-            <span className="spt-message">
-              A business in <strong>{currentToast.city}</strong> {currentToast.action}
-            </span>
-            <span className="spt-time">Just now</span>
+          <div className="spt-icons">
+            <div className="spt-icon-primary">
+              <Check size={20} strokeWidth={3} color="white" />
+            </div>
           </div>
+          
+          <div className="spt-content">
+            <p className="spt-message">
+              {currentMessage.text}
+            </p>
+            <span className="spt-time">{currentMessage.time}</span>
+          </div>
+
           <button
             className="spt-close"
-            onClick={() => setCurrentToast(null)}
+            onClick={() => setIsVisible(false)}
             aria-label="Dismiss"
           >
             ×
