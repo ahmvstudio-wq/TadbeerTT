@@ -5726,6 +5726,75 @@ section[id], div[id], [id] {
     height: 48px !important;
   }
 
+  /* Process Section Horizontal Slider */
+  .process-grid {
+    display: flex !important;
+    flex-direction: row !important;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    scroll-snap-type: x mandatory !important;
+    width: calc(100% + 10%) !important;
+    margin-left: -5% !important;
+    margin-right: -5% !important;
+    padding: 0.5rem 5% 1.5rem !important;
+    gap: 1rem !important;
+    -webkit-overflow-scrolling: touch !important;
+    scrollbar-width: none !important;
+    box-sizing: border-box !important;
+  }
+
+  .process-grid::-webkit-scrollbar {
+    display: none !important;
+  }
+
+  .process-card {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    flex: 0 0 85% !important;
+    width: 85% !important;
+    scroll-snap-align: center !important;
+    padding: 1.75rem 1.25rem !important;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.03) !important;
+    box-sizing: border-box !important;
+    margin-bottom: 0 !important;
+  }
+
+  .process-connector {
+    display: none !important;
+  }
+
+  /* Services List Mobile Truncation */
+  .service-list {
+    display: none !important;
+  }
+
+  /* Omanization Compliance Mobile Layout Adjustments */
+  .omanization-section {
+    padding: 3.5rem 1.5rem !important;
+  }
+
+  .omanization-section .roi-calc-grid {
+    grid-template-columns: 1fr !important;
+    gap: 2rem !important;
+  }
+
+  .omanization-section .roi-calc-grid > div:last-child {
+    padding: 1.5rem !important;
+    min-height: auto !important;
+  }
+
+  /* FAQ Accordion compact padding */
+  .faq-section {
+    padding: 3.5rem 1.5rem !important;
+  }
+
+  .faq-question {
+    padding: 1.15rem 1rem !important;
+    font-size: 0.95rem !important;
+  }
+
   /* Footer Restructuring & Polishing */
   .footer {
     padding: 3.5rem 1.5rem 2rem !important;
@@ -5810,5 +5879,117 @@ section[id], div[id], [id] {
     color: var(--text-muted) !important;
     text-align: left !important;
     line-height: 1.6 !important;
+  }
+}
+
+/* ========================================
+   Micro-CTA Bridge
+   ======================================== */
+.micro-cta-bridge {
+  padding: 3rem 0;
+  background: linear-gradient(135deg, rgba(24,79,91,0.03) 0%, rgba(202,169,76,0.04) 100%);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+.micro-cta-inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+  text-align: center;
+}
+
+.micro-cta-text {
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--primary);
+  margin: 0;
+  letter-spacing: -0.2px;
+}
+
+.micro-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.85rem 2rem;
+  background: var(--secondary);
+  color: var(--primary);
+  font-weight: 700;
+  font-size: 0.95rem;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+  box-shadow: 0 4px 16px rgba(202, 169, 76, 0.15);
+}
+
+.micro-cta-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(202, 169, 76, 0.25);
+}
+
+.micro-cta-arrow {
+  transition: transform 0.3s ease;
+  display: inline-block;
+}
+
+.micro-cta-btn:hover .micro-cta-arrow {
+  transform: translateX(4px);
+}
+
+/* ========================================
+   Sticky Mobile CTA Bar
+   ======================================== */
+.sticky-mobile-cta {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 999;
+  background: rgba(24, 79, 91, 0.97);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  padding: 0.65rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: translateY(100%);
+  opacity: 0;
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.35s ease;
+  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.12);
+}
+
+.sticky-mobile-cta--visible {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.sticky-mobile-cta-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 380px;
+  padding: 0.75rem 1.5rem;
+  background: var(--secondary);
+  color: var(--primary);
+  font-weight: 700;
+  font-size: 0.9rem;
+  border-radius: 6px;
+  text-decoration: none;
+  letter-spacing: 0.3px;
+  text-align: center;
+  transition: background 0.3s ease;
+}
+
+.sticky-mobile-cta-btn:hover {
+  background: #c9b05e;
+}
+
+/* Hide sticky CTA on desktop */
+@media (min-width: 769px) {
+  .sticky-mobile-cta {
+    display: none !important;
   }
 }

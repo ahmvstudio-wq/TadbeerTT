@@ -48,23 +48,74 @@ const ManufacturingIndustryPage = React.lazy(() => import('./pages/Manufacturing
 const GovernmentIndustryPage = React.lazy(() => import('./pages/GovernmentIndustryPage'));
 const ProfessionalServicesIndustryPage = React.lazy(() => import('./pages/ProfessionalServicesIndustryPage'));
 
+// Micro-CTA bridge between trust sections and interactive tools
+const MicroCTABridge = () => (
+  <section className="micro-cta-bridge">
+    <div className="container" style={{ padding: '0 5%' }}>
+      <div className="micro-cta-inner">
+        <p className="micro-cta-text">Ready to see where your business stands? It takes 2 minutes.</p>
+        <a href="#readiness-score" className="micro-cta-btn">
+          Take the Assessment <span className="micro-cta-arrow">→</span>
+        </a>
+      </div>
+    </div>
+  </section>
+);
+
+// Sticky mobile CTA bar — appears after Hero, hides when Readiness Score is in viewport
+const StickyMobileCTA = () => {
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const heroEl = document.querySelector('.hero-section');
+      const readinessEl = document.getElementById('readiness-score');
+      if (!heroEl) return;
+
+      const heroBottom = heroEl.getBoundingClientRect().bottom;
+      const pastHero = heroBottom < 0;
+
+      let readinessInView = false;
+      if (readinessEl) {
+        const rRect = readinessEl.getBoundingClientRect();
+        readinessInView = rRect.top < window.innerHeight && rRect.bottom > 0;
+      }
+
+      setVisible(pastHero && !readinessInView);
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  if (typeof window !== 'undefined' && window.innerWidth > 768) return null;
+
+  return (
+    <div className={`sticky-mobile-cta ${visible ? 'sticky-mobile-cta--visible' : ''}`}>
+      <a href="#readiness-score" className="sticky-mobile-cta-btn">
+        Take Business Assessment →
+      </a>
+    </div>
+  );
+};
+
 function HomePage() {
   return (
     <>
       <Hero />
-      <Clients />
       <ProblemStatement />
+      <Clients />
       <ReadinessScore />
-      <About />
       <Services />
-      <Proof />
       <ROICalculator />
-      <Process />
+      <Proof />
       <CaseStudies />
       <OmanizationCheck />
+      <Process />
       <TechPartners />
       <FAQ />
       <CTA />
+      <StickyMobileCTA />
     </>
   );
 }
@@ -129,6 +180,40 @@ function App() {
     };
     document.addEventListener('mouseleave', handleMouseLeave);
 
+    // Mobile Exit Intent (Rapid scroll up or tab switch)
+    let lastScrollY = window.scrollY;
+    let rapidScrollCount = 0;
+
+    const handleMobileScroll = () => {
+      const currentY = window.scrollY;
+      const diff = lastScrollY - currentY;
+
+      // If scrolling up rapidly (more than 150px in one frame)
+      if (diff > 150) {
+        rapidScrollCount++;
+        if (rapidScrollCount >= 2) {
+          openStrategyPrompt();
+          rapidScrollCount = 0;
+        }
+      } else {
+        rapidScrollCount = 0;
+      }
+      lastScrollY = currentY;
+    };
+    window.addEventListener('scroll', handleMobileScroll, { passive: true });
+
+    const handleVisibility = () => {
+      if (document.visibilityState === 'hidden') {
+        sessionStorage.setItem('showStrategyOnReturn', 'true');
+      } else if (document.visibilityState === 'visible') {
+        if (sessionStorage.getItem('showStrategyOnReturn') === 'true') {
+          sessionStorage.removeItem('showStrategyOnReturn');
+          openStrategyPrompt();
+        }
+      }
+    };
+    document.addEventListener('visibilitychange', handleVisibility);
+
     // 2. Scroll Depth Trigger (70% scroll depth)
     let hasScrolled65 = false;
     const handleScroll = () => {
@@ -162,6 +247,8 @@ function App() {
 
     return () => {
       document.removeEventListener('mouseleave', handleMouseLeave);
+      window.removeEventListener('scroll', handleMobileScroll);
+      document.removeEventListener('visibilitychange', handleVisibility);
       window.removeEventListener('scroll', handleScroll);
       activityEvents.forEach(evt => window.removeEventListener(evt, resetIdleTimer));
       clearTimeout(idleTimer);

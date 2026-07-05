@@ -63,6 +63,48 @@ const FAQ = () => {
               </motion.div>
             ))}
           </div>
+
+          {/* Still have questions CTA */}
+          <motion.div
+            initial={{ opacity: 0, y: 15 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.3 }}
+            style={{
+              textAlign: 'center',
+              marginTop: '2.5rem',
+              paddingTop: '2rem',
+              borderTop: '1px solid var(--border)'
+            }}
+          >
+            <p style={{ fontSize: '1rem', color: 'var(--text-muted)', marginBottom: '1rem' }}>
+              Still have questions?
+            </p>
+            <button
+              onClick={() => window.dispatchEvent(new CustomEvent('open-strategy-modal'))}
+              style={{
+                background: 'none',
+                border: '1.5px solid var(--primary)',
+                color: 'var(--primary)',
+                padding: '0.75rem 2rem',
+                borderRadius: '6px',
+                fontWeight: '700',
+                fontSize: '0.9rem',
+                cursor: 'pointer',
+                transition: 'all 0.3s ease'
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.background = 'var(--primary)';
+                e.currentTarget.style.color = '#fff';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.background = 'none';
+                e.currentTarget.style.color = 'var(--primary)';
+              }}
+            >
+              Apply for a Strategy Session
+            </button>
+          </motion.div>
         </div>
       </div>
     </section>

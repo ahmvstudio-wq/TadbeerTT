@@ -1,7 +1,7 @@
 const PROMPT_LIMITS = {
-  total: 3,
-  chat: 3,
-  strategy: 2
+  total: 15,
+  chat: 10,
+  strategy: 8
 };
 
 const TOTAL_KEY = 'tadbeer_auto_prompt_count';
