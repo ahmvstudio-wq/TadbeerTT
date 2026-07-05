@@ -31,6 +31,7 @@ import AIPipelineSimulator from './components/AIPipelineSimulator';
 import OurWork from './components/OurWork';
 import Proof from './components/Proof';
 import CaseStudies from './components/CaseStudies';
+import ProblemStatement from './components/ProblemStatement';
 
 const DigitalMarketingPage = React.lazy(() => import('./pages/DigitalMarketingPage'));
 const SoftwareSolutionsPage = React.lazy(() => import('./pages/SoftwareSolutionsPage'));
@@ -52,8 +53,9 @@ function HomePage() {
     <>
       <Hero />
       <Clients />
-      <About />
+      <ProblemStatement />
       <ReadinessScore />
+      <About />
       <Services />
       <Proof />
       <ROICalculator />
