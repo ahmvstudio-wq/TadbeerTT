@@ -172,8 +172,8 @@ const LeadCaptureModal = ({ isOpen, onClose, onSubmit, resourceTitle, resourceTy
                   animate={{ opacity: 1, scale: 1 }}
                   style={{ textAlign: 'center', padding: '1.5rem 0' }}
                 >
-                  <div className="modal-progress-frame" style={{ position: 'relative', width: '80px', height: '80px', margin: '0 auto 1.5rem', flexShrink: 0 }}>
-                    <svg width="80" height="80" viewBox="0 0 50 50">
+                   <div className="modal-progress-frame" style={{ position: 'relative', width: '80px', height: '80px', margin: '0 auto 1.5rem', flexShrink: 0 }}>
+                    <svg width="100%" height="100%" viewBox="0 0 50 50" style={{ display: 'block' }}>
                       <circle cx="25" cy="25" r="20" fill="none" stroke="rgba(24, 79, 91, 0.08)" strokeWidth="3" />
                       <motion.circle 
                         cx="25" cy="25" r="20" fill="none" stroke="var(--primary)" strokeWidth="3"
