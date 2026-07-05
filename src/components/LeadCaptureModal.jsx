@@ -18,6 +18,8 @@ const LeadCaptureModal = ({ isOpen, onClose, onSubmit, resourceTitle, resourceTy
       return;
     }
 
+    setLoading(false);
+    setSubmitted(true);
     setError('');
     
     const lead = {
@@ -30,18 +32,13 @@ const LeadCaptureModal = ({ isOpen, onClose, onSubmit, resourceTitle, resourceTy
       date: new Date().toISOString()
     };
     
-    // Start database insert in background
+    // Save database insert in background without blocking
     createLead(lead).then(({ error: dbError }) => {
       if (dbError) {
         console.warn('DB Error (Ignored for local demo):', dbError);
       }
     });
 
-    // Directly transition to success state and download
-    setProgress(100);
-    setLoadingText('Success!');
-    setLoading(false);
-    setSubmitted(true);
     if (onSubmit) onSubmit(formData);
     
     // Programmatic file download trigger to bypass popup blockers

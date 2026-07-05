@@ -45,9 +45,8 @@ const StrategySessionModal = ({ isOpen, onClose, initialIndustry = '' }) => {
       return;
     }
 
-    setLoading(true);
-    setProgress(0);
-    setLoadingText('Processing...');
+    setLoading(false);
+    setSuccess(true);
     setError('');
 
     const leadData = {
@@ -62,65 +61,35 @@ const StrategySessionModal = ({ isOpen, onClose, initialIndustry = '' }) => {
       source_url: window.location.pathname + window.location.hash
     };
 
-    // Start DB call in parallel
-    const dbPromise = createLead(leadData);
-
-    let currentProgress = 0;
-    const interval = setInterval(() => {
-      currentProgress += 5;
-      
-      if (currentProgress < 35) {
-        setLoadingText('Processing...');
-      } else if (currentProgress < 70) {
-        setLoadingText('Analyzing metrics...');
-      } else if (currentProgress < 90) {
-        setLoadingText('Finalizing...');
+    // Save DB call in parallel
+    createLead(leadData).then(({ error: dbError }) => {
+      if (dbError) {
+        console.warn('DB Error (Ignored for local demo):', dbError);
       }
-      
-      if (currentProgress >= 90) {
-        clearInterval(interval);
-        
-        dbPromise.then(({ error: dbError }) => {
-          if (dbError) {
-            console.warn('DB Error (Ignored for local demo):', dbError);
-          }
-          {
-            setProgress(100);
-            setLoadingText('Success!');
-            
-            setTimeout(() => {
-              setLoading(false);
-              setSuccess(true);
-              
-              // Broadcast new lead event locally
-              try {
-                const bc = new BroadcastChannel('tadbeer_leads_sync');
-                bc.postMessage({ event: 'new-lead', timestamp: Date.now() });
-                bc.close();
-              } catch (syncErr) {
-                console.warn('Sync broadcast failed:', syncErr);
-              }
+    });
 
-              // Also fire window event
-              window.dispatchEvent(new CustomEvent('lead-submitted', { detail: leadData }));
+    // Broadcast new lead event locally
+    try {
+      const bc = new BroadcastChannel('tadbeer_leads_sync');
+      bc.postMessage({ event: 'new-lead', timestamp: Date.now() });
+      bc.close();
+    } catch (syncErr) {
+      console.warn('Sync broadcast failed:', syncErr);
+    }
 
-              // Reset form
-              setFormData({
-                name: '',
-                email: '',
-                company: '',
-                phone: '',
-                industry: '',
-                revenue: '',
-                bottleneck: ''
-              });
-            }, 350);
-          }
-        });
-      } else {
-        setProgress(currentProgress);
-      }
-    }, 55);
+    // Also fire window event
+    window.dispatchEvent(new CustomEvent('lead-submitted', { detail: leadData }));
+
+    // Reset form
+    setFormData({
+      name: '',
+      email: '',
+      company: '',
+      phone: '',
+      industry: '',
+      revenue: '',
+      bottleneck: ''
+    });
 
     // Auto close modal after success
     setTimeout(() => {
@@ -130,7 +99,7 @@ const StrategySessionModal = ({ isOpen, onClose, initialIndustry = '' }) => {
         }
         return false;
       });
-    }, 5000);
+    }, 3500);
   };
 
   return (

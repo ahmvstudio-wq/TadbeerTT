@@ -480,11 +480,13 @@ const About = () => {
     if (window.innerWidth <= 768 && cardsContainerRef.current) {
       isScrollingRef.current = true;
       const container = cardsContainerRef.current;
-      const cardWidth = container.offsetWidth;
-      container.scrollTo({
-        left: index * cardWidth,
-        behavior: 'smooth'
-      });
+      const cardEl = container.querySelectorAll('.about-content-card')[index];
+      if (cardEl) {
+        container.scrollTo({
+          left: cardEl.offsetLeft - (container.offsetWidth - cardEl.offsetWidth) / 2,
+          behavior: 'smooth'
+        });
+      }
       setTimeout(() => {
         isScrollingRef.current = false;
       }, 500);
@@ -499,10 +501,15 @@ const About = () => {
     if (!container) return;
     
     const scrollLeft = container.scrollLeft;
-    const cardWidth = container.offsetWidth;
-    if (cardWidth === 0) return;
+    const containerWidth = container.offsetWidth;
+    if (containerWidth === 0) return;
     
-    const newActiveTab = Math.round(scrollLeft / cardWidth);
+    const cardEl = container.querySelector('.about-content-card');
+    if (!cardEl) return;
+    const cardWidth = cardEl.offsetWidth;
+    const gap = 16; // gap between cards (1rem)
+    
+    const newActiveTab = Math.round(scrollLeft / (cardWidth + gap));
     if (newActiveTab !== activeTab && newActiveTab >= 0 && newActiveTab < 3) {
       setActiveTab(newActiveTab);
       setProgress(0);
@@ -648,7 +655,7 @@ const About = () => {
                     borderRadius: '16px',
                     padding: '3rem',
                     boxShadow: '0 10px 30px rgba(0,0,0,0.02)',
-                    display: 'flex',
+                    display: (isTabActive || window.innerWidth <= 768) ? 'flex' : 'none',
                     flexDirection: 'column',
                     justifyContent: 'space-between',
                     position: 'relative',
@@ -672,7 +679,13 @@ const About = () => {
                       {tab.label}
                     </span>
                     
-                    <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                    <motion.div 
+                      key={isTabActive ? 'active' : 'inactive'}
+                      initial={window.innerWidth > 768 && isTabActive ? { opacity: 0, y: 15 } : { opacity: 1, y: 0 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.5 }}
+                      style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}
+                    >
                       <h3 style={{ fontSize: '1.75rem', color: 'var(--primary)', fontWeight: '800', lineHeight: '1.3', margin: 0 }}>
                         {tab.title}
                       </h3>
@@ -707,7 +720,7 @@ const About = () => {
                           </div>
                         ))}
                       </div>
-                    </div>
+                    </motion.div>
                   </div>
                 </div>
               );
