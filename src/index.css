@@ -240,6 +240,44 @@ img {
   overflow: hidden;
 }
 
+/* Scroll Indicator */
+.hero-scroll-indicator {
+  position: absolute;
+  bottom: 2.5rem;
+  left: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  z-index: 10;
+}
+
+.hero-scroll-text {
+  font-size: 0.65rem;
+  color: var(--primary);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  opacity: 0.7;
+}
+
+.hero-scroll-line {
+  width: 1px;
+  height: 50px;
+  background: rgba(24, 79, 91, 0.15);
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-scroll-line-inner {
+  width: 100%;
+  height: 50%;
+  background: var(--primary);
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+
 .hero-split {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -5114,7 +5152,7 @@ html, body {
   .hero-section {
     min-height: auto !important;
     padding-top: 5.35rem !important;
-    padding-bottom: 2.25rem !important;
+    padding-bottom: 4.5rem !important;
   }
 
   :root.has-banner .hero-section {
@@ -5122,7 +5160,8 @@ html, body {
   }
 
   .hero-scroll-indicator {
-    display: none !important;
+    display: flex !important;
+    bottom: 1.25rem !important;
   }
 
   .navbar {

@@ -255,14 +255,17 @@ const Hero = () => {
 
       {/* Subtle Scroll Indicator */}
       <motion.div 
-        style={{ position: 'absolute', bottom: '3rem', left: '5%', display: 'flex', alignItems: 'center', gap: '1rem', zIndex: 10 }}
-        initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.5, duration: 1 }}
+        className="hero-scroll-indicator"
+        initial={{ opacity: 0, x: '-50%' }} 
+        animate={{ opacity: 1, x: '-50%' }} 
+        transition={{ delay: 1.5, duration: 1 }}
       >
-        <span style={{ fontSize: '0.65rem', color: 'var(--primary)', letterSpacing: '3px', textTransform: 'uppercase', transform: 'rotate(-90deg)', transformOrigin: 'left', opacity: 0.7 }}>Scroll</span>
-        <div style={{ width: '1px', height: '60px', background: 'rgba(24, 79, 91, 0.1)', position: 'relative', overflow: 'hidden' }}>
+        <span className="hero-scroll-text">Scroll</span>
+        <div className="hero-scroll-line">
           <motion.div 
-            style={{ width: '100%', height: '50%', background: 'var(--primary)', position: 'absolute', top: 0, left: 0 }}
-            animate={{ y: ['-100%', '200%'] }} transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
+            className="hero-scroll-line-inner"
+            animate={{ y: ['-100%', '200%'] }} 
+            transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
           />
         </div>
       </motion.div>
