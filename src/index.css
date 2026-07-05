@@ -6076,11 +6076,6 @@ section[id], div[id], [id] {
 /* Mobile Adjustments for Toast */
 @media (max-width: 768px) {
   .social-proof-toast {
-    bottom: 5rem; /* Above the sticky mobile CTA */
-    left: 1rem;
-    right: 1rem;
-    max-width: none;
-    padding: 1rem;
-    gap: 1rem;
+    display: none !important;
   }
 }
