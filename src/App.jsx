@@ -52,15 +52,15 @@ function HomePage() {
     <>
       <Hero />
       <Clients />
-      <ReadinessScore />
       <About />
-      <Proof />
+      <ReadinessScore />
       <Services />
-      <Process />
+      <Proof />
       <ROICalculator />
+      <Process />
+      <CaseStudies />
       <OmanizationCheck />
       <TechPartners />
-      <CaseStudies />
       <FAQ />
       <CTA />
     </>
