@@ -418,6 +418,7 @@ const About = () => {
   const [activeTab, setActiveTab] = useState(0);
   const [progress, setProgress] = useState(0);
   const isHoveredRef = useRef(false);
+  const tabsContainerRef = useRef(null);
   const autoRotateInterval = 8000;
   const stepTime = 100;
 
@@ -433,6 +434,22 @@ const About = () => {
       });
     }, stepTime);
     return () => clearInterval(timer);
+  }, [activeTab]);
+
+  useEffect(() => {
+    if (!tabsContainerRef.current) return;
+    const container = tabsContainerRef.current;
+    const activeEl = container.querySelector('.about-tab-item.active');
+    if (activeEl) {
+      const containerWidth = container.offsetWidth;
+      const activeLeft = activeEl.offsetLeft;
+      const activeWidth = activeEl.offsetWidth;
+      
+      container.scrollTo({
+        left: activeLeft - (containerWidth / 2) + (activeWidth / 2),
+        behavior: 'smooth'
+      });
+    }
   }, [activeTab]);
 
   const handleTabClick = (index) => {
@@ -496,13 +513,17 @@ const About = () => {
           }}
         >
           {/* Left Column: Tab list */}
-          <div style={{
-            flex: '1 1 35%',
-            display: 'flex',
-            flexDirection: 'column',
-            gap: '1rem',
-            justifyContent: 'center'
-          }} className="about-tabs-col">
+          <div 
+            ref={tabsContainerRef}
+            style={{
+              flex: '1 1 35%',
+              display: 'flex',
+              flexDirection: 'column',
+              gap: '1rem',
+              justifyContent: 'center'
+            }} 
+            className="about-tabs-col"
+          >
             {tabs.map((tab) => {
               const isActive = activeTab === tab.id;
               return (
@@ -521,7 +542,7 @@ const About = () => {
                     transition: 'all 0.3s ease',
                     boxShadow: isActive ? '0 8px 20px rgba(202,169,76,0.06)' : 'none'
                   }}
-                  className="about-tab-item"
+                  className={`about-tab-item ${isActive ? 'active' : ''}`}
                 >
                   <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
                     <span style={{ 

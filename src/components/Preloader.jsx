@@ -44,12 +44,13 @@ const Preloader = () => {
         position: 'relative' 
       }}>
         <motion.div
-          initial={{ left: '-100%' }}
-          animate={{ left: '100%' }}
+          initial={{ x: '-100%' }}
+          animate={{ x: '250%' }}
           transition={{ repeat: Infinity, duration: 1.4, ease: 'easeInOut' }}
           style={{
             position: 'absolute',
             top: 0,
+            left: 0,
             width: '85px',
             height: '100%',
             background: 'linear-gradient(90deg, transparent, var(--primary), transparent)',

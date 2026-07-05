@@ -5680,4 +5680,79 @@ section[id], div[id], [id] {
     width: 48px !important;
     height: 48px !important;
   }
+
+  /* Footer Restructuring & Polishing */
+  .footer {
+    padding: 4rem 1.5rem 2rem !important;
+    background: #184F5B !important; /* var(--tertiary) */
+  }
+
+  .footer-grid {
+    grid-template-columns: 1fr !important;
+    gap: 2.25rem !important;
+    justify-items: start !important;
+    align-items: start !important;
+  }
+
+  .footer-grid > div {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    text-align: left !important;
+    width: 100% !important;
+  }
+
+  .footer-grid > div:first-child {
+    grid-column: span 1 !important;
+    margin-bottom: 0.5rem !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+    padding-bottom: 1.5rem !important;
+  }
+
+  .footer-grid > div:last-child {
+    grid-column: span 1 !important;
+    margin-top: 0 !important;
+    border-top: none !important;
+    padding-top: 0 !important;
+    width: 100% !important;
+  }
+
+  .footer-heading {
+    font-size: 1.1rem !important;
+    color: var(--secondary) !important;
+    margin-bottom: 0.85rem !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+    padding-bottom: 0.5rem !important;
+    width: 100% !important;
+    text-align: left !important;
+    letter-spacing: 0.5px !important;
+  }
+
+  .footer-links {
+    align-items: flex-start !important;
+    text-align: left !important;
+    width: 100% !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 0.75rem !important;
+  }
+
+  .footer-links li {
+    justify-content: flex-start !important;
+    text-align: left !important;
+    margin-bottom: 0.5rem !important;
+    display: flex !important;
+    align-items: flex-start !important;
+    gap: 0.5rem !important;
+    width: 100% !important;
+  }
+
+  .footer-desc {
+    display: block !important;
+    max-width: 100% !important;
+    margin-bottom: 0 !important;
+    font-size: 0.9rem !important;
+    color: rgba(255, 255, 255, 0.7) !important;
+    text-align: left !important;
+  }
 }
