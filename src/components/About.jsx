@@ -425,6 +425,10 @@ const About = () => {
   useEffect(() => {
     const timer = setInterval(() => {
       if (isHoveredRef.current) return;
+      if (window.innerWidth <= 768) {
+        setProgress(0);
+        return;
+      }
       setProgress((prev) => {
         if (prev >= 100) {
           setActiveTab((curr) => (curr + 1) % 3);
@@ -439,17 +443,32 @@ const About = () => {
   useEffect(() => {
     if (!tabsContainerRef.current) return;
     const container = tabsContainerRef.current;
-    const activeEl = container.querySelector('.about-tab-item.active');
-    if (activeEl) {
-      const containerWidth = container.offsetWidth;
-      const activeLeft = activeEl.offsetLeft;
-      const activeWidth = activeEl.offsetWidth;
-      
-      container.scrollTo({
-        left: activeLeft - (containerWidth / 2) + (activeWidth / 2),
-        behavior: 'smooth'
-      });
-    }
+    
+    const performScroll = () => {
+      const activeEl = container.querySelector('.about-tab-item.active');
+      if (activeEl) {
+        const containerWidth = container.offsetWidth;
+        if (containerWidth === 0) return; // Wait for layout
+        
+        if (activeTab === 0) {
+          container.scrollTo({ left: 0, behavior: 'smooth' });
+          return;
+        }
+        
+        const activeLeft = activeEl.offsetLeft;
+        const activeWidth = activeEl.offsetWidth;
+        const scrollTarget = activeLeft - (containerWidth / 2) + (activeWidth / 2);
+        
+        container.scrollTo({
+          left: Math.max(0, scrollTarget),
+          behavior: 'smooth'
+        });
+      }
+    };
+
+    performScroll();
+    const t = setTimeout(performScroll, 100);
+    return () => clearTimeout(t);
   }, [activeTab]);
 
   const handleTabClick = (index) => {
@@ -563,7 +582,7 @@ const About = () => {
                   </div>
                   
                   {/* Dynamic Progress Bar */}
-                  {isActive && (
+                  {isActive && progress > 0 && (
                     <div style={{
                       position: 'absolute',
                       bottom: 0,
