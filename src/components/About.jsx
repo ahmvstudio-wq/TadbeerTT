@@ -419,6 +419,8 @@ const About = () => {
   const [progress, setProgress] = useState(0);
   const isHoveredRef = useRef(false);
   const tabsContainerRef = useRef(null);
+  const cardsContainerRef = useRef(null);
+  const isScrollingRef = useRef(false);
   const autoRotateInterval = 8000;
   const stepTime = 100;
 
@@ -474,6 +476,37 @@ const About = () => {
   const handleTabClick = (index) => {
     setActiveTab(index);
     setProgress(0);
+    
+    if (window.innerWidth <= 768 && cardsContainerRef.current) {
+      isScrollingRef.current = true;
+      const container = cardsContainerRef.current;
+      const cardWidth = container.offsetWidth;
+      container.scrollTo({
+        left: index * cardWidth,
+        behavior: 'smooth'
+      });
+      setTimeout(() => {
+        isScrollingRef.current = false;
+      }, 500);
+    }
+  };
+
+  const handleCardsScroll = () => {
+    if (window.innerWidth > 768) return;
+    if (isScrollingRef.current) return;
+    
+    const container = cardsContainerRef.current;
+    if (!container) return;
+    
+    const scrollLeft = container.scrollLeft;
+    const cardWidth = container.offsetWidth;
+    if (cardWidth === 0) return;
+    
+    const newActiveTab = Math.round(scrollLeft / cardWidth);
+    if (newActiveTab !== activeTab && newActiveTab >= 0 && newActiveTab < 3) {
+      setActiveTab(newActiveTab);
+      setProgress(0);
+    }
   };
 
   const tabs = [
@@ -598,79 +631,87 @@ const About = () => {
             })}
           </div>
 
-          {/* Right Column: Display Card */}
-          <div style={{
-            flex: '1 1 65%',
-            background: 'white',
-            border: '1px solid var(--border)',
-            borderRadius: '16px',
-            padding: '3rem',
-            boxShadow: '0 10px 30px rgba(0,0,0,0.02)',
-            display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'space-between',
-            position: 'relative',
-            minHeight: '380px'
-          }} className="about-content-card">
-            {/* Background design pattern */}
-            <div style={{
-              position: 'absolute',
-              top: 0,
-              right: 0,
-              width: '120px',
-              height: '120px',
-              background: 'radial-gradient(circle, rgba(202,169,76,0.04) 0%, transparent 70%)',
-              pointerEvents: 'none'
-            }} />
+          {/* Right Column: Display Cards Slider */}
+          <div 
+            ref={cardsContainerRef}
+            onScroll={handleCardsScroll}
+            className="about-cards-slider"
+          >
+            {tabs.map((tab) => {
+              const isTabActive = activeTab === tab.id;
+              return (
+                <div 
+                  key={tab.id}
+                  style={{
+                    background: 'white',
+                    border: '1px solid var(--border)',
+                    borderRadius: '16px',
+                    padding: '3rem',
+                    boxShadow: '0 10px 30px rgba(0,0,0,0.02)',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    justifyContent: 'space-between',
+                    position: 'relative',
+                    minHeight: '380px'
+                  }} 
+                  className={`about-content-card ${isTabActive ? 'active' : ''}`}
+                >
+                  {/* Background design pattern */}
+                  <div style={{
+                    position: 'absolute',
+                    top: 0,
+                    right: 0,
+                    width: '120px',
+                    height: '120px',
+                    background: 'radial-gradient(circle, rgba(202,169,76,0.04) 0%, transparent 70%)',
+                    pointerEvents: 'none'
+                  }} />
 
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
-              <span className="section-label" style={{ color: 'var(--secondary)', alignSelf: 'flex-start' }}>
-                {tabs[activeTab].label}
-              </span>
-              
-              <motion.div
-                key={activeTab}
-                initial={{ opacity: 0, y: 15 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5 }}
-                style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}
-              >
-                <h3 style={{ fontSize: '1.75rem', color: 'var(--primary)', fontWeight: '800', lineHeight: '1.3', margin: 0 }}>
-                  {tabs[activeTab].title}
-                </h3>
-                <h5 style={{ fontSize: '0.95rem', color: 'var(--secondary)', fontWeight: '600', margin: 0, textTransform: 'uppercase', letterSpacing: '0.5px' }}>
-                  {tabs[activeTab].subtitle}
-                </h5>
-                <p style={{ color: 'var(--text-muted)', fontSize: '0.95rem', lineHeight: '1.6', margin: 0 }}>
-                  {tabs[activeTab].body}
-                </p>
-                
-                {/* Visual Highlights Grid */}
-                <div style={{ 
-                  display: 'grid', 
-                  gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', 
-                  gap: '1rem', 
-                  marginTop: '1.5rem',
-                  borderTop: '1px solid var(--border)',
-                  paddingTop: '1.5rem'
-                }} className="highlights-grid">
-                  {tabs[activeTab].highlights.map((highlight, idx) => (
-                    <div key={idx} style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                      <div style={{
-                        width: '6px',
-                        height: '6px',
-                        borderRadius: '50%',
-                        background: 'var(--secondary)',
-                        flexShrink: 0
-                      }} />
-                      <span style={{ fontSize: '0.85rem', color: 'var(--text-main)', fontWeight: '600' }}>
-                        {highlight}
-                      </span>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
+                    <span className="section-label" style={{ color: 'var(--secondary)', alignSelf: 'flex-start' }}>
+                      {tab.label}
+                    </span>
+                    
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                      <h3 style={{ fontSize: '1.75rem', color: 'var(--primary)', fontWeight: '800', lineHeight: '1.3', margin: 0 }}>
+                        {tab.title}
+                      </h3>
+                      <h5 style={{ fontSize: '0.95rem', color: 'var(--secondary)', fontWeight: '600', margin: 0, textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+                        {tab.subtitle}
+                      </h5>
+                      <p style={{ color: 'var(--text-muted)', fontSize: '0.95rem', lineHeight: '1.6', margin: 0 }}>
+                        {tab.body}
+                      </p>
+                      
+                      {/* Visual Highlights Grid */}
+                      <div style={{ 
+                        display: 'grid', 
+                        gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', 
+                        gap: '1rem', 
+                        marginTop: '1.5rem',
+                        borderTop: '1px solid var(--border)',
+                        paddingTop: '1.5rem'
+                      }} className="highlights-grid">
+                        {tab.highlights.map((highlight, hIdx) => (
+                          <div key={hIdx} style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                            <div style={{
+                              width: '6px',
+                              height: '6px',
+                              borderRadius: '50%',
+                              background: 'var(--secondary)',
+                              flexShrink: 0
+                            }} />
+                            <span style={{ fontSize: '0.85rem', color: 'var(--text-main)', fontWeight: '600' }}>
+                              {highlight}
+                            </span>
+                          </div>
+                        ))}
+                      </div>
                     </div>
-                  ))}
+                  </div>
                 </div>
-              </motion.div>
-            </div>
+              );
+            })}
           </div>
         </div>
 

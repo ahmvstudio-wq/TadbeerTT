@@ -18,9 +18,6 @@ const LeadCaptureModal = ({ isOpen, onClose, onSubmit, resourceTitle, resourceTy
       return;
     }
 
-    setLoading(true);
-    setProgress(0);
-    setLoadingText('Processing...');
     setError('');
     
     const lead = {
@@ -34,70 +31,45 @@ const LeadCaptureModal = ({ isOpen, onClose, onSubmit, resourceTitle, resourceTy
     };
     
     // Start database insert in background
-    const dbPromise = createLead(lead);
-    
-    let currentProgress = 0;
-    const interval = setInterval(() => {
-      currentProgress += 5;
-      
-      if (currentProgress < 35) {
-        setLoadingText('Processing...');
-      } else if (currentProgress < 70) {
-        setLoadingText('Verifying details...');
-      } else if (currentProgress < 90) {
-        setLoadingText('Preparing download...');
+    createLead(lead).then(({ error: dbError }) => {
+      if (dbError) {
+        console.warn('DB Error (Ignored for local demo):', dbError);
       }
-      
-      if (currentProgress >= 90) {
-        clearInterval(interval);
-        
-        // Wait for database call to finish
-        dbPromise.then(({ error: dbError }) => {
-          if (dbError) {
-            console.warn('DB Error (Ignored for local demo):', dbError);
-          }
-          {
-            setProgress(100);
-            setLoadingText('Success!');
-            
-            setTimeout(() => {
-              setLoading(false);
-              setSubmitted(true);
-              if (onSubmit) onSubmit(formData);
-              
-              // Programmatic file download trigger to bypass popup blockers
-              if (resourceLink) {
-                try {
-                  const link = document.createElement('a');
-                  link.href = resourceLink;
-                  const filename = resourceLink.split('/').pop() || 'download.pdf';
-                  link.setAttribute('download', filename);
-                  document.body.appendChild(link);
-                  link.click();
-                  document.body.removeChild(link);
-                } catch (err) {
-                  console.warn('Download trigger failed:', err);
-                }
-              }
-              
-              // Broadcast new lead event locally
-              try {
-                const bc = new BroadcastChannel('tadbeer_leads_sync');
-                bc.postMessage({ event: 'new-lead', timestamp: Date.now() });
-                bc.close();
-              } catch (syncErr) {
-                console.warn('Sync broadcast failed:', syncErr);
-              }
+    });
 
-              // Also fire a window event for same-tab updates
-              window.dispatchEvent(new CustomEvent('lead-submitted', { detail: lead }));
-            }, 350);
-          }
-        });
-      } else {
-        setProgress(currentProgress);
+    // Directly transition to success state and download
+    setProgress(100);
+    setLoadingText('Success!');
+    setLoading(false);
+    setSubmitted(true);
+    if (onSubmit) onSubmit(formData);
+    
+    // Programmatic file download trigger to bypass popup blockers
+    if (resourceLink) {
+      try {
+        const link = document.createElement('a');
+        link.href = resourceLink;
+        const filename = resourceLink.split('/').pop() || 'download.pdf';
+        link.setAttribute('download', filename);
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      } catch (err) {
+        console.warn('Download trigger failed:', err);
       }
-    }, 55);
+    }
+    
+    // Broadcast new lead event locally
+    try {
+      const bc = new BroadcastChannel('tadbeer_leads_sync');
+      bc.postMessage({ event: 'new-lead', timestamp: Date.now() });
+      bc.close();
+    } catch (syncErr) {
+      console.warn('Sync broadcast failed:', syncErr);
+    }
+
+    // Also fire a window event for same-tab updates
+    window.dispatchEvent(new CustomEvent('lead-submitted', { detail: lead }));
 
     // Auto close after success (extended to 45 seconds to let users read and book a call)
     const closeTimeout = resourceLink ? 45000 : 3500;
@@ -109,7 +81,7 @@ const LeadCaptureModal = ({ isOpen, onClose, onSubmit, resourceTitle, resourceTy
         }
         return false;
       });
-    }, closeTimeout + 1500); // Give time for the loader transition to complete
+    }, closeTimeout);
   };
 
   return (

@@ -5766,4 +5766,49 @@ section[id], div[id], [id] {
     text-align: left !important;
     line-height: 1.6 !important;
   }
+
+  /* About section mobile slider/carousel overrides */
+  .about-cards-slider {
+    flex: none !important;
+    display: flex !important;
+    flex-direction: row !important;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    scroll-snap-type: x mandatory !important;
+    width: 100% !important;
+    gap: 1rem !important;
+    padding: 0.5rem 1rem 1.5rem !important;
+    margin: 0 -1rem !important; /* bleed edge for nice side-swipe visual */
+    scrollbar-width: none !important;
+    -ms-overflow-style: none !important;
+    -webkit-overflow-scrolling: touch !important;
+  }
+  
+  .about-cards-slider::-webkit-scrollbar {
+    display: none !important;
+  }
+
+  .about-cards-slider .about-content-card {
+    display: flex !important;
+    flex: 0 0 100% !important;
+    width: 100% !important;
+    scroll-snap-align: start !important;
+    min-height: auto !important;
+    padding: 2rem 1.5rem !important; /* reduce padding on mobile */
+    box-sizing: border-box !important;
+  }
+}
+
+/* About section desktop slider defaults */
+.about-cards-slider {
+  flex: 1 1 65%;
+  width: 100%;
+}
+
+.about-cards-slider .about-content-card:not(.active) {
+  display: none !important;
+}
+
+.about-cards-slider .about-content-card.active {
+  display: flex !important;
 }

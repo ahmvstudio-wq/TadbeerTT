@@ -71,19 +71,11 @@ function HomePage() {
 
 function App() {
   const location = useLocation();
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [strategyModalOpen, setStrategyModalOpen] = useState(false);
   const [selectedIndustry, setSelectedIndustry] = useState('');
   const lenisRef = useRef(null);
   const previousPageRef = useRef(`${location.pathname}${location.search}`);
-
-  useEffect(() => {
-    // Dismiss loading screen after 2.6 seconds
-    const timer = setTimeout(() => {
-      setLoading(false);
-    }, 2600);
-    return () => clearTimeout(timer);
-  }, []);
 
   // Handle lead submission events globally to suppress modals once converted
   useEffect(() => {
@@ -276,9 +268,6 @@ function App() {
         initialIndustry={selectedIndustry} 
       />
       <CustomCursor />
-      <AnimatePresence>
-        {loading && <Preloader key="preloader" />}
-      </AnimatePresence>
     </>
   );
 }
