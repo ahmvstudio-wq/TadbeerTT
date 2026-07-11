@@ -35,7 +35,7 @@ const ROICalculator = () => {
   }, [revenue, employees, manualHours, marketingSpend]);
 
   const formatCurrency = (val) => {
-    return new Intl.NumberFormat('en-OM', { style: 'currency', currency: 'OMR', maximumFractionDigits: 0 }).format(val);
+    return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'OMR', maximumFractionDigits: 0 }).format(val);
   };
 
   return (
