@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tadbeer Transformation - B2B Solution Deck</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #184F5B;      /* Dark Teal */
+            --secondary: #CAA94C;    /* Gold */
+            --bg: #F9F8F3;           /* Warm Off-White */
+            --text-main: #1C1B17;
+            --text-muted: #555555;
+            --font-main: 'Inter', sans-serif;
+            --slide-width: 1200px;
+            --slide-height: 675px; /* 16:9 aspect ratio */
+        }
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            background-color: #222;
+            font-family: var(--font-main);
+            color: var(--text-main);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow: hidden; 
+        }
+
+        .deck-container {
+            width: 100%;
+            max-width: var(--slide-width);
+            height: var(--slide-height);
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            background-color: var(--bg);
+        }
+
+        .deck-container::-webkit-scrollbar {
+            display: none;
+        }
+        .deck-container {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        .slide {
+            flex: 0 0 100%;
+            width: 100%;
+            height: 100%;
+            scroll-snap-align: start;
+            position: relative;
+            box-sizing: border-box;
+            padding: 4rem 5rem;
+            display: flex;
+            flex-direction: column;
+            background-color: var(--bg);
+        }
+
+        .slide.dark {
+            background-color: var(--primary);
+            color: #fff;
+        }
+        
+        .slide.split {
+            flex-direction: row;
+            padding: 0;
+        }
+        
+        .split-left {
+            flex: 1;
+            padding: 4rem 4rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            background-color: #0b2b33; 
+            color: #fff;
+        }
+        
+        .split-right {
+            flex: 1;
+            padding: 4rem 4rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            background-color: var(--primary);
+            color: #fff;
+        }
+
+        .slide-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            font-size: 1rem;
+            font-weight: 500;
+            color: var(--text-muted);
+            margin-bottom: auto;
+        }
+        .dark .slide-header {
+            color: rgba(255,255,255,0.7);
+        }
+        .slide-header .accent {
+            color: var(--secondary);
+            font-weight: 600;
+        }
+
+        .slide-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-top: auto;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            height: 36px;
+        }
+        .logo img {
+            height: 100%;
+            width: auto;
+            object-fit: contain;
+        }
+        
+        .slide-number {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--secondary);
+        }
+
+        /* Typography */
+        h1 {
+            font-size: 4.5rem;
+            line-height: 1.1;
+            font-weight: 700;
+            letter-spacing: -2px;
+            margin: 2rem 0;
+            max-width: 90%;
+        }
+        h1 .highlight {
+            color: var(--secondary);
+        }
+        
+        h2 {
+            font-size: 4rem;
+            line-height: 1.1;
+            font-weight: 700;
+            letter-spacing: -1.5px;
+            margin: 0 0 2rem 0;
+            color: var(--secondary);
+        }
+        
+        h3 {
+            font-size: 2.5rem;
+            margin: 0 0 1rem 0;
+            letter-spacing: -1px;
+        }
+
+        p.large {
+            font-size: 1.8rem;
+            line-height: 1.4;
+            max-width: 85%;
+            font-weight: 300;
+            color: var(--text-main);
+            margin-bottom: 2rem;
+        }
+        .dark p.large { color: #f0f0f0; }
+
+        /* Problem Statement Lists */
+        .signs-list {
+            margin: 2rem 0;
+            padding: 0;
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+        }
+        .signs-list li {
+            font-size: 1.4rem;
+            color: var(--text-main);
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+        .dark .signs-list li, .split-right .signs-list li { color: rgba(255,255,255,0.9); }
+        .signs-list li::before {
+            content: "â€¢";
+            color: var(--secondary);
+            font-weight: bold;
+            font-size: 1.5rem;
+            line-height: 1;
+        }
+
+        /* Proof/Grid Layouts */
+        .grid-2x2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem 4rem;
+            margin: auto 0;
+        }
+        .grid-item h3 {
+            font-size: 2rem;
+            color: var(--secondary);
+            margin-bottom: 0.5rem;
+        }
+        .grid-item p {
+            font-size: 1.3rem;
+            color: rgba(255,255,255,0.8);
+            margin: 0;
+            line-height: 1.4;
+        }
+        .grid-item.light p {
+            color: var(--text-muted);
+        }
+
+        /* Case Study Layout */
+        .case-study-content {
+            display: flex;
+            align-items: stretch;
+            gap: 4rem;
+            margin: auto 0;
+        }
+        .metric-box {
+            background-color: var(--primary);
+            color: var(--bg);
+            border-radius: 24px;
+            padding: 3rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+            flex: 0 0 450px;
+            position: relative;
+            overflow: hidden;
+        }
+        .metric-box::after {
+            content: '';
+            position: absolute;
+            top: 0; right: 0; bottom: 0; left: 0;
+            background: linear-gradient(135deg, rgba(202,169,76,0.1) 0%, transparent 100%);
+            pointer-events: none;
+        }
+        .metric-box h2 {
+            font-size: 3rem;
+            color: var(--secondary);
+            margin: 0 0 1rem 0;
+            line-height: 1.1;
+        }
+        .details-box {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 2rem;
+        }
+        .detail-item h4 {
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin: 0 0 0.5rem 0;
+        }
+        .detail-item p {
+            font-size: 1.3rem;
+            line-height: 1.5;
+            margin: 0;
+            color: var(--text-muted);
+        }
+
+        /* Controls */
+        .deck-controls {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            display: flex;
+            gap: 1rem;
+            z-index: 1000;
+        }
+        .deck-btn {
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            color: white;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(4px);
+        }
+        .deck-btn:hover {
+            background: var(--secondary);
+            color: var(--bg);
+            border-color: var(--secondary);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="deck-container" id="deck">
+        
+        <!-- Slide 1: Cover -->
+        <div class="slide">
+            
+            <div style="margin: auto; display: flex; flex-direction: column; align-items: center; text-align: center; width: 100%;">
+                
+                <!-- Visual Element: Charts -->
+                <div style="display: flex; gap: 4rem; margin-bottom: 2rem; align-items: flex-end; height: 120px;">
+                    <!-- Bar chart showing growth -->
+                    <div style="display: flex; gap: 12px; align-items: flex-end; height: 100%; position: relative;">
+                        <div style="width: 32px; height: 40%; background: var(--text-muted); border-radius: 6px 6px 0 0; opacity: 0.2;"></div>
+                        <div style="width: 32px; height: 65%; background: var(--text-muted); border-radius: 6px 6px 0 0; opacity: 0.4;"></div>
+                        <div style="width: 32px; height: 100%; background: var(--primary); border-radius: 6px 6px 0 0; box-shadow: 0 10px 25px rgba(24, 79, 91, 0.3);"></div>
+                        <div style="position: absolute; bottom: -30px; left: 0; width: 100%; text-align: center; font-size: 0.85rem; color: var(--text-muted); font-weight: 600;">Scale</div>
+                    </div>
+                    
+                    <!-- Circular Ratio Graph -->
+                    <div style="position: relative; width: 110px; height: 110px; border-radius: 50%; background: conic-gradient(var(--secondary) 0% 82%, rgba(0,0,0,0.05) 82% 100%); display: flex; align-items: center; justify-content: center; box-shadow: 0 10px 30px rgba(202, 169, 76, 0.15);">
+                        <div style="width: 86px; height: 86px; background: var(--bg); border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                            <span style="font-weight: 800; font-size: 1.5rem; color: var(--primary);">82%</span>
+                        </div>
+                        <!-- Little tooltip/label -->
+                        <div style="position: absolute; bottom: -30px; font-size: 0.85rem; color: var(--text-muted); font-weight: 600; white-space: nowrap;">Efficiency</div>
+                    </div>
+                </div>
+
+                <h1 style="margin-top: 1rem; max-width: 100%; line-height: 1.15;">
+                    Why is growing<br>
+                    your business so <span class="highlight">hard?</span>
+                </h1>
+
+                <p class="large" style="max-width: 700px; margin-bottom: 0;">
+                    You want to get bigger, but everything feels broken. We help you fix the mess so you can grow easily.
+                </p>
+            </div>
+            
+            <div class="slide-footer">
+                <div class="logo"><img src="./public/logo.png" alt="Tadbeer Logo"></div>
+                <div class="slide-number">01</div>
+            </div>
+        </div>
+
+        <!-- Slide 2: Problem Statement -->
+        <div class="slide split">
+            <div class="split-left">
+                <h2 style="font-size: 2.8rem; color: #fff; margin-bottom: 1rem; line-height: 1.2;">The real reason you are stuck:</h2>
+                <h3 style="color: var(--secondary); font-size: 1.8rem; font-weight: 500; margin-top: 1rem;">Your team is great, but your tools are broken.</h3>
+            </div>
+            <div class="split-right">
+                <p class="large" style="color: rgba(255,255,255,0.9); font-size: 1.4rem;">
+                    As you get more customers, messy paperwork and endless WhatsApp messages slow you down. If one key person leaves, everything stops.
+                </p>
+                <h4 style="color: var(--secondary); font-size: 1.5rem; margin-top: 2rem; margin-bottom: 1rem;">Signs you need help:</h4>
+                <ul class="signs-list dark">
+                    <li>Everything runs on Excel and WhatsApp.</li>
+                    <li>Approving simple things takes forever.</li>
+                    <li>You never really know what is going on.</li>
+                    <li>You bought software, but nobody uses it.</li>
+                    <li>You rely too much on one or two people.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Slide 3: Services -->
+        <div class="slide">
+            
+            <h2>How we fix it</h2>
+            
+            <div class="grid-2x2">
+                <div class="grid-item light">
+                    <h3 style="color: var(--primary);">Marketing</h3>
+                    <p>We get you more customers who actually want to buy from you.</p>
+                </div>
+                <div class="grid-item light">
+                    <h3 style="color: var(--primary);">Software</h3>
+                    <p>We build simple apps that do the boring work for you.</p>
+                </div>
+                <div class="grid-item light">
+                    <h3 style="color: var(--primary);">AI & Robots</h3>
+                    <p>We use smart tools to do things instantly, saving you time and money.</p>
+                </div>
+                <div class="grid-item light">
+                    <h3 style="color: var(--primary);">Your People</h3>
+                    <p>We help you hire the right people and keep them happy.</p>
+                </div>
+            </div>
+            
+            <div class="slide-footer">
+                <div class="logo"><img src="./public/logo.png" alt="Tadbeer Logo"></div>
+                <div class="slide-number">03</div>
+            </div>
+        </div>
+
+        <!-- Slide 4: Proof -->
+        <div class="slide dark">
+            
+            <h2 style="color: #fff;">Why trust us?<br><span class="accent" style="color: var(--secondary);">We actually do the work.</span></h2>
+            
+            <div class="grid-2x2" style="margin-top: 3rem;">
+                <div class="grid-item">
+                    <h3>One Team</h3>
+                    <p>You only talk to us. We handle everything for you.</p>
+                </div>
+                <div class="grid-item">
+                    <h3>Local Experts</h3>
+                    <p>We know Oman and the GCC perfectly.</p>
+                </div>
+                <div class="grid-item">
+                    <h3>Real Results</h3>
+                    <p>We don't just give advice. We stay until it actually works.</p>
+                </div>
+                <div class="grid-item">
+                    <h3>We Teach You</h3>
+                    <p>We train your team so they don't need us forever.</p>
+                </div>
+            </div>
+            
+            <div class="slide-footer">
+                <div class="logo"><img src="./public/logo.png" alt="Tadbeer Logo"></div>
+                <div class="slide-number">04</div>
+            </div>
+        </div>
+
+        <!-- Slide 5: Case Study 1 -->
+        <div class="slide">
+            
+            <div class="case-study-content">
+                <div class="metric-box">
+                    <h2 style="font-size: 2.8rem;">Al Harrasi<br>Rope Factory</h2>
+                </div>
+                <div class="details-box">
+                    <div class="detail-item">
+                        <h4>The Problem</h4>
+                        <p>Lost papers and very slow shipping.</p>
+                    </div>
+                    <div class="detail-item">
+                        <h4>Our Fix</h4>
+                        <p>A simple scanning system that works live on their phones.</p>
+                    </div>
+                    <div class="detail-item">
+                        <h4>The Result</h4>
+                        <p>Zero shipping delays and no more lost items.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="slide-footer">
+                <div class="logo"><img src="./public/logo.png" alt="Tadbeer Logo"></div>
+                <div class="slide-number">05</div>
+            </div>
+        </div>
+
+        <!-- Slide 6: Case Study 2 -->
+        <div class="slide">
+            
+            <div class="case-study-content">
+                <div class="metric-box">
+                    <h2 style="font-size: 2.8rem;">Gloria Jean's<br>Coffee</h2>
+                </div>
+                <div class="details-box">
+                    <div class="detail-item">
+                        <h4>The Problem</h4>
+                        <p>Spending too much money on ads but not getting enough customers.</p>
+                    </div>
+                    <div class="detail-item">
+                        <h4>Our Fix</h4>
+                        <p>Smart videos that send WhatsApp discounts directly to people nearby.</p>
+                    </div>
+                    <div class="detail-item">
+                        <h4>The Result</h4>
+                        <p>Crowded coffee shops and way more sales.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="slide-footer">
+                <div class="logo"><img src="./public/logo.png" alt="Tadbeer Logo"></div>
+                <div class="slide-number">06</div>
+            </div>
+        </div>
+
+        <!-- Slide 7: Case Study 3 -->
+        <div class="slide">
+            
+            <div class="case-study-content">
+                <div class="metric-box">
+                    <h2 style="font-size: 2.8rem;">Big Telecom<br>Company</h2>
+                </div>
+                <div class="details-box">
+                    <div class="detail-item">
+                        <h4>The Problem</h4>
+                        <p>Customers waiting way too long on the phone for simple questions.</p>
+                    </div>
+                    <div class="detail-item">
+                        <h4>Our Fix</h4>
+                        <p>A smart chat robot that speaks local Arabic and answers instantly.</p>
+                    </div>
+                    <div class="detail-item">
+                        <h4>The Result</h4>
+                        <p>Happy customers get instant answers, and staff can finally relax.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="slide-footer">
+                <div class="logo"><img src="./public/logo.png" alt="Tadbeer Logo"></div>
+                <div class="slide-number">07</div>
+            </div>
+        </div>
+
+        <!-- Slide 8: Next Steps -->
+        <div class="slide split">
+            <div class="split-left" style="background-color: var(--secondary);">
+                <h2 style="color: var(--bg);">Want to<br>stop the chaos?</h2>
+            </div>
+            <div class="split-right" style="background-color: var(--bg); display: flex; align-items: center;">
+                <div style="max-width: 80%;">
+                    <h3 style="color: var(--primary);">Take our quick test.</h3>
+                    <p class="large">Find out exactly what is slowing you down and how we can fix it today.</p>
+                    
+                    <a href="#" style="display: inline-block; padding: 1rem 2rem; background: var(--primary); color: white; text-decoration: none; font-size: 1.2rem; font-weight: 600; border-radius: 8px; margin-top: 1rem;">
+                        Start the Test â†’
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+
+    <!-- Controls for easy navigation -->
+    <div class="deck-controls">
+        <button class="deck-btn" id="prevBtn" title="Previous Slide">â†</button>
+        <button class="deck-btn" id="nextBtn" title="Next Slide">â†’</button>
+    </div>
+
+    <script>
+        const deck = document.getElementById('deck');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const slideWidth = 1200; // Match var(--slide-width)
+
+        nextBtn.addEventListener('click', () => {
+            deck.scrollBy({ left: slideWidth, behavior: 'smooth' });
+        });
+
+        prevBtn.addEventListener('click', () => {
+            deck.scrollBy({ left: -slideWidth, behavior: 'smooth' });
+        });
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === ' ') {
+                deck.scrollBy({ left: slideWidth, behavior: 'smooth' });
+            } else if (e.key === 'ArrowLeft') {
+                deck.scrollBy({ left: -slideWidth, behavior: 'smooth' });
+            }
+        });
+    </script>
+</body>
+</html>
+

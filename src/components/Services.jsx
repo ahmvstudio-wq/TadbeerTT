@@ -5,24 +5,9 @@ import { ArrowRight, Target, Layers, Cpu, Users } from 'lucide-react';
 
 const servicesData = [
   {
-    id: "strategy",
-    titleEn: "Strategy",
-    subtitle: "Strategy and Operating Model",
-    desc: "Clarify direction, priorities, governance, and KPIs so execution becomes consistent.",
-    icon: Target,
-    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80&auto=format",
-    items: [
-      "Vision alignment, corporate scaling strategy, and market positioning.",
-      "Operating model design, governance frameworks, and delegation policies.",
-      "Executive dashboards and department-level OKRs / KPIs setup.",
-      "Feasibility assessments, market entry studies, and business planning."
-    ],
-    path: "#"
-  },
-  {
     id: "technology",
-    titleEn: "Technology and Systems",
-    subtitle: "Software Solutions",
+    titleEn: "Software Solutions",
+    subtitle: "Enterprise systems that scale",
     desc: "We start with process, then configure technology around it so teams adopt it and outcomes are measurable.",
     icon: Layers,
     image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&q=80&auto=format",
@@ -36,12 +21,27 @@ const servicesData = [
     path: "/services/software-solutions"
   },
   {
-    id: "marketing",
-    titleEn: "Marketing and Customer Engagement",
-    subtitle: "Marketing Foundations",
-    desc: "We build marketing infrastructure that generates consistent inbound demand. It is structured, measurable, and aligned with how customers decide in Oman.",
+    id: "ai",
+    titleEn: "AI Technology",
+    subtitle: "Enterprise AI that delivers results",
+    desc: "Bespoke AI solutions that automate workflows, predict trends, and turn conversational data into actionable insights.",
     icon: Cpu,
     image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&q=80&auto=format",
+    items: [
+      "Omnichannel AI lead scoring and capture systems.",
+      "Conversational AI agents for sales and support.",
+      "Data pipelines for predictive analytics and reporting.",
+      "Custom machine learning models tailored to your industry."
+    ],
+    path: "/services/ai-technology"
+  },
+  {
+    id: "marketing",
+    titleEn: "Digital Marketing",
+    subtitle: "Data-driven growth engines",
+    desc: "We build marketing infrastructure that generates consistent inbound demand. It is structured, measurable, and aligned with how customers decide in Oman.",
+    icon: Target,
+    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80&auto=format",
     items: [
       "Performance marketing and multi-channel lead acquisition engines.",
       "Brand messaging, positioning, and identity guidelines.",
@@ -52,8 +52,8 @@ const servicesData = [
   },
   {
     id: "people",
-    titleEn: "People and Organisational Structuring",
-    subtitle: "Human Capital",
+    titleEn: "Human Capital",
+    subtitle: "People-first transformation",
     desc: "Organisational design. Recruitment and onboarding systems. Training programs. Retention and compensation strategy so performance becomes repeatable.",
     icon: Users,
     image: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&q=80&auto=format",
@@ -83,7 +83,7 @@ const useMousePositionInCard = () => {
 
 // SVG Overlays for cards
 const ServiceSVGOverlay = ({ type }) => {
-  if (type === "strategy") {
+  if (type === "ai") {
     return (
       <svg viewBox="0 0 200 200" className="card-blueprint-svg">
         <path d="M20,180 Q100,50 180,20" fill="none" stroke="rgba(202,169,76,0.3)" strokeWidth="1.5" strokeDasharray="3 3" />
