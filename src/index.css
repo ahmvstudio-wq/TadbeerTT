@@ -6173,7 +6173,7 @@ section[id], div[id], [id] {
 /* Responsive Overrides for Hero and Clients Sections */
 @media (max-width: 1024px) {
   .hero-section {
-    padding: 10.5rem 1.25rem 2rem !important; /* Clears fixed header banner completely */
+    padding: 13rem 1.25rem 1.5rem !important; /* Clears fixed header banner completely */
   }
 
   .hero-split {
@@ -6186,19 +6186,87 @@ section[id], div[id], [id] {
   .hero-mascot-container {
     position: relative !important;
     width: 100% !important;
-    height: 240px !important; /* Shrunk down so it fits nicely in mobile frame */
-    margin-top: 0.5rem !important;
+    height: auto !important;
+    margin-top: 0.75rem !important;
     display: flex !important;
-    justify-content: center !important;
-    align-items: flex-end !important;
+    flex-direction: column !important;
+    align-items: center !important;
     right: auto !important;
     bottom: auto !important;
     top: auto !important;
     left: auto !important;
   }
 
+  /* 2x2 Grid of Minimal Capability Cards on Mobile */
+  .hero-mobile-cards-grid {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 0.5rem !important;
+    width: 100% !important;
+    order: 1 !important; /* Positions cards above mascot image */
+    margin-bottom: 0.75rem !important;
+    z-index: 10 !important;
+  }
+
   .hero-floating-card-item {
+    position: relative !important;
+    left: auto !important;
+    right: auto !important;
+    top: auto !important;
+    bottom: auto !important;
+    width: 100% !important;
+    min-width: auto !important;
+    max-width: none !important;
+    padding: 0.45rem 0.6rem !important;
+    border-radius: 8px !important;
+    background: rgba(255, 255, 255, 0.96) !important;
+    border: 1px solid rgba(24, 79, 91, 0.1) !important;
+    box-shadow: 0 2px 8px rgba(24, 79, 91, 0.02) !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 0.4rem !important;
+    box-sizing: border-box !important;
+  }
+
+  /* Card icon sizing overrides */
+  .hero-floating-card-item > div:first-of-type {
+    width: 28px !important;
+    height: 28px !important;
+    border-radius: 6px !important;
+  }
+  .hero-floating-card-item > div:first-of-type svg {
+    width: 14px !important;
+    height: 14px !important;
+  }
+
+  /* Minimal typography: hide description text line */
+  .hero-floating-card-item > div:nth-of-type(2) > div:last-child {
     display: none !important;
+  }
+  .hero-floating-card-item > div:nth-of-type(2) > div:first-child {
+    font-size: 0.74rem !important;
+    font-weight: 700 !important;
+    line-height: 1.1 !important;
+  }
+
+  /* Hide right arrow icon to maximize space */
+  .hero-floating-card-item > svg {
+    display: none !important;
+  }
+
+  /* Mascot image container */
+  .hero-mascot-container > div:last-of-type {
+    position: relative !important;
+    width: 100% !important;
+    height: 160px !important; /* Keep mascot small and centered */
+    order: 2 !important; /* Mascot sits below the cards */
+    display: flex !important;
+    justify-content: center !important;
+    align-items: flex-end !important;
+    top: auto !important;
+    bottom: auto !important;
+    right: auto !important;
+    left: auto !important;
   }
 
   .hero-floating-lightbulb {
@@ -6206,7 +6274,39 @@ section[id], div[id], [id] {
   }
 
   .hero-floating-particles {
-    display: none !important; /* Hide floating dots/plus elements on mobile for performance and layout cleanliness */
+    display: none !important; /* Hide particles on mobile */
+  }
+
+  /* Side-by-side Hero CTAs in one line */
+  .hero-buttons {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    justify-content: center !important;
+    width: 100% !important;
+    gap: 0.5rem !important;
+    margin-top: 0.25rem !important;
+  }
+  
+  .hero-btn-primary, .hero-btn-link {
+    flex: 1 !important;
+    font-size: 0.78rem !important;
+    padding: 0.6rem 0.5rem !important;
+    height: 38px !important;
+    white-space: nowrap !important;
+    border-radius: 6px !important;
+    box-sizing: border-box !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+
+  .hero-btn-link {
+    background: white !important;
+    border: 1.2px solid var(--primary) !important;
+    color: var(--primary) !important;
+    text-decoration: none !important;
+    padding-bottom: 0 !important;
   }
 
   /* Compact Hero Clientele / Trust layout for mobile */
