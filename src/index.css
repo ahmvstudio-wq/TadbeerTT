@@ -6183,7 +6183,7 @@ section[id], div[id], [id] {
 
   /* 2. Hero section padding: just clear the sticky navbar (~70px) */
   .hero-section {
-    padding: 5.5rem 1.1rem 2rem !important;
+    padding: 8.5rem 1.1rem 2rem !important;
     min-height: auto !important;
   }
 
@@ -6282,7 +6282,7 @@ section[id], div[id], [id] {
   }
 
   /* 9. Mascot image layer: fill the container, aligned to bottom */
-  .hero-mascot-container > div:nth-last-child(2) {
+  .hero-mascot-img-wrapper {
     position: absolute !important;
     inset: 0 !important;
     width: 100% !important;
@@ -6319,10 +6319,10 @@ section[id], div[id], [id] {
   }
 
   /* Pill positions: 2 left, 2 right */
-  .card-idx-0 { top: 10% !important; left: 0 !important; right: auto !important; }
-  .card-idx-1 { top: 58% !important; left: 0 !important; right: auto !important; }
-  .card-idx-2 { top: 10% !important; right: 0 !important; left: auto !important; }
-  .card-idx-3 { top: 58% !important; right: 0 !important; left: auto !important; }
+  .card-idx-0 { top: auto !important; bottom: 125px !important; left: 0 !important; right: auto !important; }
+  .card-idx-1 { top: auto !important; bottom: 55px !important; left: 0 !important; right: auto !important; }
+  .card-idx-2 { top: auto !important; bottom: 125px !important; right: 0 !important; left: auto !important; }
+  .card-idx-3 { top: auto !important; bottom: 55px !important; right: 0 !important; left: auto !important; }
 
   /* Icon shrink */
   .hero-floating-card-item > div:first-of-type {
