@@ -15,7 +15,7 @@ const InboundAutomation = () => {
     <section id="inbound-automation" className="inbound-section" style={{ padding: 'var(--section-padding)', background: 'var(--bg)' }}>
       <div className="container">
         <div className="text-center" style={{ marginBottom: '4rem' }}>
-          <span className="section-label">INTELLIGENT LEAD AUTOMATION</span>
+          
           <h2 className="section-title">Turn Every Visitor Into a Qualified Opportunity</h2>
         </div>
 

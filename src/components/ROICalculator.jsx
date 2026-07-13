@@ -2,6 +2,35 @@ import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import LeadCaptureModal from './LeadCaptureModal';
 
+const AnimatedNumber = ({ value, format }) => {
+  const [displayValue, setDisplayValue] = useState(value);
+
+  useEffect(() => {
+    let start = displayValue;
+    const end = value;
+    if (start === end) return;
+
+    const duration = 400; // ms
+    let startTime = null;
+
+    const animate = (timestamp) => {
+      if (!startTime) startTime = timestamp;
+      const progress = Math.min((timestamp - startTime) / duration, 1);
+      const easedProgress = progress * (2 - progress); // Easing out quad
+      const current = Math.round(start + (end - start) * easedProgress);
+      setDisplayValue(current);
+
+      if (progress < 1) {
+        requestAnimationFrame(animate);
+      }
+    };
+
+    requestAnimationFrame(animate);
+  }, [value]);
+
+  return <>{format ? format(displayValue) : displayValue}</>;
+};
+
 const ROICalculator = () => {
   const [revenue, setRevenue] = useState(50000);
   const [employees, setEmployees] = useState(25);
@@ -42,9 +71,9 @@ const ROICalculator = () => {
     <section id="roi-calculator" className="roi-section" style={{ padding: 'var(--section-padding)', background: 'white' }}>
       <div className="container">
         <div className="text-center" style={{ marginBottom: '4rem' }}>
-          <span className="section-label">ROI</span>
-          <h2 className="section-title">Calculate the cost of operational friction.</h2>
-          <p style={{ color: 'var(--text-muted)', fontSize: '1.15rem', marginTop: '1rem', maxWidth: '750px', margin: '1rem auto 0' }}>Manual effort, rework, slow approvals, and unclear ownership create hidden cost. Use the ROI model to estimate the annual impact of stronger systems and execution. Then request a detailed analysis tailored to your operation.</p>
+          <h2 className="section-title">
+            Calculate the Cost of <span style={{ color: 'var(--secondary)' }}>Operational Friction</span>
+          </h2>
         </div>
 
         <div className="roi-calc-grid">
@@ -56,7 +85,7 @@ const ROICalculator = () => {
                 <label style={{ fontWeight: '600', color: 'var(--text-main)', fontSize: 'clamp(0.85rem, 3.5vw, 0.95rem)' }}>Monthly Revenue (OMR)</label>
                 <span style={{ color: 'var(--secondary)', fontWeight: '700', fontSize: 'clamp(0.85rem, 3.5vw, 1rem)', whiteSpace: 'nowrap' }}>{formatCurrency(revenue)}</span>
               </div>
-              <input type="range" min="5000" max="500000" step="5000" value={revenue} onChange={(e) => setRevenue(Number(e.target.value))} style={{ width: '100%', accentColor: 'var(--secondary)' }} />
+              <input type="range" min="1000" max="500000" step="1000" value={revenue} onChange={(e) => setRevenue(Number(e.target.value))} style={{ width: '100%', accentColor: 'var(--secondary)' }} />
             </div>
 
             <div className="roi-input-group">
@@ -64,7 +93,7 @@ const ROICalculator = () => {
                 <label style={{ fontWeight: '600', color: 'var(--text-main)', fontSize: 'clamp(0.85rem, 3.5vw, 0.95rem)' }}>Number of Employees</label>
                 <span style={{ color: 'var(--secondary)', fontWeight: '700', fontSize: 'clamp(0.85rem, 3.5vw, 1rem)', whiteSpace: 'nowrap' }}>{employees}</span>
               </div>
-              <input type="range" min="5" max="500" step="5" value={employees} onChange={(e) => setEmployees(Number(e.target.value))} style={{ width: '100%', accentColor: 'var(--secondary)' }} />
+              <input type="range" min="2" max="500" step="1" value={employees} onChange={(e) => setEmployees(Number(e.target.value))} style={{ width: '100%', accentColor: 'var(--secondary)' }} />
             </div>
 
             <div className="roi-input-group">
@@ -80,7 +109,7 @@ const ROICalculator = () => {
                 <label style={{ fontWeight: '600', color: 'var(--text-main)', fontSize: 'clamp(0.85rem, 3.5vw, 0.95rem)' }}>Monthly Marketing Spend (OMR)</label>
                 <span style={{ color: 'var(--secondary)', fontWeight: '700', fontSize: 'clamp(0.85rem, 3.5vw, 1rem)', whiteSpace: 'nowrap' }}>{formatCurrency(marketingSpend)}</span>
               </div>
-              <input type="range" min="1000" max="100000" step="1000" value={marketingSpend} onChange={(e) => setMarketingSpend(Number(e.target.value))} style={{ width: '100%', accentColor: 'var(--secondary)' }} />
+              <input type="range" min="500" max="100000" step="500" value={marketingSpend} onChange={(e) => setMarketingSpend(Number(e.target.value))} style={{ width: '100%', accentColor: 'var(--secondary)' }} />
             </div>
             {/* Calculation Parameters & GCC Benchmarks */}
             <div className="roi-benchmarks-box" style={{ background: 'rgba(24,79,91,0.02)', border: '1px solid var(--border)', borderRadius: '12px', padding: '1.25rem', marginTop: '1rem' }}>
@@ -94,7 +123,20 @@ const ROICalculator = () => {
           </div>
 
           {/* Outputs */}
-          <div className="roi-output-card" style={{ background: 'var(--primary)', borderRadius: '16px', color: 'white', display: 'flex', flexDirection: 'column', justifyContent: 'center', padding: '2.5rem', boxSizing: 'border-box', overflow: 'hidden' }}>
+          <motion.div 
+            key={results.totalImpact}
+            animate={{
+              scale: [1, 1.015, 1],
+              boxShadow: [
+                '0 10px 30px rgba(24,79,91,0.05)',
+                '0 15px 35px rgba(202,169,76,0.15)',
+                '0 10px 30px rgba(24,79,91,0.05)'
+              ]
+            }}
+            transition={{ duration: 0.5, ease: "easeOut" }}
+            className="roi-output-card" 
+            style={{ background: 'var(--primary)', borderRadius: '16px', color: 'white', display: 'flex', flexDirection: 'column', justifyContent: 'center', padding: '2.5rem', boxSizing: 'border-box', overflow: 'hidden' }}
+          >
             
             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginBottom: '1.5rem', width: '100%' }}>
               <div className="roi-impact-ring" style={{ position: 'relative', width: '160px', height: '160px', marginBottom: '1rem', flexShrink: 0 }}>
@@ -115,11 +157,8 @@ const ROICalculator = () => {
                 </svg>
                 <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '10px', boxSizing: 'border-box' }}>
                   <span className="roi-impact-label" style={{ fontSize: 'clamp(0.55rem, 2.5vw, 0.65rem)', textTransform: 'uppercase', letterSpacing: '1px', opacity: 0.8, marginBottom: '4px', textAlign: 'center', whiteSpace: 'nowrap' }}>Annual Impact</span>
-                  <motion.span 
+                  <span 
                     className="roi-impact-value"
-                    key={results.totalImpact} 
-                    initial={{ scale: 0.95, opacity: 0.8 }} 
-                    animate={{ scale: 1, opacity: 1 }} 
                     style={{ 
                       fontSize: String(formatCurrency(results.totalImpact)).length > 11 ? '0.95rem' : '1.15rem', 
                       fontWeight: '800', 
@@ -133,8 +172,8 @@ const ROICalculator = () => {
                       lineHeight: '1.2'
                     }}
                   >
-                    {formatCurrency(results.totalImpact)}
-                  </motion.span>
+                    <AnimatedNumber value={results.totalImpact} format={formatCurrency} />
+                  </span>
                 </div>
               </div>
             </div>
@@ -142,11 +181,15 @@ const ROICalculator = () => {
             <div className="roi-results-subgrid" style={{ marginBottom: '2.5rem', borderTop: '1px solid rgba(255,255,255,0.1)', paddingTop: '1.5rem', width: '100%' }}>
               <div>
                 <div style={{ fontSize: '0.8rem', opacity: 0.7, marginBottom: '0.25rem' }}>Efficiency Savings</div>
-                <div style={{ fontSize: 'clamp(1.1rem, 4.5vw, 1.5rem)', fontWeight: '600', wordBreak: 'break-all', overflowWrap: 'break-word', lineHeight: '1.2' }}>{formatCurrency(results.efficiencySavings)}</div>
+                <div style={{ fontSize: 'clamp(1.1rem, 4.5vw, 1.5rem)', fontWeight: '600', wordBreak: 'break-all', overflowWrap: 'break-word', lineHeight: '1.2' }}>
+                  <AnimatedNumber value={results.efficiencySavings} format={formatCurrency} />
+                </div>
               </div>
               <div>
                 <div style={{ fontSize: '0.8rem', opacity: 0.7, marginBottom: '0.25rem' }}>Marketing ROI</div>
-                <div style={{ fontSize: 'clamp(1.1rem, 4.5vw, 1.5rem)', fontWeight: '600', wordBreak: 'break-all', overflowWrap: 'break-word', lineHeight: '1.2' }}>{formatCurrency(results.marketingReturn)}</div>
+                <div style={{ fontSize: 'clamp(1.1rem, 4.5vw, 1.5rem)', fontWeight: '600', wordBreak: 'break-all', overflowWrap: 'break-word', lineHeight: '1.2' }}>
+                  <AnimatedNumber value={results.marketingReturn} format={formatCurrency} />
+                </div>
               </div>
             </div>
 
@@ -179,7 +222,7 @@ const ROICalculator = () => {
                 Request a Detailed Analysis
               </button>
             </div>
-          </div>
+          </motion.div>
 
         </div>
       </div>

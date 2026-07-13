@@ -71,7 +71,7 @@ const AIPipelineSimulator = () => {
       <div className="container" style={{ maxWidth: '1100px' }}>
         
         <div className="text-center" style={{ marginBottom: '4rem' }}>
-          <span className="section-label" style={{ color: 'var(--secondary)' }}>Interactive Simulator</span>
+          
           <h2 className="section-title" style={{ color: 'white' }}>Design Your Custom AI Pipeline</h2>
           <p style={{ color: 'rgba(255,255,255,0.7)', fontSize: '1.15rem', marginTop: '1rem', maxWidth: '750px', margin: '1rem auto 0' }}>Select your operational elements below to test and simulate a custom automation flow instantly.</p>
         </div>

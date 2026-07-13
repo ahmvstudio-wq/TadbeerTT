@@ -675,9 +675,7 @@ const About = () => {
                   }} />
 
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
-                    <span className="section-label" style={{ color: 'var(--secondary)', alignSelf: 'flex-start' }}>
-                      {tab.label}
-                    </span>
+                    
                     
                     <motion.div 
                       key={isTabActive ? 'active' : 'inactive'}
@@ -741,7 +739,7 @@ const About = () => {
             transition={{ type: "spring", bounce: 0.1, duration: 1.2 }}
             style={{ marginBottom: '3.5rem' }}
           >
-            <span className="section-label" style={{ color: 'var(--secondary)' }}>Industries</span>
+            
             <h2 className="section-title">Sector aware transformation. Designed for Oman.</h2>
           </motion.div>
 

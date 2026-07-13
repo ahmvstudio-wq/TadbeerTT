@@ -85,7 +85,7 @@ const TechPartners = () => {
     <section id="tech-partners" className="tp-section">
       <div className="tp-inner">
         <div className="tp-header">
-          <span className="section-label">Ecosystem</span>
+          
           <h2 className="section-title tp-title">
             Technology and platform partners.
           </h2>

@@ -64,8 +64,12 @@ const Footer = () => {
           </div>
         </div>
         
-        <div className="footer-bottom">
+        <div className="footer-bottom" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem' }}>
           <div>&copy; {new Date().getFullYear()} Tadbeer Transformation. All rights reserved.</div>
+          <div style={{ display: 'flex', gap: '1.5rem', fontSize: '0.85rem' }}>
+            <Link to="/privacy-policy" style={{ color: 'var(--text-muted)', textDecoration: 'none', transition: 'color 0.2s' }} onMouseEnter={(e) => e.target.style.color = 'var(--secondary)'} onMouseLeave={(e) => e.target.style.color = 'var(--text-muted)'}>Privacy Policy</Link>
+            <Link to="/terms-of-service" style={{ color: 'var(--text-muted)', textDecoration: 'none', transition: 'color 0.2s' }} onMouseEnter={(e) => e.target.style.color = 'var(--secondary)'} onMouseLeave={(e) => e.target.style.color = 'var(--text-muted)'}>Terms of Service</Link>
+          </div>
           <div style={{ fontFamily: 'var(--font-ar)' }}>شكراً Shukran</div>
         </div>
       </div>

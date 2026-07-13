@@ -186,7 +186,7 @@ const OurWork = () => {
           viewport={{ once: true }}
           style={{ marginBottom: '3rem' }}
         >
-          <span className="section-label" style={{ color: 'var(--secondary)' }}>Our Work | أعمالنا</span>
+          
           <h2 className="section-title" style={{ color: 'var(--primary)' }}>Transformation Data Console</h2>
         </motion.div>
 

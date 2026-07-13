@@ -209,7 +209,7 @@ const Careers = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
         >
-          <span className="section-label">Careers | الوظائف</span>
+          
           <h1 className="section-title" style={{ fontSize: '3rem' }}>Join the Team That Stays to the End.</h1>
           <p style={{ color: 'var(--text-muted)', fontSize: '1.15rem', maxWidth: '600px', margin: '1rem auto 0' }}>
             At Tadbeer, the engagement does not close when the strategy is presented. It closes when the results are embedded. If that is the standard of work you want to be part of, there may be a role here for you.
@@ -226,7 +226,7 @@ const Careers = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <span className="section-label">Open Positions</span>
+            
             <h2 className="section-title" style={{ fontSize: '2.25rem' }}>Current Opportunities</h2>
           </motion.div>
 
@@ -346,7 +346,7 @@ const Careers = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <span className="section-label">Life at Tadbeer</span>
+            
             <h2 className="section-title" style={{ fontSize: '2.25rem' }}>A Practice Built on Completion, Not Delivery.</h2>
           </motion.div>
 

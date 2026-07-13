@@ -69,7 +69,7 @@ const Timeline = () => {
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.6 }}
         >
-          <span className="section-label">Our Journey | رحلتنا</span>
+          
           <h2 className="section-title">From a Vision in Muscat<br />to Transforming the GCC.</h2>
           <p style={{ color: 'var(--text-muted)', fontSize: '1.1rem', maxWidth: '600px', margin: '1rem auto 0' }}>
             Click any milestone to explore the full story.

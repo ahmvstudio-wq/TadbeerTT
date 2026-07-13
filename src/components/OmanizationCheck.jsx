@@ -64,8 +64,8 @@ const OmanizationCheck = () => {
       <div className="container">
         
         <div className="text-center" style={{ marginBottom: '4rem' }}>
-          <span className="section-label">Compliance</span>
-          <h2 className="section-title">Omanization readiness check.</h2>
+          
+          <h2 className="section-title">Omanization <span style={{ color: 'var(--secondary)' }}>readiness check.</span></h2>
           <p style={{ color: 'var(--text-muted)', fontSize: '1.15rem', marginTop: '1rem', maxWidth: '750px', margin: '1rem auto 0' }}>Omanization is easier when managed proactively. Enter your workforce figures to see where you stand, then request a practical roadmap aligned to your sector realities.</p>
         </div>
 
@@ -81,9 +81,9 @@ const OmanizationCheck = () => {
               </div>
               <input 
                 type="range" 
-                min="10" 
+                min="5" 
                 max="500" 
-                step="5" 
+                step="1" 
                 value={totalStaff} 
                 onChange={(e) => setTotalStaff(Number(e.target.value))} 
                 style={{ width: '100%', accentColor: 'var(--secondary)' }} 

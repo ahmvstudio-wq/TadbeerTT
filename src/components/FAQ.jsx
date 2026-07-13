@@ -24,23 +24,24 @@ const FAQ = () => {
   ];
 
   return (
-    <section id="faq" className="faq-section">
-      <div className="container">
+    <section id="faq" className="faq-section" style={{ padding: '6rem 0', background: 'var(--bg-alt)' }}>
+      <div className="container" style={{ maxWidth: '850px', margin: '0 auto', padding: '0 5%' }}>
         <motion.div 
           className="text-center"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.6 }}
-          style={{ marginBottom: '4rem' }}
+          style={{ marginBottom: '3.5rem' }}
         >
-          <span className="section-label">FAQ</span>
-          <h2 className="section-title">Frequently asked questions</h2>
+          <h2 className="section-title" style={{ fontSize: '2.5rem', fontWeight: '800', margin: 0 }}>
+            Frequently asked questions
+          </h2>
         </motion.div>
         
-        <div className="faq-layout">
+        <div className="faq-layout" style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
           {/* FAQ Accordion */}
-          <div className="faq-list">
+          <div className="faq-list" style={{ display: 'flex', flexDirection: 'column', gap: '1rem', width: '100%' }}>
             {faqs.map((faq, index) => (
               <motion.div 
                 key={index}
@@ -49,49 +50,78 @@ const FAQ = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.4, delay: index * 0.1 }}
+                style={{
+                  background: 'white',
+                  border: '1px solid var(--border)',
+                  borderRadius: '12px',
+                  overflow: 'hidden',
+                  transition: 'all 0.3s ease'
+                }}
               >
                 <div 
                   className="faq-question"
                   onClick={() => setActiveIndex(activeIndex === index ? null : index)}
+                  style={{
+                    padding: '1.25rem 1.5rem',
+                    cursor: 'pointer',
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
+                    gap: '1rem',
+                    fontWeight: '700',
+                    color: 'var(--primary)',
+                    fontSize: '1rem'
+                  }}
                 >
                   <span>{faq.q}</span>
-                  <span className="faq-icon">+</span>
+                  <span className="faq-icon" style={{ fontSize: '1.2rem', color: 'var(--secondary)' }}>
+                    {activeIndex === index ? '−' : '+'}
+                  </span>
                 </div>
-                <div className="faq-answer">
-                  <p>{faq.a}</p>
+                <div 
+                  className="faq-answer"
+                  style={{
+                    maxHeight: activeIndex === index ? '200px' : '0px',
+                    overflow: 'hidden',
+                    transition: 'max-height 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                    background: '#FAF9F5'
+                  }}
+                >
+                  <p style={{ padding: '1.25rem 1.5rem', margin: 0, fontSize: '0.92rem', color: 'var(--text-muted)', lineHeight: '1.6' }}>
+                    {faq.a}
+                  </p>
                 </div>
               </motion.div>
             ))}
           </div>
 
-          {/* Still have questions CTA */}
+          {/* Centered CTA button layout (composition fix) */}
           <motion.div
             initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.3 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
             style={{
               textAlign: 'center',
               marginTop: '2.5rem',
-              paddingTop: '2rem',
-              borderTop: '1px solid var(--border)'
+              display: 'flex',
+              justifyContent: 'center',
+              width: '100%'
             }}
           >
-            <p style={{ fontSize: '1rem', color: 'var(--text-muted)', marginBottom: '1rem' }}>
-              Still have questions?
-            </p>
             <button
               onClick={() => window.dispatchEvent(new CustomEvent('open-strategy-modal'))}
               style={{
                 background: 'none',
                 border: '1.5px solid var(--primary)',
                 color: 'var(--primary)',
-                padding: '0.75rem 2rem',
-                borderRadius: '6px',
+                padding: '0.85rem 2.25rem',
+                borderRadius: '8px',
                 fontWeight: '700',
-                fontSize: '0.9rem',
+                fontSize: '0.92rem',
                 cursor: 'pointer',
-                transition: 'all 0.3s ease'
+                transition: 'all 0.3s ease',
+                fontFamily: 'var(--font-en)'
               }}
               onMouseEnter={(e) => {
                 e.currentTarget.style.background = 'var(--primary)';

@@ -345,8 +345,11 @@ img {
 .hero-image-container {
   position: relative;
   border-radius: var(--radius);
-  overflow: hidden;
-  height: 520px;
+  overflow: visible;
+  height: 100%;
+  min-height: 550px;
+  display: flex;
+  align-items: flex-end;
 }
 
 .hero-image {
@@ -6078,4 +6081,85 @@ section[id], div[id], [id] {
   .social-proof-toast {
     display: none !important;
   }
+}
+
+/* ===== HIGHLIGHT & CLIENT LOGO OVERHAUL (PHASE 2) ===== */
+@keyframes highlightFlash {
+  0% {
+    box-shadow: 0 0 0 0 rgba(202, 169, 76, 0);
+    border-color: var(--border);
+  }
+  20% {
+    box-shadow: 0 0 25px 5px rgba(202, 169, 76, 0.45);
+    border-color: var(--secondary);
+    transform: scale(1.02);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(202, 169, 76, 0);
+    border-color: var(--border);
+  }
+}
+.highlight-glow-active {
+  animation: highlightFlash 2.5s cubic-bezier(0.22, 1, 0.36, 1) !important;
+}
+
+.client-logo-card {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.8rem;
+  background: white;
+  padding: 0.5rem 1.25rem 0.5rem 0.65rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(28, 27, 23, 0.02);
+  border: 1px solid rgba(0, 0, 0, 0.04);
+  flex-shrink: 0;
+  min-width: 240px;
+  max-width: 280px;
+  height: 76px;
+  transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  cursor: pointer;
+  box-sizing: border-box;
+  position: relative;
+}
+.client-logo-card .client-img {
+  filter: none;
+  opacity: 0.75;
+  transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.client-logo-card .client-name {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--text-main);
+  letter-spacing: 0.2px;
+  white-space: nowrap;
+  opacity: 0.8;
+  transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Hover States */
+.client-logo-card:hover {
+  border-color: var(--secondary) !important;
+  box-shadow: 0 8px 25px rgba(202, 169, 76, 0.12) !important;
+  transform: translateY(-2px);
+}
+.client-logo-card:hover .client-img {
+  filter: none !important;
+  opacity: 1 !important;
+  transform: scale(1.05) !important;
+}
+.client-logo-card:hover .client-name {
+  opacity: 1 !important;
+  color: var(--primary) !important;
+}
+
+/* Global Section Reveal Easing Transitions */
+.reveal-on-scroll {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 1s cubic-bezier(0.22, 1, 0.36, 1), transform 1s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.reveal-on-scroll.active {
+  opacity: 1;
+  transform: translateY(0);
 }

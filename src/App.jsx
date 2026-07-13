@@ -18,9 +18,11 @@ import CareersAdmin from './components/CareersAdmin';
 import ReadinessScore from './components/ReadinessScore';
 import ROICalculator from './components/ROICalculator';
 import WhatsAppButton from './components/WhatsAppButton';
-import OnyxAssistant from './components/OnyxAssistant';
+import OryxAssistant from './components/OryxAssistant';
 import { canShowAutoPrompt, markAutoPromptShown } from './promptLimits';
 
+import { MascotProvider } from './context/MascotContext';
+import ErrorBoundary from './components/ErrorBoundary';
 import Preloader from './components/Preloader';
 import StrategySessionModal from './components/StrategySessionModal';
 import PlaybookBanner from './components/PlaybookBanner';
@@ -33,12 +35,16 @@ import OurWork from './components/OurWork';
 import Proof from './components/Proof';
 import CaseStudies from './components/CaseStudies';
 import ProblemStatement from './components/ProblemStatement';
+import ScrollRewardPopup from './components/ScrollRewardPopup';
+import CaseStudyDetailPage from './pages/CaseStudyDetailPage';
 
 const DigitalMarketingPage = React.lazy(() => import('./pages/DigitalMarketingPage'));
 const SoftwareSolutionsPage = React.lazy(() => import('./pages/SoftwareSolutionsPage'));
 const HumanCapitalPage = React.lazy(() => import('./pages/HumanCapitalPage'));
 const AITechnologyPage = React.lazy(() => import('./pages/AITechnologyPage'));
 const ResourceLibraryPage = React.lazy(() => import('./pages/ResourceLibraryPage'));
+const PrivacyPolicyPage = React.lazy(() => import('./pages/PrivacyPolicyPage'));
+const TermsOfServicePage = React.lazy(() => import('./pages/TermsOfServicePage'));
 
 const HealthcareIndustryPage = React.lazy(() => import('./pages/HealthcareIndustryPage'));
 const RealEstateIndustryPage = React.lazy(() => import('./pages/RealEstateIndustryPage'));
@@ -109,8 +115,8 @@ function HomePage() {
       <ReadinessScore />
       <Services />
       <ROICalculator />
-      <Proof />
       <CaseStudies />
+      <Proof />
       <OmanizationCheck />
       <Process />
       <TechPartners />
@@ -274,6 +280,8 @@ function App() {
   useLayoutEffect(() => {
     const pageKey = `${location.pathname}${location.search}`;
     const isNewPage = previousPageRef.current !== pageKey;
+    const savedScrollPos = sessionStorage.getItem('homepage_scroll_pos');
+
     const scrollToTop = () => {
       lenisRef.current?.scrollTo?.(0, { immediate: true, force: true });
       window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
@@ -281,7 +289,19 @@ function App() {
       document.body.scrollTop = 0;
     };
 
-    if (isNewPage || !location.hash) {
+    if (location.pathname === '/' && savedScrollPos) {
+      const targetPos = parseInt(savedScrollPos, 10);
+      sessionStorage.removeItem('homepage_scroll_pos');
+      
+      // Delay slightly for Lenis and component mounts to finalize layout sizing
+      const timer = setTimeout(() => {
+        lenisRef.current?.scrollTo?.(targetPos, { immediate: true, force: true });
+        window.scrollTo({ top: targetPos, left: 0, behavior: 'auto' });
+      }, 100);
+      
+      previousPageRef.current = pageKey;
+      return () => clearTimeout(timer);
+    } else if (isNewPage || !location.hash) {
       scrollToTop();
       requestAnimationFrame(scrollToTop);
     } else if (location.hash) {
@@ -325,50 +345,56 @@ function App() {
   }, []);
 
   return (
-    <>
-      <PlaybookBanner />
-      <Navbar />
-      <main>
-        <Suspense fallback={<div style={{height: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center'}}>Loading...</div>}>
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/services/digital-marketing" element={<DigitalMarketingPage />} />
-            <Route path="/services/software-solutions" element={<SoftwareSolutionsPage />} />
-            <Route path="/services/human-capital" element={<HumanCapitalPage />} />
-            <Route path="/services/ai-technology" element={<AITechnologyPage />} />
-            
-            <Route path="/industries/healthcare" element={<HealthcareIndustryPage />} />
-            <Route path="/industries/real-estate" element={<RealEstateIndustryPage />} />
-            <Route path="/industries/logistics" element={<LogisticsIndustryPage />} />
-            <Route path="/industries/ecommerce" element={<EcommerceIndustryPage />} />
-            <Route path="/industries/construction" element={<ConstructionIndustryPage />} />
-            <Route path="/industries/manufacturing" element={<ManufacturingIndustryPage />} />
-            <Route path="/industries/government" element={<GovernmentIndustryPage />} />
-            <Route path="/industries/professional-services" element={<ProfessionalServicesIndustryPage />} />
+    <ErrorBoundary>
+      <MascotProvider>
+        <PlaybookBanner />
+        <Navbar />
+        <main>
+          <Suspense fallback={<div style={{height: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center'}}>Loading...</div>}>
+            <Routes>
+              <Route path="/" element={<HomePage />} />
+              <Route path="/services/digital-marketing" element={<DigitalMarketingPage />} />
+              <Route path="/services/software-solutions" element={<SoftwareSolutionsPage />} />
+              <Route path="/services/human-capital" element={<HumanCapitalPage />} />
+              <Route path="/services/ai-technology" element={<AITechnologyPage />} />
+              <Route path="/case-studies/:id" element={<CaseStudyDetailPage />} />
+              
+              <Route path="/industries/healthcare" element={<HealthcareIndustryPage />} />
+              <Route path="/industries/real-estate" element={<RealEstateIndustryPage />} />
+              <Route path="/industries/logistics" element={<LogisticsIndustryPage />} />
+              <Route path="/industries/ecommerce" element={<EcommerceIndustryPage />} />
+              <Route path="/industries/construction" element={<ConstructionIndustryPage />} />
+              <Route path="/industries/manufacturing" element={<ManufacturingIndustryPage />} />
+              <Route path="/industries/government" element={<GovernmentIndustryPage />} />
+              <Route path="/industries/professional-services" element={<ProfessionalServicesIndustryPage />} />
 
-            <Route path="/resources" element={<ResourceLibraryPage />} />
-            <Route path="/careers" element={<Careers />} />
-            <Route path="/admin" element={<CareersAdmin />} />
-          </Routes>
-        </Suspense>
-      </main>
-      <Footer />
-      <WhatsAppButton />
-      <OnyxAssistant />
-      <StrategySessionModal 
-        isOpen={strategyModalOpen} 
-        onClose={() => {
-          setStrategyModalOpen(false);
-          sessionStorage.setItem('strategyModalDismissedTime', Date.now().toString());
-        }} 
-        initialIndustry={selectedIndustry} 
-      />
-      <SocialProofToasts />
-      <CustomCursor />
-      <AnimatePresence>
-        {loading && <Preloader key="preloader" />}
-      </AnimatePresence>
-    </>
+              <Route path="/resources" element={<ResourceLibraryPage />} />
+              <Route path="/careers" element={<Careers />} />
+              <Route path="/admin" element={<CareersAdmin />} />
+              <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
+              <Route path="/terms-of-service" element={<TermsOfServicePage />} />
+            </Routes>
+          </Suspense>
+        </main>
+        <Footer />
+        <WhatsAppButton />
+        <OryxAssistant />
+        <ScrollRewardPopup />
+        <StrategySessionModal 
+          isOpen={strategyModalOpen} 
+          onClose={() => {
+            setStrategyModalOpen(false);
+            sessionStorage.setItem('strategyModalDismissedTime', Date.now().toString());
+          }} 
+          initialIndustry={selectedIndustry} 
+        />
+        <SocialProofToasts />
+        <CustomCursor />
+        <AnimatePresence>
+          {loading && <Preloader key="preloader" />}
+        </AnimatePresence>
+      </MascotProvider>
+    </ErrorBoundary>
   );
 }
 

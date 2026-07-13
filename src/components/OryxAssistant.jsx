@@ -6,7 +6,7 @@ import LeadCaptureModal from './LeadCaptureModal';
 import { createLead } from '../supabaseService';
 import { canShowAutoPrompt, markAutoPromptShown } from '../promptLimits';
 
-const OnyxIcon = ({ size = 24, active = false }) => (
+const OryxIcon = ({ size = 24, active = false }) => (
   <svg 
     width={size} 
     height={size} 
@@ -24,7 +24,7 @@ const OnyxIcon = ({ size = 24, active = false }) => (
   </svg>
 );
 
-const OnyxAssistant = () => {
+const OryxAssistant = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState([]);
   const [inputValue, setInputValue] = useState('');
@@ -32,6 +32,7 @@ const OnyxAssistant = () => {
   const [toastMessage, setToastMessage] = useState('');
   const [activeAssessment, setActiveAssessment] = useState(null);
   const [modalOpen, setModalOpen] = useState(false);
+  const [isHeroInView, setIsHeroInView] = useState(true);
   const messagesEndRef = useRef(null);
 
   // Conversational Lead Capture (CLC) states
@@ -39,7 +40,7 @@ const OnyxAssistant = () => {
   const [leadFlowData, setLeadFlowData] = useState({ name: '', email: '', phone: '', topic: '' });
 
   const markChatDismissed = () => {
-    sessionStorage.setItem('onyx_chat_dismissed', Date.now().toString());
+    sessionStorage.setItem('oryx_chat_dismissed', Date.now().toString());
   };
 
   const getProactiveMessageForPage = (path) => {
@@ -80,7 +81,7 @@ const OnyxAssistant = () => {
       return `Welcome! Are you looking to upgrade operations in the ${formatted} sector? I can guide you through a dedicated digital audit.`;
     }
     
-    return "I’m Onyx. I connect GCC companies with the strategy, software, and talent required to scale. How can I direct you?";
+    return "I’m Oryx. I connect GCC companies with the strategy, software, and talent required to scale. How can I direct you?";
   };
 
   // Triggers Effect (Scroll, Time, Exit-intent, Idle, Copy text)
@@ -89,7 +90,7 @@ const OnyxAssistant = () => {
     
     // Check if cooldown is active
     const isUnderCooldown = () => {
-      const dismissedTime = sessionStorage.getItem('onyx_chat_dismissed');
+      const dismissedTime = sessionStorage.getItem('oryx_chat_dismissed');
       if (!dismissedTime) return false;
       const dismissedAt = Number.parseInt(dismissedTime, 10);
       if (!Number.isFinite(dismissedAt)) return dismissedTime === 'true';
@@ -142,6 +143,10 @@ const OnyxAssistant = () => {
       
       const scrollTop = window.scrollY || document.documentElement.scrollTop;
       const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      
+      // Track hero section visibility (assuming hero is approx 100vh)
+      setIsHeroInView(scrollTop < window.innerHeight * 0.8);
+
       if (docHeight <= 0) return;
       
       const scrollPercent = (scrollTop / docHeight) * 100;
@@ -178,7 +183,7 @@ const OnyxAssistant = () => {
       idleTimer = setTimeout(() => {
         if (!canTriggerChatPrompt()) return;
         markAutoPromptShown('chat');
-        setToastMessage('Oman Vision 2040 requires more than digitalization. It requires operational excellence. Let’s assess your readiness.');
+        setToastMessage('Transform your operations into data-driven powerhouses. Let’s assess your readiness.');
         setShowToast(true);
       }, 45000);
     };
@@ -204,7 +209,7 @@ const OnyxAssistant = () => {
         const extraMessages = [
           'A good strategy is useless if the system can’t execute it. Are your systems ready?',
           'We don’t just consult. We build the architecture. Let’s talk.',
-          'Oman Vision 2040 requires more than digitalization. It requires operational excellence. Let’s assess your readiness.'
+          'Transform your operations into data-driven powerhouses. Let’s assess your readiness.'
         ];
         const randomMsg = extraMessages[Math.floor(Math.random() * extraMessages.length)];
         setToastMessage(randomMsg);
@@ -427,7 +432,7 @@ const OnyxAssistant = () => {
 
   return (
     <>
-      <div className="onyx-assistant-shell" style={{ position: 'fixed', bottom: '24px', right: '24px', zIndex: 999, display: 'flex', flexDirection: 'column', alignItems: 'flex-end' }}>
+      <div className="oryx-assistant-shell" style={{ position: 'fixed', bottom: '24px', right: '24px', zIndex: 999, display: 'flex', flexDirection: 'column', alignItems: 'flex-end' }}>
         
         {/* Proactive Toast */}
         <AnimatePresence>
@@ -462,33 +467,32 @@ const OnyxAssistant = () => {
               initial={{ opacity: 0, y: 20, scale: 0.95 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: 20, scale: 0.95 }}
+              className="oryx-chat-panel"
               style={{
-                width: '380px',
-                height: '560px',
-                maxHeight: 'calc(100vh - 120px)',
-                background: 'var(--bg)',
-                borderRadius: '16px',
-                boxShadow: '0 20px 40px rgba(0,0,0,0.15)',
-                border: '1px solid var(--border)',
-                marginBottom: '1rem',
-                overflow: 'hidden',
-                display: 'flex',
-                flexDirection: 'column',
-                marginRight: 'auto',
-                marginLeft: 'auto'
+                position: 'fixed', right: '24px', bottom: '96px',
+                width: '380px', height: '600px', maxHeight: 'calc(100vh - 120px)',
+                background: '#faf9f6', borderRadius: '24px',
+                boxShadow: '0 25px 50px rgba(24,79,91,0.2), 0 0 0 1px rgba(24,79,91,0.08)',
+                display: 'flex', flexDirection: 'column', overflow: 'hidden',
+                zIndex: 99999
               }}
-              className="onyx-panel"
             >
               {/* Header */}
-              <div style={{ background: 'var(--primary)', color: 'white', padding: '1.25rem', display: 'flex', alignItems: 'center', justifyContent: 'space-between', borderTopLeftRadius: '16px', borderTopRightRadius: '16px' }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-                  <div style={{ width: '40px', height: '40px', background: 'rgba(255,255,255,0.1)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                    <OnyxIcon size={22} active={true} />
+              <div style={{ 
+                background: 'linear-gradient(135deg, var(--primary), #1a5a68)', 
+                padding: '20px 24px', color: 'white', 
+                display: 'flex', justifyContent: 'space-between', alignItems: 'center',
+                boxShadow: '0 4px 15px rgba(0,0,0,0.1)',
+                zIndex: 10
+              }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
+                  <div style={{ width: '46px', height: '46px', background: 'rgba(255,255,255,0.15)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden', border: '2px solid rgba(255,255,255,0.2)' }}>
+                    <img src='/mascot.png.png' alt='Oryx' style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center 10%', transform: 'scale(1.4)' }} />
                   </div>
-                  <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
-                    <h3 style={{ fontSize: '1.1rem', margin: 0, lineHeight: '1.2', color: 'white', fontWeight: 'bold' }}>Onyx</h3>
-                    <div style={{ fontSize: '0.75rem', opacity: 0.9, display: 'flex', alignItems: 'center', gap: '4px', marginTop: '2px' }}>
-                      <div style={{ width: '8px', height: '8px', background: '#22c55e', borderRadius: '50%' }} /> Transformation Architect
+                  <div>
+                    <h3 style={{ fontSize: '1.15rem', margin: 0, lineHeight: '1.2', color: 'white', fontWeight: 'bold', letterSpacing: '-0.3px' }}>Oryx Assistant</h3>
+                    <div style={{ fontSize: '0.75rem', opacity: 0.9, display: 'flex', alignItems: 'center', gap: '5px', marginTop: '3px' }}>
+                      <div style={{ width: '8px', height: '8px', background: '#22c55e', borderRadius: '50%', boxShadow: '0 0 6px #22c55e' }} /> Online
                     </div>
                   </div>
                 </div>
@@ -520,10 +524,10 @@ const OnyxAssistant = () => {
                     {/* Quick Options */}
                     {msg.isOptions && !activeAssessment && (
                       <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', marginTop: '0.75rem', width: '100%' }}>
-                        <button onClick={() => handleQuickReply('I need to audit our current systems.', 'digital-transformation')} className="onyx-quick-btn">📊 I need to audit our current systems.</button>
-                        <button onClick={() => handleQuickReply('I need to develop custom software.', 'ai-readiness')} className="onyx-quick-btn">💻 I need to develop custom software.</button>
-                        <button onClick={() => handleQuickReply('I need to restructure our talent model.', 'marketing-maturity')} className="onyx-quick-btn">👥 I need to restructure our talent model.</button>
-                        <button onClick={() => handleQuickReply('I need a complete digital transformation roadmap.', 'services')} className="onyx-quick-btn">🗺️ I need a complete digital transformation roadmap.</button>
+                        <button onClick={() => handleQuickReply('I need to audit our current systems.', 'digital-transformation')} className="oryx-quick-btn">📊 I need to audit our current systems.</button>
+                        <button onClick={() => handleQuickReply('I need to develop custom software.', 'ai-readiness')} className="oryx-quick-btn">💻 I need to develop custom software.</button>
+                        <button onClick={() => handleQuickReply('I need to restructure our talent model.', 'marketing-maturity')} className="oryx-quick-btn">👥 I need to restructure our talent model.</button>
+                        <button onClick={() => handleQuickReply('I need a complete digital transformation roadmap.', 'services')} className="oryx-quick-btn">🗺️ I need a complete digital transformation roadmap.</button>
                       </div>
                     )}
 
@@ -582,7 +586,10 @@ const OnyxAssistant = () => {
 
         {/* Trigger Button */}
         <motion.button
-          className="onyx-trigger-button"
+          initial={{ opacity: 0, scale: 0.5, y: 30 }}
+          animate={{ opacity: 1, scale: 1, y: 0 }}
+          transition={{ type: 'spring', stiffness: 350, damping: 22 }}
+          className="oryx-trigger-button"
           onClick={() => {
             const nextState = !isOpen;
             setIsOpen(nextState);
@@ -593,30 +600,35 @@ const OnyxAssistant = () => {
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
           style={{
-            width: '56px',
-            height: '56px',
+            width: '60px',
+            height: '60px',
             borderRadius: '50%',
-            background: 'var(--primary)',
-            color: 'white',
-            border: 'none',
-            boxShadow: '0 10px 25px rgba(24,79,91,0.4)',
+            background: '#ffffff',
+            border: '2.5px solid var(--secondary)',
+            boxShadow: '0 8px 24px rgba(24,79,91,0.18)',
             cursor: 'pointer',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            position: 'relative'
+            position: 'relative',
+            padding: '3px',
+            overflow: 'hidden'
           }}
         >
-          {isOpen ? <X size={24} /> : <OnyxIcon size={26} />}
+          {isOpen ? <X size={26} color="var(--primary)" /> : (
+            <div style={{ width: '100%', height: '100%', borderRadius: '50%', overflow: 'hidden', background: '#FDFCF9', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <img src='/mascot.png.png' alt='Oryx' style={{ width: '100%', height: '100%', objectFit: 'contain', objectPosition: 'bottom center', transform: 'scale(1.2) translateY(2px)' }} />
+            </div>
+          )}
           
           {/* Notification Dot */}
           {!isOpen && (
-            <div style={{ position: 'absolute', top: 0, right: 0, width: '12px', height: '12px', background: '#22c55e', borderRadius: '50%', border: '2px solid white' }} />
+            <div style={{ position: 'absolute', top: 0, right: 0, width: '14px', height: '14px', background: '#22c55e', borderRadius: '50%', border: '2px solid white', zIndex: 2 }} />
           )}
         </motion.button>
         
         <style dangerouslySetInnerHTML={{__html: `
-          .onyx-quick-btn {
+          .oryx-quick-btn {
             background: white;
             border: 1px solid var(--secondary);
             color: var(--primary);
@@ -627,11 +639,11 @@ const OnyxAssistant = () => {
             cursor: pointer;
             transition: all 0.2s;
           }
-          .onyx-quick-btn:hover {
+          .oryx-quick-btn:hover {
             background: rgba(202,169,76,0.1);
           }
           @media (max-width: 480px) {
-            .onyx-panel {
+            .oryx-panel {
               position: fixed !important;
               width: calc(100vw - 32px) !important;
               left: 16px !important;
@@ -648,4 +660,4 @@ const OnyxAssistant = () => {
   );
 };
 
-export default OnyxAssistant;
+export default OryxAssistant;

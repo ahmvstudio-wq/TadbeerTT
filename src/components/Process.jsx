@@ -45,8 +45,11 @@ const Process = () => {
           transition={{ type: "spring", bounce: 0.1, duration: 1.2 }}
           style={{ marginBottom: '4rem' }}
         >
-          <span className="section-label">How We Work</span>
-          <h2 className="section-title">Four stages. One team.<br />Clear accountability.</h2>
+          
+          <h2 className="section-title" style={{ fontSize: 'clamp(1.8rem, 4vw, 2.5rem)', fontWeight: '700', lineHeight: '1.3' }}>
+            From the first operational audit to the final system deployment.<br />
+            <span style={{ color: 'var(--secondary)' }}>One Team.</span> <span style={{ color: 'var(--secondary)' }}>One Point of Accountability.</span>
+          </h2>
         </motion.div>
 
         {/* Process Steps */}

@@ -45,7 +45,7 @@ const OperationsFramework = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.8, ease: easeTransition }}
           >
-            <span className="section-label" style={{ color: 'var(--primary-light, #4FD1C5)' }}>AI AS A SERVICE | الذكاء الاصطناعي كخدمة</span>
+            
             <h2 className="ops-hero-title">Supercharge Operations<br />With Custom AI.</h2>
             <p className="ops-hero-desc">
               Stop relying on human bandwidth to scale. We engineer and deploy enterprise-grade AI systems, LLMs, and autonomous agents that securely plug into your business, eliminating manual bottlenecks instantly.
@@ -89,7 +89,7 @@ const OperationsFramework = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.8, ease: easeTransition }}
           >
-            <span className="story-tag">THE AI ADVANTAGE</span>
+            
             <h3 className="partner-headline">We Fix The Operations That Are Quietly Killing Your Profit</h3>
             <p className="partner-text">
               Most GCC companies bleed revenue through manual data entry, slow customer response times, and scattered decision-making. We inject precision-engineered AI to automate these exact friction points.
@@ -223,14 +223,14 @@ const OperationsFramework = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.6, ease: easeTransition }}
             >
-              <span className="story-tag">Custom AI Architecture</span>
+              
               <p className="partnership-intro-text">
                 We don't sell generic ChatGPT subscriptions. We custom-build AI logic that understands your specific business, your data, and your industry context.
               </p>
               
               <div className="separator-line"></div>
               
-              <span className="section-label" style={{ marginTop: '2rem' }}>AI Implementation.</span>
+              
               <h3 className="framework-headline">Our AI Delivery Framework</h3>
               <p className="framework-subtitle">
                 Deploying enterprise AI requires precision engineering across four distinct technical layers:

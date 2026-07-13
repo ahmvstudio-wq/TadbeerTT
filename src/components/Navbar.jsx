@@ -184,7 +184,7 @@ const Navbar = () => {
             className="btn btn-primary nav-cta-btn" 
             style={{ padding: '0.65rem 1.25rem', fontSize: '0.9rem', cursor: 'pointer', border: 'none' }}
           >
-            Request a Consultation
+            Speak to an Expert
           </button>
           
           <button 
@@ -226,7 +226,7 @@ const Navbar = () => {
             className="btn btn-primary" 
             style={{ width: '100%', justifyContent: 'center', cursor: 'pointer', border: 'none' }}
           >
-            Request a Consultation
+            Speak to an Expert
           </button>
         </div>
       </div>

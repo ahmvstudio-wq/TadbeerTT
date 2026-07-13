@@ -32,7 +32,7 @@ const Proof = () => {
         
         {/* Header */}
         <div className="text-center" style={{ maxWidth: '800px', margin: '0 auto 4rem' }}>
-          <span className="section-label" style={{ color: 'var(--secondary)' }}>Proof</span>
+          
           <h2 className="section-title" style={{ fontSize: '2.4rem', fontWeight: '800', marginTop: '0.5rem' }}>
             Trusted delivery. Practical outcomes.
           </h2>
