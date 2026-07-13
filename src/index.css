@@ -6195,24 +6195,19 @@ section[id], div[id], [id] {
     height: 36px !important;
   }
 
-  /* 2. Hero section: full screen height, content fills and spaces itself */
+  /* 2. Hero section: full screen height */
   .hero-section {
-    padding: 7rem 1.1rem 1.5rem !important;
+    padding: 7rem 1.1rem 3rem !important;
     min-height: 100dvh !important;
-    display: flex !important;
-    align-items: flex-start !important;
-    justify-content: flex-start !important;
   }
 
-  /* 3. Hero split: single column, full height, space content evenly */
+  /* 3. Hero split: single column, full width */
   .hero-split {
     grid-template-columns: 1fr !important;
     display: flex !important;
     flex-direction: column !important;
-    gap: 0 !important;
+    gap: 1.5rem !important;
     width: 100% !important;
-    flex: 1 !important;
-    justify-content: space-between !important;
   }
 
   /* 4. Hero text area: center-align on mobile */
