@@ -34,12 +34,12 @@ const Hero = () => {
     offset: ["start start", "end start"]
   });
 
-  const y1 = useTransform(scrollYProgress, [0, 1], [0, 80]);
-  const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
-  const yBlob = useTransform(scrollYProgress, [0, 1], [0, 150]);
-  const yImage = useTransform(scrollYProgress, [0, 1], [0, -50]);
-  const yFloat1 = useTransform(scrollYProgress, [0, 1], [0, -120]);
-  const yFloat2 = useTransform(scrollYProgress, [0, 1], [0, 90]);
+  const y1 = useTransform(scrollYProgress, [0, 1], [0, isMobile ? 0 : 80]);
+  const opacity = useTransform(scrollYProgress, [0, 0.8], [1, isMobile ? 1 : 0]);
+  const yBlob = useTransform(scrollYProgress, [0, 1], [0, isMobile ? 0 : 150]);
+  const yImage = useTransform(scrollYProgress, [0, 1], [0, isMobile ? 0 : -50]);
+  const yFloat1 = useTransform(scrollYProgress, [0, 1], [0, isMobile ? 0 : -120]);
+  const yFloat2 = useTransform(scrollYProgress, [0, 1], [0, isMobile ? 0 : 90]);
 
   const floatingCards = [
     {
@@ -287,7 +287,7 @@ const Hero = () => {
       </div> {/* End hero-split */}
 
       {/* Right: Life-Size Mascot Overlay - Full Bleed */}
-      <div className="hero-mascot-container" style={{ position: 'absolute', top: 0, right: 0, bottom: 0, width: '55%', height: '100%', display: 'flex', alignItems: 'flex-end', justifyContent: 'center', zIndex: 5 }}>
+      <div className="hero-mascot-container">
           
           {/* ─── Layer 1 Removed ─── */}
 

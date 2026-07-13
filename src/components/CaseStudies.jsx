@@ -99,12 +99,7 @@ const CaseStudies = () => {
         </div>
 
         {/* 5-Card Staggered Grid */}
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-          gap: '2rem',
-          marginBottom: '4.5rem'
-        }}>
+        <div className="case-studies-grid">
           {cases.map((item, index) => (
             <Link 
               key={index}

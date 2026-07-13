@@ -6421,3 +6421,604 @@ section[id], div[id], [id] {
   }
 }
 
+/* ==========================================================================
+   FINAL MOBILE OPTIMIZATION OVERHAUL — CONSOLIDATED
+   Appended last to ensure proper cascade precedence.
+   Covers all remaining mobile issues across all components.
+   ========================================================================== */
+
+/* ─── CSS Custom Properties for Safe Areas ─── */
+:root {
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+  --sticky-cta-height: 0px;
+}
+
+/* ─── Global Touch Optimizations ─── */
+@media (hover: none) and (pointer: coarse) {
+  * {
+    -webkit-tap-highlight-color: transparent;
+  }
+  a, button, [role="button"], input, select, textarea, .btn, .faq-question, .service-card, .process-card, .why-card, .job-card {
+    touch-action: manipulation;
+  }
+}
+
+/* ─── WhatsApp Pulse Animation (moved from dangerouslySetInnerHTML) ─── */
+@keyframes pulseScale {
+  0% { transform: scale(1); opacity: 0.8; }
+  100% { transform: scale(1.5); opacity: 0; }
+}
+
+/* ─── Hero Mascot Container Desktop Defaults (replacing inline styles) ─── */
+.hero-mascot-container {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 55%;
+  height: 100%;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  z-index: 5;
+}
+
+/* ─── Problem Statement Grid Desktop Defaults ─── */
+.problem-statement-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 4rem;
+  align-items: center;
+}
+
+/* ─── Case Studies Grid Desktop Defaults ─── */
+.case-studies-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  margin-bottom: 4.5rem;
+}
+
+/* ─── Navigation Mobile Backdrop ─── */
+.nav-mobile-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(28, 27, 23, 0.35);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  z-index: 98;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.nav-mobile-backdrop.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* ─── Mobile drawer: use dvh for iOS Safari ─── */
+.nav-mobile-drawer {
+  height: 100dvh;
+}
+
+/* =============================================================================
+   TABLET BREAKPOINT (max-width: 1024px)
+   ============================================================================= */
+@media (max-width: 1024px) {
+  /* Hero mascot: relative, contained */
+  .hero-mascot-container {
+    position: relative;
+    width: 100%;
+    height: 260px;
+    margin-top: 1.25rem;
+    display: block;
+    right: auto;
+    bottom: auto;
+    top: auto;
+    left: auto;
+    overflow: visible;
+  }
+
+  /* Problem Statement: single column */
+  .problem-statement-grid {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+
+  .problem-statement-section {
+    padding: 4rem 0 !important;
+  }
+
+  .problem-statement-grid > div:first-child {
+    text-align: center !important;
+  }
+
+  .problem-statement-grid > div:first-child h2 {
+    max-width: 100%;
+  }
+
+  .problem-statement-grid > div:first-child .btn {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* Case Studies: snap scroll */
+  .case-studies-grid {
+    display: flex;
+    flex-direction: row;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    width: calc(100% + 10%);
+    margin-left: -5%;
+    margin-right: -5%;
+    padding: 0.5rem 5% 1.5rem;
+    gap: 1rem;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    box-sizing: border-box;
+  }
+
+  .case-studies-grid::-webkit-scrollbar {
+    display: none;
+  }
+
+  .case-studies-grid > a {
+    flex: 0 0 85%;
+    width: 85%;
+    scroll-snap-align: center;
+    box-sizing: border-box;
+  }
+
+  .case-studies-section {
+    padding: 4rem 0 !important;
+  }
+}
+
+/* =============================================================================
+   MOBILE BREAKPOINT (max-width: 768px)
+   ============================================================================= */
+@media (max-width: 768px) {
+  /* ── Navbar compact ── */
+  .navbar {
+    min-height: 56px;
+  }
+
+  .nav-toggle {
+    min-width: 44px;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* ── Hero refinements ── */
+  .hero-section {
+    padding-bottom: 2rem !important;
+    display: flex !important;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .hero-mascot-container {
+    height: 220px;
+  }
+
+  .hero-title {
+    text-align: center;
+  }
+
+  .hero-trusted {
+    transform: scale(0.82);
+    transform-origin: center;
+  }
+
+  /* ── Problem Statement mobile ── */
+  .problem-statement-section {
+    padding: 3rem 0 !important;
+  }
+
+  .problem-statement-grid {
+    gap: 2rem;
+  }
+
+  .problem-statement-grid > div:first-child h2 {
+    font-size: clamp(1.5rem, 7vw, 2rem) !important;
+    line-height: 1.3;
+  }
+
+  .problem-statement-grid > div:last-child h3 {
+    text-align: center !important;
+  }
+
+  /* ── Case Studies mobile ── */
+  .case-studies-grid > a {
+    flex: 0 0 88%;
+    width: 88%;
+  }
+
+  .case-studies-section .section-title {
+    font-size: clamp(1.4rem, 6.5vw, 1.8rem) !important;
+  }
+
+  /* ── Modals: iOS keyboard-safe heights ── */
+  .strategy-modal-overlay,
+  .lead-modal-overlay {
+    height: 100dvh;
+    max-height: 100dvh;
+  }
+
+  .strategy-modal-panel,
+  .lead-modal-panel {
+    max-height: calc(100dvh - 1.5rem);
+  }
+
+  /* ── FABs: coordinate with sticky CTA ── */
+  .sticky-mobile-cta--visible ~ .whatsapp-float,
+  .sticky-mobile-cta--visible ~ .onyx-assistant-shell {
+    bottom: calc(60px + var(--safe-bottom)) !important;
+  }
+
+  /* ── WhatsApp button mobile sizing ── */
+  .whatsapp-float {
+    width: 48px !important;
+    height: 48px !important;
+    bottom: calc(16px + var(--safe-bottom)) !important;
+    left: 16px !important;
+  }
+
+  /* ── Oryx assistant mobile sizing ── */
+  .onyx-assistant-shell {
+    bottom: calc(16px + var(--safe-bottom)) !important;
+    right: 16px !important;
+  }
+
+  .onyx-trigger-button {
+    width: 48px !important;
+    height: 48px !important;
+  }
+
+  /* ── Sticky CTA bar: safe area padding ── */
+  .sticky-mobile-cta {
+    padding-bottom: calc(0.65rem + var(--safe-bottom));
+  }
+
+  /* ── Service cards: ensure list items visible on mobile ── */
+  .service-card-body .service-list {
+    display: flex !important;
+  }
+
+  .service-card-body .service-list li {
+    font-size: 0.82rem !important;
+  }
+
+  /* ── Process cards mobile scroll fix ── */
+  .process-card {
+    text-align: center;
+  }
+
+  /* ── Footer: resolve conflicting rules with clean override ── */
+  .footer {
+    padding: 3rem 1.25rem 2rem !important;
+  }
+
+  .footer-grid {
+    grid-template-columns: 1fr !important;
+    gap: 1.75rem !important;
+    justify-items: start !important;
+  }
+
+  .footer-grid > div {
+    width: 100% !important;
+    text-align: left !important;
+    align-items: flex-start !important;
+  }
+
+  .footer-grid > div:first-child {
+    grid-column: 1 !important;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 1.25rem;
+  }
+
+  .footer-grid > div:last-child {
+    grid-column: 1 !important;
+    border-top: 1px solid var(--border);
+    padding-top: 1rem;
+  }
+
+  .footer-bottom {
+    flex-direction: column !important;
+    text-align: center !important;
+    gap: 0.75rem !important;
+  }
+
+  .footer-links {
+    text-align: left !important;
+    align-items: flex-start !important;
+  }
+
+  .footer-links li,
+  .footer-links li a {
+    justify-content: flex-start !important;
+    text-align: left !important;
+    min-height: 36px;
+    display: flex;
+    align-items: center;
+  }
+
+  /* ── FAQ: better touch targets ── */
+  .faq-question {
+    min-height: 48px;
+    padding: 1rem 1.15rem !important;
+  }
+
+  .faq-answer p {
+    font-size: 0.9rem !important;
+  }
+
+  /* ── About section: card peek refinement ── */
+  .about-content-card {
+    flex: 0 0 85% !important;
+    width: 85% !important;
+  }
+
+  /* ── Readiness Score: option buttons ── */
+  .assessment-layout button {
+    min-height: 48px;
+    font-size: 0.88rem !important;
+    white-space: normal !important;
+    text-align: left !important;
+    line-height: 1.35 !important;
+  }
+
+  /* ── ROI Calculator: constrain overflow ── */
+  .roi-impact-ring {
+    width: 140px !important;
+    height: 140px !important;
+    margin: 0 auto;
+  }
+
+  .roi-impact-value {
+    font-size: clamp(0.78rem, 4vw, 1rem) !important;
+    white-space: normal !important;
+    max-width: 100% !important;
+    overflow-wrap: anywhere !important;
+  }
+
+  /* ── Omanization section ── */
+  .omanization-section {
+    padding: 3rem 1.25rem !important;
+  }
+
+  /* ── CTA Section: better button sizing ── */
+  .cta-section .cta-btn {
+    width: 100%;
+    max-width: 340px;
+    margin: 0 auto;
+  }
+
+  /* ── Careers: culture grid slider ── */
+  .culture-grid {
+    display: flex !important;
+    flex-direction: row !important;
+    overflow-x: auto !important;
+    scroll-snap-type: x mandatory !important;
+    gap: 1rem !important;
+    padding-bottom: 1rem;
+    scrollbar-width: none;
+  }
+
+  .culture-grid::-webkit-scrollbar {
+    display: none;
+  }
+
+  .culture-grid > div,
+  .culture-card {
+    flex: 0 0 80% !important;
+    scroll-snap-align: center !important;
+  }
+
+  /* ── Careers: job cards ── */
+  .careers-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .job-card {
+    padding: 1.25rem !important;
+  }
+
+  .job-meta {
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+
+  /* ── Service Page Hero mobile centering ── */
+  .sp-hero-section {
+    padding: 7rem 1.25rem 3rem !important;
+    text-align: center;
+  }
+
+  .sp-hero-title {
+    font-size: clamp(1.5rem, 7vw, 2rem) !important;
+  }
+
+  .sp-hero-breadcrumbs {
+    justify-content: center;
+  }
+
+  .sp-hero-actions {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .sp-hero-actions .btn {
+    width: 100%;
+    max-width: 340px;
+    justify-content: center;
+  }
+
+  /* ── Industry Page Template: stack grids ── */
+  .ind-benefits-grid,
+  .ind-process-grid,
+  .ind-features-grid {
+    grid-template-columns: 1fr !important;
+    gap: 1.25rem !important;
+  }
+
+  /* ── Case Study Detail Page ── */
+  .case-detail-hero-grid {
+    grid-template-columns: 1fr !important;
+    gap: 2rem !important;
+  }
+
+  .case-detail-metrics-row {
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .case-detail-metrics-row > div {
+    flex: 1 1 calc(50% - 0.5rem);
+  }
+
+  /* ── Scroll Reward Popup: smaller on mobile ── */
+  .scroll-reward-popup {
+    max-width: calc(100vw - 2rem) !important;
+    left: 1rem !important;
+    right: 1rem !important;
+    bottom: calc(80px + var(--safe-bottom)) !important;
+  }
+
+  /* ── Timeline mobile: left-aligned ── */
+  .vertical-timeline-line {
+    left: 20px !important;
+  }
+
+  .timeline-block-item {
+    flex-direction: column !important;
+    padding-left: 50px;
+  }
+
+  .timeline-indicator-node {
+    left: 20px !important;
+    width: 40px;
+    height: 40px;
+  }
+
+  .timeline-card-panel {
+    width: 100% !important;
+  }
+
+  /* ── Stats strip: 2-column on mobile ── */
+  .company-stats-strip {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 0.75rem !important;
+  }
+
+  .stat-box-card {
+    padding: 1.25rem 1rem !important;
+    text-align: center;
+  }
+
+  .stat-value-digits {
+    font-size: clamp(1.5rem, 6vw, 2rem) !important;
+  }
+}
+
+/* =============================================================================
+   SMALL MOBILE BREAKPOINT (max-width: 480px)
+   ============================================================================= */
+@media (max-width: 480px) {
+  .hero-mascot-container {
+    height: 200px;
+  }
+
+  .hero-floating-card-item {
+    width: 110px !important;
+    padding: 0.25rem 0.35rem !important;
+  }
+
+  .case-studies-grid > a {
+    flex: 0 0 92%;
+    width: 92%;
+  }
+
+  .about-content-card {
+    flex: 0 0 90% !important;
+    width: 90% !important;
+    min-height: 320px !important;
+  }
+
+  .company-stats-strip {
+    grid-template-columns: 1fr !important;
+  }
+
+  .problem-statement-grid > div:first-child h2 {
+    font-size: clamp(1.35rem, 6.5vw, 1.75rem) !important;
+  }
+
+  /* Footer bottom links: stack */
+  .footer-bottom > div:nth-child(2) {
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: center;
+  }
+}
+
+/* =============================================================================
+   ULTRA-SMALL MOBILE BREAKPOINT (max-width: 360px) — iPhone SE, Galaxy A
+   ============================================================================= */
+@media (max-width: 360px) {
+  .hero-title {
+    font-size: clamp(1.35rem, 7vw, 1.65rem) !important;
+  }
+
+  .section-title {
+    font-size: clamp(1.2rem, 6vw, 1.5rem) !important;
+  }
+
+  .hero-mascot-container {
+    height: 180px;
+  }
+
+  .hero-floating-card-item {
+    width: 100px !important;
+  }
+
+  .hero-floating-card-item > div:nth-of-type(2) > div:first-child {
+    font-size: 0.6rem !important;
+  }
+
+  .hero-trusted {
+    transform: scale(0.75);
+  }
+
+  .navbar .main-logo {
+    height: 36px !important;
+  }
+
+  .btn {
+    padding: 0.75rem 1.25rem;
+    font-size: 0.88rem;
+  }
+
+  .case-studies-grid > a {
+    flex: 0 0 95%;
+    width: 95%;
+  }
+
+  .process-card {
+    flex: 0 0 90% !important;
+    width: 90% !important;
+  }
+
+  .roi-impact-ring {
+    width: 120px !important;
+    height: 120px !important;
+  }
+}
+

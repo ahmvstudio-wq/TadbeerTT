@@ -70,6 +70,7 @@ const MicroCTABridge = () => (
 );
 
 // Sticky mobile CTA bar — appears after Hero, hides when Readiness Score is in viewport
+// Visibility on desktop is handled by CSS (display: none on min-width: 769px)
 const StickyMobileCTA = () => {
   const [visible, setVisible] = useState(false);
 
@@ -94,8 +95,6 @@ const StickyMobileCTA = () => {
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
-
-  if (typeof window !== 'undefined' && window.innerWidth > 768) return null;
 
   return (
     <div className={`sticky-mobile-cta ${visible ? 'sticky-mobile-cta--visible' : ''}`}>
@@ -317,6 +316,13 @@ function App() {
     previousPageRef.current = pageKey;
   }, [location.pathname, location.search, location.hash]);
 
+  // Detect touch device once for conditional rendering
+  const [isTouchDevice, setIsTouchDevice] = useState(false);
+  useEffect(() => {
+    const isTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0 || window.innerWidth <= 1024;
+    setIsTouchDevice(isTouch);
+  }, []);
+
   useEffect(() => {
     // Disable Lenis smooth scrolling on mobile/tablet viewports for native fluid scrolling
     const isMobileDevice = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth <= 768;
@@ -396,8 +402,8 @@ function App() {
           }} 
           initialIndustry={selectedIndustry} 
         />
-        <SocialProofToasts />
-        <CustomCursor />
+        {!isTouchDevice && <SocialProofToasts />}
+        {!isTouchDevice && <CustomCursor />}
         <AnimatePresence>
           {loading && <Preloader key="preloader" />}
         </AnimatePresence>

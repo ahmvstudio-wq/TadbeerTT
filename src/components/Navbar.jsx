@@ -198,6 +198,12 @@ const Navbar = () => {
         </div>
       </nav>
 
+      {/* Mobile Menu Backdrop */}
+      <div 
+        className={`nav-mobile-backdrop ${mobileOpen ? 'open' : ''}`}
+        onClick={() => setMobileOpen(false)}
+      />
+
       {/* Mobile Menu */}
       <div className={`nav-mobile-drawer ${mobileOpen ? 'open' : ''}`}>
         <div className="nav-mobile-links" style={{ paddingTop: '5rem' }}>
@@ -205,18 +211,18 @@ const Navbar = () => {
           <div style={{ marginBottom: '2rem' }}>
             <div style={{ fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '1px', color: 'var(--secondary)', fontWeight: '700', marginBottom: '1rem' }}>Services</div>
             {serviceLinks.map((s) => (
-              <Link key={s.path} to={s.path} onClick={() => setMobileOpen(false)} style={{ display: 'block', fontSize: '1.25rem', marginBottom: '1rem', fontWeight: '500', color: 'var(--primary)' }}>
+              <Link key={s.path} to={s.path} onClick={() => setMobileOpen(false)} style={{ display: 'block', fontSize: '1.25rem', marginBottom: '1rem', fontWeight: '500', color: 'var(--primary)', minHeight: '44px', lineHeight: '44px' }}>
                 {s.label}
               </Link>
             ))}
           </div>
 
-          <div style={{ borderTop: '1px solid var(--border)', paddingTop: '2rem', display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
-            <Link to="/#industries" onClick={() => setMobileOpen(false)} style={{ fontSize: '1.25rem', fontWeight: '500', color: 'var(--primary)' }}>Industries</Link>
-            <Link to="/#about" onClick={() => setMobileOpen(false)} style={{ fontSize: '1.25rem', fontWeight: '500', color: 'var(--primary)' }}>About Us</Link>
-            <Link to="/resources" onClick={() => setMobileOpen(false)} style={{ fontSize: '1.25rem', fontWeight: '500', color: 'var(--primary)' }}>Resources</Link>
-            <Link to="/careers" onClick={() => setMobileOpen(false)} style={{ fontSize: '1.25rem', fontWeight: '500', color: 'var(--primary)' }}>Careers</Link>
-            <Link to="/#contact" onClick={() => setMobileOpen(false)} style={{ fontSize: '1.25rem', fontWeight: '500', color: 'var(--primary)' }}>Contact</Link>
+          <div style={{ borderTop: '1px solid var(--border)', paddingTop: '2rem', display: 'flex', flexDirection: 'column', gap: '0.25rem' }}>
+            <Link to="/#industries" onClick={() => setMobileOpen(false)} style={{ fontSize: '1.25rem', fontWeight: '500', color: 'var(--primary)', minHeight: '48px', display: 'flex', alignItems: 'center' }}>Industries</Link>
+            <Link to="/#about" onClick={() => setMobileOpen(false)} style={{ fontSize: '1.25rem', fontWeight: '500', color: 'var(--primary)', minHeight: '48px', display: 'flex', alignItems: 'center' }}>About Us</Link>
+            <Link to="/resources" onClick={() => setMobileOpen(false)} style={{ fontSize: '1.25rem', fontWeight: '500', color: 'var(--primary)', minHeight: '48px', display: 'flex', alignItems: 'center' }}>Resources</Link>
+            <Link to="/careers" onClick={() => setMobileOpen(false)} style={{ fontSize: '1.25rem', fontWeight: '500', color: 'var(--primary)', minHeight: '48px', display: 'flex', alignItems: 'center' }}>Careers</Link>
+            <Link to="/#contact" onClick={() => setMobileOpen(false)} style={{ fontSize: '1.25rem', fontWeight: '500', color: 'var(--primary)', minHeight: '48px', display: 'flex', alignItems: 'center' }}>Contact</Link>
           </div>
 
         </div>
@@ -224,7 +230,7 @@ const Navbar = () => {
           <button 
             onClick={(e) => { e.preventDefault(); setMobileOpen(false); window.dispatchEvent(new CustomEvent('open-strategy-modal')); }} 
             className="btn btn-primary" 
-            style={{ width: '100%', justifyContent: 'center', cursor: 'pointer', border: 'none' }}
+            style={{ width: '100%', justifyContent: 'center', cursor: 'pointer', border: 'none', minHeight: '48px' }}
           >
             Speak to an Expert
           </button>

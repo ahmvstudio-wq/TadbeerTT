@@ -7,7 +7,7 @@ const ProblemStatement = () => {
   return (
     <section id="problem-statement" className="problem-statement-section" style={{ padding: '6rem 0', background: '#FDFDFB' }}>
       <div className="container" style={{ padding: '0 5%' }}>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '4rem', alignItems: 'center' }}>
+        <div className="problem-statement-grid">
           
           {/* Left Column: Heading, Supporting Text, CTA */}
           <div style={{ textAlign: 'left' }}>
