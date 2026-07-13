@@ -118,7 +118,7 @@ const ScrollRewardPopup = () => {
             </div>
             
             <p style={{ fontSize: '0.9rem', color: 'var(--text-muted)', lineHeight: '1.5', margin: '0 0 2.5rem' }}>
-              You've unlocked a complimentary business website.
+              You've unlocked a <span style={{ color: 'var(--secondary)', fontWeight: '700' }}>complimentary business website</span>.
             </p>
 
             <motion.button
