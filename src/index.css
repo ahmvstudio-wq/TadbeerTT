@@ -6181,9 +6181,9 @@ section[id], div[id], [id] {
     display: none !important;
   }
 
-  /* 2. Hero section padding: just clear the sticky navbar (~70px) */
+  /* 2. Hero section padding: clear sticky navbar completely */
   .hero-section {
-    padding: 8.5rem 1.1rem 2rem !important;
+    padding: 10.5rem 1.1rem 2rem !important;
     min-height: auto !important;
   }
 
@@ -6205,6 +6205,7 @@ section[id], div[id], [id] {
   /* 5. Tag pill: center it */
   .hero-text > div:first-child {
     align-self: center !important;
+    margin-bottom: 0.5rem !important;
   }
 
   /* 6. Trusted / clientele strip: compact pill */
@@ -6239,8 +6240,8 @@ section[id], div[id], [id] {
     flex-direction: column !important;
     align-items: center !important;
     width: 100% !important;
-    gap: 0.75rem !important;
-    margin-top: 0.75rem !important;
+    gap: 0.5rem !important;
+    margin-top: 0.5rem !important;
   }
 
   .hero-btn-primary {
@@ -6257,15 +6258,16 @@ section[id], div[id], [id] {
   .hero-btn-link {
     background: none !important;
     border: none !important;
-    border-bottom: 1.5px solid var(--primary) !important;
+    border-bottom: 1px solid var(--primary) !important;
     color: var(--primary) !important;
-    font-size: 0.88rem !important;
-    font-weight: 600 !important;
-    padding: 0 0 2px 0 !important;
+    font-size: 0.75rem !important;
+    font-weight: 500 !important;
+    padding: 0 0 1px 0 !important;
     width: auto !important;
     height: auto !important;
     border-radius: 0 !important;
     display: inline-block !important;
+    margin-top: 0 !important;
   }
 
   /* 8. Mascot container: relative block, fixed height, cards float inside it */
@@ -6360,14 +6362,17 @@ section[id], div[id], [id] {
    ===================================================== */
 @media (max-width: 1024px) {
   .clients-marquee-frame {
-    border-radius: 16px !important;
-    border: 1px solid rgba(24, 79, 91, 0.07) !important;
-    max-width: calc(100% - 2rem) !important;
-    margin-left: auto !important;
-    margin-right: auto !important;
-    width: auto !important;
+    border-radius: 0 !important;
+    border-left: none !important;
+    border-right: none !important;
+    border-top: 1px solid rgba(24, 79, 91, 0.07) !important;
+    border-bottom: 1px solid rgba(24, 79, 91, 0.07) !important;
+    max-width: 100% !important;
+    width: 100% !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
     background: rgba(255,255,255,0.6) !important;
-    box-shadow: 0 4px 18px rgba(0,0,0,0.03) !important;
+    box-shadow: none !important;
     padding: 0.4rem 0 !important;
   }
 
