@@ -6209,19 +6209,20 @@ section[id], div[id], [id] {
 
   /* 6. Trusted / clientele strip: compact pill */
   .hero-trusted {
-    padding: 6px 12px !important;
-    gap: 0.75rem !important;
-    margin-top: 0.6rem !important;
-    margin-bottom: 1rem !important;
+    padding: 4px 10px !important;
+    gap: 0.4rem !important;
+    margin-top: 0.3rem !important;
+    margin-bottom: 0.5rem !important;
     border-radius: 30px !important;
     align-self: center !important;
+    transform: scale(0.85); /* Scales down the whole component to make it minimal */
   }
 
   .hero-trusted-logo-bubble {
-    width: 34px !important;
-    height: 34px !important;
-    border-width: 2px !important;
-    margin-left: -10px !important;
+    width: 28px !important;
+    height: 28px !important;
+    border-width: 1.5px !important;
+    margin-left: -8px !important;
   }
 
   .hero-trusted-logo-bubble:first-of-type {
@@ -6229,7 +6230,7 @@ section[id], div[id], [id] {
   }
 
   .hero-trusted-star {
-    font-size: 1rem !important;
+    font-size: 0.85rem !important;
   }
 
   /* 7. CTA buttons: stacked, full-width primary, link below */
