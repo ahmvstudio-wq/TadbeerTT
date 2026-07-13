@@ -6195,18 +6195,24 @@ section[id], div[id], [id] {
     height: 36px !important;
   }
 
-  /* 2. Hero section padding: clear sticky navbar completely */
+  /* 2. Hero section: full screen height, content fills and spaces itself */
   .hero-section {
-    padding: 7.5rem 1.1rem 2rem !important;
-    min-height: auto !important;
+    padding: 7rem 1.1rem 1.5rem !important;
+    min-height: 100dvh !important;
+    display: flex !important;
+    align-items: flex-start !important;
+    justify-content: flex-start !important;
   }
 
-  /* 3. Hero split: single column */
+  /* 3. Hero split: single column, full height, space content evenly */
   .hero-split {
     grid-template-columns: 1fr !important;
     display: flex !important;
     flex-direction: column !important;
     gap: 0 !important;
+    width: 100% !important;
+    flex: 1 !important;
+    justify-content: space-between !important;
   }
 
   /* 4. Hero text area: center-align on mobile */
