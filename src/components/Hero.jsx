@@ -265,7 +265,7 @@ const Hero = () => {
               transition={{ type: 'spring', stiffness: 450, damping: 18 }}
               className="hero-btn-primary"
             >
-              {isMobile ? "Start Audit →" : "Take the Business Assessment →"}
+              Take the Business Assessment →
             </motion.a>
 
             <motion.button 
@@ -279,7 +279,7 @@ const Hero = () => {
               className="hero-btn-link"
               style={{ borderBottom: '1.5px solid var(--primary)', paddingBottom: '2px' }}
             >
-              {isMobile ? "Book Session" : "Apply for a Strategy Session"}
+              Apply for a Strategy Session
             </motion.button>
           </motion.div>
 
@@ -435,64 +435,62 @@ const Hero = () => {
           </motion.div>
 
           {/* Interactive Service Navigation Floating Cards */}
-          <div className="hero-mobile-cards-grid">
-            {floatingCards.map((card, idx) => {
-              const CardIcon = card.icon;
-              return (
-                <motion.div
-                  key={idx}
-                  className="hero-floating-card-item"
-                  initial={{ opacity: 0, scale: 0.9, y: 15 }}
-                  animate={{ opacity: 1, scale: 1, y: 0 }}
-                  transition={{ delay: card.delay, duration: 0.8 }}
-                  whileHover={{ 
-                    scale: 1.04, 
-                    y: -2,
-                    boxShadow: '0 12px 25px rgba(202, 169, 76, 0.18)',
-                    borderColor: 'rgba(202, 169, 76, 0.5)',
-                    background: 'rgba(255, 255, 255, 0.98)'
-                  }}
-                  onClick={(e) => handleScrollToService(e, card.id)}
-                  style={{
-                    position: 'absolute',
-                    ...card.position,
-                    zIndex: 12,
-                    background: 'rgba(255, 255, 255, 0.93)',
-                    backdropFilter: 'blur(8px)',
-                    border: '1px solid rgba(24, 79, 91, 0.12)',
-                    borderRadius: '14px',
-                    padding: '0.85rem 1.15rem',
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '0.85rem',
-                    cursor: 'pointer',
-                    width: '260px',
-                    boxShadow: '0 8px 22px rgba(24, 79, 91, 0.04)',
-                    transition: 'border-color 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease'
-                  }}
-                >
-                  <div style={{
-                    background: 'rgba(24, 79, 91, 0.05)',
-                    borderRadius: '8px',
-                    width: '36px',
-                    height: '36px',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    color: 'var(--primary)',
-                    flexShrink: 0
-                  }}>
-                    <CardIcon size={18} />
-                  </div>
-                  <div style={{ flex: 1 }}>
-                    <div style={{ fontSize: '0.85rem', fontWeight: '700', color: 'var(--primary)', margin: 0, lineHeight: 1.2 }}>{card.title}</div>
-                    <div style={{ fontSize: '0.7rem', color: 'var(--text-muted)', margin: 0, marginTop: '2px', lineHeight: 1.2 }}>{card.desc}</div>
-                  </div>
-                  <ArrowRight size={14} style={{ color: 'var(--secondary)', flexShrink: 0 }} />
-                </motion.div>
-              );
-            })}
-          </div>
+          {floatingCards.map((card, idx) => {
+            const CardIcon = card.icon;
+            return (
+              <motion.div
+                key={idx}
+                className={`hero-floating-card-item card-idx-${idx}`}
+                initial={{ opacity: 0, scale: 0.9, y: 15 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                transition={{ delay: card.delay, duration: 0.8 }}
+                whileHover={{ 
+                  scale: 1.04, 
+                  y: -2,
+                  boxShadow: '0 12px 25px rgba(202, 169, 76, 0.18)',
+                  borderColor: 'rgba(202, 169, 76, 0.5)',
+                  background: 'rgba(255, 255, 255, 0.98)'
+                }}
+                onClick={(e) => handleScrollToService(e, card.id)}
+                style={{
+                  position: 'absolute',
+                  ...card.position,
+                  zIndex: 12,
+                  background: 'rgba(255, 255, 255, 0.93)',
+                  backdropFilter: 'blur(8px)',
+                  border: '1px solid rgba(24, 79, 91, 0.12)',
+                  borderRadius: '14px',
+                  padding: '0.85rem 1.15rem',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '0.85rem',
+                  cursor: 'pointer',
+                  width: '260px',
+                  boxShadow: '0 8px 22px rgba(24, 79, 91, 0.04)',
+                  transition: 'border-color 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease'
+                }}
+              >
+                <div style={{
+                  background: 'rgba(24, 79, 91, 0.05)',
+                  borderRadius: '8px',
+                  width: '36px',
+                  height: '36px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  color: 'var(--primary)',
+                  flexShrink: 0
+                }}>
+                  <CardIcon size={18} />
+                </div>
+                <div style={{ flex: 1 }}>
+                  <div style={{ fontSize: '0.85rem', fontWeight: '700', color: 'var(--primary)', margin: 0, lineHeight: 1.2 }}>{card.title}</div>
+                  <div style={{ fontSize: '0.7rem', color: 'var(--text-muted)', margin: 0, marginTop: '2px', lineHeight: 1.2 }}>{card.desc}</div>
+                </div>
+                <ArrowRight size={14} style={{ color: 'var(--secondary)', flexShrink: 0 }} />
+              </motion.div>
+            );
+          })}
 
         </div>
 
