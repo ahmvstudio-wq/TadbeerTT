@@ -218,7 +218,7 @@ const Hero = () => {
           >
             <div style={{ display: 'flex', alignItems: 'center' }}>
               {[omanAir, omanVision2040, alHarrasi].map((logoSrc, i) => (
-                <div key={i} style={{ 
+                <div key={i} className="hero-trusted-logo-bubble" style={{ 
                   width: '54px', height: '54px', borderRadius: '50%', 
                   background: '#ffffff', border: '3px solid white', 
                   marginLeft: i === 0 ? '0' : '-18px',
@@ -232,7 +232,7 @@ const Hero = () => {
             </div>
             <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
-                {[1,2,3,4,5].map(star => <span key={star} style={{ color: 'var(--secondary)', fontSize: '1.3rem', lineHeight: '1' }}>★</span>)}
+                {[1,2,3,4,5].map(star => <span key={star} className="hero-trusted-star" style={{ color: 'var(--secondary)', fontSize: '1.3rem', lineHeight: '1' }}>★</span>)}
               </div>
             </div>
           </motion.div>
@@ -283,6 +283,7 @@ const Hero = () => {
 
           {/* ─── Layer 2: Floating Decorative Particles ─── */}
           <motion.div
+            className="hero-floating-particles"
             style={{ position: 'absolute', width: '100%', height: '100%', zIndex: 2, pointerEvents: 'none' }}
           >
             {/* Plus signs */}

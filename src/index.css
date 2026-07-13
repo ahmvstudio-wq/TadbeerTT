@@ -6172,9 +6172,13 @@ section[id], div[id], [id] {
 
 /* Responsive Overrides for Hero and Clients Sections */
 @media (max-width: 1024px) {
+  .hero-section {
+    padding: 10.5rem 1.25rem 2rem !important; /* Clears fixed header banner completely */
+  }
+
   .hero-split {
     grid-template-columns: 1fr !important;
-    gap: 2rem !important;
+    gap: 1.5rem !important;
     display: flex !important;
     flex-direction: column !important;
   }
@@ -6182,8 +6186,8 @@ section[id], div[id], [id] {
   .hero-mascot-container {
     position: relative !important;
     width: 100% !important;
-    height: 380px !important;
-    margin-top: 1.5rem !important;
+    height: 240px !important; /* Shrunk down so it fits nicely in mobile frame */
+    margin-top: 0.5rem !important;
     display: flex !important;
     justify-content: center !important;
     align-items: flex-end !important;
@@ -6199,5 +6203,33 @@ section[id], div[id], [id] {
 
   .hero-floating-lightbulb {
     display: none !important;
+  }
+
+  .hero-floating-particles {
+    display: none !important; /* Hide floating dots/plus elements on mobile for performance and layout cleanliness */
+  }
+
+  /* Compact Hero Clientele / Trust layout for mobile */
+  .hero-trusted {
+    padding: 8px 14px !important;
+    gap: 1rem !important;
+    margin-top: 0.75rem !important;
+    margin-bottom: 1.25rem !important;
+    border-radius: 30px !important;
+  }
+
+  .hero-trusted-logo-bubble {
+    width: 36px !important;
+    height: 36px !important;
+    border-width: 2px !important;
+    margin-left: -10px !important;
+  }
+
+  .hero-trusted-logo-bubble:first-of-type {
+    margin-left: 0 !important;
+  }
+
+  .hero-trusted-star {
+    font-size: 1.05rem !important;
   }
 }
