@@ -55,7 +55,7 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 @media (min-width: 1025px) {
-  body {
+  .app-scale-container {
     zoom: 0.94; /* Premium desktop zoom-out */
   }
 }

@@ -347,36 +347,38 @@ function App() {
   return (
     <ErrorBoundary>
       <MascotProvider>
-        <PlaybookBanner />
-        <Navbar />
-        <main>
-          <Suspense fallback={<div style={{height: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center'}}>Loading...</div>}>
-            <Routes>
-              <Route path="/" element={<HomePage />} />
-              <Route path="/services/digital-marketing" element={<DigitalMarketingPage />} />
-              <Route path="/services/software-solutions" element={<SoftwareSolutionsPage />} />
-              <Route path="/services/human-capital" element={<HumanCapitalPage />} />
-              <Route path="/services/ai-technology" element={<AITechnologyPage />} />
-              <Route path="/case-studies/:id" element={<CaseStudyDetailPage />} />
-              
-              <Route path="/industries/healthcare" element={<HealthcareIndustryPage />} />
-              <Route path="/industries/real-estate" element={<RealEstateIndustryPage />} />
-              <Route path="/industries/logistics" element={<LogisticsIndustryPage />} />
-              <Route path="/industries/ecommerce" element={<EcommerceIndustryPage />} />
-              <Route path="/industries/construction" element={<ConstructionIndustryPage />} />
-              <Route path="/industries/manufacturing" element={<ManufacturingIndustryPage />} />
-              <Route path="/industries/government" element={<GovernmentIndustryPage />} />
-              <Route path="/industries/professional-services" element={<ProfessionalServicesIndustryPage />} />
+        <div className="app-scale-container">
+          <PlaybookBanner />
+          <Navbar />
+          <main>
+            <Suspense fallback={<div style={{height: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center'}}>Loading...</div>}>
+              <Routes>
+                <Route path="/" element={<HomePage />} />
+                <Route path="/services/digital-marketing" element={<DigitalMarketingPage />} />
+                <Route path="/services/software-solutions" element={<SoftwareSolutionsPage />} />
+                <Route path="/services/human-capital" element={<HumanCapitalPage />} />
+                <Route path="/services/ai-technology" element={<AITechnologyPage />} />
+                <Route path="/case-studies/:id" element={<CaseStudyDetailPage />} />
+                
+                <Route path="/industries/healthcare" element={<HealthcareIndustryPage />} />
+                <Route path="/industries/real-estate" element={<RealEstateIndustryPage />} />
+                <Route path="/industries/logistics" element={<LogisticsIndustryPage />} />
+                <Route path="/industries/ecommerce" element={<EcommerceIndustryPage />} />
+                <Route path="/industries/construction" element={<ConstructionIndustryPage />} />
+                <Route path="/industries/manufacturing" element={<ManufacturingIndustryPage />} />
+                <Route path="/industries/government" element={<GovernmentIndustryPage />} />
+                <Route path="/industries/professional-services" element={<ProfessionalServicesIndustryPage />} />
 
-              <Route path="/resources" element={<ResourceLibraryPage />} />
-              <Route path="/careers" element={<Careers />} />
-              <Route path="/admin" element={<CareersAdmin />} />
-              <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
-              <Route path="/terms-of-service" element={<TermsOfServicePage />} />
-            </Routes>
-          </Suspense>
-        </main>
-        <Footer />
+                <Route path="/resources" element={<ResourceLibraryPage />} />
+                <Route path="/careers" element={<Careers />} />
+                <Route path="/admin" element={<CareersAdmin />} />
+                <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
+                <Route path="/terms-of-service" element={<TermsOfServicePage />} />
+              </Routes>
+            </Suspense>
+          </main>
+          <Footer />
+        </div>
         <WhatsAppButton />
         <OryxAssistant />
         <ScrollRewardPopup />
