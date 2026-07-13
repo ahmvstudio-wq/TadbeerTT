@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 const partners = [
   { name: 'ERPNext', domain: 'erpnext.com', category: 'ERP' },
@@ -77,6 +77,17 @@ const MarqueeRow = ({ items, reverse }) => {
 };
 
 const TechPartners = () => {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
   const half = Math.ceil(partners.length / 2);
   const topRow = partners.slice(0, half);
   const bottomRow = partners.slice(half);
@@ -96,7 +107,7 @@ const TechPartners = () => {
 
         <div className="tp-rows-wrapper">
           <MarqueeRow items={topRow} />
-          <MarqueeRow items={bottomRow} reverse={true} />
+          {!isMobile && <MarqueeRow items={bottomRow} reverse={true} />}
         </div>
       </div>
     </section>

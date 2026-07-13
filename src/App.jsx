@@ -318,6 +318,10 @@ function App() {
   }, [location.pathname, location.search, location.hash]);
 
   useEffect(() => {
+    // Disable Lenis smooth scrolling on mobile/tablet viewports for native fluid scrolling
+    const isMobileDevice = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth <= 768;
+    if (isMobileDevice) return;
+
     const lenis = new Lenis({
       duration: 1.2,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
@@ -332,8 +336,10 @@ function App() {
     lenisRef.current = lenis;
 
     function raf(time) {
-      lenis.raf(time);
-      requestAnimationFrame(raf);
+      if (lenisRef.current) {
+        lenis.raf(time);
+        requestAnimationFrame(raf);
+      }
     }
 
     requestAnimationFrame(raf);

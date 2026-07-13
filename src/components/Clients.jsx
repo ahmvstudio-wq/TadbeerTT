@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 
 import alHarrasi      from '../assets/clients/al-harrasi-rope-factory.png';
@@ -16,6 +16,16 @@ import yallaPass      from '../assets/clients/yalla-pass.jpg';
 import tameerInvestments from '../assets/clients/tameer-investments.png';
 
 const Clients = () => {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
   const row1 = [
     { name: "Al Harrasi Rope Factory",    logo: alHarrasi,    scale: 1.9,  offset: '0px' },
     { name: "Oman Air",                   logo: omanAir,       scale: 2.0,  offset: '-1px' },
@@ -168,8 +178,8 @@ const Clients = () => {
           gap: '0.35rem'
         }}>
           {renderMarqueeRow(row1, '35s', false)}
-          {renderMarqueeRow(row2, '45s', true)}
-          {renderMarqueeRow(row3, '38s', false)}
+          {!isMobile && renderMarqueeRow(row2, '45s', true)}
+          {!isMobile && renderMarqueeRow(row3, '38s', false)}
         </div>
 
       </motion.div>

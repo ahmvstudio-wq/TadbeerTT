@@ -83,13 +83,26 @@ const useMousePositionInCard = () => {
 // Interactive Dashboard Overlays for cards (highly visual, satisfying, animated)
 const ServiceSVGOverlay = ({ type }) => {
   const [activeStep, setActiveStep] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  useEffect(() => {
+    if (isMobile) return;
     const interval = setInterval(() => {
       setActiveStep(prev => (prev + 1) % 4);
     }, 2000);
     return () => clearInterval(interval);
-  }, []);
+  }, [isMobile]);
+
+  if (isMobile) return null;
 
   if (type === "technology") {
     return (
