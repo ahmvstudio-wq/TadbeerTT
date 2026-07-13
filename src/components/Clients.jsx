@@ -34,7 +34,7 @@ const Clients = () => {
   const row3 = [
     { name: "Oudh Al Kabir",              logo: oudhAlKabir,   scale: 1.85, offset: '0px' },
     { name: "Yalla Pass",                 logo: yallaPass,     scale: 1.9,  offset: '0px' },
-    { name: "Troxy",                      logo: troxy,         scale: 2.0,  offset: '0px' },
+    { name: "Troxy Oman",                 logo: troxy,         scale: 2.0,  offset: '0px' },
     { name: "Tameer Investments",         logo: tameerInvestments, scale: 1.85, offset: '0px' },
   ];
 
