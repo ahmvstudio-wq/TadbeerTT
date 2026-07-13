@@ -6181,9 +6181,23 @@ section[id], div[id], [id] {
     display: none !important;
   }
 
+  /* 1.5 Navbar shrink */
+  .navbar {
+    padding: 0.6rem 1rem !important;
+  }
+  .navbar.scrolled {
+    padding: 0.4rem 1rem !important;
+  }
+  .navbar .main-logo {
+    height: 42px !important;
+  }
+  .navbar.scrolled .main-logo {
+    height: 36px !important;
+  }
+
   /* 2. Hero section padding: clear sticky navbar completely */
   .hero-section {
-    padding: 10.5rem 1.1rem 2rem !important;
+    padding: 7.5rem 1.1rem 2rem !important;
     min-height: auto !important;
   }
 
