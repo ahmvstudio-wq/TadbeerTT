@@ -277,7 +277,7 @@ const Hero = () => {
       </div> {/* End hero-split */}
 
       {/* Right: Life-Size Mascot Overlay - Full Bleed */}
-      <div style={{ position: 'absolute', top: 0, right: 0, bottom: 0, width: '55%', height: '100%', display: 'flex', alignItems: 'flex-end', justifyContent: 'center', zIndex: 5 }}>
+      <div className="hero-mascot-container" style={{ position: 'absolute', top: 0, right: 0, bottom: 0, width: '55%', height: '100%', display: 'flex', alignItems: 'flex-end', justifyContent: 'center', zIndex: 5 }}>
           
           {/* ─── Layer 1 Removed ─── */}
 
@@ -324,6 +324,7 @@ const Hero = () => {
 
           {/* ─── Layer 3: Floating Lightbulb ─── */}
           <motion.div
+            className="hero-floating-lightbulb"
             initial={{ opacity: 0, scale: 0, y: 50 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             transition={{ delay: 1.2, type: "spring", stiffness: 150 }}
@@ -428,6 +429,7 @@ const Hero = () => {
             return (
               <motion.div
                 key={idx}
+                className="hero-floating-card-item"
                 initial={{ opacity: 0, scale: 0.9, y: 15 }}
                 animate={{ opacity: 1, scale: 1, y: 0 }}
                 transition={{ delay: card.delay, duration: 0.8 }}
