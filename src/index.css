@@ -4810,37 +4810,40 @@ html, body {
     width: calc(100% + 10%) !important;
     background: rgba(24, 79, 91, 0.01) !important;
     box-shadow: none !important;
-    padding: 0.6rem 0 !important;
+    padding: 0.35rem 0 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 0.15rem !important;
   }
 
   .marquee-container {
-    margin: 0.15rem 0 !important;
-    padding: 0.2rem 0 !important;
+    margin: 0.05rem 0 !important;
+    padding: 0.1rem 0 !important;
     background: rgba(255, 255, 255, 0.4) !important;
     border-top: 1px solid rgba(24, 79, 91, 0.04) !important;
     border-bottom: 1px solid rgba(24, 79, 91, 0.04) !important;
   }
 
   .client-logo-card {
-    border-radius: 10px !important;
-    border: 1px solid rgba(24, 79, 91, 0.08) !important;
+    border-radius: 8px !important;
+    border: 1px solid rgba(24, 79, 91, 0.06) !important;
     box-shadow: none !important;
-    min-width: 170px !important;
-    max-width: 210px !important;
-    height: 52px !important;
-    padding: 0.3rem 0.75rem 0.3rem 0.4rem !important;
-    gap: 0.5rem !important;
+    min-width: 130px !important;
+    max-width: 160px !important;
+    height: 40px !important;
+    padding: 0.15rem 0.5rem 0.15rem 0.3rem !important;
+    gap: 0.35rem !important;
   }
 
   .client-logo-card > div {
-    width: 40px !important;
-    height: 40px !important;
-    border-radius: 6px !important;
+    width: 30px !important;
+    height: 30px !important;
+    border-radius: 4px !important;
     border: 1px solid rgba(24, 79, 91, 0.03) !important;
   }
 
   .client-logo-card .client-name {
-    font-size: 0.75rem !important;
+    font-size: 0.64rem !important;
     font-weight: 600 !important;
   }
 

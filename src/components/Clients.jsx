@@ -178,8 +178,8 @@ const Clients = () => {
           gap: '0.35rem'
         }}>
           {renderMarqueeRow(row1, '35s', false)}
-          {!isMobile && renderMarqueeRow(row2, '45s', true)}
-          {!isMobile && renderMarqueeRow(row3, '38s', false)}
+          {renderMarqueeRow(row2, '45s', true)}
+          {renderMarqueeRow(row3, '38s', false)}
         </div>
 
       </motion.div>
