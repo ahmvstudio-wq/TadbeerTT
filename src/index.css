@@ -6171,171 +6171,55 @@ section[id], div[id], [id] {
 .reveal-on-scroll.active {
   opacity: 1;
   transform: translateY(0);
-}/* Responsive Overrides for Hero and Clients Sections */
+}/* =====================================================
+   MOBILE HERO REDESIGN (max-width: 1024px)
+   ===================================================== */
 @media (max-width: 1024px) {
-  .hero-section {
-    padding: 16.5rem 1.25rem 2rem !important; /* Safely clears playbook banner and sticky header */
+
+  /* 1. Hide the playbook banner entirely on mobile to free space */
+  .playbook-top-banner {
+    display: none !important;
   }
 
+  /* 2. Hero section padding: just clear the sticky navbar (~70px) */
+  .hero-section {
+    padding: 5.5rem 1.1rem 2rem !important;
+    min-height: auto !important;
+  }
+
+  /* 3. Hero split: single column */
   .hero-split {
     grid-template-columns: 1fr !important;
-    gap: 1.5rem !important;
     display: flex !important;
     flex-direction: column !important;
-  }
-  
-  .hero-mascot-container {
-    position: relative !important;
-    width: 100% !important;
-    height: 300px !important; /* Perfect vertical bounds for centered mobile mascot */
-    margin-top: 1.5rem !important;
-    display: block !important;
-    right: auto !important;
-    bottom: auto !important;
-    top: auto !important;
-    left: auto !important;
+    gap: 0 !important;
   }
 
-  /* Centered absolute mascot container */
-  .hero-mascot-container > div:last-of-type {
-    position: absolute !important;
-    width: 100% !important;
-    height: 100% !important;
-    display: flex !important;
-    justify-content: center !important;
-    align-items: flex-end !important;
-    top: 0 !important;
-    bottom: 0 !important;
-    right: 0 !important;
-    left: 0 !important;
-    z-index: 5 !important;
-  }
-
-  /* 4 Floating minimal service link tags flanking the mascot */
-  .hero-floating-card-item {
-    position: absolute !important;
-    width: 135px !important; /* Compact width to fit alongside mascot */
-    min-width: auto !important;
-    max-width: none !important;
-    padding: 0.35rem 0.45rem !important;
-    border-radius: 8px !important;
-    background: rgba(255, 255, 255, 0.95) !important;
-    border: 1px solid rgba(24, 79, 91, 0.1) !important;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.03) !important;
-    display: flex !important;
+  /* 4. Hero text area: center-align on mobile */
+  .hero-text {
     align-items: center !important;
-    gap: 0.3rem !important;
-    box-sizing: border-box !important;
-    z-index: 12 !important;
-  }
-
-  /* Left columns float tags */
-  .card-idx-0 {
-    top: 15% !important;
-    left: 2% !important;
-  }
-  .card-idx-1 {
-    top: 50% !important;
-    left: 2% !important;
-  }
-
-  /* Right columns float tags */
-  .card-idx-2 {
-    top: 15% !important;
-    right: 2% !important;
-  }
-  .card-idx-3 {
-    top: 50% !important;
-    right: 2% !important;
-  }
-
-  /* Icon sizes */
-  .hero-floating-card-item > div:first-of-type {
-    width: 24px !important;
-    height: 24px !important;
-    border-radius: 4px !important;
-  }
-  .hero-floating-card-item > div:first-of-type svg {
-    width: 12px !important;
-    height: 12px !important;
-  }
-
-  /* Typography cleanup: hide description */
-  .hero-floating-card-item > div:nth-of-type(2) > div:last-child {
-    display: none !important;
-  }
-  .hero-floating-card-item > div:nth-of-type(2) > div:first-child {
-    font-size: 0.68rem !important;
-    font-weight: 700 !important;
-    line-height: 1.1 !important;
-    white-space: normal !important;
-  }
-
-  /* Hide right arrows on mobile */
-  .hero-floating-card-item > svg {
-    display: none !important;
-  }
-
-  .hero-floating-lightbulb {
-    display: none !important;
-  }
-
-  .hero-floating-particles {
-    display: none !important;
-  }
-
-  /* Centered vertical stacked layout for original hero buttons */
-  .hero-buttons {
-    display: flex !important;
-    flex-direction: column !important;
-    align-items: center !important;
-    width: 100% !important;
-    gap: 0.85rem !important;
-    margin-top: 0.75rem !important;
-  }
-  
-  .hero-btn-primary {
-    width: 100% !important;
-    font-size: 0.86rem !important;
-    padding: 0.8rem 1.2rem !important;
-    height: auto !important;
-    border-radius: 6px !important;
-    box-sizing: border-box !important;
     text-align: center !important;
-    display: inline-flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    white-space: normal !important;
-    line-height: 1.2 !important;
+    max-width: 100% !important;
   }
 
-  .hero-btn-link {
-    background: none !important;
-    border: none !important;
-    border-bottom: 1.5px solid var(--primary) !important;
-    color: var(--primary) !important;
-    font-size: 0.86rem !important;
-    font-weight: 600 !important;
-    padding-bottom: 2px !important;
-    width: auto !important;
-    margin: 0.25rem auto 0 !important;
-    display: inline-block !important;
-    border-radius: 0 !important;
-    height: auto !important;
+  /* 5. Tag pill: center it */
+  .hero-text > div:first-child {
+    align-self: center !important;
   }
 
-  /* Compact Hero Clientele / Trust layout for mobile */
+  /* 6. Trusted / clientele strip: compact pill */
   .hero-trusted {
-    padding: 8px 14px !important;
-    gap: 1rem !important;
-    margin-top: 0.75rem !important;
-    margin-bottom: 1.25rem !important;
+    padding: 6px 12px !important;
+    gap: 0.75rem !important;
+    margin-top: 0.6rem !important;
+    margin-bottom: 1rem !important;
     border-radius: 30px !important;
+    align-self: center !important;
   }
 
   .hero-trusted-logo-bubble {
-    width: 36px !important;
-    height: 36px !important;
+    width: 34px !important;
+    height: 34px !important;
     border-width: 2px !important;
     margin-left: -10px !important;
   }
@@ -6345,6 +6229,174 @@ section[id], div[id], [id] {
   }
 
   .hero-trusted-star {
-    font-size: 1.05rem !important;
+    font-size: 1rem !important;
+  }
+
+  /* 7. CTA buttons: stacked, full-width primary, link below */
+  .hero-buttons {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    width: 100% !important;
+    gap: 0.75rem !important;
+    margin-top: 0.75rem !important;
+  }
+
+  .hero-btn-primary {
+    width: 100% !important;
+    font-size: 0.9rem !important;
+    padding: 0.85rem 1.5rem !important;
+    border-radius: 6px !important;
+    text-align: center !important;
+    white-space: normal !important;
+    line-height: 1.2 !important;
+    height: auto !important;
+  }
+
+  .hero-btn-link {
+    background: none !important;
+    border: none !important;
+    border-bottom: 1.5px solid var(--primary) !important;
+    color: var(--primary) !important;
+    font-size: 0.88rem !important;
+    font-weight: 600 !important;
+    padding: 0 0 2px 0 !important;
+    width: auto !important;
+    height: auto !important;
+    border-radius: 0 !important;
+    display: inline-block !important;
+  }
+
+  /* 8. Mascot container: relative block, fixed height, cards float inside it */
+  .hero-mascot-container {
+    position: relative !important;
+    width: 100% !important;
+    height: 260px !important;
+    margin-top: 1.25rem !important;
+    display: block !important;
+    right: auto !important;
+    bottom: auto !important;
+    top: auto !important;
+    left: auto !important;
+    overflow: visible !important;
+  }
+
+  /* 9. Mascot image layer: fill the container, aligned to bottom */
+  .hero-mascot-container > div:nth-last-child(2) {
+    position: absolute !important;
+    inset: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: flex-end !important;
+    z-index: 5 !important;
+    pointer-events: none !important;
+  }
+
+  /* 10. Floating particles + lightbulb: hidden on mobile */
+  .hero-floating-particles,
+  .hero-floating-lightbulb {
+    display: none !important;
+  }
+
+  /* 11. Service redirect pills: small tags floating L/R around the mascot */
+  .hero-floating-card-item {
+    position: absolute !important;
+    width: 120px !important;
+    padding: 0.3rem 0.4rem !important;
+    border-radius: 10px !important;
+    background: rgba(255, 255, 255, 0.96) !important;
+    border: 1px solid rgba(24, 79, 91, 0.1) !important;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.05) !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 0.3rem !important;
+    z-index: 12 !important;
+    box-sizing: border-box !important;
+    min-width: auto !important;
+    max-width: none !important;
+  }
+
+  /* Pill positions: 2 left, 2 right */
+  .card-idx-0 { top: 10% !important; left: 0 !important; right: auto !important; }
+  .card-idx-1 { top: 58% !important; left: 0 !important; right: auto !important; }
+  .card-idx-2 { top: 10% !important; right: 0 !important; left: auto !important; }
+  .card-idx-3 { top: 58% !important; right: 0 !important; left: auto !important; }
+
+  /* Icon shrink */
+  .hero-floating-card-item > div:first-of-type {
+    width: 22px !important;
+    height: 22px !important;
+    border-radius: 4px !important;
+    flex-shrink: 0 !important;
+  }
+  .hero-floating-card-item > div:first-of-type svg {
+    width: 12px !important;
+    height: 12px !important;
+  }
+
+  /* Title only, no description */
+  .hero-floating-card-item > div:nth-of-type(2) > div:last-child {
+    display: none !important;
+  }
+  .hero-floating-card-item > div:nth-of-type(2) > div:first-child {
+    font-size: 0.66rem !important;
+    font-weight: 700 !important;
+    line-height: 1.15 !important;
+    white-space: normal !important;
+    word-break: break-word !important;
+  }
+
+  /* Hide arrow */
+  .hero-floating-card-item > svg {
+    display: none !important;
   }
 }
+
+/* =====================================================
+   CLIENT SECTION: Compact pill-style cards on mobile
+   ===================================================== */
+@media (max-width: 1024px) {
+  .clients-marquee-frame {
+    border-radius: 16px !important;
+    border: 1px solid rgba(24, 79, 91, 0.07) !important;
+    max-width: calc(100% - 2rem) !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    width: auto !important;
+    background: rgba(255,255,255,0.6) !important;
+    box-shadow: 0 4px 18px rgba(0,0,0,0.03) !important;
+    padding: 0.4rem 0 !important;
+  }
+
+  .marquee-container {
+    margin: 0.05rem 0 !important;
+    padding: 0.1rem 0 !important;
+  }
+
+  .client-logo-card {
+    border-radius: 50px !important;
+    border: 1px solid rgba(24, 79, 91, 0.08) !important;
+    box-shadow: none !important;
+    min-width: 120px !important;
+    max-width: 145px !important;
+    height: 36px !important;
+    padding: 0.1rem 0.55rem 0.1rem 0.25rem !important;
+    gap: 0.3rem !important;
+    background: rgba(255,255,255,0.9) !important;
+  }
+
+  .client-logo-card > div {
+    width: 26px !important;
+    height: 26px !important;
+    border-radius: 50% !important;
+    border: none !important;
+  }
+
+  .client-logo-card .client-name {
+    font-size: 0.6rem !important;
+    font-weight: 600 !important;
+  }
+}
+
