@@ -13,6 +13,7 @@ import marbleLogo from '../assets/clients/sultanate-of-marble.png';
 // Import case images
 import omanAirCaseImage from '../assets/clients/oman_air_case.png';
 import troxyCaseImage from '../assets/clients/troxy_case.png';
+import alHarassiCaseImage from '../assets/clients/al_harassi_case.png';
 
 const cases = [
   {
@@ -46,7 +47,7 @@ const cases = [
     title: 'Al Harassi Rope Factory',
     category: 'Manufacturing',
     service: 'Digital Transformation & Web Development',
-    image: 'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=800&q=80',
+    image: alHarassiCaseImage,
     logo: alHarrasiLogo,
     summary: 'Establishing a professional B2B presence, supplier portal, and lead tracking.',
     metrics: [
@@ -82,13 +83,25 @@ const cases = [
   }
 ];
 
+const useMousePositionInCard = () => {
+  const handleMouseMove = (e) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    e.currentTarget.style.setProperty('--mouse-x', `${x}px`);
+    e.currentTarget.style.setProperty('--mouse-y', `${y}px`);
+  };
+  return handleMouseMove;
+};
+
 const CaseStudies = () => {
+  const handleMouseMove = useMousePositionInCard();
   const saveScrollPosition = () => {
     sessionStorage.setItem('homepage_scroll_pos', window.scrollY.toString());
   };
 
   return (
-    <section id="case-studies" className="case-studies-section" style={{ padding: '7rem 0', background: 'var(--bg-alt)' }}>
+    <section id="case-studies" className="case-studies-section" style={{ paddingTop: '5rem', paddingBottom: '2.5rem', background: 'var(--bg-alt)' }}>
       <div className="container" style={{ padding: '0 5%' }}>
         
         {/* Header */}
@@ -108,6 +121,8 @@ const CaseStudies = () => {
               style={{ textDecoration: 'none', color: 'inherit', display: 'flex' }}
             >
               <motion.div
+                className="case-study-card"
+                onMouseMove={handleMouseMove}
                 initial="initial"
                 whileHover="hover"
                 initial={{ opacity: 0, y: 40 }}
@@ -181,30 +196,7 @@ const CaseStudies = () => {
                     {item.category}
                   </div>
 
-                  {/* Company Logo Badge */}
-                  {item.logo && (
-                    <div style={{
-                      position: 'absolute',
-                      bottom: '0.75rem',
-                      right: '0.75rem',
-                      background: 'white',
-                      padding: '0.35rem',
-                      borderRadius: '8px',
-                      width: '36px',
-                      height: '36px',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      boxShadow: '0 4px 12px rgba(8, 32, 37, 0.15)',
-                      zIndex: 2
-                    }}>
-                      <img 
-                        src={item.logo} 
-                        alt={`${item.title} logo`} 
-                        style={{ maxWidth: '100%', maxHeight: '100%', objectFit: 'contain' }} 
-                      />
-                    </div>
-                  )}
+
                 </div>
 
                 {/* Body */}

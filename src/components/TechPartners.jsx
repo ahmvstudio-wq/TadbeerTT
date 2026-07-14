@@ -100,14 +100,26 @@ const TechPartners = () => {
           <h2 className="section-title tp-title">
             Technology and platform partners.
           </h2>
-          <p className="tp-subtitle" style={{ maxWidth: '750px', margin: '1rem auto 0' }}>
-            We are platform agnostic. Tools are chosen based on what your business needs, not what is easiest to sell. We can work with your current stack or recommend the right fit tools to support adoption, reporting, and scalability. Logos as defined and shared.
+          <p className="tp-subtitle" style={{
+            maxWidth: 'fit-content',
+            margin: '1.25rem auto 0',
+            fontSize: '1.05rem',
+            fontWeight: '600',
+            color: 'var(--tertiary)',
+            background: 'rgba(202, 169, 76, 0.08)',
+            padding: '0.6rem 1.75rem',
+            borderRadius: '100px',
+            border: '1px solid rgba(202, 169, 76, 0.25)',
+            letterSpacing: '0.2px',
+            boxShadow: '0 2px 10px rgba(202, 169, 76, 0.04)'
+          }}>
+            One company for all your tools.
           </p>
         </div>
 
         <div className="tp-rows-wrapper">
           <MarqueeRow items={topRow} />
-          {!isMobile && <MarqueeRow items={bottomRow} reverse={true} />}
+          <MarqueeRow items={bottomRow} reverse={true} />
         </div>
       </div>
     </section>

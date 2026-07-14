@@ -13,6 +13,7 @@ import marbleLogo from '../assets/clients/sultanate-of-marble.png';
 // Import case images
 import omanAirCaseImage from '../assets/clients/oman_air_case.png';
 import troxyCaseImage from '../assets/clients/troxy_case.png';
+import alHarassiCaseImage from '../assets/clients/al_harassi_case.png';
 
 const caseStudiesData = {
   'oman-air': {
@@ -62,7 +63,7 @@ const caseStudiesData = {
       { label: 'B2B Leads Volume', value: '+45%', sub: 'Digital inquiries portal' },
       { label: 'Operational Reach', value: 'Global B2B', sub: 'Online positioning' }
     ],
-    image: 'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=1200&q=80',
+    image: alHarassiCaseImage,
     logo: alHarrasiLogo,
     color: '#1a5c6a'
   },

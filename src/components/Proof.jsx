@@ -27,7 +27,7 @@ const proofItems = [
 
 const Proof = () => {
   return (
-    <section id="proof" className="proof-section" style={{ padding: '6rem 0', background: 'var(--bg-alt)' }}>
+    <section id="proof" className="proof-section" style={{ paddingTop: '2.5rem', paddingBottom: '5rem', background: 'var(--bg-alt)' }}>
       <div className="container">
         
         {/* Header */}

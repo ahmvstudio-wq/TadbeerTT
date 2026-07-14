@@ -510,7 +510,7 @@ const Services = () => {
         >
           <div style={{ position: 'relative', zIndex: 2, maxWidth: '700px' }}>
             <p style={{ fontSize: '1.2rem', fontWeight: '600', marginBottom: '1.5rem', color: '#fff', lineHeight: '1.6' }}>
-              From the first operational audit to the final system deployment — one team, one point of accountability, one standard of completion.
+              From the first operational audit to the final system deployment — <span style={{ color: 'var(--secondary)' }}>one team, one point of accountability</span>, one standard of completion.
             </p>
             <a 
               href="#readiness-score" 
