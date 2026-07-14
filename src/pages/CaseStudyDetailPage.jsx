@@ -383,25 +383,7 @@ const CaseStudyDetailPage = () => {
 
           <div style={{ position: 'relative', height: '320px', borderRadius: '20px', overflow: 'hidden', boxShadow: '0 15px 40px rgba(8, 32, 37, 0.08)', border: '1px solid var(--border)' }}>
             <img src={data.image} alt={data.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-            {data.logo && (
-              <div style={{
-                position: 'absolute',
-                bottom: '1rem',
-                right: '1rem',
-                background: 'white',
-                padding: '0.4rem',
-                borderRadius: '8px',
-                width: '45px',
-                height: '45px',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                boxShadow: '0 4px 15px rgba(0,0,0,0.15)',
-                zIndex: 2
-              }}>
-                <img src={data.logo} alt={`${data.title} logo`} style={{ maxWidth: '100%', maxHeight: '100%', objectFit: 'contain' }} />
-              </div>
-            )}
+
           </div>
         </div>
 
