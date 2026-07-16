@@ -1,10 +1,10 @@
 import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
+import { hydrateRoot, createRoot } from 'react-dom/client'
 import { BrowserRouter } from 'react-router-dom'
 import './index.css'
 import App from './App.jsx'
-
 import * as Sentry from "@sentry/react";
+import ErrorBoundary from './components/ErrorBoundary';
 
 Sentry.init({
   dsn: "https://de5a8c565eee16e3b534a9179782628a@o4511717942296576.ingest.us.sentry.io/4511717948456960",
@@ -17,35 +17,22 @@ Sentry.init({
   replaysOnErrorSampleRate: 1.0,
 });
 
-import ErrorBoundary from './components/ErrorBoundary';
-
-import { hydrateRoot, createRoot } from 'react-dom/client' // 1. Add hydrateRoot here
-
-// ... (keep your existing imports and Sentry setup above this)
-
 if (typeof window !== 'undefined') {
   const rootElement = document.getElementById('root');
   
-  // 2. Logic: If the HTML already has content, hydrate it. If not, create it.
+  const appContent = (
+    <StrictMode>
+      <ErrorBoundary>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      </ErrorBoundary>
+    </StrictMode>
+  );
+
   if (rootElement.hasChildNodes()) {
-    hydrateRoot(rootElement, (
-      <StrictMode>
-        <ErrorBoundary>
-          <BrowserRouter>
-            <App />
-          </BrowserRouter>
-        </ErrorBoundary>
-      </StrictMode>
-    ));
+    hydrateRoot(rootElement, appContent);
   } else {
-    createRoot(rootElement).render(
-      <StrictMode>
-        <ErrorBoundary>
-          <BrowserRouter>
-            <App />
-          </BrowserRouter>
-        </ErrorBoundary>
-      </StrictMode>
-    );
+    createRoot(rootElement).render(appContent);
   }
 }
