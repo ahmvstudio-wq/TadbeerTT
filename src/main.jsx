@@ -19,14 +19,33 @@ Sentry.init({
 
 import ErrorBoundary from './components/ErrorBoundary';
 
+import { hydrateRoot, createRoot } from 'react-dom/client' // 1. Add hydrateRoot here
+
+// ... (keep your existing imports and Sentry setup above this)
+
 if (typeof window !== 'undefined') {
-  createRoot(document.getElementById('root')).render(
-    <StrictMode>
-      <ErrorBoundary>
-        <BrowserRouter>
-          <App />
-        </BrowserRouter>
-      </ErrorBoundary>
-    </StrictMode>,
-  )
+  const rootElement = document.getElementById('root');
+  
+  // 2. Logic: If the HTML already has content, hydrate it. If not, create it.
+  if (rootElement.hasChildNodes()) {
+    hydrateRoot(rootElement, (
+      <StrictMode>
+        <ErrorBoundary>
+          <BrowserRouter>
+            <App />
+          </BrowserRouter>
+        </ErrorBoundary>
+      </StrictMode>
+    ));
+  } else {
+    createRoot(rootElement).render(
+      <StrictMode>
+        <ErrorBoundary>
+          <BrowserRouter>
+            <App />
+          </BrowserRouter>
+        </ErrorBoundary>
+      </StrictMode>
+    );
+  }
 }
