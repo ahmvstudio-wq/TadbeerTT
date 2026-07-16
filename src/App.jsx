@@ -1,5 +1,6 @@
 import React, { useEffect, useLayoutEffect, useRef, useState, Suspense } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
+import { StaticRouter } from 'react-router';
 import Lenis from 'lenis';
 import { AnimatePresence } from 'framer-motion';
 import Navbar from './components/Navbar';
@@ -411,5 +412,11 @@ function App() {
     </ErrorBoundary>
   );
 }
+
+export const ssgOptions = {
+  slug: 'home',
+  routeUrl: '/',
+  context: (children) => React.createElement(StaticRouter, { location: "/" }, children)
+};
 
 export default App;
