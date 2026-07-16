@@ -18,6 +18,39 @@ const Navbar = () => {
   const timeoutRef = useRef(null);
   const location = useLocation();
   const { scrollYProgress } = useScroll();
+  const [lang, setLang] = useState('en');
+
+  useEffect(() => {
+    const checkLang = setInterval(() => {
+      const htmlLang = document.documentElement.lang || 'en';
+      const googleCookie = document.cookie.includes('googtrans=/en/ar');
+      if (googleCookie || htmlLang.startsWith('ar')) {
+        setLang('ar');
+        document.documentElement.dir = 'rtl';
+      } else {
+        setLang('en');
+        document.documentElement.dir = 'ltr';
+      }
+    }, 800);
+    return () => clearInterval(checkLang);
+  }, []);
+
+  const toggleLanguage = () => {
+    const targetLang = lang === 'en' ? 'ar' : 'en';
+    setLang(targetLang);
+    document.documentElement.lang = targetLang;
+    document.documentElement.dir = targetLang === 'ar' ? 'rtl' : 'ltr';
+
+    const translateSelect = document.querySelector('.goog-te-combo');
+    if (translateSelect) {
+      translateSelect.value = targetLang;
+      translateSelect.dispatchEvent(new Event('change'));
+    } else {
+      document.cookie = `googtrans=/en/${targetLang}; path=/`;
+      document.cookie = `googtrans=/en/${targetLang}; path=/; domain=.tadbeertt.com`;
+      window.location.reload();
+    }
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -178,7 +211,9 @@ const Navbar = () => {
         </div>
 
         <div className="nav-actions">
-          <span className="lang-switch">العربية</span>
+          <span className="lang-switch" onClick={toggleLanguage} style={{ userSelect: 'none' }}>
+            {lang === 'en' ? 'العربية' : 'English'}
+          </span>
           <button 
             onClick={(e) => { e.preventDefault(); window.dispatchEvent(new CustomEvent('open-strategy-modal')); }} 
             className="btn btn-primary nav-cta-btn" 
@@ -226,7 +261,14 @@ const Navbar = () => {
           </div>
 
         </div>
-        <div className="nav-mobile-footer" style={{ padding: '2rem' }}>
+        <div className="nav-mobile-footer" style={{ padding: '2rem', display: 'flex', flexDirection: 'column', gap: '1.5rem', alignItems: 'center' }}>
+          <div 
+            className="mobile-lang-switch" 
+            onClick={toggleLanguage} 
+            style={{ fontSize: '1.2rem', cursor: 'pointer', fontWeight: '600' }}
+          >
+            {lang === 'en' ? 'العربية' : 'English'}
+          </div>
           <button 
             onClick={(e) => { e.preventDefault(); setMobileOpen(false); window.dispatchEvent(new CustomEvent('open-strategy-modal')); }} 
             className="btn btn-primary" 

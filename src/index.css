@@ -7047,3 +7047,22 @@ section[id], div[id], [id] {
   }
 }
 
+/* ===== GOOGLE TRANSLATE STYLE OVERRIDES ===== */
+.goog-te-banner-frame.skiptranslate,
+.goog-te-gadget,
+#goog-gt-tt,
+.goog-te-balloon-frame,
+iframe.goog-te-banner-frame {
+  display: none !important;
+}
+body {
+  top: 0px !important;
+}
+.skiptranslate {
+  display: none !important;
+}
+.goog-text-highlight {
+  background-color: transparent !important;
+  box-shadow: none !important;
+}
+
