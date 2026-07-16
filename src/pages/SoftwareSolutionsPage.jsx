@@ -34,6 +34,14 @@ const IntegrationArchitectureSVG = () => (
 const SoftwareSolutionsPage = () => {
   const [activeTab, setActiveTab] = useState('erp');
 
+  React.useEffect(() => {
+    document.title = "Software Solutions | Systems That Fit the Business";
+    const metaDesc = document.querySelector('meta[name="description"]');
+    if (metaDesc) {
+      metaDesc.setAttribute("content", "ERP Implementation (Odoo and SAP), Warehouse Management, HRMS & Payroll, Custom Development, and POS Systems built for Omani regulatory requirements.");
+    }
+  }, []);
+
   const solutions = [
     {
       title: "ERP Implementation",
@@ -171,7 +179,11 @@ const SoftwareSolutionsPage = () => {
                           { metric: "API-First", label: "Architecture", desc: "Seamless integration with your existing legacy systems" }
                         ].map((stat, i) => (
                           <div key={i} style={{ background: 'white', padding: '1.5rem', borderRadius: '12px', border: '1px solid #e2e8f0', boxShadow: '0 4px 6px -1px rgba(0,0,0,0.05)' }}>
-                            <div style={{ color: '#64748b', fontSize: '0.85rem', marginBottom: '0.5rem' }}>{stat.label}</div>
+                            {stat.label === "Core Platforms" ? (
+                              <h2 style={{ color: '#64748b', fontSize: '0.85rem', marginBottom: '0.5rem', fontWeight: 'normal', fontFamily: 'inherit', margin: 0, display: 'block' }}>{stat.label}</h2>
+                            ) : (
+                              <div style={{ color: '#64748b', fontSize: '0.85rem', marginBottom: '0.5rem' }}>{stat.label}</div>
+                            )}
                             <div style={{ fontSize: '1.75rem', fontWeight: 'bold', color: 'var(--primary)', marginBottom: '0.5rem' }}>{stat.metric}</div>
                             <div style={{ color: '#64748b', fontSize: '0.8rem', lineHeight: '1.4' }}>{stat.desc}</div>
                           </div>

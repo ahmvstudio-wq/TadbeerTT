@@ -42,6 +42,14 @@ const OmanizationComplianceSVG = () => (
 
 const HumanCapitalPage = () => {
   const [modalOpen, setModalOpen] = useState(false);
+
+  useEffect(() => {
+    document.title = "Human Capital | Organisational Capability for the GCC Market";
+    const metaDesc = document.querySelector('meta[name="description"]');
+    if (metaDesc) {
+      metaDesc.setAttribute("content", "Ministry of Labour compliance, talent retention frameworks, OKR systems, and genuine nationalization strategy aligned to Omani labour laws.");
+    }
+  }, []);
   const [selectedResource, setSelectedResource] = useState(null);
 
   const handleDownload = (resource) => {

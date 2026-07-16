@@ -136,6 +136,14 @@ const EmailInfographic = () => (
 const DigitalMarketingPage = () => {
   const [activeTab, setActiveTab] = useState('social');
 
+  React.useEffect(() => {
+    document.title = "Digital Marketing | Acquisition Infrastructure for the GCC Market";
+    const metaDesc = document.querySelector('meta[name="description"]');
+    if (metaDesc) {
+      metaDesc.setAttribute("content", "Full-funnel marketing systems built for Omani and GCC audiences. Social media management, performance advertising, SEO strategy, and server-side tracking loops.");
+    }
+  }, []);
+
   const caseStudies = [
     {
       client: "Gloria Jean's GCC",

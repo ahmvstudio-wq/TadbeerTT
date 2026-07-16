@@ -171,15 +171,19 @@ const Hero = () => {
             }}
           >
             <Sparkles size={14} style={{ color: 'var(--secondary)' }} />
-            <span style={{ 
+            <h1 style={{ 
               fontSize: '0.78rem', 
               fontWeight: '700', 
               color: 'var(--primary)', 
               textTransform: 'uppercase', 
-              letterSpacing: '1px' 
+              letterSpacing: '1px',
+              margin: 0,
+              display: 'inline',
+              fontFamily: 'inherit',
+              lineHeight: 'inherit'
             }}>
               Oman's System & Scale Partner
-            </span>
+            </h1>
           </motion.div>
 
           <motion.h1 
@@ -486,7 +490,16 @@ const Hero = () => {
                 </div>
                 <div style={{ flex: 1 }}>
                   <div style={{ fontSize: '0.85rem', fontWeight: '700', color: 'var(--primary)', margin: 0, lineHeight: 1.2 }}>{card.title}</div>
-                  <div style={{ fontSize: '0.7rem', color: 'var(--text-muted)', margin: 0, marginTop: '2px', lineHeight: 1.2 }}>{card.desc}</div>
+                  <h2 style={{ 
+                    fontSize: '0.7rem', 
+                    color: 'var(--text-muted)', 
+                    margin: 0, 
+                    marginTop: '2px', 
+                    lineHeight: 1.2,
+                    fontWeight: 'normal',
+                    fontFamily: 'inherit',
+                    display: 'block'
+                  }}>{card.desc}</h2>
                 </div>
                 <ArrowRight size={14} style={{ color: 'var(--secondary)', flexShrink: 0 }} />
               </motion.div>

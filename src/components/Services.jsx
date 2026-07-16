@@ -434,7 +434,20 @@ const Services = () => {
                   <div>
                     <div className="title-row" style={{ display: 'flex', flexDirection: 'column', gap: '4px', alignItems: 'flex-start' }}>
                       <h3 className="service-title" style={{ fontSize: '1.25rem', color: 'var(--primary)', fontWeight: '800' }}>{service.titleEn}</h3>
-                      <span className="service-arabic" style={{ fontSize: '0.8rem', color: 'var(--secondary)', fontWeight: '600', textTransform: 'uppercase', letterSpacing: '0.5px' }}>{service.subtitle}</span>
+                      {["Enterprise systems that scale", "Enterprise AI that delivers results"].includes(service.subtitle) ? (
+                        <h2 className="service-arabic" style={{ 
+                          fontSize: '0.8rem', 
+                          color: 'var(--secondary)', 
+                          fontWeight: '600', 
+                          textTransform: 'uppercase', 
+                          letterSpacing: '0.5px',
+                          margin: 0,
+                          display: 'inline-block',
+                          fontFamily: 'inherit'
+                        }}>{service.subtitle}</h2>
+                      ) : (
+                        <span className="service-arabic" style={{ fontSize: '0.8rem', color: 'var(--secondary)', fontWeight: '600', textTransform: 'uppercase', letterSpacing: '0.5px' }}>{service.subtitle}</span>
+                      )}
                     </div>
                     <p className="service-desc" style={{ fontSize: '0.9rem', color: 'var(--text-muted)', marginTop: '0.5rem', lineHeight: '1.5' }}>{service.desc}</p>
                     

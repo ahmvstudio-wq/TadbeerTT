@@ -57,15 +57,23 @@ const ServicePageHero = ({ title, subtitle, description, breadcrumbs, dark = fal
         </motion.h1>
 
         {subtitle && (
-          <motion.h3
+          <motion.h1
             className="sp-hero-subtitle"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.2 }}
-            style={{ fontSize: '1.5rem', color: 'var(--secondary)', fontWeight: '600', marginBottom: '1.5rem' }}
+            style={{ 
+              fontSize: '1.5rem', 
+              color: 'var(--secondary)', 
+              fontWeight: '600', 
+              marginBottom: '1.5rem',
+              fontFamily: 'inherit',
+              lineHeight: 'inherit',
+              margin: 0
+            }}
           >
             {subtitle}
-          </motion.h3>
+          </motion.h1>
         )}
 
         {description && (

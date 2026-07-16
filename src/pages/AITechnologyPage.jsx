@@ -780,6 +780,14 @@ const AITechnologyPage = () => {
   const [popupOpen, setPopupOpen] = useState(false);
   const interactionTimerRef = useRef(null);
 
+  useEffect(() => {
+    document.title = "AI & Technology | Automation That Earns Its Place";
+    const metaDesc = document.querySelector('meta[name="description"]');
+    if (metaDesc) {
+      metaDesc.setAttribute("content", "Enterprise AI solutions for GCC businesses. Intelligent WhatsApp qualification, sales automation, machine learning route optimization, and AI reporting dashboards.");
+    }
+  }, []);
+
   const handleDemoInteraction = () => {
     const isDismissed = sessionStorage.getItem('ai_demo_lead_capture_dismissed');
     const isSubmitted = sessionStorage.getItem('ai_demo_lead_capture_submitted');

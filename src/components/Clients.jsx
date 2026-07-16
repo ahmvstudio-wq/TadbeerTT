@@ -152,15 +152,16 @@ const Clients = () => {
         
         {/* Trust (Logos) Section */}
         <div className="text-center" style={{ maxWidth: '800px', margin: '0 auto 3rem' }}>
-          <h2 style={{ 
+          <h3 style={{ 
             fontSize: '2.2rem', 
             color: 'var(--primary)', 
             fontWeight: '800', 
             marginBottom: '1rem',
-            letterSpacing: '-0.5px'
+            letterSpacing: '-0.5px',
+            fontFamily: 'inherit'
           }}>
             Trusted by Leading Organizations in Oman and the GCC
-          </h2>
+          </h3>
         </div>
 
         {/* Triple lane counter-scrolling marquees in a centered lean frame */}
