@@ -730,7 +730,7 @@ const About = () => {
         <div style={{ height: '1px', background: 'var(--border)', margin: '0 auto 5rem', maxWidth: '1000px' }} />
 
         {/* ─── Industries ─── */}
-        <div style={{ marginBottom: '5rem' }}>
+        <div id="industries" style={{ marginBottom: '5rem' }}>
           <motion.div 
             className="text-center"
             initial={{ opacity: 0, y: 30 }}

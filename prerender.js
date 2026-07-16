@@ -8,13 +8,35 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const PORT = 3000;
+// We read from your normal build folder
 const DIST_DIR = path.join(__dirname, 'dist');
+// We save the final, SEO-ready files to a completely clean folder
+const OUT_DIR = path.join(__dirname, 'dist-static');
 
-// Basic static file server using Node's built-in http module
+// 1. Copy all static assets (images, CSS, JS) to the new output folder
+function copyFolderSync(from, to) {
+  if (!fs.existsSync(to)) fs.mkdirSync(to, { recursive: true });
+  fs.readdirSync(from).forEach(element => {
+    const fromPath = path.join(from, element);
+    const toPath = path.join(to, element);
+    if (fs.lstatSync(fromPath).isFile()) {
+      // We skip index.html because Puppeteer is going to build a better one
+      if (element !== 'index.html') {
+        fs.copyFileSync(fromPath, toPath);
+      }
+    } else {
+      copyFolderSync(fromPath, toPath);
+    }
+  });
+}
+
+console.log('Copying static assets to clean output folder...');
+copyFolderSync(DIST_DIR, OUT_DIR);
+
+// 2. Start the server reading from the ORIGINAL dist folder
 const server = http.createServer((req, res) => {
   let filePath = path.join(DIST_DIR, req.url === '/' ? 'index.html' : req.url);
-  
-  // Basic route handling for SPA: if file doesn't exist or is a directory route, fall back to index.html
+
   if (!fs.existsSync(filePath) || fs.statSync(filePath).isDirectory()) {
     filePath = path.join(DIST_DIR, 'index.html');
   }
@@ -53,41 +75,41 @@ const routes = [
 
 server.listen(PORT, async () => {
   console.log(`Prerender server running at http://localhost:${PORT}`);
-  
+
   try {
     const browser = await puppeteer.launch({
       headless: true,
       args: ['--no-sandbox', '--disable-setuid-sandbox']
     });
     const page = await browser.newPage();
-    
+
     // Set high viewport size to render desktop layouts correctly
     await page.setViewport({ width: 1440, height: 900 });
-    
+
     for (const route of routes) {
       console.log(`Prerendering route: ${route}`);
       await page.goto(`http://localhost:${PORT}${route}`, {
         waitUntil: 'networkidle0',
         timeout: 30000
       });
-      
+
       // Allow any animations/loading states to settle
       await new Promise(resolve => setTimeout(resolve, 1500));
-      
+
       const html = await page.content();
-      
-      // Create destination directory
-      const destPath = route === '/' 
-        ? path.join(DIST_DIR, 'index.html')
-        : path.join(DIST_DIR, route, 'index.html');
-        
+
+      // 3. Save the rendered HTML to the NEW dist-static folder
+      const destPath = route === '/'
+        ? path.join(OUT_DIR, 'index.html')
+        : path.join(OUT_DIR, route, 'index.html');
+
       fs.mkdirSync(path.dirname(destPath), { recursive: true });
       fs.writeFileSync(destPath, html, 'utf-8');
       console.log(`Saved: ${destPath}`);
     }
-    
+
     await browser.close();
-    console.log('Prerendering completed successfully!');
+    console.log('✅ Prerendering complete! Tell Vercel to deploy the "dist-static" folder.');
   } catch (error) {
     console.error('Error during prerendering:', error);
   } finally {
