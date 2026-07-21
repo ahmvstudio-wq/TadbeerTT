@@ -74,9 +74,9 @@ const HumanCapitalPage = () => {
       desc: "Reporting lines redesigned for clarity. Responsibilities defined with precision. The ambiguity that slows decisions is removed."
     },
     {
-      title: "Omanization & Compliance",
-      icon: <ShieldCheck size={24} />,
-      desc: "Ministry of Labour requirements met through genuine national talent development, not quota-filling. The difference is in what the organisation looks like two years later."
+      title: "Training & Development Programme",
+      icon: <Award size={24} />,
+      desc: "Customised learning pathways, leadership development, and capability building designed to close skill gaps and align individual growth with business strategy."
     }
   ];
 
