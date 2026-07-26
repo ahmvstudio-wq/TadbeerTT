@@ -403,10 +403,10 @@ const Hero = () => {
             transition={{ duration: 1.8, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
             style={{ 
               position: 'absolute', 
-              bottom: '-14%', 
+              bottom: 0, 
               right: 0, 
               width: '100%', 
-              height: '125%', 
+              height: '82%', 
               zIndex: 5,
               pointerEvents: 'none',
               display: 'flex',
@@ -415,7 +415,7 @@ const Hero = () => {
           >
             <motion.img
               layoutId="global-mascot"
-              src="/Oryx Mascot.png.png?v=4"
+              src="/Oryx Mascot.png.png?v=5"
               alt="Oryx Mascot"
               animate={{
                 y: [0, -8, 0],
