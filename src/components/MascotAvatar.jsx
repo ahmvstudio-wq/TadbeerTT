@@ -21,7 +21,7 @@ const MascotAvatar = ({
     >
       <motion.img
         layoutId={layoutId}
-        src="/mascot.png.png"
+        src="/Oryx Mascot.png.png"
         alt="Oryx Mascot"
         style={{
           width: '100%',
