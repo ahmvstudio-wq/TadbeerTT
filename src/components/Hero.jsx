@@ -406,7 +406,7 @@ const Hero = () => {
               bottom: 0, 
               right: 0, 
               width: '100%', 
-              height: '82%', 
+              height: '92%', 
               zIndex: 5,
               pointerEvents: 'none',
               display: 'flex',
@@ -415,7 +415,7 @@ const Hero = () => {
           >
             <motion.img
               layoutId="global-mascot"
-              src="/Oryx Mascot.png.png?v=5"
+              src="/Oryx Mascot.png.png?v=6"
               alt="Oryx Mascot"
               animate={{
                 y: [0, -8, 0],
