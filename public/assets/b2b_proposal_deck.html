@@ -1,0 +1,1136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tadbeer - B2B Executive Transformation Proposal Deck</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #184F5B;       /* Deep Slate Teal */
+            --primary-dark: #0B2B33;  /* Midnight Teal */
+            --secondary: #CAA94C;     /* Warm Omani Gold */
+            --secondary-light: #E5C875;
+            --bg-light: #F9F8F3;      /* Warm Off-White Cream */
+            --bg-card: #FFFFFF;
+            --text-dark: #1C1B17;
+            --text-muted: #333333;
+            --border-color: #CBD5E1;
+            --radius-lg: 12px;
+            --radius-md: 8px;
+        }
+
+        @page {
+            size: A4 landscape;
+            margin: 0;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--text-dark);
+            background-color: #D1D5DB;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+
+        .slide {
+            width: 297mm;
+            height: 210mm;
+            page-break-after: always;
+            break-after: page;
+            position: relative;
+            background-color: var(--bg-light);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            margin: 0 auto;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+            box-sizing: border-box;
+        }
+
+        /* Slide Header & Footer Layout */
+        .slide-header {
+            padding: 10mm 18mm 5mm 18mm;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            border-bottom: 2px solid rgba(202, 169, 76, 0.35);
+            position: relative;
+            z-index: 2;
+        }
+
+        .logo-img {
+            height: 42px;
+            width: auto;
+            object-fit: contain;
+        }
+
+        .header-tag {
+            font-size: 9pt;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            color: var(--primary);
+            text-transform: uppercase;
+            background: rgba(24, 79, 91, 0.1);
+            padding: 4px 14px;
+            border-radius: 20px;
+            border: 1px solid rgba(24, 79, 91, 0.25);
+        }
+
+        .slide-body {
+            flex: 1;
+            padding: 6mm 18mm 6mm 18mm;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            position: relative;
+            z-index: 2;
+        }
+
+        .slide-footer {
+            padding: 4mm 18mm 6mm 18mm;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 8.8pt;
+            color: var(--text-muted);
+            border-top: 1px solid rgba(0,0,0,0.1);
+            margin-top: auto;
+            position: relative;
+            z-index: 2;
+            background: rgba(24, 79, 91, 0.02);
+        }
+
+        .slide-footer .slide-number {
+            font-weight: 800;
+            color: var(--secondary);
+        }
+
+        /* Typography */
+        h1.slide-title {
+            font-size: 22pt;
+            font-weight: 800;
+            color: var(--primary-dark);
+            line-height: 1.2;
+            margin-bottom: 2mm;
+            letter-spacing: -0.5px;
+        }
+
+        .title-gold {
+            color: var(--secondary);
+        }
+
+        .title-teal {
+            color: var(--primary);
+        }
+
+        p.slide-intro {
+            font-size: 10.5pt;
+            line-height: 1.45;
+            color: var(--text-muted);
+            margin-bottom: 4mm;
+            max-width: 98%;
+        }
+
+        /* SLIDE 1: COVER SPECIFIC */
+        .slide-cover {
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            justify-content: space-between;
+            padding: 0;
+        }
+
+        .cover-top {
+            padding: 14mm 18mm 0 18mm;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .cover-accent-line {
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 50%, var(--primary) 100%);
+            margin: 8mm 18mm 0 18mm;
+            border-radius: 2px;
+        }
+
+        .cover-hero {
+            padding: 0 18mm;
+            margin: auto 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12mm;
+        }
+
+        .cover-left {
+            flex: 1.3;
+        }
+
+        .cover-right {
+            flex: 0.85;
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .cover-tag {
+            display: inline-block;
+            padding: 6px 18px;
+            background: rgba(202, 169, 76, 0.18);
+            border: 1.5px solid var(--secondary);
+            color: var(--primary-dark);
+            border-radius: 20px;
+            font-size: 9pt;
+            font-weight: 800;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            margin-bottom: 5mm;
+        }
+
+        .cover-title {
+            font-size: 30pt;
+            font-weight: 800;
+            line-height: 1.15;
+            letter-spacing: -0.8px;
+            margin-bottom: 5mm;
+            color: var(--primary-dark);
+        }
+
+        .cover-subtitle {
+            font-size: 11.5pt;
+            font-weight: 400;
+            line-height: 1.5;
+            color: var(--text-muted);
+            max-width: 95%;
+            margin-bottom: 6mm;
+        }
+
+        .client-box {
+            background: #ffffff;
+            border: 2px solid var(--border-color);
+            border-top: 6px solid var(--secondary);
+            border-radius: 16px;
+            padding: 8mm 10mm;
+            box-shadow: 0 10px 28px rgba(0,0,0,0.08);
+            text-align: center;
+            width: 100%;
+            max-width: 330px;
+        }
+
+        .client-label {
+            font-size: 8.5pt;
+            font-weight: 800;
+            letter-spacing: 1.5px;
+            color: var(--primary);
+            text-transform: uppercase;
+            margin-bottom: 4mm;
+        }
+
+        .client-logo-img {
+            max-height: 105px;
+            max-width: 240px;
+            object-fit: contain;
+            margin-bottom: 4mm;
+        }
+
+        .client-name {
+            font-size: 12pt;
+            font-weight: 800;
+            color: var(--primary-dark);
+        }
+
+        .client-subtext {
+            font-size: 9pt;
+            color: var(--text-muted);
+            margin-top: 1.5mm;
+            line-height: 1.35;
+            font-weight: 500;
+        }
+
+        .cover-bottom {
+            padding: 8mm 18mm 10mm 18mm;
+            background: rgba(24, 79, 91, 0.05);
+            border-top: 1px solid rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* SLIDE 2: ABOUT TADBEER & EXTENSIVE LOGOS */
+        .about-container {
+            display: grid;
+            grid-template-columns: 1fr 1.15fr;
+            gap: 7mm;
+            flex: 1;
+        }
+
+        .vision-box {
+            background: #ffffff;
+            border: 1px solid var(--border-color);
+            border-left: 5px solid var(--primary);
+            border-radius: 12px;
+            padding: 6mm 7mm;
+            box-shadow: 0 4px 14px rgba(0,0,0,0.03);
+            display: flex;
+            flex-direction: column;
+            gap: 3mm;
+        }
+
+        .vision-title {
+            font-size: 12pt;
+            font-weight: 800;
+            color: var(--primary-dark);
+            margin-bottom: 1mm;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .vision-bullet-item {
+            font-size: 9.5pt;
+            line-height: 1.45;
+            color: var(--text-dark);
+            background: rgba(24, 79, 91, 0.03);
+            padding: 3.5mm 4.5mm;
+            border-radius: 8px;
+            border-left: 3px solid var(--secondary);
+            font-weight: 500;
+        }
+
+        .pillars-list-box {
+            background: #ffffff;
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 5mm 6mm;
+            margin-top: 2mm;
+        }
+
+        .pillars-list-title {
+            font-size: 10pt;
+            font-weight: 800;
+            color: var(--primary-dark);
+            margin-bottom: 3mm;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .pillars-chips-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2.5mm;
+        }
+
+        .pillar-tag-chip {
+            background: rgba(24, 79, 91, 0.08);
+            border: 1px solid rgba(24, 79, 91, 0.2);
+            color: var(--primary-dark);
+            padding: 3mm 5.5mm;
+            border-radius: 8px;
+            font-size: 9pt;
+            font-weight: 700;
+        }
+
+        .trusted-box {
+            background: #ffffff;
+            border: 1px solid var(--border-color);
+            border-top: 5px solid var(--secondary);
+            border-radius: 12px;
+            padding: 6mm 7mm;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 4px 14px rgba(0,0,0,0.03);
+        }
+
+        .trusted-title {
+            font-size: 11.5pt;
+            font-weight: 800;
+            color: var(--primary-dark);
+            margin-bottom: 3.5mm;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* EXTENSIVE LARGE LOGOS GRID */
+        .logos-3x3-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 4mm;
+            flex: 1;
+            align-content: center;
+        }
+
+        .logo-card-large {
+            background: rgba(24, 79, 91, 0.03);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 4mm 4mm;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 82px; /* Extensive Large Size */
+        }
+
+        .logo-card-large img {
+            max-height: 52px; /* Prominent Extensive Logo Display */
+            max-width: 95%;
+            object-fit: contain;
+        }
+
+        .logo-card-label {
+            font-size: 7.5pt;
+            color: var(--text-dark);
+            margin-top: 2mm;
+            text-align: center;
+            font-weight: 700;
+        }
+
+        /* SLIDE 3: USE CASES */
+        .usecases-5-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 4.5mm;
+            flex: 1;
+        }
+
+        .uc-card {
+            background: #ffffff;
+            border: 1px solid var(--border-color);
+            border-top: 4px solid var(--primary);
+            border-radius: 12px;
+            padding: 5mm 6mm;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+        }
+
+        .uc-card.highlight-gold {
+            border-top-color: var(--secondary);
+            background: linear-gradient(180deg, #FFFFFF 0%, #FAF7ED 100%);
+        }
+
+        .uc-badge {
+            font-size: 7.5pt;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--secondary);
+            background: rgba(202, 169, 76, 0.18);
+            padding: 2px 8px;
+            border-radius: 10px;
+            width: fit-content;
+            margin-bottom: 2mm;
+        }
+
+        .uc-title {
+            font-size: 11.5pt;
+            font-weight: 800;
+            color: var(--primary-dark);
+            margin-bottom: 2mm;
+        }
+
+        .uc-action {
+            font-size: 9pt;
+            line-height: 1.45;
+            color: var(--text-dark);
+            margin-bottom: 3mm;
+            font-weight: 400;
+        }
+
+        .uc-impact-box {
+            font-size: 8.8pt;
+            font-weight: 700;
+            color: var(--primary-dark);
+            background: rgba(24, 79, 91, 0.06);
+            padding: 3mm 4mm;
+            border-radius: 6px;
+            border-left: 3px solid var(--secondary);
+            margin-top: auto;
+        }
+
+        /* SLIDE 4: CAPABILITIES (NO EMPTY WHITESPACE) */
+        .capabilities-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 4.5mm;
+            margin-bottom: 3mm;
+        }
+
+        .cap-column {
+            background: #ffffff;
+            border: 1px solid var(--border-color);
+            border-top: 5px solid var(--primary);
+            border-radius: 12px;
+            padding: 5mm 5.5mm;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+        }
+
+        .cap-column.gold-top {
+            border-top-color: var(--secondary);
+        }
+
+        .cap-title {
+            font-size: 11.5pt;
+            font-weight: 800;
+            color: var(--primary-dark);
+            margin-bottom: 3mm;
+            padding-bottom: 2mm;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .cap-bullets {
+            display: flex;
+            flex-direction: column;
+            gap: 2mm;
+        }
+
+        .cap-bullet-item {
+            font-size: 8.8pt;
+            color: var(--text-dark);
+            line-height: 1.35;
+            font-weight: 500;
+        }
+
+        .summary-banner {
+            background: rgba(24, 79, 91, 0.06);
+            border: 1px solid rgba(24, 79, 91, 0.2);
+            border-radius: 10px;
+            padding: 3.5mm 6mm;
+            font-size: 9.5pt;
+            color: var(--primary-dark);
+            font-weight: 700;
+            text-align: center;
+            margin-top: 2mm;
+        }
+
+        /* SLIDE 5: CONSULTATIVE APPROACH (NO EMPTY WHITESPACE) */
+        .process-flow-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 5mm;
+            margin-bottom: 3mm;
+        }
+
+        .flow-step-card {
+            background: #ffffff;
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 5.5mm 6.5mm;
+            display: flex;
+            flex-direction: column;
+            border-top: 5px solid var(--primary);
+            box-shadow: 0 4px 14px rgba(0,0,0,0.03);
+        }
+
+        .flow-step-card.gold-card {
+            border-top-color: var(--secondary);
+        }
+
+        .step-circle-num {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: var(--primary);
+            color: #ffffff;
+            font-weight: 800;
+            font-size: 11pt;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 3mm;
+        }
+
+        .flow-step-card.gold-card .step-circle-num {
+            background: var(--secondary);
+            color: var(--primary-dark);
+        }
+
+        .flow-step-name {
+            font-size: 12pt;
+            font-weight: 800;
+            color: var(--primary-dark);
+            margin-bottom: 3mm;
+        }
+
+        .flow-step-items {
+            display: flex;
+            flex-direction: column;
+            gap: 2.5mm;
+        }
+
+        .flow-item {
+            font-size: 9pt;
+            color: var(--text-dark);
+            line-height: 1.4;
+            font-weight: 500;
+        }
+
+        .process-summary-banner {
+            background: rgba(202, 169, 76, 0.12);
+            border: 1px solid var(--secondary);
+            border-radius: 10px;
+            padding: 3.5mm 6mm;
+            font-size: 9.5pt;
+            color: var(--primary-dark);
+            font-weight: 700;
+            text-align: center;
+            margin-top: 2mm;
+        }
+
+        /* SLIDE 6: DISCOVERY SESSION */
+        .discovery-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5.5mm;
+            flex: 1;
+        }
+
+        .disc-card {
+            background: #ffffff;
+            border: 1px solid var(--border-color);
+            border-left: 5px solid var(--primary);
+            border-radius: 12px;
+            padding: 6mm 7mm;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 4px 14px rgba(0,0,0,0.03);
+            justify-content: center;
+        }
+
+        .disc-card.gold-accent {
+            border-left-color: var(--secondary);
+        }
+
+        .disc-num {
+            font-size: 13pt;
+            font-weight: 800;
+            color: var(--secondary);
+            margin-bottom: 2mm;
+        }
+
+        .disc-title {
+            font-size: 12pt;
+            font-weight: 800;
+            color: var(--primary-dark);
+            margin-bottom: 3mm;
+        }
+
+        .disc-question {
+            font-size: 9.8pt;
+            line-height: 1.5;
+            color: var(--text-dark);
+            font-weight: 500;
+        }
+
+        .disc-closing-banner {
+            background: rgba(202, 169, 76, 0.14);
+            border: 1px solid var(--secondary);
+            border-radius: 10px;
+            padding: 3.5mm 6mm;
+            font-size: 9.5pt;
+            color: var(--primary-dark);
+            font-weight: 700;
+            text-align: center;
+            margin-top: 4mm;
+        }
+
+        /* SLIDE 7: THANK YOU & CLOSING */
+        .slide-back {
+            background: linear-gradient(135deg, #0B2B33 0%, #184F5B 100%) !important;
+            color: #ffffff !important;
+            justify-content: space-between;
+            padding: 0;
+        }
+
+        .back-top {
+            padding: 14mm 18mm 0 18mm;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .back-hero {
+            padding: 0 18mm;
+            margin: auto 0;
+            text-align: center;
+            max-width: 90%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .back-title {
+            font-size: 26pt;
+            font-weight: 800;
+            color: #ffffff;
+            margin-bottom: 3mm;
+            line-height: 1.25;
+        }
+
+        .back-subtitle {
+            font-size: 11.5pt;
+            color: rgba(255,255,255,0.88);
+            line-height: 1.5;
+            margin-bottom: 7mm;
+        }
+
+        .contact-grid {
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(202, 169, 76, 0.35);
+            border-radius: 14px;
+            padding: 6mm 9mm;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 5mm;
+            text-align: left;
+        }
+
+        .contact-col h4 {
+            font-size: 8.5pt;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            color: var(--secondary);
+            margin-bottom: 1.5mm;
+        }
+
+        .contact-col p {
+            font-size: 9.5pt;
+            color: #ffffff;
+            font-weight: 500;
+        }
+
+        .back-bottom {
+            padding: 8mm 18mm 10mm 18mm;
+            border-top: 1px solid rgba(255,255,255,0.15);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 8.5pt;
+            color: rgba(255,255,255,0.7);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ================= SLIDE 1: COVER ================= -->
+    <div class="slide slide-cover">
+        <div class="cover-top">
+            <img src="../logo.png" alt="Tadbeer Logo" class="logo-img">
+            <div style="font-size: 8.5pt; font-weight: 700; letter-spacing: 1.5px; color: var(--primary); text-transform: uppercase; background: rgba(24, 79, 91, 0.08); padding: 4px 12px; border-radius: 20px; border: 1px solid rgba(24, 79, 91, 0.2);">Executive Growth Proposal</div>
+        </div>
+
+        <div class="cover-accent-line"></div>
+
+        <div class="cover-hero">
+            <div class="cover-left">
+                <div class="cover-tag">Tadbeer Transformation Trading</div>
+                <h1 class="cover-title">Accelerating Growth Across<br><span class="title-gold">Guest Acquisition, Dining &</span><br><span class="title-teal">New Tourism Projects</span></h1>
+                <p class="cover-subtitle">A consultative strategy bridging performance marketing, website engineering, custom technology, and operational capability for luxury hospitality and mountain eco-resort projects across Oman.</p>
+            </div>
+
+            <div class="cover-right">
+                <div class="client-box">
+                    <div class="client-label">Prepared Exclusively For</div>
+                    <img src="./jabal_shams_domes_logo.jpg" alt="Jabal Shams Domes Logo" class="client-logo-img">
+                    <div class="client-name">Jabal Shams Domes</div>
+                    <div class="client-subtext">Luxury Geodesic Domes & Eco-Resort<br>Al Hajar Mountains, Sultanate of Oman<br><span style="color: var(--primary); font-weight: 700;">@jabal.shams.domes</span></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="cover-bottom">
+            <div style="font-size: 8.5pt; color: var(--text-muted);">Muscat, Sultanate of Oman &nbsp;|&nbsp; 2026 Strategy Proposal</div>
+            <div style="font-size: 9.5pt; font-weight: 700; color: var(--primary);">Tadbeer Transformation Trading</div>
+        </div>
+    </div>
+
+    <!-- ================= SLIDE 2: ABOUT TADBEER & EXTENSIVE LOGOS ================= -->
+    <div class="slide">
+        <div class="slide-header">
+            <img src="../logo.png" alt="Tadbeer Logo" class="logo-img">
+            <div class="header-tag">Slide 02 &nbsp;|&nbsp; About Tadbeer</div>
+        </div>
+
+        <div class="slide-body">
+            <h1 class="slide-title">Your Strategic Partner for <span class="title-gold">Integrated Business Growth</span></h1>
+            <p class="slide-intro">Tadbeer Transformation Trading is a premier business consultancy headquartered in Muscat. We partner with leaders to solve commercial bottlenecks through seamless integration of strategy, marketing, technology, and people.</p>
+
+            <div class="about-container">
+                <div style="display: flex; flex-direction: column; gap: 4mm;">
+                    <div class="vision-box">
+                        <div class="vision-title">Aligned with Oman Vision 2040</div>
+                        <div class="vision-bullet-item">Building national commercial capabilities and sustainable In-Country Value (ICV) through local talent development.</div>
+                        <div class="vision-bullet-item">Modernizing enterprise operations through digital platforms, custom software, and autonomous technology.</div>
+                        <div class="vision-bullet-item">Driving tourism and hospitality growth through international brand positioning and direct acquisition channels.</div>
+                    </div>
+
+                    <div class="pillars-list-box">
+                        <div class="pillars-list-title">Core Transformation Pillars</div>
+                        <div class="pillars-chips-container">
+                            <div class="pillar-tag-chip">Business Strategy</div>
+                            <div class="pillar-tag-chip">Digital Marketing</div>
+                            <div class="pillar-tag-chip">Software & Technology</div>
+                            <div class="pillar-tag-chip">AI & Automation</div>
+                            <div class="pillar-tag-chip">Human Capital</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="trusted-box">
+                    <div class="trusted-title">Trusted Across Multiple Industries</div>
+                    <div class="logos-3x3-grid">
+                        <div class="logo-card-large">
+                            <img src="./clients/oman-air.png" alt="Oman Air">
+                            <div class="logo-card-label">Aviation</div>
+                        </div>
+                        <div class="logo-card-large">
+                            <img src="./clients/gloria-jeans.png" alt="Gloria Jean's">
+                            <div class="logo-card-label">Cafés & Hospitality</div>
+                        </div>
+                        <div class="logo-card-large">
+                            <img src="./clients/al-harrasi-rope-factory.png" alt="Al Harrasi">
+                            <div class="logo-card-label">Manufacturing</div>
+                        </div>
+                        <div class="logo-card-large">
+                            <img src="./clients/tamimah-telecom.png" alt="Tamimah Telecom">
+                            <div class="logo-card-label">Telecom</div>
+                        </div>
+                        <div class="logo-card-large">
+                            <img src="./clients/ministry-of-awqaf.png" alt="Ministry of Awqaf">
+                            <div class="logo-card-label">Public Sector</div>
+                        </div>
+                        <div class="logo-card-large">
+                            <img src="./clients/sultanate-of-marble.png" alt="Sultanate of Marble">
+                            <div class="logo-card-label">Industrial & Mining</div>
+                        </div>
+                        <div class="logo-card-large">
+                            <img src="./clients/al-qurum-perfumes.png" alt="Al Qurum Perfumes">
+                            <div class="logo-card-label">Retail Chains</div>
+                        </div>
+                        <div class="logo-card-large">
+                            <img src="./clients/yalla.png" alt="Yalla Pass">
+                            <div class="logo-card-label">Apps & Service Platforms</div>
+                        </div>
+                        <div class="logo-card-large">
+                            <img src="./clients/oudh-al-kabir.png" alt="Oudh Al Kabir">
+                            <div class="logo-card-label">Luxury Brands</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide-footer">
+            <div>Tadbeer Transformation Trading &nbsp;|&nbsp; Company Profile</div>
+            <div class="slide-number">Slide 02 of 07</div>
+        </div>
+    </div>
+
+    <!-- ================= SLIDE 3: USE CASES ================= -->
+    <div class="slide">
+        <div class="slide-header">
+            <img src="../logo.png" alt="Tadbeer Logo" class="logo-img">
+            <div class="header-tag">Slide 03 &nbsp;|&nbsp; Proven Impact</div>
+        </div>
+
+        <div class="slide-body">
+            <h1 class="slide-title">Industry-Specific Use Cases & <span class="title-gold">Commercial Outcomes</span></h1>
+            <p class="slide-intro">Demonstrated capability in structuring customer acquisition, direct booking channels, and digital positioning across key sectors in Oman.</p>
+
+            <div class="usecases-5-grid">
+                <!-- 1. Luxury Hotels & Resorts (Featured) -->
+                <div class="uc-card highlight-gold">
+                    <div class="uc-badge">Jabal Shams Domes Focus</div>
+                    <div class="uc-title">Luxury Eco-Resorts & Domes</div>
+                    <div class="uc-action">High-altitude luxury glamping dome positioning in the Al Hajar Mountains (@jabal.shams.domes). Direct WhatsApp booking engines, drone reel storytelling, seasonal GCC targeting, and dining venue marketing.</div>
+                    <div class="uc-impact-box">Outcome: Reduced OTA commission dependency & elevated direct booking yield.</div>
+                </div>
+
+                <!-- 2. Retail Chains -->
+                <div class="uc-card">
+                    <div class="uc-badge">Retail Sector</div>
+                    <div class="uc-title">Retail Chains</div>
+                    <div class="uc-action">Multi-channel digital marketing, in-store promotional activations, targeted lead funnels, and brand collaborations.</div>
+                    <div class="uc-impact-box">Outcome: +200 new followers/month; daily inquiries grew from 1-2 to 10-12.</div>
+                </div>
+
+                <!-- 3. Cafés & Restaurants -->
+                <div class="uc-card">
+                    <div class="uc-badge">Hospitality & FnB</div>
+                    <div class="uc-title">Cafés & Restaurants</div>
+                    <div class="uc-action">Operational marketing campaigns, local geo-targeted video activations, direct WhatsApp offer distribution, and customer retention systems.</div>
+                    <div class="uc-impact-box">Outcome: Doubled repeat customer visits & increased daily dining traffic.</div>
+                </div>
+
+                <!-- 4. Manufacturing & Industrial -->
+                <div class="uc-card">
+                    <div class="uc-badge">Industrial B2B</div>
+                    <div class="uc-title">Manufacturing</div>
+                    <div class="uc-action">B2B client acquisition systems, automated inventory reporting, digitized order routing, and internal process engineering.</div>
+                    <div class="uc-impact-box">Outcome: 40% reduction in order processing friction & zero shipping delays.</div>
+                </div>
+
+                <!-- 5. Apps & Service Platforms -->
+                <div class="uc-card">
+                    <div class="uc-badge">Digital Platforms</div>
+                    <div class="uc-title">Apps & Service Platforms</div>
+                    <div class="uc-action">User acquisition campaign architecture, conversion rate optimization, app store positioning, and automated user onboarding.</div>
+                    <div class="uc-impact-box">Outcome: Accelerated active user growth & lower acquisition costs.</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide-footer">
+            <div>Tadbeer Transformation Trading &nbsp;|&nbsp; Case Track Record</div>
+            <div class="slide-number">Slide 03 of 07</div>
+        </div>
+    </div>
+
+    <!-- ================= SLIDE 4: CAPABILITIES (NO EMPTY WHITESPACE) ================= -->
+    <div class="slide">
+        <div class="slide-header">
+            <img src="../logo.png" alt="Tadbeer Logo" class="logo-img">
+            <div class="header-tag">Slide 04 &nbsp;|&nbsp; Capabilities</div>
+        </div>
+
+        <div class="slide-body">
+            <h1 class="slide-title">One Partner. <span class="title-gold">Every Solution.</span></h1>
+            <p class="slide-intro">An integrated portfolio of services connecting strategic vision, marketing execution, technology platforms, and workforce capability.</p>
+
+            <div class="capabilities-grid">
+                <!-- 1. Digital Marketing -->
+                <div class="cap-column">
+                    <div class="cap-title">Digital Marketing</div>
+                    <div class="cap-bullets">
+                        <div class="cap-bullet-item">Social Media Strategy & Management</div>
+                        <div class="cap-bullet-item">High-ROI Paid Performance Ads</div>
+                        <div class="cap-bullet-item">Brand Identity & Strategic Positioning</div>
+                        <div class="cap-bullet-item">Brand Activations & Launch Campaigns</div>
+                        <div class="cap-bullet-item">Strategic Brand Collaborations</div>
+                        <div class="cap-bullet-item">Premium Video & Content Production</div>
+                        <div class="cap-bullet-item">Search Engine Optimization (SEO)</div>
+                        <div class="cap-bullet-item">Direct Lead Generation Funnels</div>
+                    </div>
+                </div>
+
+                <!-- 2. Software & Technology -->
+                <div class="cap-column gold-top">
+                    <div class="cap-title">Software & Technology</div>
+                    <div class="cap-bullets">
+                        <div class="cap-bullet-item">Website & Application Development</div>
+                        <div class="cap-bullet-item">Custom ERP System Implementation</div>
+                        <div class="cap-bullet-item">CRM & Lead Management Systems</div>
+                        <div class="cap-bullet-item">Bespoke Web & Mobile Platforms</div>
+                        <div class="cap-bullet-item">Direct Online Booking Systems</div>
+                        <div class="cap-bullet-item">Custom Analytics & Dashboards</div>
+                        <div class="cap-bullet-item">Business Process Automation</div>
+                    </div>
+                </div>
+
+                <!-- 3. AI & Automation -->
+                <div class="cap-column gold-top">
+                    <div class="cap-title">AI & Automation</div>
+                    <div class="cap-bullets">
+                        <div class="cap-bullet-item">Autonomous AI Employees & Agents</div>
+                        <div class="cap-bullet-item">End-to-End Workflow Automation</div>
+                        <div class="cap-bullet-item">Executive AI Strategy Consulting</div>
+                        <div class="cap-bullet-item">Internal AI Knowledge Systems</div>
+                        <div class="cap-bullet-item">Automated Customer Support Bots</div>
+                        <div class="cap-bullet-item">Predictive Booking & Analytics</div>
+                    </div>
+                </div>
+
+                <!-- 4. Human Capital -->
+                <div class="cap-column">
+                    <div class="cap-title">Human Capital</div>
+                    <div class="cap-bullets">
+                        <div class="cap-bullet-item">Executive & Specialized Recruitment</div>
+                        <div class="cap-bullet-item">Strategic Workforce Planning</div>
+                        <div class="cap-bullet-item">HR Consulting & Policy Design</div>
+                        <div class="cap-bullet-item">Performance Management Systems</div>
+                        <div class="cap-bullet-item">Talent Retention Frameworks</div>
+                        <div class="cap-bullet-item">ICV & Capability Upskilling</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="summary-banner">
+                An integrated portfolio of services connecting strategy, marketing, technology, and workforce capability.
+            </div>
+        </div>
+
+        <div class="slide-footer">
+            <div>Tadbeer Transformation Trading &nbsp;|&nbsp; Service Portfolio</div>
+            <div class="slide-number">Slide 04 of 07</div>
+        </div>
+    </div>
+
+    <!-- ================= SLIDE 5: CONSULTATIVE APPROACH (NO EMPTY WHITESPACE) ================= -->
+    <div class="slide">
+        <div class="slide-header">
+            <img src="../logo.png" alt="Tadbeer Logo" class="logo-img">
+            <div class="header-tag">Slide 05 &nbsp;|&nbsp; Consultative Approach</div>
+        </div>
+
+        <div class="slide-body">
+            <h1 class="slide-title">Our Consultative Engagement Flow: <span class="title-gold">From Discovery to Scale</span></h1>
+            <p class="slide-intro">We do not sell pre-packaged templates. Every engagement begins with deep business understanding to ensure zero wasted capital.</p>
+
+            <div class="process-flow-grid">
+                <!-- Step 1 -->
+                <div class="flow-step-card">
+                    <div class="step-circle-num">01</div>
+                    <div class="flow-step-name">Understand Your Business</div>
+                    <div class="flow-step-items">
+                        <div class="flow-item">Executive discovery session & alignment</div>
+                        <div class="flow-item">Current operational & channel challenges</div>
+                        <div class="flow-item">Growth, booking & revenue objectives</div>
+                        <div class="flow-item">Customer friction point identification</div>
+                    </div>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="flow-step-card gold-card">
+                    <div class="step-circle-num">02</div>
+                    <div class="flow-step-name">Analyze Opportunities</div>
+                    <div class="flow-step-items">
+                        <div class="flow-item">Marketing & digital channel review</div>
+                        <div class="flow-item">Operational & inquiry process audit</div>
+                        <div class="flow-item">Technology stack evaluation</div>
+                        <div class="flow-item">Competitive positioning analysis</div>
+                    </div>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="flow-step-card gold-card">
+                    <div class="step-circle-num">03</div>
+                    <div class="flow-step-name">Develop Tailored Strategy</div>
+                    <div class="flow-step-items">
+                        <div class="flow-item">Actionable strategic recommendations</div>
+                        <div class="flow-item">Phased transformation roadmap</div>
+                        <div class="flow-item">Prioritized quick-win initiatives</div>
+                        <div class="flow-item">Long-term strategic growth blueprint</div>
+                    </div>
+                </div>
+
+                <!-- Step 4 -->
+                <div class="flow-step-card">
+                    <div class="step-circle-num">04</div>
+                    <div class="flow-step-name">Implementation & Scale</div>
+                    <div class="flow-step-items">
+                        <div class="flow-item">Embedded execution & project support</div>
+                        <div class="flow-item">Metric measurement & KPI tracking</div>
+                        <div class="flow-item">Continuous ROI & funnel optimization</div>
+                        <div class="flow-item">Ongoing strategic guidance</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="process-summary-banner">
+                A structured 4-phase transformation methodology designed for long-term commercial performance and high capital efficiency.
+            </div>
+        </div>
+
+        <div class="slide-footer">
+            <div>Tadbeer Transformation Trading &nbsp;|&nbsp; Engagement Roadmap</div>
+            <div class="slide-number">Slide 05 of 07</div>
+        </div>
+    </div>
+
+    <!-- ================= SLIDE 6: DISCOVERY SESSION ================= -->
+    <div class="slide">
+        <div class="slide-header">
+            <img src="../logo.png" alt="Tadbeer Logo" class="logo-img">
+            <div class="header-tag">Slide 06 &nbsp;|&nbsp; Discovery Session</div>
+        </div>
+
+        <div class="slide-body">
+            <h1 class="slide-title">Executive Discovery Session: <span class="title-gold">Key Strategic Areas</span></h1>
+            <p class="slide-intro">An open discussion framework evaluating four core pillars of commercial health, customer acquisition efficiency, and project scalability.</p>
+
+            <div class="discovery-grid">
+                <!-- Q1 -->
+                <div class="disc-card">
+                    <div class="disc-num">01</div>
+                    <div class="disc-title">Guest & Customer Acquisition</div>
+                    <div class="disc-question">How are current guest acquisition channels performing, and what balance of direct bookings versus OTA platforms is targeted for your eco-resort and dining venues?</div>
+                </div>
+
+                <!-- Q2 -->
+                <div class="disc-card gold-accent">
+                    <div class="disc-num">02</div>
+                    <div class="disc-title">Digital Presence & Brand Positioning</div>
+                    <div class="disc-question">How effectively does your current visual storytelling, social media presence, and brand positioning communicate your premium eco-luxury experience to regional travelers?</div>
+                </div>
+
+                <!-- Q3 -->
+                <div class="disc-card gold-accent">
+                    <div class="disc-num">03</div>
+                    <div class="disc-title">Operations & Technology Systems</div>
+                    <div class="disc-question">Which booking workflows, customer inquiry channels, and operational management tools are currently in place, and where do manual bottlenecks occur?</div>
+                </div>
+
+                <!-- Q4 -->
+                <div class="disc-card">
+                    <div class="disc-num">04</div>
+                    <div class="disc-title">Vision & Growth Goals</div>
+                    <div class="disc-question">What are the key commercial milestones, expansion timelines, and revenue targets for your upcoming tourism, dining, and eco-hospitality projects?</div>
+                </div>
+            </div>
+
+            <div class="disc-closing-banner">
+                Following this session, Tadbeer will deliver a tailored growth roadmap and customized strategy proposal for your review.
+            </div>
+        </div>
+
+        <div class="slide-footer">
+            <div>Tadbeer Transformation Trading &nbsp;|&nbsp; Strategic Discovery</div>
+            <div class="slide-number">Slide 06 of 07</div>
+        </div>
+    </div>
+
+    <!-- ================= SLIDE 7: THANK YOU & CLOSING ================= -->
+    <div class="slide slide-back">
+        <div class="back-top">
+            <img src="../logo.png" alt="Tadbeer Logo" class="logo-img" style="filter: brightness(0) saturate(100%) invert(74%) sepia(38%) saturate(762%) hue-rotate(6deg) brightness(96%) contrast(89%);">
+            <div style="font-size: 8.5pt; font-weight: 700; letter-spacing: 1.5px; color: var(--secondary); text-transform: uppercase; background: rgba(255,255,255,0.08); padding: 4px 12px; border-radius: 20px; border: 1px solid rgba(202, 169, 76, 0.3);">Strategic Partnership</div>
+        </div>
+
+        <div class="back-hero">
+            <h1 class="back-title">Let's Build Your Next Stage of Growth Together.</h1>
+            <p class="back-subtitle">We will follow up with a tailored transformation roadmap and sample strategy review customized for your expansion goals.</p>
+
+            <div class="contact-grid">
+                <div class="contact-col">
+                    <h4>Head Office</h4>
+                    <p>Muscat, Sultanate of Oman</p>
+                </div>
+                <div class="contact-col">
+                    <h4>Direct Inquiries</h4>
+                    <p>operation@tadbeertt.com</p>
+                </div>
+                <div class="contact-col">
+                    <h4>Online Presence</h4>
+                    <p>www.tadbeertt.com</p>
+                </div>
+                <div class="contact-col">
+                    <h4>Core Services</h4>
+                    <p>Strategy, Tech, AI & HR</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="back-bottom">
+            <div>Tadbeer Transformation Trading © 2026</div>
+            <div style="color: var(--secondary); font-weight: 700;">Transforming Strategy into Lasting Performance</div>
+        </div>
+    </div>
+
+</body>
+</html>

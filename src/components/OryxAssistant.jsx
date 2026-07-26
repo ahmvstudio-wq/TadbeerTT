@@ -487,7 +487,7 @@ const OryxAssistant = () => {
               }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
                   <div style={{ width: '46px', height: '46px', background: 'rgba(255,255,255,0.15)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden', border: '2px solid rgba(255,255,255,0.2)' }}>
-                    <img src='/Oryx Mascot.png.png?v=2' alt='Oryx' style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center 10%', transform: 'scale(1.4)' }} />
+                    <img src='/Oryx Mascot.png.png?v=3' alt='Oryx' style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center 10%', transform: 'scale(1.4)' }} />
                   </div>
                   <div>
                     <h3 style={{ fontSize: '1.15rem', margin: 0, lineHeight: '1.2', color: 'white', fontWeight: 'bold', letterSpacing: '-0.3px' }}>Oryx Assistant</h3>
@@ -617,7 +617,7 @@ const OryxAssistant = () => {
         >
           {isOpen ? <X size={26} color="var(--primary)" /> : (
             <div style={{ width: '100%', height: '100%', borderRadius: '50%', overflow: 'hidden', background: '#FDFCF9', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-              <img src='/Oryx Mascot.png.png?v=2' alt='Oryx' style={{ width: '100%', height: '100%', objectFit: 'contain', objectPosition: 'bottom center', transform: 'scale(1.2) translateY(2px)' }} />
+              <img src='/Oryx Mascot.png.png?v=3' alt='Oryx' style={{ width: '100%', height: '100%', objectFit: 'contain', objectPosition: 'bottom center', transform: 'scale(1.2) translateY(2px)' }} />
             </div>
           )}
           
