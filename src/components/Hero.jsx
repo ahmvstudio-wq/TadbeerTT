@@ -403,7 +403,7 @@ const Hero = () => {
             transition={{ duration: 1.8, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
             style={{ 
               position: 'absolute', 
-              bottom: 0, 
+              bottom: '80px', 
               right: 0, 
               width: '100%', 
               height: '92%', 
