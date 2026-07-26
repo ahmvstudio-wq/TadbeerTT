@@ -415,7 +415,7 @@ const Hero = () => {
           >
             <motion.img
               layoutId="global-mascot"
-              src="/Oryx Mascot.png.png?v=6"
+              src="/Oryx Mascot.png.png?v=7"
               alt="Oryx Mascot"
               animate={{
                 y: [0, -8, 0],
@@ -431,8 +431,10 @@ const Hero = () => {
               style={{
                 width: '100%',
                 height: '100%',
-                objectFit: 'contain',
-                objectPosition: 'bottom center',
+                objectFit: 'cover',
+                objectPosition: 'top center',
+                WebkitMaskImage: 'linear-gradient(to bottom, rgba(0,0,0,1) 80%, rgba(0,0,0,0) 100%)',
+                maskImage: 'linear-gradient(to bottom, rgba(0,0,0,1) 80%, rgba(0,0,0,0) 100%)',
                 pointerEvents: 'auto',
                 filter: 'drop-shadow(0 15px 30px rgba(24, 79, 91, 0.05)) drop-shadow(0 0 35px rgba(202, 169, 76, 0.14))'
               }}
