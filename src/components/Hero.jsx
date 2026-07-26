@@ -415,7 +415,7 @@ const Hero = () => {
           >
             <motion.img
               layoutId="global-mascot"
-              src="/Oryx Mascot.png.png"
+              src="/Oryx Mascot.png.png?v=2"
               alt="Oryx Mascot"
               animate={{
                 y: [0, -8, 0],
