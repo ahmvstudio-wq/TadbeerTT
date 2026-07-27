@@ -56,7 +56,7 @@
 
         /* Slide Header & Footer Layout */
         .slide-header {
-            padding: 10mm 18mm 5mm 18mm;
+            padding: 10mm 18mm 4mm 18mm;
             display: flex;
             justify-content: space-between;
             align-items: flex-end;
@@ -122,13 +122,8 @@
             letter-spacing: -0.5px;
         }
 
-        .title-gold {
-            color: var(--secondary);
-        }
-
-        .title-teal {
-            color: var(--primary);
-        }
+        .title-gold { color: var(--secondary); }
+        .title-teal { color: var(--primary); }
 
         p.slide-intro {
             font-size: 10.5pt;
@@ -169,15 +164,8 @@
             gap: 12mm;
         }
 
-        .cover-left {
-            flex: 1.3;
-        }
-
-        .cover-right {
-            flex: 0.85;
-            display: flex;
-            justify-content: flex-end;
-        }
+        .cover-left { flex: 1.3; }
+        .cover-right { flex: 0.85; display: flex; justify-content: flex-end; }
 
         .cover-tag {
             display: inline-block;
@@ -262,12 +250,18 @@
             align-items: center;
         }
 
-        /* SLIDE 2: ABOUT TADBEER & EXTENSIVE LOGOS */
+        /* SLIDE 2: ABOUT TADBEER & ENLARGED 10 LOGOS GRID */
         .about-container {
-            display: grid;
-            grid-template-columns: 1fr 1.15fr;
-            gap: 7mm;
+            display: flex;
+            flex-direction: column;
+            gap: 4mm;
             flex: 1;
+        }
+
+        .about-top-split {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6mm;
         }
 
         .vision-box {
@@ -275,15 +269,15 @@
             border: 1px solid var(--border-color);
             border-left: 5px solid var(--primary);
             border-radius: 12px;
-            padding: 6mm 7mm;
+            padding: 5mm 6mm;
             box-shadow: 0 4px 14px rgba(0,0,0,0.03);
             display: flex;
             flex-direction: column;
-            gap: 3mm;
+            gap: 2.5mm;
         }
 
         .vision-title {
-            font-size: 12pt;
+            font-size: 11pt;
             font-weight: 800;
             color: var(--primary-dark);
             margin-bottom: 1mm;
@@ -292,12 +286,12 @@
         }
 
         .vision-bullet-item {
-            font-size: 9.5pt;
-            line-height: 1.45;
+            font-size: 8.8pt;
+            line-height: 1.38;
             color: var(--text-dark);
             background: rgba(24, 79, 91, 0.03);
-            padding: 3.5mm 4.5mm;
-            border-radius: 8px;
+            padding: 3mm 4mm;
+            border-radius: 6px;
             border-left: 3px solid var(--secondary);
             font-weight: 500;
         }
@@ -307,7 +301,9 @@
             border: 1px solid var(--border-color);
             border-radius: 12px;
             padding: 5mm 6mm;
-            margin-top: 2mm;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
 
         .pillars-list-title {
@@ -329,73 +325,100 @@
             background: rgba(24, 79, 91, 0.08);
             border: 1px solid rgba(24, 79, 91, 0.2);
             color: var(--primary-dark);
-            padding: 3mm 5.5mm;
+            padding: 3mm 5mm;
             border-radius: 8px;
-            font-size: 9pt;
+            font-size: 8.8pt;
             font-weight: 700;
         }
 
-        .trusted-box {
+        .trusted-box-full {
             background: #ffffff;
             border: 1px solid var(--border-color);
             border-top: 5px solid var(--secondary);
             border-radius: 12px;
-            padding: 6mm 7mm;
+            padding: 4.5mm 6mm;
             display: flex;
             flex-direction: column;
             box-shadow: 0 4px 14px rgba(0,0,0,0.03);
+            flex: 1;
         }
 
         .trusted-title {
-            font-size: 11.5pt;
+            font-size: 11pt;
             font-weight: 800;
             color: var(--primary-dark);
-            margin-bottom: 3.5mm;
+            margin-bottom: 3mm;
             text-transform: uppercase;
             letter-spacing: 0.5px;
+            text-align: center;
         }
 
-        /* EXTENSIVE LARGE LOGOS GRID */
-        .logos-3x3-grid {
+        /* 10 CLIENT LOGOS IN A SYMMETRICAL 5x2 GRID (ENLARGED PROMINENT LOGOS) */
+        .logos-grid-5x2 {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 4mm;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 4.5mm 4mm;
             flex: 1;
             align-content: center;
         }
 
-        .logo-card-large {
-            background: rgba(24, 79, 91, 0.03);
-            border: 1px solid var(--border-color);
-            border-radius: 10px;
-            padding: 4mm 4mm;
+        .logo-unit {
             display: flex;
             flex-direction: column;
             align-items: center;
+        }
+
+        .logo-box-filled {
+            background: #ffffff;
+            border: 1.5px solid #CBD5E1;
+            border-radius: 12px;
+            width: 100%;
+            height: 78px; /* ENLARGED PROMINENT SLOT */
+            display: flex;
+            align-items: center;
             justify-content: center;
-            height: 82px; /* Extensive Large Size */
+            padding: 4px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.04);
+            overflow: hidden;
         }
 
-        .logo-card-large img {
-            max-height: 52px; /* Prominent Extensive Logo Display */
+        .logo-box-filled img {
+            max-height: 68px; /* LOGO FILLS THE ENTIRE BOX */
             max-width: 95%;
+            width: auto;
             object-fit: contain;
+            transform: scale(1.35); /* ENLARGE LOGO VISIBILITY */
+            transition: transform 0.2s ease;
         }
 
-        .logo-card-label {
-            font-size: 7.5pt;
-            color: var(--text-dark);
-            margin-top: 2mm;
+        /* Specific Scaling Adjustments to make padded logos expand maximally */
+        .logo-box-filled img.scale-huge { transform: scale(1.65); }
+        .logo-box-filled img.scale-large { transform: scale(1.45); }
+        .logo-box-filled img.scale-wide { transform: scale(1.25); max-width: 98%; }
+
+        .logo-text-outside {
+            font-size: 8.5pt;
+            font-weight: 800;
+            color: var(--primary-dark);
+            margin-top: 2.2mm;
             text-align: center;
-            font-weight: 700;
+            line-height: 1.25;
         }
 
         /* SLIDE 3: USE CASES */
-        .usecases-5-grid {
+        .usecases-top-row {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 4.5mm;
-            flex: 1;
+            margin-bottom: 4.5mm;
+        }
+
+        .usecases-bottom-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4.5mm;
+            max-width: 720px;
+            margin: 0 auto;
         }
 
         .uc-card {
@@ -415,12 +438,12 @@
         }
 
         .uc-badge {
-            font-size: 7.5pt;
+            font-size: 7.2pt;
             font-weight: 800;
             text-transform: uppercase;
             letter-spacing: 1px;
             color: var(--secondary);
-            background: rgba(202, 169, 76, 0.18);
+            background: rgba(202, 169, 76, 0.15);
             padding: 2px 8px;
             border-radius: 10px;
             width: fit-content;
@@ -431,29 +454,45 @@
             font-size: 11.5pt;
             font-weight: 800;
             color: var(--primary-dark);
-            margin-bottom: 2mm;
+            margin-bottom: 2.5mm;
         }
 
-        .uc-action {
-            font-size: 9pt;
-            line-height: 1.45;
+        .uc-bullets {
+            display: flex;
+            flex-direction: column;
+            gap: 1.8mm;
+            margin-bottom: 3.5mm;
+        }
+
+        .uc-bullet-item {
+            font-size: 8.8pt;
+            line-height: 1.4;
             color: var(--text-dark);
-            margin-bottom: 3mm;
             font-weight: 400;
+            display: flex;
+            align-items: flex-start;
+            gap: 2mm;
+        }
+
+        .uc-bullet-item::before {
+            content: "•";
+            color: var(--secondary);
+            font-weight: 800;
         }
 
         .uc-impact-box {
-            font-size: 8.8pt;
-            font-weight: 700;
+            font-size: 8.5pt;
+            font-weight: 600;
             color: var(--primary-dark);
-            background: rgba(24, 79, 91, 0.06);
+            background: rgba(24, 79, 91, 0.05);
             padding: 3mm 4mm;
             border-radius: 6px;
             border-left: 3px solid var(--secondary);
             margin-top: auto;
+            line-height: 1.35;
         }
 
-        /* SLIDE 4: CAPABILITIES (NO EMPTY WHITESPACE) */
+        /* SLIDE 4: CAPABILITIES */
         .capabilities-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -472,9 +511,7 @@
             box-shadow: 0 4px 12px rgba(0,0,0,0.03);
         }
 
-        .cap-column.gold-top {
-            border-top-color: var(--secondary);
-        }
+        .cap-column.gold-top { border-top-color: var(--secondary); }
 
         .cap-title {
             font-size: 11.5pt;
@@ -510,7 +547,7 @@
             margin-top: 2mm;
         }
 
-        /* SLIDE 5: CONSULTATIVE APPROACH (NO EMPTY WHITESPACE) */
+        /* SLIDE 5: CONSULTATIVE APPROACH */
         .process-flow-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -529,9 +566,7 @@
             box-shadow: 0 4px 14px rgba(0,0,0,0.03);
         }
 
-        .flow-step-card.gold-card {
-            border-top-color: var(--secondary);
-        }
+        .flow-step-card.gold-card { border-top-color: var(--secondary); }
 
         .step-circle-num {
             width: 36px;
@@ -604,9 +639,7 @@
             justify-content: center;
         }
 
-        .disc-card.gold-accent {
-            border-left-color: var(--secondary);
-        }
+        .disc-card.gold-accent { border-left-color: var(--secondary); }
 
         .disc-num {
             font-size: 13pt;
@@ -745,12 +778,12 @@
         </div>
 
         <div class="cover-bottom">
-            <div style="font-size: 8.5pt; color: var(--text-muted);">Muscat, Sultanate of Oman &nbsp;|&nbsp; 2026 Strategy Proposal</div>
+            <div style="font-size: 8.5pt; color: var(--text-muted);">Muscat, Sultanate of Oman &nbsp;|&nbsp; Executive Proposal</div>
             <div style="font-size: 9.5pt; font-weight: 700; color: var(--primary);">Tadbeer Transformation Trading</div>
         </div>
     </div>
 
-    <!-- ================= SLIDE 2: ABOUT TADBEER & EXTENSIVE LOGOS ================= -->
+    <!-- ================= SLIDE 2: ABOUT TADBEER & ENLARGED 10 LOGOS GRID ================= -->
     <div class="slide">
         <div class="slide-header">
             <img src="../logo.png" alt="Tadbeer Logo" class="logo-img">
@@ -762,12 +795,12 @@
             <p class="slide-intro">Tadbeer Transformation Trading is a premier business consultancy headquartered in Muscat. We partner with leaders to solve commercial bottlenecks through seamless integration of strategy, marketing, technology, and people.</p>
 
             <div class="about-container">
-                <div style="display: flex; flex-direction: column; gap: 4mm;">
+                <div class="about-top-split">
                     <div class="vision-box">
                         <div class="vision-title">Aligned with Oman Vision 2040</div>
-                        <div class="vision-bullet-item">Building national commercial capabilities and sustainable In-Country Value (ICV) through local talent development.</div>
-                        <div class="vision-bullet-item">Modernizing enterprise operations through digital platforms, custom software, and autonomous technology.</div>
-                        <div class="vision-bullet-item">Driving tourism and hospitality growth through international brand positioning and direct acquisition channels.</div>
+                        <div class="vision-bullet-item">Building national commercial capabilities & In-Country Value (ICV) through talent development.</div>
+                        <div class="vision-bullet-item">Modernizing enterprise operations through digital platforms, custom software, and AI technology.</div>
+                        <div class="vision-bullet-item">Driving tourism and hospitality growth through brand positioning and direct acquisition channels.</div>
                     </div>
 
                     <div class="pillars-list-box">
@@ -782,44 +815,89 @@
                     </div>
                 </div>
 
-                <div class="trusted-box">
+                <div class="trusted-box-full">
                     <div class="trusted-title">Trusted Across Multiple Industries</div>
-                    <div class="logos-3x3-grid">
-                        <div class="logo-card-large">
-                            <img src="./clients/oman-air.png" alt="Oman Air">
-                            <div class="logo-card-label">Aviation</div>
+                    
+                    <!-- 10 ENLARGED CLIENT LOGOS IN 5x2 GRID (LOGOS FILL BOX, LABELS OUTSIDE) -->
+                    <div class="logos-grid-5x2">
+                        <!-- 1. Semi-Government Enterprises -->
+                        <div class="logo-unit">
+                            <div class="logo-box-filled">
+                                <img src="./clients/oman-air.png" alt="Oman Air" class="scale-huge">
+                            </div>
+                            <div class="logo-text-outside">Semi-Government</div>
                         </div>
-                        <div class="logo-card-large">
-                            <img src="./clients/gloria-jeans.png" alt="Gloria Jean's">
-                            <div class="logo-card-label">Cafés & Hospitality</div>
+
+                        <!-- 2. Cafés & Hospitality -->
+                        <div class="logo-unit">
+                            <div class="logo-box-filled">
+                                <img src="./clients/gloria-jeans.png" alt="Gloria Jean's" class="scale-huge">
+                            </div>
+                            <div class="logo-text-outside">Cafés & Hospitality</div>
                         </div>
-                        <div class="logo-card-large">
-                            <img src="./clients/al-harrasi-rope-factory.png" alt="Al Harrasi">
-                            <div class="logo-card-label">Manufacturing</div>
+
+                        <!-- 3. Manufacturing -->
+                        <div class="logo-unit">
+                            <div class="logo-box-filled">
+                                <img src="./clients/al-harrasi-rope-factory.png" alt="Al Harrasi" class="scale-huge">
+                            </div>
+                            <div class="logo-text-outside">Manufacturing</div>
                         </div>
-                        <div class="logo-card-large">
-                            <img src="./clients/tamimah-telecom.png" alt="Tamimah Telecom">
-                            <div class="logo-card-label">Telecom</div>
+
+                        <!-- 4. Telecom -->
+                        <div class="logo-unit">
+                            <div class="logo-box-filled">
+                                <img src="./clients/tamimah-telecom.png" alt="TechNova Telecom" class="scale-wide">
+                            </div>
+                            <div class="logo-text-outside">Telecom</div>
                         </div>
-                        <div class="logo-card-large">
-                            <img src="./clients/ministry-of-awqaf.png" alt="Ministry of Awqaf">
-                            <div class="logo-card-label">Public Sector</div>
+
+                        <!-- 5. Government Enterprise -->
+                        <div class="logo-unit">
+                            <div class="logo-box-filled">
+                                <img src="./clients/ministry-of-awqaf.png" alt="Ministry of Awqaf" class="scale-huge">
+                            </div>
+                            <div class="logo-text-outside">Public Sector</div>
                         </div>
-                        <div class="logo-card-large">
-                            <img src="./clients/sultanate-of-marble.png" alt="Sultanate of Marble">
-                            <div class="logo-card-label">Industrial & Mining</div>
+
+                        <!-- 6. Industrial & Mining -->
+                        <div class="logo-unit">
+                            <div class="logo-box-filled">
+                                <img src="./clients/sultanate-of-marble.png" alt="Sultanate of Marble" class="scale-huge">
+                            </div>
+                            <div class="logo-text-outside">Industrial & Mining</div>
                         </div>
-                        <div class="logo-card-large">
-                            <img src="./clients/al-qurum-perfumes.png" alt="Al Qurum Perfumes">
-                            <div class="logo-card-label">Retail Chains</div>
+
+                        <!-- 7. Retail Chains -->
+                        <div class="logo-unit">
+                            <div class="logo-box-filled">
+                                <img src="./clients/al-qurum-perfumes.png" alt="Al Qurum Perfumes" class="scale-huge">
+                            </div>
+                            <div class="logo-text-outside">Retail Chains</div>
                         </div>
-                        <div class="logo-card-large">
-                            <img src="./clients/yalla.png" alt="Yalla Pass">
-                            <div class="logo-card-label">Apps & Service Platforms</div>
+
+                        <!-- 8. Apps & Service Platforms -->
+                        <div class="logo-unit">
+                            <div class="logo-box-filled">
+                                <img src="./clients/yalla.png" alt="Yalla Pass" class="scale-huge">
+                            </div>
+                            <div class="logo-text-outside">Apps & Services</div>
                         </div>
-                        <div class="logo-card-large">
-                            <img src="./clients/oudh-al-kabir.png" alt="Oudh Al Kabir">
-                            <div class="logo-card-label">Luxury Brands</div>
+
+                        <!-- 9. Luxury Brands -->
+                        <div class="logo-unit">
+                            <div class="logo-box-filled">
+                                <img src="./clients/oudh-al-kabir.png" alt="Oudh Al Kabir" class="scale-huge">
+                            </div>
+                            <div class="logo-text-outside">Luxury Brands</div>
+                        </div>
+
+                        <!-- 10. Hospitality & Tourism -->
+                        <div class="logo-unit">
+                            <div class="logo-box-filled">
+                                <img src="./clients/sheraton-muscat.svg" alt="Sheraton Hotel Muscat" class="scale-wide">
+                            </div>
+                            <div class="logo-text-outside">Hospitality & Tourism</div>
                         </div>
                     </div>
                 </div>
@@ -840,48 +918,67 @@
         </div>
 
         <div class="slide-body">
-            <h1 class="slide-title">Industry-Specific Use Cases & <span class="title-gold">Commercial Outcomes</span></h1>
-            <p class="slide-intro">Demonstrated capability in structuring customer acquisition, direct booking channels, and digital positioning across key sectors in Oman.</p>
+            <h1 class="slide-title">Demonstrated Commercial Outcomes & <span class="title-gold">Track Record</span></h1>
+            <p class="slide-intro">Demonstrated capability in structuring customer acquisition, operational efficiency, and digital positioning across key Oman and GCC growth sectors.</p>
 
-            <div class="usecases-5-grid">
-                <!-- 1. Luxury Hotels & Resorts (Featured) -->
-                <div class="uc-card highlight-gold">
-                    <div class="uc-badge">Jabal Shams Domes Focus</div>
-                    <div class="uc-title">Luxury Eco-Resorts & Domes</div>
-                    <div class="uc-action">High-altitude luxury glamping dome positioning in the Al Hajar Mountains (@jabal.shams.domes). Direct WhatsApp booking engines, drone reel storytelling, seasonal GCC targeting, and dining venue marketing.</div>
-                    <div class="uc-impact-box">Outcome: Reduced OTA commission dependency & elevated direct booking yield.</div>
-                </div>
-
-                <!-- 2. Retail Chains -->
+            <!-- Top Row 3 Cards -->
+            <div class="usecases-top-row">
+                <!-- 1. Retail Chains -->
                 <div class="uc-card">
-                    <div class="uc-badge">Retail Sector</div>
+                    <div class="uc-badge">RETAIL CHAINS</div>
                     <div class="uc-title">Retail Chains</div>
-                    <div class="uc-action">Multi-channel digital marketing, in-store promotional activations, targeted lead funnels, and brand collaborations.</div>
-                    <div class="uc-impact-box">Outcome: +200 new followers/month; daily inquiries grew from 1-2 to 10-12.</div>
+                    <div class="uc-bullets">
+                        <div class="uc-bullet-item">Full traditional + digital marketing strategy for sales growth</div>
+                        <div class="uc-bullet-item">In-store activations & brand collaborations</div>
+                    </div>
+                    <div class="uc-impact-box">Outcome: +200 new followers/month; daily inquiries grew from 1-2 to 10-12</div>
                 </div>
 
-                <!-- 3. Cafés & Restaurants -->
+                <!-- 2. Cafés & Restaurants -->
                 <div class="uc-card">
-                    <div class="uc-badge">Hospitality & FnB</div>
+                    <div class="uc-badge">CAFÉS & RESTAURANTS</div>
                     <div class="uc-title">Cafés & Restaurants</div>
-                    <div class="uc-action">Operational marketing campaigns, local geo-targeted video activations, direct WhatsApp offer distribution, and customer retention systems.</div>
-                    <div class="uc-impact-box">Outcome: Doubled repeat customer visits & increased daily dining traffic.</div>
+                    <div class="uc-bullets">
+                        <div class="uc-bullet-item">Full brand concept, positioning & identity</div>
+                        <div class="uc-bullet-item">Daily social management — stories, posts, collabs</div>
+                    </div>
+                    <div class="uc-impact-box">Outcome: Elevated brand presence & consistent guest engagement</div>
                 </div>
 
-                <!-- 4. Manufacturing & Industrial -->
+                <!-- 3. Manufacturing -->
                 <div class="uc-card">
-                    <div class="uc-badge">Industrial B2B</div>
+                    <div class="uc-badge">MANUFACTURING</div>
                     <div class="uc-title">Manufacturing</div>
-                    <div class="uc-action">B2B client acquisition systems, automated inventory reporting, digitized order routing, and internal process engineering.</div>
-                    <div class="uc-impact-box">Outcome: 40% reduction in order processing friction & zero shipping delays.</div>
+                    <div class="uc-bullets">
+                        <div class="uc-bullet-item">End-to-end marketing funnel design</div>
+                        <div class="uc-bullet-item">Website build & professional video production</div>
+                    </div>
+                    <div class="uc-impact-box">Outcome: Stronger digital presence & qualified client conversion</div>
+                </div>
+            </div>
+
+            <!-- Bottom Row 2 Cards Centered -->
+            <div class="usecases-bottom-row">
+                <!-- 4. Luxury Hotels & Resorts (Highlighted Gold Focus Card) -->
+                <div class="uc-card highlight-gold">
+                    <div class="uc-badge">LUXURY HOTELS & RESORTS</div>
+                    <div class="uc-title">Luxury Hotels & Resorts</div>
+                    <div class="uc-bullets">
+                        <div class="uc-bullet-item">Hotel & restaurant social media marketing</div>
+                        <div class="uc-bullet-item">Collaborations, drone videography & pre-launch buzz campaigns</div>
+                    </div>
+                    <div class="uc-impact-box">Outcome: Elevated visibility & successful property launches</div>
                 </div>
 
                 <!-- 5. Apps & Service Platforms -->
                 <div class="uc-card">
-                    <div class="uc-badge">Digital Platforms</div>
+                    <div class="uc-badge">SERVICE-BASED PLATFORMS</div>
                     <div class="uc-title">Apps & Service Platforms</div>
-                    <div class="uc-action">User acquisition campaign architecture, conversion rate optimization, app store positioning, and automated user onboarding.</div>
-                    <div class="uc-impact-box">Outcome: Accelerated active user growth & lower acquisition costs.</div>
+                    <div class="uc-bullets">
+                        <div class="uc-bullet-item">Full social & marketing strategy build-out</div>
+                        <div class="uc-bullet-item">Funnel design with phased in-house team handover</div>
+                    </div>
+                    <div class="uc-impact-box">Outcome: Self-sufficient, scalable internal marketing capability</div>
                 </div>
             </div>
         </div>
@@ -892,7 +989,7 @@
         </div>
     </div>
 
-    <!-- ================= SLIDE 4: CAPABILITIES (NO EMPTY WHITESPACE) ================= -->
+    <!-- ================= SLIDE 4: CAPABILITIES ================= -->
     <div class="slide">
         <div class="slide-header">
             <img src="../logo.png" alt="Tadbeer Logo" class="logo-img">
@@ -971,7 +1068,7 @@
         </div>
     </div>
 
-    <!-- ================= SLIDE 5: CONSULTATIVE APPROACH (NO EMPTY WHITESPACE) ================= -->
+    <!-- ================= SLIDE 5: CONSULTATIVE APPROACH ================= -->
     <div class="slide">
         <div class="slide-header">
             <img src="../logo.png" alt="Tadbeer Logo" class="logo-img">
@@ -998,47 +1095,47 @@
                 <!-- Step 2 -->
                 <div class="flow-step-card gold-card">
                     <div class="step-circle-num">02</div>
-                    <div class="flow-step-name">Analyze Opportunities</div>
+                    <div class="flow-step-name">Gather Requirements & Research</div>
                     <div class="flow-step-items">
-                        <div class="flow-item">Marketing & digital channel review</div>
-                        <div class="flow-item">Operational & inquiry process audit</div>
-                        <div class="flow-item">Technology stack evaluation</div>
-                        <div class="flow-item">Competitive positioning analysis</div>
+                        <div class="flow-item">In-depth market & competitor audit</div>
+                        <div class="flow-item">Audience persona & channel mapping</div>
+                        <div class="flow-item">Technology & workflow audit</div>
+                        <div class="flow-item">Data gathering & capacity assessment</div>
                     </div>
                 </div>
 
                 <!-- Step 3 -->
-                <div class="flow-step-card gold-card">
+                <div class="flow-step-card">
                     <div class="step-circle-num">03</div>
-                    <div class="flow-step-name">Develop Tailored Strategy</div>
+                    <div class="flow-step-name">Engineer Strategy & Architecture</div>
                     <div class="flow-step-items">
-                        <div class="flow-item">Actionable strategic recommendations</div>
-                        <div class="flow-item">Phased transformation roadmap</div>
-                        <div class="flow-item">Prioritized quick-win initiatives</div>
-                        <div class="flow-item">Long-term strategic growth blueprint</div>
+                        <div class="flow-item">Custom solution architecture design</div>
+                        <div class="flow-item">Multi-channel marketing plan buildout</div>
+                        <div class="flow-item">Technology & automation integration</div>
+                        <div class="flow-item">KPI definition & ROI model projection</div>
                     </div>
                 </div>
 
                 <!-- Step 4 -->
-                <div class="flow-step-card">
+                <div class="flow-step-card gold-card">
                     <div class="step-circle-num">04</div>
-                    <div class="flow-step-name">Implementation & Scale</div>
+                    <div class="flow-step-name">Present Tailored Proposal & Execute</div>
                     <div class="flow-step-items">
-                        <div class="flow-item">Embedded execution & project support</div>
-                        <div class="flow-item">Metric measurement & KPI tracking</div>
-                        <div class="flow-item">Continuous ROI & funnel optimization</div>
-                        <div class="flow-item">Ongoing strategic guidance</div>
+                        <div class="flow-item">Transparent scope & timeline alignment</div>
+                        <div class="flow-item">Agile implementation & deployment</div>
+                        <div class="flow-item">Continuous optimization & analytics</div>
+                        <div class="flow-item">Long-term advisory & capability handover</div>
                     </div>
                 </div>
             </div>
 
             <div class="process-summary-banner">
-                A structured 4-phase transformation methodology designed for long-term commercial performance and high capital efficiency.
+                Every engagement follows a structured 4-step framework to deliver measurable commercial impact.
             </div>
         </div>
 
         <div class="slide-footer">
-            <div>Tadbeer Transformation Trading &nbsp;|&nbsp; Engagement Roadmap</div>
+            <div>Tadbeer Transformation Trading &nbsp;|&nbsp; Methodology</div>
             <div class="slide-number">Slide 05 of 07</div>
         </div>
     </div>
@@ -1047,50 +1144,46 @@
     <div class="slide">
         <div class="slide-header">
             <img src="../logo.png" alt="Tadbeer Logo" class="logo-img">
-            <div class="header-tag">Slide 06 &nbsp;|&nbsp; Discovery Session</div>
+            <div class="header-tag">Slide 06 &nbsp;|&nbsp; Next Steps</div>
         </div>
 
         <div class="slide-body">
-            <h1 class="slide-title">Executive Discovery Session: <span class="title-gold">Key Strategic Areas</span></h1>
-            <p class="slide-intro">An open discussion framework evaluating four core pillars of commercial health, customer acquisition efficiency, and project scalability.</p>
+            <h1 class="slide-title">Next Step: <span class="title-gold">Executive Discovery Session</span></h1>
+            <p class="slide-intro">To ensure our proposal addresses Jabal Shams Domes' specific priorities, we recommend a 45-minute strategic discovery session focused on three core areas:</p>
 
             <div class="discovery-grid">
-                <!-- Q1 -->
                 <div class="disc-card">
                     <div class="disc-num">01</div>
-                    <div class="disc-title">Guest & Customer Acquisition</div>
-                    <div class="disc-question">How are current guest acquisition channels performing, and what balance of direct bookings versus OTA platforms is targeted for your eco-resort and dining venues?</div>
+                    <div class="disc-title">Direct Booking & RevPAR Optimization</div>
+                    <div class="disc-question">What is your current mix between direct booking capture and third-party OTA platforms, and where are the primary conversion drop-offs occurring?</div>
                 </div>
 
-                <!-- Q2 -->
                 <div class="disc-card gold-accent">
                     <div class="disc-num">02</div>
-                    <div class="disc-title">Digital Presence & Brand Positioning</div>
-                    <div class="disc-question">How effectively does your current visual storytelling, social media presence, and brand positioning communicate your premium eco-luxury experience to regional travelers?</div>
+                    <div class="disc-title">Dining & Venue Activation Strategy</div>
+                    <div class="disc-question">How can we leverage digital marketing, local influencer collaborations, and event activations to position your dining venues as destination experiences?</div>
                 </div>
 
-                <!-- Q3 -->
                 <div class="disc-card gold-accent">
                     <div class="disc-num">03</div>
-                    <div class="disc-title">Operations & Technology Systems</div>
-                    <div class="disc-question">Which booking workflows, customer inquiry channels, and operational management tools are currently in place, and where do manual bottlenecks occur?</div>
+                    <div class="disc-title">Pre-Launch Strategy for New Projects</div>
+                    <div class="disc-question">What is the timeline and positioning roadmap for your upcoming resort expansions and new tourism ventures across Oman?</div>
                 </div>
 
-                <!-- Q4 -->
                 <div class="disc-card">
                     <div class="disc-num">04</div>
-                    <div class="disc-title">Vision & Growth Goals</div>
-                    <div class="disc-question">What are the key commercial milestones, expansion timelines, and revenue targets for your upcoming tourism, dining, and eco-hospitality projects?</div>
+                    <div class="disc-title">Technology & Automation Integration</div>
+                    <div class="disc-question">Which internal operational workflows (guest inquiries, booking routing, marketing funnels) can be automated to reduce management overhead?</div>
                 </div>
             </div>
 
             <div class="disc-closing-banner">
-                Following this session, Tadbeer will deliver a tailored growth roadmap and customized strategy proposal for your review.
+                Following this discovery session, Tadbeer will deliver a comprehensive commercial proposal with clear timelines, ROI projections, and strategic scope.
             </div>
         </div>
 
         <div class="slide-footer">
-            <div>Tadbeer Transformation Trading &nbsp;|&nbsp; Strategic Discovery</div>
+            <div>Tadbeer Transformation Trading &nbsp;|&nbsp; Executive Discovery</div>
             <div class="slide-number">Slide 06 of 07</div>
         </div>
     </div>
@@ -1103,8 +1196,8 @@
         </div>
 
         <div class="back-hero">
-            <h1 class="back-title">Let's Build Your Next Stage of Growth Together.</h1>
-            <p class="back-subtitle">We will follow up with a tailored transformation roadmap and sample strategy review customized for your expansion goals.</p>
+            <h1 class="back-title">Partnering for Commercial Growth<br><span style="color: var(--secondary);">Across Oman & the GCC.</span></h1>
+            <p class="back-subtitle">We look forward to collaborating with Jabal Shams Domes to build scalable marketing funnels, elevate brand prestige, and maximize direct booking revenue.</p>
 
             <div class="contact-grid">
                 <div class="contact-col">
@@ -1120,15 +1213,15 @@
                     <p>www.tadbeertt.com</p>
                 </div>
                 <div class="contact-col">
-                    <h4>Core Services</h4>
-                    <p>Strategy, Tech, AI & HR</p>
+                    <h4>Core Scope</h4>
+                    <p>Strategy, Marketing & Tech</p>
                 </div>
             </div>
         </div>
 
         <div class="back-bottom">
             <div>Tadbeer Transformation Trading © 2026</div>
-            <div style="color: var(--secondary); font-weight: 700;">Transforming Strategy into Lasting Performance</div>
+            <div style="color: var(--secondary); font-weight: 700;">Executive B2B Growth Proposal</div>
         </div>
     </div>
 
