@@ -20,22 +20,26 @@
       margin: 0;
     }
 
-    body {
+    html, body {
       width: 1080px;
       height: 1920px;
       background-color: #FAF9F6;
       color: #1C1B17;
       position: relative;
       overflow: hidden;
+    }
+
+    body {
       display: flex;
       flex-direction: column;
     }
 
-    /* Top Accent Line */
+    /* Top Accent Bar */
     .top-bar {
       width: 100%;
-      height: 14px;
+      height: 16px;
       background: linear-gradient(90deg, #184F5B 0%, #CAA94C 50%, #184F5B 100%);
+      flex-shrink: 0;
     }
 
     /* Ambient Background Glows */
@@ -43,18 +47,18 @@
       position: absolute;
       top: -100px;
       right: -100px;
-      width: 800px;
-      height: 800px;
+      width: 850px;
+      height: 850px;
       background: radial-gradient(circle, rgba(202,169,76,0.18) 0%, rgba(250,249,246,0) 70%);
       pointer-events: none;
     }
 
     .bg-glow-2 {
       position: absolute;
-      bottom: -150px;
-      left: -150px;
-      width: 900px;
-      height: 900px;
+      bottom: -100px;
+      left: -100px;
+      width: 950px;
+      height: 950px;
       background: radial-gradient(circle, rgba(24,79,91,0.12) 0%, rgba(250,249,246,0) 70%);
       pointer-events: none;
     }
@@ -78,7 +82,8 @@
       display: flex;
       flex-direction: column;
       height: 100%;
-      padding: 70px 65px 60px 65px;
+      padding: 60px 65px 55px 65px;
+      justify-content: space-between;
     }
 
     /* Header Section */
@@ -86,49 +91,21 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 50px;
+      margin-bottom: 35px;
     }
 
-    .brand-logo {
-      display: flex;
-      align-items: center;
-      gap: 18px;
-    }
-
-    .brand-logo img {
-      height: 75px;
+    .brand-logo-img {
+      height: 95px;
       width: auto;
       object-fit: contain;
-    }
-
-    .brand-text {
-      display: flex;
-      flex-direction: column;
-    }
-
-    .brand-title {
-      font-size: 32px;
-      font-weight: 900;
-      color: #184F5B;
-      letter-spacing: -0.5px;
-      line-height: 1.1;
-    }
-
-    .brand-subtitle {
-      font-size: 16px;
-      color: #CAA94C;
-      font-weight: 700;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      margin-top: 4px;
     }
 
     .invitation-badge {
       background: linear-gradient(135deg, #184F5B 0%, #0F353D 100%);
       color: #FFFFFF;
-      padding: 14px 32px;
+      padding: 16px 36px;
       border-radius: 50px;
-      font-size: 18px;
+      font-size: 19px;
       font-weight: 800;
       letter-spacing: 1.5px;
       text-transform: uppercase;
@@ -140,8 +117,8 @@
     }
 
     .invitation-badge .dot {
-      width: 10px;
-      height: 10px;
+      width: 11px;
+      height: 11px;
       border-radius: 50%;
       background-color: #CAA94C;
       box-shadow: 0 0 10px #CAA94C;
@@ -149,55 +126,79 @@
 
     /* Hero Headline */
     .hero-section {
-      margin-bottom: 50px;
+      margin-bottom: 30px;
     }
 
     .tag-line {
-      font-size: 19px;
+      font-size: 20px;
       color: #CAA94C;
       font-weight: 800;
       text-transform: uppercase;
       letter-spacing: 3px;
-      margin-bottom: 14px;
+      margin-bottom: 12px;
       display: flex;
       align-items: center;
       gap: 10px;
     }
 
     .hero-title {
-      font-size: 56px;
+      font-size: 58px;
       font-weight: 900;
       color: #184F5B;
-      line-height: 1.15;
+      line-height: 1.12;
       letter-spacing: -1px;
-      margin-bottom: 20px;
+      margin-bottom: 18px;
     }
 
     .hero-desc {
-      font-size: 25px;
+      font-size: 24px;
       color: #4A4A48;
       line-height: 1.55;
       font-weight: 400;
-      max-width: 900px;
+    }
+
+    /* Pillars Grid */
+    .pillars-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 35px;
+    }
+
+    .pillar-pill {
+      background: #FFFFFF;
+      padding: 16px 22px;
+      border-radius: 16px;
+      font-size: 19px;
+      font-weight: 700;
+      color: #184F5B;
+      border: 1px solid rgba(24,79,91,0.1);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.02);
+    }
+
+    .pillar-icon {
+      font-size: 22px;
     }
 
     /* Cards Stack */
     .cards-stack {
-      flex: 1;
       display: flex;
       flex-direction: column;
-      gap: 28px;
-      margin-bottom: 40px;
+      gap: 26px;
+      margin-bottom: 30px;
     }
 
     /* Individual Card Style */
     .qr-card {
       background: #FFFFFF;
-      border-radius: 26px;
-      padding: 30px 36px;
+      border-radius: 28px;
+      padding: 32px 38px;
       display: flex;
       align-items: center;
-      gap: 32px;
+      gap: 34px;
       border: 1px solid rgba(24,79,91,0.1);
       box-shadow: 0 10px 30px rgba(0,0,0,0.04);
       position: relative;
@@ -207,32 +208,32 @@
     .qr-card.featured {
       background: linear-gradient(135deg, #184F5B 0%, #0F353D 100%);
       color: #FFFFFF;
-      border: 2.5px solid #CAA94C;
-      box-shadow: 0 16px 36px rgba(24,79,91,0.25);
+      border: 3px solid #CAA94C;
+      box-shadow: 0 16px 38px rgba(24,79,91,0.28);
     }
 
     .qr-card.instagram {
-      border: 2px solid rgba(225,48,108,0.25);
-      background: linear-gradient(135deg, #FFFFFF 0%, #FFF5F7 100%);
+      border: 2.5px solid rgba(225,48,108,0.3);
+      background: linear-gradient(135deg, #FFFFFF 0%, #FFF5F8 100%);
     }
 
     .qr-card.linkedin {
-      border: 2px solid rgba(10,102,194,0.25);
-      background: linear-gradient(135deg, #FFFFFF 0%, #F4F8FC 100%);
+      border: 2.5px solid rgba(10,102,194,0.3);
+      background: linear-gradient(135deg, #FFFFFF 0%, #F3F7FC 100%);
     }
 
     /* QR Code Container */
     .qr-img-wrapper {
-      width: 170px;
-      height: 170px;
+      width: 180px;
+      height: 180px;
       background: #FFFFFF;
-      border-radius: 20px;
+      border-radius: 22px;
       padding: 10px;
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.08);
-      border: 2px solid rgba(202,169,76,0.3);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+      border: 2px solid rgba(202,169,76,0.35);
       flex-shrink: 0;
     }
 
@@ -250,7 +251,7 @@
     }
 
     .card-category {
-      font-size: 15px;
+      font-size: 16px;
       font-weight: 800;
       text-transform: uppercase;
       letter-spacing: 2px;
@@ -265,10 +266,10 @@
     .linkedin .card-category { color: #0A66C2; }
 
     .card-title {
-      font-size: 30px;
+      font-size: 31px;
       font-weight: 800;
       line-height: 1.25;
-      margin-bottom: 6px;
+      margin-bottom: 8px;
     }
 
     .featured .card-title { color: #FFFFFF; }
@@ -276,7 +277,7 @@
     .linkedin .card-title { color: #184F5B; }
 
     .card-url {
-      font-size: 21px;
+      font-size: 22px;
       font-weight: 700;
       margin-bottom: 16px;
     }
@@ -289,10 +290,10 @@
       display: inline-flex;
       align-items: center;
       gap: 10px;
-      padding: 10px 22px;
+      padding: 12px 26px;
       border-radius: 50px;
-      font-size: 16px;
-      font-weight: 700;
+      font-size: 17px;
+      font-weight: 800;
       width: fit-content;
     }
 
@@ -302,22 +303,47 @@
     }
 
     .instagram .action-pill {
-      background: rgba(225,48,108,0.1);
+      background: rgba(225,48,108,0.12);
       color: #E1306C;
     }
 
     .linkedin .action-pill {
-      background: rgba(10,102,194,0.1);
+      background: rgba(10,102,194,0.12);
       color: #0A66C2;
+    }
+
+    /* Difference Banner Section */
+    .diff-banner {
+      background: rgba(24,79,91,0.05);
+      border-left: 6px solid #CAA94C;
+      padding: 24px 30px;
+      border-radius: 18px;
+      margin-bottom: 30px;
+    }
+
+    .diff-title {
+      font-size: 18px;
+      font-weight: 800;
+      color: #184F5B;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      margin-bottom: 6px;
+    }
+
+    .diff-desc {
+      font-size: 21px;
+      color: #4A4A48;
+      line-height: 1.5;
     }
 
     /* Footer Section */
     .footer {
       border-top: 2px solid rgba(24,79,91,0.12);
-      padding-top: 30px;
+      padding-top: 28px;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      flex-shrink: 0;
     }
 
     .footer-left {
@@ -326,13 +352,13 @@
     }
 
     .footer-company {
-      font-size: 22px;
+      font-size: 24px;
       font-weight: 800;
       color: #184F5B;
     }
 
     .footer-tagline {
-      font-size: 17px;
+      font-size: 18px;
       color: #6A6A68;
       margin-top: 4px;
     }
@@ -342,14 +368,14 @@
     }
 
     .footer-hashtag {
-      font-size: 20px;
+      font-size: 22px;
       font-weight: 800;
       color: #CAA94C;
       letter-spacing: 1px;
     }
 
     .footer-domain {
-      font-size: 17px;
+      font-size: 18px;
       color: #6A6A68;
       margin-top: 4px;
     }
@@ -367,32 +393,44 @@
 
   <div class="story-container">
     
-    <!-- 1. Header -->
-    <div class="header">
-      <div class="brand-logo">
-        <img src="../oryx.png.png" alt="Tadbeer Logo" />
-        <div class="brand-text">
-          <div class="brand-title">Tadbeer</div>
-          <div class="brand-subtitle">Transformations</div>
+    <div>
+      <!-- 1. Header -->
+      <div class="header">
+        <img src="../logo.png" alt="Tadbeer Transformations Logo" class="brand-logo-img" />
+
+        <div class="invitation-badge">
+          <span class="dot"></span>
+          Official Invitation
         </div>
       </div>
 
-      <div class="invitation-badge">
-        <span class="dot"></span>
-        Official Invitation
+      <!-- 2. Hero Section -->
+      <div class="hero-section">
+        <div class="tag-line">✦ CONNECT, SCALE & TRANSFORM</div>
+        <h1 class="hero-title">Scan To Connect With Tadbeer</h1>
+        <p class="hero-desc">
+          Explore enterprise software solutions, stay updated with operating insights across Oman, and apply for open career opportunities.
+        </p>
+      </div>
+
+      <!-- 3. Core Practice Pillars -->
+      <div class="pillars-row">
+        <div class="pillar-pill">
+          <span class="pillar-icon">💻</span> Enterprise ERP & Software
+        </div>
+        <div class="pillar-pill">
+          <span class="pillar-icon">🤖</span> AI & Workflow Automation
+        </div>
+        <div class="pillar-pill">
+          <span class="pillar-icon">📈</span> Digital Marketing & Growth
+        </div>
+        <div class="pillar-pill">
+          <span class="pillar-icon">👥</span> Human Capital & Hiring
+        </div>
       </div>
     </div>
 
-    <!-- 2. Hero Section -->
-    <div class="hero-section">
-      <div class="tag-line">✦ Connect & Grow</div>
-      <h1 class="hero-title">Scan To Connect With Tadbeer</h1>
-      <p class="hero-desc">
-        Explore enterprise digital solutions, stay updated with business insights in Oman, and apply for open career opportunities.
-      </p>
-    </div>
-
-    <!-- 3. Cards Stack -->
+    <!-- 4. Cards Stack -->
     <div class="cards-stack">
 
       <!-- Card 1: Website & Careers (Featured) -->
@@ -402,7 +440,7 @@
         </div>
         <div class="card-info">
           <div class="card-category">🌐 Official Website & Careers</div>
-          <div class="card-title">Explore Open Roles & Services</div>
+          <div class="card-title">Apply Online & Discover Services</div>
           <div class="card-url">tadbeertt.com/careers</div>
           <div class="action-pill">
             Scan to Visit Website & Apply →
@@ -416,8 +454,8 @@
           <img src="qr_instagram.png" alt="Instagram QR Code" />
         </div>
         <div class="card-info">
-          <div class="card-category">📸 Instagram Page</div>
-          <div class="card-title">Follow Our Daily Culture & Updates</div>
+          <div class="card-category">📸 Instagram Official</div>
+          <div class="card-title">Follow Our Projects & Team Culture</div>
           <div class="card-url">@tadbeertt</div>
           <div class="action-pill">
             Scan to Follow on Instagram →
@@ -431,8 +469,8 @@
           <img src="qr_linkedin.png" alt="LinkedIn QR Code" />
         </div>
         <div class="card-info">
-          <div class="card-category">💼 LinkedIn Page</div>
-          <div class="card-title">Join Our Professional Network</div>
+          <div class="card-category">💼 LinkedIn Network</div>
+          <div class="card-title">Connect With Our Leadership</div>
           <div class="card-url">Tadbeer Transformations</div>
           <div class="action-pill">
             Scan to Connect on LinkedIn →
@@ -442,15 +480,25 @@
 
     </div>
 
-    <!-- 4. Footer -->
-    <div class="footer">
-      <div class="footer-left">
-        <div class="footer-company">Tadbeer Transformations</div>
-        <div class="footer-tagline">System & Scale Partner | Muscat, Sultanate of Oman</div>
+    <div>
+      <!-- 5. Difference Banner -->
+      <div class="diff-banner">
+        <div class="diff-title">The Tadbeer Standard</div>
+        <div class="diff-desc">
+          We don't close engagements when strategy is delivered. We close when real results are embedded into operations across Oman.
+        </div>
       </div>
-      <div class="footer-right">
-        <div class="footer-hashtag">#TADBEER_TRANSFORMATIONS</div>
-        <div class="footer-domain">www.tadbeertt.com</div>
+
+      <!-- 6. Footer -->
+      <div class="footer">
+        <div class="footer-left">
+          <div class="footer-company">Tadbeer Transformations</div>
+          <div class="footer-tagline">System & Scale Partner | Muscat, Sultanate of Oman</div>
+        </div>
+        <div class="footer-right">
+          <div class="footer-hashtag">#TADBEER_TRANSFORMATIONS</div>
+          <div class="footer-domain">www.tadbeertt.com</div>
+        </div>
       </div>
     </div>
 
