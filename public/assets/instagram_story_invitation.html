@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tadbeer Transformations - Instagram Story Invitation</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+    
+    @page {
+      size: 1080px 1920px;
+      margin: 0;
+    }
+
+    body {
+      width: 1080px;
+      height: 1920px;
+      background-color: #FAF9F6;
+      color: #1C1B17;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Top Accent Line */
+    .top-bar {
+      width: 100%;
+      height: 14px;
+      background: linear-gradient(90deg, #184F5B 0%, #CAA94C 50%, #184F5B 100%);
+    }
+
+    /* Ambient Background Glows */
+    .bg-glow-1 {
+      position: absolute;
+      top: -100px;
+      right: -100px;
+      width: 800px;
+      height: 800px;
+      background: radial-gradient(circle, rgba(202,169,76,0.18) 0%, rgba(250,249,246,0) 70%);
+      pointer-events: none;
+    }
+
+    .bg-glow-2 {
+      position: absolute;
+      bottom: -150px;
+      left: -150px;
+      width: 900px;
+      height: 900px;
+      background: radial-gradient(circle, rgba(24,79,91,0.12) 0%, rgba(250,249,246,0) 70%);
+      pointer-events: none;
+    }
+
+    /* Precision Grid Overlay */
+    .grid-overlay {
+      position: absolute;
+      inset: 0;
+      background-image: 
+        linear-gradient(rgba(24,79,91,0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(24,79,91,0.025) 1px, transparent 1px);
+      background-size: 45px 45px;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    /* Content Layout Container */
+    .story-container {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      padding: 70px 65px 60px 65px;
+    }
+
+    /* Header Section */
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 50px;
+    }
+
+    .brand-logo {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+
+    .brand-logo img {
+      height: 75px;
+      width: auto;
+      object-fit: contain;
+    }
+
+    .brand-text {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .brand-title {
+      font-size: 32px;
+      font-weight: 900;
+      color: #184F5B;
+      letter-spacing: -0.5px;
+      line-height: 1.1;
+    }
+
+    .brand-subtitle {
+      font-size: 16px;
+      color: #CAA94C;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-top: 4px;
+    }
+
+    .invitation-badge {
+      background: linear-gradient(135deg, #184F5B 0%, #0F353D 100%);
+      color: #FFFFFF;
+      padding: 14px 32px;
+      border-radius: 50px;
+      font-size: 18px;
+      font-weight: 800;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      box-shadow: 0 10px 24px rgba(24,79,91,0.2);
+      border: 1.5px solid rgba(202,169,76,0.4);
+    }
+
+    .invitation-badge .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background-color: #CAA94C;
+      box-shadow: 0 0 10px #CAA94C;
+    }
+
+    /* Hero Headline */
+    .hero-section {
+      margin-bottom: 50px;
+    }
+
+    .tag-line {
+      font-size: 19px;
+      color: #CAA94C;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .hero-title {
+      font-size: 56px;
+      font-weight: 900;
+      color: #184F5B;
+      line-height: 1.15;
+      letter-spacing: -1px;
+      margin-bottom: 20px;
+    }
+
+    .hero-desc {
+      font-size: 25px;
+      color: #4A4A48;
+      line-height: 1.55;
+      font-weight: 400;
+      max-width: 900px;
+    }
+
+    /* Cards Stack */
+    .cards-stack {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+      margin-bottom: 40px;
+    }
+
+    /* Individual Card Style */
+    .qr-card {
+      background: #FFFFFF;
+      border-radius: 26px;
+      padding: 30px 36px;
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      border: 1px solid rgba(24,79,91,0.1);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.04);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .qr-card.featured {
+      background: linear-gradient(135deg, #184F5B 0%, #0F353D 100%);
+      color: #FFFFFF;
+      border: 2.5px solid #CAA94C;
+      box-shadow: 0 16px 36px rgba(24,79,91,0.25);
+    }
+
+    .qr-card.instagram {
+      border: 2px solid rgba(225,48,108,0.25);
+      background: linear-gradient(135deg, #FFFFFF 0%, #FFF5F7 100%);
+    }
+
+    .qr-card.linkedin {
+      border: 2px solid rgba(10,102,194,0.25);
+      background: linear-gradient(135deg, #FFFFFF 0%, #F4F8FC 100%);
+    }
+
+    /* QR Code Container */
+    .qr-img-wrapper {
+      width: 170px;
+      height: 170px;
+      background: #FFFFFF;
+      border-radius: 20px;
+      padding: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+      border: 2px solid rgba(202,169,76,0.3);
+      flex-shrink: 0;
+    }
+
+    .qr-img-wrapper img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    /* Card Details */
+    .card-info {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .card-category {
+      font-size: 15px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .featured .card-category { color: #CAA94C; }
+    .instagram .card-category { color: #E1306C; }
+    .linkedin .card-category { color: #0A66C2; }
+
+    .card-title {
+      font-size: 30px;
+      font-weight: 800;
+      line-height: 1.25;
+      margin-bottom: 6px;
+    }
+
+    .featured .card-title { color: #FFFFFF; }
+    .instagram .card-title { color: #184F5B; }
+    .linkedin .card-title { color: #184F5B; }
+
+    .card-url {
+      font-size: 21px;
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+
+    .featured .card-url { color: #CAA94C; }
+    .instagram .card-url { color: #E1306C; }
+    .linkedin .card-url { color: #0A66C2; }
+
+    .action-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 22px;
+      border-radius: 50px;
+      font-size: 16px;
+      font-weight: 700;
+      width: fit-content;
+    }
+
+    .featured .action-pill {
+      background: #CAA94C;
+      color: #184F5B;
+    }
+
+    .instagram .action-pill {
+      background: rgba(225,48,108,0.1);
+      color: #E1306C;
+    }
+
+    .linkedin .action-pill {
+      background: rgba(10,102,194,0.1);
+      color: #0A66C2;
+    }
+
+    /* Footer Section */
+    .footer {
+      border-top: 2px solid rgba(24,79,91,0.12);
+      padding-top: 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .footer-left {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .footer-company {
+      font-size: 22px;
+      font-weight: 800;
+      color: #184F5B;
+    }
+
+    .footer-tagline {
+      font-size: 17px;
+      color: #6A6A68;
+      margin-top: 4px;
+    }
+
+    .footer-right {
+      text-align: right;
+    }
+
+    .footer-hashtag {
+      font-size: 20px;
+      font-weight: 800;
+      color: #CAA94C;
+      letter-spacing: 1px;
+    }
+
+    .footer-domain {
+      font-size: 17px;
+      color: #6A6A68;
+      margin-top: 4px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Accent Bar -->
+  <div class="top-bar"></div>
+
+  <!-- Background Lights -->
+  <div class="bg-glow-1"></div>
+  <div class="bg-glow-2"></div>
+  <div class="grid-overlay"></div>
+
+  <div class="story-container">
+    
+    <!-- 1. Header -->
+    <div class="header">
+      <div class="brand-logo">
+        <img src="../oryx.png.png" alt="Tadbeer Logo" />
+        <div class="brand-text">
+          <div class="brand-title">Tadbeer</div>
+          <div class="brand-subtitle">Transformations</div>
+        </div>
+      </div>
+
+      <div class="invitation-badge">
+        <span class="dot"></span>
+        Official Invitation
+      </div>
+    </div>
+
+    <!-- 2. Hero Section -->
+    <div class="hero-section">
+      <div class="tag-line">✦ Connect & Grow</div>
+      <h1 class="hero-title">Scan To Connect With Tadbeer</h1>
+      <p class="hero-desc">
+        Explore enterprise digital solutions, stay updated with business insights in Oman, and apply for open career opportunities.
+      </p>
+    </div>
+
+    <!-- 3. Cards Stack -->
+    <div class="cards-stack">
+
+      <!-- Card 1: Website & Careers (Featured) -->
+      <div class="qr-card featured">
+        <div class="qr-img-wrapper">
+          <img src="qr_website.png" alt="Website QR Code" />
+        </div>
+        <div class="card-info">
+          <div class="card-category">🌐 Official Website & Careers</div>
+          <div class="card-title">Explore Open Roles & Services</div>
+          <div class="card-url">tadbeertt.com/careers</div>
+          <div class="action-pill">
+            Scan to Visit Website & Apply →
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 2: Instagram -->
+      <div class="qr-card instagram">
+        <div class="qr-img-wrapper">
+          <img src="qr_instagram.png" alt="Instagram QR Code" />
+        </div>
+        <div class="card-info">
+          <div class="card-category">📸 Instagram Page</div>
+          <div class="card-title">Follow Our Daily Culture & Updates</div>
+          <div class="card-url">@tadbeertt</div>
+          <div class="action-pill">
+            Scan to Follow on Instagram →
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 3: LinkedIn -->
+      <div class="qr-card linkedin">
+        <div class="qr-img-wrapper">
+          <img src="qr_linkedin.png" alt="LinkedIn QR Code" />
+        </div>
+        <div class="card-info">
+          <div class="card-category">💼 LinkedIn Page</div>
+          <div class="card-title">Join Our Professional Network</div>
+          <div class="card-url">Tadbeer Transformations</div>
+          <div class="action-pill">
+            Scan to Connect on LinkedIn →
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- 4. Footer -->
+    <div class="footer">
+      <div class="footer-left">
+        <div class="footer-company">Tadbeer Transformations</div>
+        <div class="footer-tagline">System & Scale Partner | Muscat, Sultanate of Oman</div>
+      </div>
+      <div class="footer-right">
+        <div class="footer-hashtag">#TADBEER_TRANSFORMATIONS</div>
+        <div class="footer-domain">www.tadbeertt.com</div>
+      </div>
+    </div>
+
+  </div>
+
+</body>
+</html>
