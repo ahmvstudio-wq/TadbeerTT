@@ -10,7 +10,7 @@ SECONDARY = (202, 169, 76) # #CAA94C
 BG_COLOR = (250, 249, 246) # #FAF9F6
 
 links = [
-    {"url": "https://tadbeertt.com/careers", "file": "public/assets/qr_website.png"},
+    {"url": "https://tadbeertt.com", "file": "public/assets/qr_website.png"},
     {"url": "https://www.instagram.com/tadbeertt/", "file": "public/assets/qr_instagram.png"},
     {"url": "https://www.linkedin.com/company/tadbeertransformations", "file": "public/assets/qr_linkedin.png"}
 ]
