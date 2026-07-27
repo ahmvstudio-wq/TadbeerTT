@@ -5,6 +5,7 @@ import { Share2, CheckCircle2, X } from 'lucide-react';
 import { useLocation } from 'react-router-dom';
 import * as htmlToImage from 'html-to-image';
 import JobShareCard from './JobShareCard';
+import { parseJobDescription } from '../utils/jobFormatter';
 
 const GOOGLE_FORM_URL = 'https://docs.google.com/forms/d/e/YOUR_FORM_ID/viewform';
 
@@ -276,12 +277,30 @@ const Careers = () => {
                         transition={{ duration: 0.3 }}
                         style={{ overflow: 'hidden' }}
                       >
-                        <p className="job-description">{job.description}</p>
+                        {(() => {
+                          const { overview, bullets: descBullets } = parseJobDescription(job.description);
+                          return (
+                            <>
+                              {overview && <p className="job-description" style={{ textAlign: 'justify' }}>{overview}</p>}
+                              
+                              {descBullets && descBullets.length > 0 && (
+                                <div style={{ marginBottom: '1.25rem' }}>
+                                  <h4 style={{ fontSize: '0.9rem', fontWeight: '600', color: 'var(--primary)', marginBottom: '0.5rem' }}>Key Responsibilities:</h4>
+                                  <ul className="job-requirements">
+                                    {descBullets.map((bullet, i) => (
+                                      <li key={i}>{bullet}</li>
+                                    ))}
+                                  </ul>
+                                </div>
+                              )}
+                            </>
+                          );
+                        })()}
                         
                         <h4 style={{ fontSize: '0.9rem', fontWeight: '600', color: 'var(--primary)', marginBottom: '0.5rem' }}>Requirements:</h4>
                         <ul className="job-requirements">
                           {job.requirements.map((req, i) => (
-                            <li key={i}>{req}</li>
+                            <li key={i}>{req.replace(/\*\*(.*?)\*\*/g, '$1')}</li>
                           ))}
                         </ul>
 
