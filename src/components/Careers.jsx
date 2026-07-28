@@ -121,14 +121,18 @@ const Careers = () => {
     setShareTargetJob(job);
     setGeneratedImage(null);
     
-    // Wait for the hidden card to render and load fonts/images
+    // Wait for card element to mount in DOM
     setTimeout(async () => {
       try {
-        if (!shareCardRef.current) throw new Error("Card ref not found");
+        if (!shareCardRef.current) throw new Error("Card element not ready");
         
         const dataUrl = await htmlToImage.toPng(shareCardRef.current, {
           pixelRatio: 2,
-          backgroundColor: '#FAF9F6'
+          backgroundColor: '#FAF9F6',
+          cacheBust: true,
+          style: {
+            opacity: '1'
+          }
         });
         
         const blob = await (await fetch(dataUrl)).blob();
@@ -150,18 +154,20 @@ const Careers = () => {
           // Fallback: Show modal with the image
           setGeneratedImage({ url: dataUrl, blob: blob, shareUrl: shareUrl, jobTitle: job.title });
           setIsSharing(false);
-          // Keep shareTargetJob active for the modal to stay open
         }
       } catch (err) {
-        console.error('Error generating or sharing image', err);
-        // Ultimate fallback to just copy link
+        console.error('Error generating or sharing image:', err);
         const shareUrl = `${window.location.origin}${window.location.pathname}?jobId=${job.id}`;
-        navigator.clipboard.writeText(shareUrl);
-        alert(`Link copied to clipboard! (Image generation failed: ${err.message})`);
+        try {
+          await navigator.clipboard.writeText(shareUrl);
+          alert(`Job post link copied to clipboard!`);
+        } catch (clipErr) {
+          alert(`Link: ${shareUrl}`);
+        }
         setIsSharing(false);
         setShareTargetJob(null);
       }
-    }, 400); // Increased timeout to 400ms to allow Logo image to load
+    }, 600);
   };
 
   const copyImageToClipboard = async () => {
@@ -408,7 +414,7 @@ const Careers = () => {
 
       {/* Hidden Share Card */}
       {shareTargetJob && !generatedImage && (
-        <div style={{ position: 'fixed', top: '-2000px', left: '-2000px', pointerEvents: 'none' }}>
+        <div style={{ position: 'absolute', left: '-9999px', top: 0, opacity: 1, pointerEvents: 'none' }}>
           <JobShareCard job={shareTargetJob} ref={shareCardRef} />
         </div>
       )}
