@@ -141,29 +141,40 @@ const Careers = () => {
         const shareUrl = `${window.location.origin}${window.location.pathname}?jobId=${job.id}`;
         const file = new File([blob], `tadbeer-job-${job.title.replace(/\s+/g, '-').toLowerCase()}.png`, { type: 'image/png' });
         
+        // Check if Web Share API with files is supported (primarily mobile)
+        let sharedSuccessfully = false;
         if (navigator.share && navigator.canShare && navigator.canShare({ files: [file] })) {
-          await navigator.share({
-            title: `${job.title} at Tadbeer`,
-            text: `Check out this open position for ${job.title} at Tadbeer.\n\nApply here:`,
-            url: shareUrl,
-            files: [file]
-          });
-          setIsSharing(false);
-          setShareTargetJob(null);
-        } else {
-          // Fallback: Show modal with the image
+          try {
+            await navigator.share({
+              title: `${job.title} at Tadbeer`,
+              text: `Check out this open position for ${job.title} at Tadbeer.\n\nApply here:`,
+              url: shareUrl,
+              files: [file]
+            });
+            sharedSuccessfully = true;
+            setIsSharing(false);
+            setShareTargetJob(null);
+          } catch (shareErr) {
+            // User cancelled share dialog or OS refused share
+            if (shareErr.name === 'AbortError') {
+              setIsSharing(false);
+              setShareTargetJob(null);
+              return;
+            }
+            // Fall back to modal preview if native share failed
+          }
+        }
+
+        // If native Web Share wasn't used or failed, display the image preview modal
+        if (!sharedSuccessfully) {
           setGeneratedImage({ url: dataUrl, blob: blob, shareUrl: shareUrl, jobTitle: job.title });
           setIsSharing(false);
         }
       } catch (err) {
-        console.error('Error generating or sharing image:', err);
+        console.error('Error generating image:', err);
         const shareUrl = `${window.location.origin}${window.location.pathname}?jobId=${job.id}`;
-        try {
-          await navigator.clipboard.writeText(shareUrl);
-          alert(`Job post link copied to clipboard!`);
-        } catch (clipErr) {
-          alert(`Link: ${shareUrl}`);
-        }
+        navigator.clipboard.writeText(shareUrl);
+        alert(`Link copied to clipboard!`);
         setIsSharing(false);
         setShareTargetJob(null);
       }
