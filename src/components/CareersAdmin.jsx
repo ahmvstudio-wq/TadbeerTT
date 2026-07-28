@@ -1193,6 +1193,9 @@ const CareersAdmin = () => {
                       <th style={{ padding: '0.9rem 1rem' }}>Email</th>
                       <th style={{ padding: '0.9rem 1rem', whiteSpace: 'nowrap' }}>Phone</th>
                       <th style={{ padding: '0.9rem 1rem' }}>Location</th>
+                      <th style={{ padding: '0.9rem 1rem', whiteSpace: 'nowrap' }}>Experience</th>
+                      <th style={{ padding: '0.9rem 1rem', whiteSpace: 'nowrap' }}>Resume / CV</th>
+                      <th style={{ padding: '0.9rem 1rem', whiteSpace: 'nowrap' }}>LinkedIn</th>
                       <th style={{ padding: '0.9rem 1rem' }}>Cover Note</th>
                       <th style={{ padding: '0.9rem 1rem', textAlign: 'center', whiteSpace: 'nowrap' }}>Actions</th>
                     </tr>
@@ -1203,6 +1206,24 @@ const CareersAdmin = () => {
                         ? applicant.resource.replace(/^Job Application:\s*/i, '').trim()
                         : 'General Application';
                       const appliedDate = applicant.date ? new Date(applicant.date).toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' }) : '—';
+
+                      // Parse location and experience from company field ("Muscat | 3 Years Exp")
+                      let parsedLocation = '—';
+                      let parsedExperience = '—';
+                      if (applicant.company) {
+                        if (applicant.company.includes('|')) {
+                          const parts = applicant.company.split('|');
+                          parsedLocation = parts[0]?.trim() || '—';
+                          parsedExperience = parts[1]?.trim() || '—';
+                        } else {
+                          parsedLocation = applicant.company;
+                        }
+                      }
+
+                      // Resume/CV link stored in `revenue`, LinkedIn stored in `industry`
+                      const resumeLink = applicant.revenue || '';
+                      const linkedinProfile = applicant.industry && applicant.industry !== 'Not provided' ? applicant.industry : '';
+
                       return (
                         <tr
                           key={applicant.id || idx}
@@ -1220,7 +1241,7 @@ const CareersAdmin = () => {
                               {jobTitle}
                             </span>
                           </td>
-                          <td style={{ padding: '0.9rem 1rem', fontWeight: '700', color: 'var(--primary)' }}>
+                          <td style={{ padding: '0.9rem 1rem', fontWeight: '700', color: 'var(--primary)', whiteSpace: 'nowrap' }}>
                             {applicant.name || '—'}
                           </td>
                           <td style={{ padding: '0.9rem 1rem' }}>
@@ -1228,7 +1249,7 @@ const CareersAdmin = () => {
                               <a href={`mailto:${applicant.email}`} style={{ color: 'var(--secondary)', fontWeight: '600', textDecoration: 'underline' }}>
                                 {applicant.email}
                               </a>
-                            ) : '—'}
+                            ) : <span style={{ color: 'var(--text-muted)', fontStyle: 'italic' }}>—</span>}
                           </td>
                           <td style={{ padding: '0.9rem 1rem', whiteSpace: 'nowrap' }}>
                             {applicant.phone ? (
@@ -1237,12 +1258,47 @@ const CareersAdmin = () => {
                               </a>
                             ) : <span style={{ color: 'var(--text-muted)', fontStyle: 'italic' }}>N/A</span>}
                           </td>
-                          <td style={{ padding: '0.9rem 1rem' }}>
-                            {applicant.company || <span style={{ color: 'var(--text-muted)', fontStyle: 'italic' }}>N/A</span>}
+                          <td style={{ padding: '0.9rem 1rem', whiteSpace: 'nowrap' }}>
+                            {parsedLocation !== '—'
+                              ? <span>📍 {parsedLocation}</span>
+                              : <span style={{ color: 'var(--text-muted)', fontStyle: 'italic' }}>N/A</span>}
                           </td>
-                          <td style={{ padding: '0.9rem 1rem', maxWidth: '260px', wordBreak: 'break-word', fontSize: '0.83rem', color: '#4A4A48', lineHeight: '1.45' }}>
+                          <td style={{ padding: '0.9rem 1rem', whiteSpace: 'nowrap' }}>
+                            {parsedExperience !== '—'
+                              ? <span style={{ background: 'rgba(42,122,140,0.08)', color: '#2A7A8C', padding: '0.2rem 0.5rem', borderRadius: '6px', fontWeight: '700', fontSize: '0.82rem' }}>
+                                  {parsedExperience}
+                                </span>
+                              : <span style={{ color: 'var(--text-muted)', fontStyle: 'italic' }}>N/A</span>}
+                          </td>
+                          <td style={{ padding: '0.9rem 1rem' }}>
+                            {resumeLink ? (
+                              <a
+                                href={resumeLink}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                style={{ display: 'inline-flex', alignItems: 'center', gap: '0.35rem', background: 'rgba(24,79,91,0.07)', color: 'var(--primary)', padding: '0.3rem 0.7rem', borderRadius: '7px', fontWeight: '700', fontSize: '0.82rem', textDecoration: 'none', whiteSpace: 'nowrap' }}
+                                title={resumeLink}
+                              >
+                                <ExternalLink size={13} /> View CV
+                              </a>
+                            ) : <span style={{ color: 'var(--text-muted)', fontStyle: 'italic', fontSize: '0.83rem' }}>Not provided</span>}
+                          </td>
+                          <td style={{ padding: '0.9rem 1rem' }}>
+                            {linkedinProfile ? (
+                              <a
+                                href={linkedinProfile.startsWith('http') ? linkedinProfile : `https://linkedin.com/in/${linkedinProfile}`}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                style={{ display: 'inline-flex', alignItems: 'center', gap: '0.35rem', background: 'rgba(10,102,194,0.07)', color: '#0A66C2', padding: '0.3rem 0.7rem', borderRadius: '7px', fontWeight: '700', fontSize: '0.82rem', textDecoration: 'none', whiteSpace: 'nowrap' }}
+                                title={linkedinProfile}
+                              >
+                                <ExternalLink size={13} /> LinkedIn
+                              </a>
+                            ) : <span style={{ color: 'var(--text-muted)', fontStyle: 'italic', fontSize: '0.83rem' }}>N/A</span>}
+                          </td>
+                          <td style={{ padding: '0.9rem 1rem', maxWidth: '220px', wordBreak: 'break-word', fontSize: '0.83rem', color: '#4A4A48', lineHeight: '1.45' }}>
                             {applicant.bottleneck
-                              ? (applicant.bottleneck.length > 100 ? applicant.bottleneck.substring(0, 100) + '…' : applicant.bottleneck)
+                              ? (applicant.bottleneck.length > 90 ? applicant.bottleneck.substring(0, 88) + '…' : applicant.bottleneck)
                               : <span style={{ color: 'var(--text-muted)', fontStyle: 'italic' }}>No cover note</span>
                             }
                           </td>
@@ -1258,8 +1314,8 @@ const CareersAdmin = () => {
                                 </a>
                               )}
                               <button
-                                onClick={() => { navigator.clipboard.writeText(`Name: ${applicant.name}\nEmail: ${applicant.email}\nPhone: ${applicant.phone}\nJob: ${jobTitle}\nNote: ${applicant.bottleneck}`); triggerToast('Applicant details copied!'); }}
-                                title="Copy Details"
+                                onClick={() => { navigator.clipboard.writeText(`Name: ${applicant.name}\nEmail: ${applicant.email}\nPhone: ${applicant.phone}\nJob: ${jobTitle}\nLocation: ${parsedLocation}\nExperience: ${parsedExperience}\nResume: ${resumeLink}\nLinkedIn: ${linkedinProfile}\nNote: ${applicant.bottleneck}`); triggerToast('Applicant details copied!'); }}
+                                title="Copy All Details"
                                 style={{ background: 'rgba(202,169,76,0.1)', color: '#9a7d1a', border: 'none', borderRadius: '7px', padding: '0.35rem 0.5rem', cursor: 'pointer', display: 'inline-flex', alignItems: 'center' }}
                               >
                                 <Copy size={13} />
