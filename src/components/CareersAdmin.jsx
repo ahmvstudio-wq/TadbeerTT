@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { 
   X, CheckCircle, Plus, LogOut, Trash2, Edit, Download, Save, 
-  Briefcase, BookOpen, Users, Settings, Key, Phone, MessageSquare, ExternalLink
+  Briefcase, BookOpen, Users, Settings, Key, Phone, MessageSquare, ExternalLink,
+  UserCheck, Search, Filter, Calendar, FileText, Copy, RefreshCw
 } from 'lucide-react';
 import { 
   fetchJobs, createJob, updateJob, deleteJob,
@@ -36,7 +37,7 @@ const CareersAdmin = () => {
   const [authenticated, setAuthenticated] = useState(false);
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
-  const [activeTab, setActiveTab] = useState('jobs'); // 'jobs', 'resources', 'leads', 'settings'
+  const [activeTab, setActiveTab] = useState('jobs'); // 'jobs', 'applicants', 'resources', 'leads', 'settings'
   const [loading, setLoading] = useState(false);
   
   // Data stores
@@ -44,6 +45,15 @@ const CareersAdmin = () => {
   const [resources, setResources] = useState([]);
   const [leads, setLeads] = useState([]);
   const [settings, setSettings] = useState(defaultSettings);
+
+  // Job Applicants Filter States
+  const [applicantJobFilter, setApplicantJobFilter] = useState('ALL');
+  const [applicantDateFilter, setApplicantDateFilter] = useState('ALL');
+  const [applicantCustomStartDate, setApplicantCustomStartDate] = useState('');
+  const [applicantCustomEndDate, setApplicantCustomEndDate] = useState('');
+  const [applicantExpFilter, setApplicantExpFilter] = useState('ALL');
+  const [applicantSearchQuery, setApplicantSearchQuery] = useState('');
+  const [applicantSortOrder, setApplicantSortOrder] = useState('NEWEST');
 
   // Form states
   const [editingId, setEditingId] = useState(null);
@@ -114,9 +124,11 @@ const CareersAdmin = () => {
           const data = await fetchSettings();
           setSettings(data);
           setSettingsForm(data);
-        } else if (activeTab === 'leads') {
+        } else if (activeTab === 'leads' || activeTab === 'applicants') {
           const data = await fetchLeads(pwd);
           setLeads(data);
+          const jobsData = await fetchJobs();
+          setJobs(jobsData);
         }
       } catch (err) {
         console.error('Error fetching tab data:', err);
@@ -128,8 +140,8 @@ const CareersAdmin = () => {
     if (authenticated) {
       loadTabAllData();
 
-      // Enable Realtime Updates for Leads (Supabase server-side)
-      if (activeTab === 'leads') {
+      // Enable Realtime Updates for Leads and Job Applicants (Supabase server-side)
+      if (activeTab === 'leads' || activeTab === 'applicants') {
         const pwd = getPassword();
         subscription = supabase
           .channel('leads-realtime-admin')
@@ -438,6 +450,175 @@ const CareersAdmin = () => {
     document.body.removeChild(link);
   };
 
+  // JOB APPLICANTS HELPER FUNCTIONS
+  const allJobApplicants = leads.filter(lead => {
+    if (!lead.resource) return false;
+    return lead.resource.toLowerCase().includes('job application') ||
+           jobs.some(j => j.title && lead.resource.toLowerCase().includes(j.title.toLowerCase()));
+  });
+
+  const getAvailableJobTitles = () => {
+    const titles = new Set();
+    jobs.forEach(j => {
+      if (j.title) titles.add(j.title.trim());
+    });
+    leads.forEach(l => {
+      if (l.resource && l.resource.toLowerCase().includes('job application')) {
+        const parsed = l.resource.replace(/^Job Application:\s*/i, '').trim();
+        if (parsed) titles.add(parsed);
+      }
+    });
+    return Array.from(titles);
+  };
+
+  const getFilteredApplicants = () => {
+    let list = [...allJobApplicants];
+
+    // 1. Job Title Filter
+    if (applicantJobFilter !== 'ALL') {
+      list = list.filter(a => {
+        const title = a.resource ? a.resource.replace(/^Job Application:\s*/i, '').trim() : '';
+        return title.toLowerCase() === applicantJobFilter.toLowerCase();
+      });
+    }
+
+    // 2. Experience Level Filter
+    if (applicantExpFilter !== 'ALL') {
+      list = list.filter(a => {
+        return a.company && a.company.toLowerCase().includes(applicantExpFilter.toLowerCase());
+      });
+    }
+
+    // 3. Search Query Filter
+    if (applicantSearchQuery.trim()) {
+      const q = applicantSearchQuery.toLowerCase();
+      list = list.filter(a => 
+        (a.name && a.name.toLowerCase().includes(q)) ||
+        (a.email && a.email.toLowerCase().includes(q)) ||
+        (a.phone && a.phone.toLowerCase().includes(q)) ||
+        (a.company && a.company.toLowerCase().includes(q)) ||
+        (a.resource && a.resource.toLowerCase().includes(q)) ||
+        (a.bottleneck && a.bottleneck.toLowerCase().includes(q))
+      );
+    }
+
+    // 4. Date Range Filter
+    const now = new Date();
+    if (applicantDateFilter === 'TODAY') {
+      const todayStr = now.toISOString().split('T')[0];
+      list = list.filter(a => a.date && a.date.startsWith(todayStr));
+    } else if (applicantDateFilter === 'LAST_7_DAYS') {
+      const sevenDaysAgo = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
+      list = list.filter(a => new Date(a.date) >= sevenDaysAgo);
+    } else if (applicantDateFilter === 'LAST_30_DAYS') {
+      const thirtyDaysAgo = new Date(now.getTime() - 30 * 24 * 60 * 60 * 1000);
+      list = list.filter(a => new Date(a.date) >= thirtyDaysAgo);
+    } else if (applicantDateFilter === 'THIS_MONTH') {
+      const currentMonth = now.getMonth();
+      const currentYear = now.getFullYear();
+      list = list.filter(a => {
+        const d = new Date(a.date);
+        return d.getMonth() === currentMonth && d.getFullYear() === currentYear;
+      });
+    } else if (applicantDateFilter === 'CUSTOM') {
+      if (applicantCustomStartDate) {
+        const start = new Date(applicantCustomStartDate);
+        list = list.filter(a => new Date(a.date) >= start);
+      }
+      if (applicantCustomEndDate) {
+        const end = new Date(applicantCustomEndDate);
+        end.setHours(23, 59, 59, 999);
+        list = list.filter(a => new Date(a.date) <= end);
+      }
+    }
+
+    // 5. Sorting
+    list.sort((a, b) => {
+      if (applicantSortOrder === 'NEWEST') {
+        return new Date(b.date || 0) - new Date(a.date || 0);
+      } else if (applicantSortOrder === 'OLDEST') {
+        return new Date(a.date || 0) - new Date(b.date || 0);
+      } else if (applicantSortOrder === 'NAME_AZ') {
+        return (a.name || '').localeCompare(b.name || '');
+      } else if (applicantSortOrder === 'JOB_AZ') {
+        return (a.resource || '').localeCompare(b.resource || '');
+      }
+      return 0;
+    });
+
+    return list;
+  };
+
+  const handleExportApplicantsCSV = () => {
+    const filteredData = getFilteredApplicants();
+    if (filteredData.length === 0) {
+      triggerToast('No job applicants found matching current filters to export.');
+      return;
+    }
+
+    const headers = [
+      'Application Date',
+      'Job Title',
+      'Candidate Name',
+      'Email Address',
+      'Phone Number',
+      'Current Location',
+      'Years of Experience',
+      'Resume / CV Link',
+      'LinkedIn Profile',
+      'Cover Note / Response',
+      'Source URL'
+    ];
+
+    const escapeCsv = (str) => {
+      if (str === null || str === undefined) return '""';
+      const cleanStr = String(str).replace(/"/g, '""');
+      return `"${cleanStr}"`;
+    };
+
+    const rows = filteredData.map(item => {
+      let location = '';
+      let experience = '';
+      if (item.company && item.company.includes('|')) {
+        const parts = item.company.split('|');
+        location = parts[0]?.trim() || '';
+        experience = parts[1]?.trim() || '';
+      } else {
+        location = item.company || '';
+      }
+
+      const jobTitle = item.resource
+        ? item.resource.replace(/^Job Application:\s*/i, '').trim()
+        : 'General Application';
+
+      return [
+        escapeCsv(item.date?.split('T')[0] || item.date || ''),
+        escapeCsv(jobTitle),
+        escapeCsv(item.name || ''),
+        escapeCsv(item.email || ''),
+        escapeCsv(item.phone || ''),
+        escapeCsv(location),
+        escapeCsv(experience),
+        escapeCsv(item.revenue || ''),
+        escapeCsv(item.industry || ''),
+        escapeCsv(item.bottleneck || ''),
+        escapeCsv(item.source_url || '')
+      ].join(',');
+    });
+
+    const csvContent = 'data:text/csv;charset=utf-8,\uFEFF' + [headers.map(escapeCsv).join(','), ...rows].join('\r\n');
+    const encodedUri = encodeURI(csvContent);
+    const link = document.createElement('a');
+    link.setAttribute('href', encodedUri);
+    const filterLabel = applicantJobFilter !== 'ALL' ? applicantJobFilter.replace(/[^a-zA-Z0-9]/g, '_') : 'All_Jobs';
+    const filename = `Tadbeer_Job_Applicants_${filterLabel}_${new Date().toISOString().split('T')[0]}.csv`;
+    link.setAttribute('download', filename);
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    triggerToast(`Exported ${filteredData.length} job applicants to CSV!`);
+  };
+
   // Settings Actions
   const handleSettingsSubmit = async (e) => {
     e.preventDefault();
@@ -512,6 +693,7 @@ const CareersAdmin = () => {
       <div style={{ display: 'flex', borderBottom: '1px solid var(--border)', marginBottom: '2rem', gap: '0.5rem', overflowX: 'auto', paddingBottom: '0.5rem' }}>
         {[
           { id: 'jobs', label: '💼 Job Openings', count: jobs.length },
+          { id: 'applicants', label: '📋 Job Applicants', count: allJobApplicants.length },
           { id: 'resources', label: '📚 Resource Library', count: resources.length },
           { id: 'leads', label: '👥 Captured Leads', count: leads.length },
           { id: 'settings', label: '⚙️ System Config', count: null }
@@ -821,7 +1003,310 @@ const CareersAdmin = () => {
         </div>
       )}
 
-      {/* 3. CAPTURED LEADS TAB */}
+      {/* 3. JOB APPLICANTS TAB */}
+      {activeTab === 'applicants' && (() => {
+        const filteredApplicants = getFilteredApplicants();
+        const availableJobs = getAvailableJobTitles();
+        return (
+          <div>
+            {/* Header Bar */}
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '1.5rem', flexWrap: 'wrap', gap: '0.75rem' }}>
+              <div>
+                <h3 style={{ color: 'var(--primary)', margin: 0, display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                  <UserCheck size={22} /> Job Applicants
+                </h3>
+                <p style={{ color: 'var(--text-muted)', fontSize: '0.85rem', marginTop: '0.25rem' }}>
+                  {allJobApplicants.length} total application{allJobApplicants.length !== 1 ? 's' : ''} received across all job postings
+                </p>
+              </div>
+              <div style={{ display: 'flex', gap: '0.6rem', flexWrap: 'wrap', alignItems: 'center' }}>
+                <button
+                  onClick={() => { setLoading(true); const pwd = getPassword(); Promise.all([fetchLeads(pwd), fetchJobs()]).then(([ldata, jdata]) => { setLeads(ldata); setJobs(jdata); setLoading(false); triggerToast('Refreshed applicant data.'); }); }}
+                  style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', fontSize: '0.85rem', padding: '0.5rem 1rem', background: 'rgba(24,79,91,0.07)', color: 'var(--primary)', border: '1px solid var(--border)', borderRadius: '8px', cursor: 'pointer', fontWeight: '600' }}
+                >
+                  <RefreshCw size={14} /> Refresh
+                </button>
+                <button
+                  className="btn btn-primary"
+                  onClick={handleExportApplicantsCSV}
+                  style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', fontSize: '0.85rem', padding: '0.5rem 1rem' }}
+                >
+                  <Download size={15} /> Export CSV ({filteredApplicants.length})
+                </button>
+              </div>
+            </div>
+
+            {/* ── FILTER TOOLBAR ── */}
+            <div style={{ background: '#fff', border: '1px solid var(--border)', borderRadius: '12px', padding: '1.25rem 1.5rem', marginBottom: '1.5rem', display: 'flex', flexWrap: 'wrap', gap: '1rem', alignItems: 'flex-end' }}>
+              
+              {/* Search */}
+              <div style={{ flex: '1 1 220px' }}>
+                <label style={{ fontSize: '0.75rem', fontWeight: '700', color: 'var(--text-muted)', display: 'block', marginBottom: '0.35rem', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+                  Search
+                </label>
+                <div style={{ position: 'relative' }}>
+                  <Search size={15} style={{ position: 'absolute', left: '0.75rem', top: '50%', transform: 'translateY(-50%)', color: 'var(--text-muted)' }} />
+                  <input
+                    type="text"
+                    placeholder="Name, email, phone..."
+                    value={applicantSearchQuery}
+                    onChange={e => setApplicantSearchQuery(e.target.value)}
+                    style={{ paddingLeft: '2.2rem', width: '100%', boxSizing: 'border-box' }}
+                  />
+                </div>
+              </div>
+
+              {/* Job Title Filter */}
+              <div style={{ flex: '1 1 200px' }}>
+                <label style={{ fontSize: '0.75rem', fontWeight: '700', color: 'var(--text-muted)', display: 'block', marginBottom: '0.35rem', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+                  Job Position
+                </label>
+                <select
+                  value={applicantJobFilter}
+                  onChange={e => setApplicantJobFilter(e.target.value)}
+                  style={{ width: '100%', boxSizing: 'border-box' }}
+                >
+                  <option value="ALL">All Positions ({allJobApplicants.length})</option>
+                  {availableJobs.map(title => {
+                    const count = allJobApplicants.filter(a => {
+                      const t = a.resource ? a.resource.replace(/^Job Application:\s*/i, '').trim() : '';
+                      return t.toLowerCase() === title.toLowerCase();
+                    }).length;
+                    return <option key={title} value={title}>{title} ({count})</option>;
+                  })}
+                </select>
+              </div>
+
+              {/* Date Filter */}
+              <div style={{ flex: '1 1 180px' }}>
+                <label style={{ fontSize: '0.75rem', fontWeight: '700', color: 'var(--text-muted)', display: 'block', marginBottom: '0.35rem', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+                  Date Range
+                </label>
+                <select
+                  value={applicantDateFilter}
+                  onChange={e => setApplicantDateFilter(e.target.value)}
+                  style={{ width: '100%', boxSizing: 'border-box' }}
+                >
+                  <option value="ALL">All Time</option>
+                  <option value="TODAY">Today</option>
+                  <option value="LAST_7_DAYS">Last 7 Days</option>
+                  <option value="LAST_30_DAYS">Last 30 Days</option>
+                  <option value="THIS_MONTH">This Month</option>
+                  <option value="CUSTOM">Custom Range</option>
+                </select>
+              </div>
+
+              {/* Custom Date Range (only shown when CUSTOM selected) */}
+              {applicantDateFilter === 'CUSTOM' && (
+                <>
+                  <div style={{ flex: '1 1 150px' }}>
+                    <label style={{ fontSize: '0.75rem', fontWeight: '700', color: 'var(--text-muted)', display: 'block', marginBottom: '0.35rem', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+                      From Date
+                    </label>
+                    <input
+                      type="date"
+                      value={applicantCustomStartDate}
+                      onChange={e => setApplicantCustomStartDate(e.target.value)}
+                      style={{ width: '100%', boxSizing: 'border-box' }}
+                    />
+                  </div>
+                  <div style={{ flex: '1 1 150px' }}>
+                    <label style={{ fontSize: '0.75rem', fontWeight: '700', color: 'var(--text-muted)', display: 'block', marginBottom: '0.35rem', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+                      To Date
+                    </label>
+                    <input
+                      type="date"
+                      value={applicantCustomEndDate}
+                      onChange={e => setApplicantCustomEndDate(e.target.value)}
+                      style={{ width: '100%', boxSizing: 'border-box' }}
+                    />
+                  </div>
+                </>
+              )}
+
+              {/* Sort Order */}
+              <div style={{ flex: '1 1 160px' }}>
+                <label style={{ fontSize: '0.75rem', fontWeight: '700', color: 'var(--text-muted)', display: 'block', marginBottom: '0.35rem', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+                  Sort By
+                </label>
+                <select
+                  value={applicantSortOrder}
+                  onChange={e => setApplicantSortOrder(e.target.value)}
+                  style={{ width: '100%', boxSizing: 'border-box' }}
+                >
+                  <option value="NEWEST">Newest First</option>
+                  <option value="OLDEST">Oldest First</option>
+                  <option value="NAME_AZ">Name (A→Z)</option>
+                  <option value="JOB_AZ">Job Title (A→Z)</option>
+                </select>
+              </div>
+
+              {/* Clear Filters Button */}
+              {(applicantJobFilter !== 'ALL' || applicantDateFilter !== 'ALL' || applicantSearchQuery || applicantExpFilter !== 'ALL') && (
+                <button
+                  onClick={() => { setApplicantJobFilter('ALL'); setApplicantDateFilter('ALL'); setApplicantSearchQuery(''); setApplicantExpFilter('ALL'); setApplicantCustomStartDate(''); setApplicantCustomEndDate(''); }}
+                  style={{ background: 'rgba(220,53,69,0.08)', color: '#dc3545', border: '1px solid rgba(220,53,69,0.2)', borderRadius: '8px', padding: '0.5rem 1rem', fontSize: '0.85rem', fontWeight: '700', cursor: 'pointer', whiteSpace: 'nowrap', height: 'fit-content' }}
+                >
+                  ✕ Clear Filters
+                </button>
+              )}
+            </div>
+
+            {/* Results Summary */}
+            <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1rem' }}>
+              <span style={{ fontSize: '0.88rem', color: 'var(--text-muted)', fontWeight: '600' }}>
+                Showing <strong style={{ color: 'var(--primary)' }}>{filteredApplicants.length}</strong> of {allJobApplicants.length} applicant{allJobApplicants.length !== 1 ? 's' : ''}
+              </span>
+              {applicantJobFilter !== 'ALL' && (
+                <span style={{ background: 'rgba(24,79,91,0.08)', color: 'var(--primary)', padding: '0.2rem 0.65rem', borderRadius: '50px', fontSize: '0.78rem', fontWeight: '700' }}>
+                  📌 {applicantJobFilter}
+                </span>
+              )}
+              {applicantDateFilter !== 'ALL' && (
+                <span style={{ background: 'rgba(202,169,76,0.1)', color: '#9a7d1a', padding: '0.2rem 0.65rem', borderRadius: '50px', fontSize: '0.78rem', fontWeight: '700' }}>
+                  📅 {applicantDateFilter.replace(/_/g, ' ')}
+                </span>
+              )}
+            </div>
+
+            {/* Applicants Table */}
+            <div style={{ overflowX: 'auto', background: '#fff', borderRadius: '14px', border: '1px solid var(--border)', boxShadow: '0 4px 16px rgba(0,0,0,0.03)' }}>
+              {filteredApplicants.length === 0 ? (
+                <div style={{ textAlign: 'center', padding: '5rem 2rem' }}>
+                  <UserCheck size={44} style={{ color: 'var(--text-muted)', opacity: 0.25, marginBottom: '1rem' }} />
+                  <h4 style={{ margin: 0, color: 'var(--primary)' }}>
+                    {allJobApplicants.length === 0 ? 'No job applications received yet' : 'No applicants match the current filters'}
+                  </h4>
+                  <p style={{ color: 'var(--text-muted)', fontSize: '0.85rem', marginTop: '0.4rem' }}>
+                    {allJobApplicants.length === 0
+                      ? 'Once candidates apply through the Careers page, they will appear here.'
+                      : 'Try clearing filters or adjusting the date range.'}
+                  </p>
+                </div>
+              ) : (
+                <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.88rem', textAlign: 'left' }}>
+                  <thead>
+                    <tr style={{ background: 'var(--primary)', color: '#fff' }}>
+                      <th style={{ padding: '0.9rem 1rem', whiteSpace: 'nowrap' }}>Date Applied</th>
+                      <th style={{ padding: '0.9rem 1rem' }}>Job Position</th>
+                      <th style={{ padding: '0.9rem 1rem' }}>Candidate Name</th>
+                      <th style={{ padding: '0.9rem 1rem' }}>Email</th>
+                      <th style={{ padding: '0.9rem 1rem', whiteSpace: 'nowrap' }}>Phone</th>
+                      <th style={{ padding: '0.9rem 1rem' }}>Location</th>
+                      <th style={{ padding: '0.9rem 1rem' }}>Cover Note</th>
+                      <th style={{ padding: '0.9rem 1rem', textAlign: 'center', whiteSpace: 'nowrap' }}>Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {filteredApplicants.map((applicant, idx) => {
+                      const jobTitle = applicant.resource
+                        ? applicant.resource.replace(/^Job Application:\s*/i, '').trim()
+                        : 'General Application';
+                      const appliedDate = applicant.date ? new Date(applicant.date).toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' }) : '—';
+                      return (
+                        <tr
+                          key={applicant.id || idx}
+                          style={{ borderBottom: '1px solid var(--border)', transition: 'background 0.15s' }}
+                          className="lead-row"
+                        >
+                          <td style={{ padding: '0.9rem 1rem', whiteSpace: 'nowrap', color: 'var(--text-muted)', fontSize: '0.83rem' }}>
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+                              <Calendar size={13} />
+                              {appliedDate}
+                            </div>
+                          </td>
+                          <td style={{ padding: '0.9rem 1rem' }}>
+                            <span style={{ background: 'rgba(24,79,91,0.08)', color: 'var(--primary)', padding: '0.25rem 0.65rem', borderRadius: '50px', fontSize: '0.8rem', fontWeight: '700', whiteSpace: 'nowrap' }}>
+                              {jobTitle}
+                            </span>
+                          </td>
+                          <td style={{ padding: '0.9rem 1rem', fontWeight: '700', color: 'var(--primary)' }}>
+                            {applicant.name || '—'}
+                          </td>
+                          <td style={{ padding: '0.9rem 1rem' }}>
+                            {applicant.email ? (
+                              <a href={`mailto:${applicant.email}`} style={{ color: 'var(--secondary)', fontWeight: '600', textDecoration: 'underline' }}>
+                                {applicant.email}
+                              </a>
+                            ) : '—'}
+                          </td>
+                          <td style={{ padding: '0.9rem 1rem', whiteSpace: 'nowrap' }}>
+                            {applicant.phone ? (
+                              <a href={`tel:${applicant.phone}`} style={{ color: 'inherit', textDecoration: 'none' }}>
+                                📞 {applicant.phone}
+                              </a>
+                            ) : <span style={{ color: 'var(--text-muted)', fontStyle: 'italic' }}>N/A</span>}
+                          </td>
+                          <td style={{ padding: '0.9rem 1rem' }}>
+                            {applicant.company || <span style={{ color: 'var(--text-muted)', fontStyle: 'italic' }}>N/A</span>}
+                          </td>
+                          <td style={{ padding: '0.9rem 1rem', maxWidth: '260px', wordBreak: 'break-word', fontSize: '0.83rem', color: '#4A4A48', lineHeight: '1.45' }}>
+                            {applicant.bottleneck
+                              ? (applicant.bottleneck.length > 100 ? applicant.bottleneck.substring(0, 100) + '…' : applicant.bottleneck)
+                              : <span style={{ color: 'var(--text-muted)', fontStyle: 'italic' }}>No cover note</span>
+                            }
+                          </td>
+                          <td style={{ padding: '0.9rem 1rem', textAlign: 'center' }}>
+                            <div style={{ display: 'flex', gap: '0.35rem', justifyContent: 'center' }}>
+                              {applicant.email && (
+                                <a
+                                  href={`mailto:${applicant.email}?subject=Re: ${encodeURIComponent(jobTitle)} Application - Tadbeer Transformations`}
+                                  title="Email Applicant"
+                                  style={{ background: 'rgba(24,79,91,0.08)', color: 'var(--primary)', border: 'none', borderRadius: '7px', padding: '0.35rem 0.6rem', cursor: 'pointer', textDecoration: 'none', fontSize: '0.8rem', fontWeight: '700', display: 'inline-flex', alignItems: 'center', gap: '0.3rem' }}
+                                >
+                                  <MessageSquare size={13} /> Reply
+                                </a>
+                              )}
+                              <button
+                                onClick={() => { navigator.clipboard.writeText(`Name: ${applicant.name}\nEmail: ${applicant.email}\nPhone: ${applicant.phone}\nJob: ${jobTitle}\nNote: ${applicant.bottleneck}`); triggerToast('Applicant details copied!'); }}
+                                title="Copy Details"
+                                style={{ background: 'rgba(202,169,76,0.1)', color: '#9a7d1a', border: 'none', borderRadius: '7px', padding: '0.35rem 0.5rem', cursor: 'pointer', display: 'inline-flex', alignItems: 'center' }}
+                              >
+                                <Copy size={13} />
+                              </button>
+                              <button
+                                onClick={() => handleLeadDelete(applicant.id)}
+                                title="Delete Application"
+                                style={{ background: 'rgba(220,53,69,0.08)', color: '#dc3545', border: 'none', borderRadius: '7px', padding: '0.35rem 0.5rem', cursor: 'pointer', display: 'inline-flex', alignItems: 'center' }}
+                              >
+                                <Trash2 size={13} />
+                              </button>
+                            </div>
+                          </td>
+                        </tr>
+                      );
+                    })}
+                  </tbody>
+                </table>
+              )}
+            </div>
+
+            {/* Summary Stats Footer */}
+            {allJobApplicants.length > 0 && (
+              <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', marginTop: '1.25rem' }}>
+                {availableJobs.slice(0, 5).map(title => {
+                  const count = allJobApplicants.filter(a => {
+                    const t = a.resource ? a.resource.replace(/^Job Application:\s*/i, '').trim() : '';
+                    return t.toLowerCase() === title.toLowerCase();
+                  }).length;
+                  return (
+                    <div
+                      key={title}
+                      onClick={() => setApplicantJobFilter(applicantJobFilter === title ? 'ALL' : title)}
+                      style={{ background: '#fff', border: `2px solid ${applicantJobFilter === title ? 'var(--primary)' : 'var(--border)'}`, borderRadius: '12px', padding: '0.75rem 1.25rem', cursor: 'pointer', transition: 'all 0.2s', flex: '1 1 160px', minWidth: '140px' }}
+                    >
+                      <div style={{ fontSize: '1.4rem', fontWeight: '900', color: 'var(--primary)' }}>{count}</div>
+                      <div style={{ fontSize: '0.78rem', color: 'var(--text-muted)', fontWeight: '600', marginTop: '0.15rem', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{title}</div>
+                    </div>
+                  );
+                })}
+              </div>
+            )}
+          </div>
+        );
+      })()}
+
+      {/* 4. CAPTURED LEADS TAB */}
       {activeTab === 'leads' && (
         <div>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem', flexWrap: 'wrap', gap: '0.5rem' }}>
