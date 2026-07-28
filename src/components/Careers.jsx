@@ -116,52 +116,76 @@ const Careers = () => {
   const handleShare = async (e, job) => {
     e.stopPropagation();
     if (isSharing) return;
-    
+
     setIsSharing(true);
     setShareTargetJob(job);
     setGeneratedImage(null);
-    
-    // Wait for the hidden card to render and load fonts/images
-    setTimeout(async () => {
-      try {
-        if (!shareCardRef.current) throw new Error("Card ref not found");
-        
-        const dataUrl = await htmlToImage.toPng(shareCardRef.current, {
-          pixelRatio: 2,
-          backgroundColor: '#FAF9F6'
+
+    // Wait for React to render the hidden card, then wait for logo image to load
+    const waitForCardReady = () => new Promise((resolve) => {
+      // Give React one frame to mount the card
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          if (!shareCardRef.current) { resolve(); return; }
+          // Find the logo img inside the card and wait for it
+          const logoImg = shareCardRef.current.querySelector('img');
+          if (logoImg && !logoImg.complete) {
+            logoImg.onload = () => resolve();
+            logoImg.onerror = () => resolve(); // proceed even on error
+            // Safety timeout
+            setTimeout(resolve, 2000);
+          } else {
+            // Extra 800ms for fonts (html-to-image embeds fonts on first call)
+            setTimeout(resolve, 800);
+          }
         });
-        
-        const blob = await (await fetch(dataUrl)).blob();
-        if (!blob) throw new Error("Blob generation failed");
-        
-        const shareUrl = `${window.location.origin}${window.location.pathname}?jobId=${job.id}`;
-        const file = new File([blob], `tadbeer-job-${job.title.replace(/\s+/g, '-').toLowerCase()}.png`, { type: 'image/png' });
-        
-        if (navigator.share && navigator.canShare && navigator.canShare({ files: [file] })) {
-          await navigator.share({
-            title: `${job.title} at Tadbeer`,
-            text: `Check out this open position for ${job.title} at Tadbeer.\n\nApply here:`,
-            url: shareUrl,
-            files: [file]
-          });
-          setIsSharing(false);
-          setShareTargetJob(null);
-        } else {
-          // Fallback: Show modal with the image
-          setGeneratedImage({ url: dataUrl, blob: blob, shareUrl: shareUrl, jobTitle: job.title });
-          setIsSharing(false);
-          // Keep shareTargetJob active for the modal to stay open
-        }
-      } catch (err) {
-        console.error('Error generating or sharing image', err);
-        // Ultimate fallback to just copy link
-        const shareUrl = `${window.location.origin}${window.location.pathname}?jobId=${job.id}`;
-        navigator.clipboard.writeText(shareUrl);
-        alert(`Link copied to clipboard! (Image generation failed: ${err.message})`);
+      });
+    });
+
+    // Allow React state update + DOM paint
+    await new Promise(r => setTimeout(r, 50));
+    await waitForCardReady();
+
+    try {
+      if (!shareCardRef.current) throw new Error('Card ref not found');
+
+      // Capture twice — first call embeds fonts, second is clean
+      await htmlToImage.toPng(shareCardRef.current, { pixelRatio: 1, backgroundColor: '#FAF9F6' });
+      const dataUrl = await htmlToImage.toPng(shareCardRef.current, {
+        pixelRatio: 2,
+        backgroundColor: '#FAF9F6',
+        skipFonts: false
+      });
+
+      const blob = await (await fetch(dataUrl)).blob();
+      if (!blob) throw new Error('Blob generation failed');
+
+      const shareUrl = `${window.location.origin}${window.location.pathname}?jobId=${job.id}`;
+      const file = new File([blob], `tadbeer-job-${job.title.replace(/\s+/g, '-').toLowerCase()}.png`, { type: 'image/png' });
+
+      if (navigator.share && navigator.canShare && navigator.canShare({ files: [file] })) {
+        await navigator.share({
+          title: `${job.title} at Tadbeer`,
+          text: `Check out this open position for ${job.title} at Tadbeer.\n\nApply here:`,
+          url: shareUrl,
+          files: [file]
+        });
         setIsSharing(false);
         setShareTargetJob(null);
+      } else {
+        // Desktop fallback: show modal with preview + download
+        setGeneratedImage({ url: dataUrl, blob, shareUrl, jobTitle: job.title });
+        setIsSharing(false);
+        // Keep shareTargetJob active so modal stays visible
       }
-    }, 400); // Increased timeout to 400ms to allow Logo image to load
+    } catch (err) {
+      console.error('Share image generation failed:', err);
+      const shareUrl = `${window.location.origin}${window.location.pathname}?jobId=${job.id}`;
+      navigator.clipboard.writeText(shareUrl);
+      alert(`Job link copied to clipboard!\n(Image could not be generated: ${err.message})`);
+      setIsSharing(false);
+      setShareTargetJob(null);
+    }
   };
 
   const copyImageToClipboard = async () => {
@@ -406,12 +430,23 @@ const Careers = () => {
         </div>
       </section>
 
-      {/* Hidden Share Card */}
-      {shareTargetJob && !generatedImage && (
-        <div style={{ position: 'fixed', top: '-2000px', left: '-2000px', pointerEvents: 'none' }}>
-          <JobShareCard job={shareTargetJob} ref={shareCardRef} />
-        </div>
-      )}
+      {/* Hidden Share Card — must stay in DOM flow (not clipped off-screen) so html-to-image can render it */}
+      <div
+        aria-hidden="true"
+        style={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          width: '1080px',
+          overflow: 'hidden',
+          height: shareTargetJob ? 'auto' : '0px',
+          visibility: shareTargetJob ? 'visible' : 'hidden',
+          pointerEvents: 'none',
+          zIndex: -1
+        }}
+      >
+        {shareTargetJob && <JobShareCard job={shareTargetJob} ref={shareCardRef} />}
+      </div>
 
       {/* Share Result Modal (Fallback for Desktop) */}
       <AnimatePresence>
