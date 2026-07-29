@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { 
   X, CheckCircle, Plus, LogOut, Trash2, Edit, Download, Save, 
   Briefcase, BookOpen, Users, Settings, Key, Phone, MessageSquare, ExternalLink,
-  UserCheck, Search, Filter, Calendar, FileText, Copy, RefreshCw
+  UserCheck, Search, Filter, Calendar, FileText, Copy, RefreshCw, Eye
 } from 'lucide-react';
 import { 
   fetchJobs, createJob, updateJob, deleteJob,
@@ -54,6 +54,7 @@ const CareersAdmin = () => {
   const [applicantExpFilter, setApplicantExpFilter] = useState('ALL');
   const [applicantSearchQuery, setApplicantSearchQuery] = useState('');
   const [applicantSortOrder, setApplicantSortOrder] = useState('NEWEST');
+  const [viewingApplicant, setViewingApplicant] = useState(null);
 
   // Form states
   const [editingId, setEditingId] = useState(null);
@@ -1184,20 +1185,20 @@ const CareersAdmin = () => {
                   </p>
                 </div>
               ) : (
-                <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.88rem', textAlign: 'left' }}>
+                <table style={{ width: '100%', minWidth: '1250px', borderCollapse: 'collapse', fontSize: '0.88rem', textAlign: 'left', tableLayout: 'fixed' }}>
                   <thead>
                     <tr style={{ background: 'var(--primary)', color: '#fff' }}>
-                      <th style={{ padding: '0.9rem 1rem', whiteSpace: 'nowrap' }}>Date Applied</th>
-                      <th style={{ padding: '0.9rem 1rem' }}>Job Position</th>
-                      <th style={{ padding: '0.9rem 1rem' }}>Candidate Name</th>
-                      <th style={{ padding: '0.9rem 1rem' }}>Email</th>
-                      <th style={{ padding: '0.9rem 1rem', whiteSpace: 'nowrap' }}>Phone</th>
-                      <th style={{ padding: '0.9rem 1rem' }}>Location</th>
-                      <th style={{ padding: '0.9rem 1rem', whiteSpace: 'nowrap' }}>Experience</th>
-                      <th style={{ padding: '0.9rem 1rem', whiteSpace: 'nowrap' }}>Resume / CV</th>
-                      <th style={{ padding: '0.9rem 1rem', whiteSpace: 'nowrap' }}>LinkedIn</th>
-                      <th style={{ padding: '0.9rem 1rem' }}>Cover Note</th>
-                      <th style={{ padding: '0.9rem 1rem', textAlign: 'center', whiteSpace: 'nowrap' }}>Actions</th>
+                      <th style={{ padding: '0.9rem 0.8rem', width: '115px', whiteSpace: 'nowrap' }}>Date Applied</th>
+                      <th style={{ padding: '0.9rem 0.8rem', width: '160px' }}>Job Position</th>
+                      <th style={{ padding: '0.9rem 0.8rem', width: '140px' }}>Candidate Name</th>
+                      <th style={{ padding: '0.9rem 0.8rem', width: '170px' }}>Email</th>
+                      <th style={{ padding: '0.9rem 0.8rem', width: '130px', whiteSpace: 'nowrap' }}>Phone</th>
+                      <th style={{ padding: '0.9rem 0.8rem', width: '120px' }}>Location</th>
+                      <th style={{ padding: '0.9rem 0.8rem', width: '110px', whiteSpace: 'nowrap' }}>Experience</th>
+                      <th style={{ padding: '0.9rem 0.8rem', width: '115px', whiteSpace: 'nowrap' }}>Resume / CV</th>
+                      <th style={{ padding: '0.9rem 0.8rem', width: '115px', whiteSpace: 'nowrap' }}>LinkedIn</th>
+                      <th style={{ padding: '0.9rem 0.8rem', width: '240px' }}>Cover Note</th>
+                      <th style={{ padding: '0.9rem 0.8rem', width: '140px', textAlign: 'center', whiteSpace: 'nowrap' }}>Actions</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -1224,106 +1225,123 @@ const CareersAdmin = () => {
                       const resumeLink = applicant.revenue || '';
                       const linkedinProfile = applicant.industry && applicant.industry !== 'Not provided' ? applicant.industry : '';
 
+                      const applicantDetails = {
+                        ...applicant,
+                        jobTitle,
+                        appliedDate,
+                        parsedLocation,
+                        parsedExperience,
+                        resumeLink,
+                        linkedinProfile
+                      };
+
                       return (
                         <tr
                           key={applicant.id || idx}
-                          style={{ borderBottom: '1px solid var(--border)', transition: 'background 0.15s' }}
+                          style={{ borderBottom: '1px solid var(--border)', transition: 'background 0.15s', cursor: 'pointer' }}
                           className="lead-row"
+                          onClick={() => setViewingApplicant(applicantDetails)}
                         >
-                          <td style={{ padding: '0.9rem 1rem', whiteSpace: 'nowrap', color: 'var(--text-muted)', fontSize: '0.83rem' }}>
-                            <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+                          <td style={{ padding: '0.85rem 0.8rem', color: 'var(--text-muted)', fontSize: '0.82rem', whiteSpace: 'nowrap' }}>
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '0.35rem' }}>
                               <Calendar size={13} />
                               {appliedDate}
                             </div>
                           </td>
-                          <td style={{ padding: '0.9rem 1rem' }}>
-                            <span style={{ background: 'rgba(24,79,91,0.08)', color: 'var(--primary)', padding: '0.25rem 0.65rem', borderRadius: '50px', fontSize: '0.8rem', fontWeight: '700', whiteSpace: 'nowrap' }}>
+                          <td style={{ padding: '0.85rem 0.8rem' }}>
+                            <span style={{ background: 'rgba(24,79,91,0.08)', color: 'var(--primary)', padding: '0.25rem 0.6rem', borderRadius: '50px', fontSize: '0.78rem', fontWeight: '700', display: 'inline-block', maxWidth: '100%', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }} title={jobTitle}>
                               {jobTitle}
                             </span>
                           </td>
-                          <td style={{ padding: '0.9rem 1rem', fontWeight: '700', color: 'var(--primary)', whiteSpace: 'nowrap' }}>
+                          <td style={{ padding: '0.85rem 0.8rem', fontWeight: '700', color: 'var(--primary)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }} title={applicant.name}>
                             {applicant.name || '—'}
                           </td>
-                          <td style={{ padding: '0.9rem 1rem' }}>
+                          <td style={{ padding: '0.85rem 0.8rem', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }} title={applicant.email} onClick={e => e.stopPropagation()}>
                             {applicant.email ? (
                               <a href={`mailto:${applicant.email}`} style={{ color: 'var(--secondary)', fontWeight: '600', textDecoration: 'underline' }}>
                                 {applicant.email}
                               </a>
                             ) : <span style={{ color: 'var(--text-muted)', fontStyle: 'italic' }}>—</span>}
                           </td>
-                          <td style={{ padding: '0.9rem 1rem', whiteSpace: 'nowrap' }}>
+                          <td style={{ padding: '0.85rem 0.8rem', whiteSpace: 'nowrap' }} onClick={e => e.stopPropagation()}>
                             {applicant.phone ? (
                               <a href={`tel:${applicant.phone}`} style={{ color: 'inherit', textDecoration: 'none' }}>
                                 📞 {applicant.phone}
                               </a>
                             ) : <span style={{ color: 'var(--text-muted)', fontStyle: 'italic' }}>N/A</span>}
                           </td>
-                          <td style={{ padding: '0.9rem 1rem', whiteSpace: 'nowrap' }}>
+                          <td style={{ padding: '0.85rem 0.8rem', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }} title={parsedLocation}>
                             {parsedLocation !== '—'
                               ? <span>📍 {parsedLocation}</span>
                               : <span style={{ color: 'var(--text-muted)', fontStyle: 'italic' }}>N/A</span>}
                           </td>
-                          <td style={{ padding: '0.9rem 1rem', whiteSpace: 'nowrap' }}>
+                          <td style={{ padding: '0.85rem 0.8rem', whiteSpace: 'nowrap' }}>
                             {parsedExperience !== '—'
-                              ? <span style={{ background: 'rgba(42,122,140,0.08)', color: '#2A7A8C', padding: '0.2rem 0.5rem', borderRadius: '6px', fontWeight: '700', fontSize: '0.82rem' }}>
+                              ? <span style={{ background: 'rgba(42,122,140,0.08)', color: '#2A7A8C', padding: '0.2rem 0.5rem', borderRadius: '6px', fontWeight: '700', fontSize: '0.8rem' }}>
                                   {parsedExperience}
                                 </span>
                               : <span style={{ color: 'var(--text-muted)', fontStyle: 'italic' }}>N/A</span>}
                           </td>
-                          <td style={{ padding: '0.9rem 1rem' }}>
+                          <td style={{ padding: '0.85rem 0.8rem' }} onClick={e => e.stopPropagation()}>
                             {resumeLink ? (
                               <a
                                 href={resumeLink}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                style={{ display: 'inline-flex', alignItems: 'center', gap: '0.35rem', background: 'rgba(24,79,91,0.07)', color: 'var(--primary)', padding: '0.3rem 0.7rem', borderRadius: '7px', fontWeight: '700', fontSize: '0.82rem', textDecoration: 'none', whiteSpace: 'nowrap' }}
+                                style={{ display: 'inline-flex', alignItems: 'center', gap: '0.3rem', background: 'rgba(24,79,91,0.07)', color: 'var(--primary)', padding: '0.25rem 0.6rem', borderRadius: '6px', fontWeight: '700', fontSize: '0.8rem', textDecoration: 'none', whiteSpace: 'nowrap' }}
                                 title={resumeLink}
                               >
-                                <ExternalLink size={13} /> View CV
+                                <ExternalLink size={12} /> View CV
                               </a>
-                            ) : <span style={{ color: 'var(--text-muted)', fontStyle: 'italic', fontSize: '0.83rem' }}>Not provided</span>}
+                            ) : <span style={{ color: 'var(--text-muted)', fontStyle: 'italic', fontSize: '0.8rem' }}>N/A</span>}
                           </td>
-                          <td style={{ padding: '0.9rem 1rem' }}>
+                          <td style={{ padding: '0.85rem 0.8rem' }} onClick={e => e.stopPropagation()}>
                             {linkedinProfile ? (
                               <a
                                 href={linkedinProfile.startsWith('http') ? linkedinProfile : `https://linkedin.com/in/${linkedinProfile}`}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                style={{ display: 'inline-flex', alignItems: 'center', gap: '0.35rem', background: 'rgba(10,102,194,0.07)', color: '#0A66C2', padding: '0.3rem 0.7rem', borderRadius: '7px', fontWeight: '700', fontSize: '0.82rem', textDecoration: 'none', whiteSpace: 'nowrap' }}
+                                style={{ display: 'inline-flex', alignItems: 'center', gap: '0.3rem', background: 'rgba(10,102,194,0.07)', color: '#0A66C2', padding: '0.25rem 0.6rem', borderRadius: '6px', fontWeight: '700', fontSize: '0.8rem', textDecoration: 'none', whiteSpace: 'nowrap' }}
                                 title={linkedinProfile}
                               >
-                                <ExternalLink size={13} /> LinkedIn
+                                <ExternalLink size={12} /> LinkedIn
                               </a>
-                            ) : <span style={{ color: 'var(--text-muted)', fontStyle: 'italic', fontSize: '0.83rem' }}>N/A</span>}
+                            ) : <span style={{ color: 'var(--text-muted)', fontStyle: 'italic', fontSize: '0.8rem' }}>N/A</span>}
                           </td>
-                          <td style={{ padding: '0.9rem 1rem', maxWidth: '220px', wordBreak: 'break-word', fontSize: '0.83rem', color: '#4A4A48', lineHeight: '1.45' }}>
-                            {applicant.bottleneck
-                              ? (applicant.bottleneck.length > 90 ? applicant.bottleneck.substring(0, 88) + '…' : applicant.bottleneck)
-                              : <span style={{ color: 'var(--text-muted)', fontStyle: 'italic' }}>No cover note</span>
-                            }
+                          <td style={{ padding: '0.85rem 0.8rem', fontSize: '0.83rem', color: '#4A4A48', lineHeight: '1.4' }}>
+                            {applicant.bottleneck ? (
+                              <div>
+                                <span style={{ display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden', wordBreak: 'break-word' }}>
+                                  {applicant.bottleneck}
+                                </span>
+                                <span style={{ fontSize: '0.75rem', color: 'var(--secondary)', fontWeight: '700', display: 'inline-flex', alignItems: 'center', gap: '0.2rem', marginTop: '0.2rem' }}>
+                                  Full View →
+                                </span>
+                              </div>
+                            ) : (
+                              <span style={{ color: 'var(--text-muted)', fontStyle: 'italic' }}>No cover note</span>
+                            )}
                           </td>
-                          <td style={{ padding: '0.9rem 1rem', textAlign: 'center' }}>
-                            <div style={{ display: 'flex', gap: '0.35rem', justifyContent: 'center' }}>
-                              {applicant.email && (
-                                <a
-                                  href={`mailto:${applicant.email}?subject=Re: ${encodeURIComponent(jobTitle)} Application - Tadbeer Transformations`}
-                                  title="Email Applicant"
-                                  style={{ background: 'rgba(24,79,91,0.08)', color: 'var(--primary)', border: 'none', borderRadius: '7px', padding: '0.35rem 0.6rem', cursor: 'pointer', textDecoration: 'none', fontSize: '0.8rem', fontWeight: '700', display: 'inline-flex', alignItems: 'center', gap: '0.3rem' }}
-                                >
-                                  <MessageSquare size={13} /> Reply
-                                </a>
-                              )}
+                          <td style={{ padding: '0.85rem 0.8rem', textAlign: 'center' }} onClick={e => e.stopPropagation()}>
+                            <div style={{ display: 'flex', gap: '0.3rem', justifyContent: 'center' }}>
+                              <button
+                                onClick={() => setViewingApplicant(applicantDetails)}
+                                title="View Full Details"
+                                style={{ background: 'rgba(24,79,91,0.08)', color: 'var(--primary)', border: 'none', borderRadius: '6px', padding: '0.35rem 0.55rem', cursor: 'pointer', display: 'inline-flex', alignItems: 'center', gap: '0.25rem', fontSize: '0.78rem', fontWeight: '700' }}
+                              >
+                                <Eye size={13} /> View
+                              </button>
                               <button
                                 onClick={() => { navigator.clipboard.writeText(`Name: ${applicant.name}\nEmail: ${applicant.email}\nPhone: ${applicant.phone}\nJob: ${jobTitle}\nLocation: ${parsedLocation}\nExperience: ${parsedExperience}\nResume: ${resumeLink}\nLinkedIn: ${linkedinProfile}\nNote: ${applicant.bottleneck}`); triggerToast('Applicant details copied!'); }}
                                 title="Copy All Details"
-                                style={{ background: 'rgba(202,169,76,0.1)', color: '#9a7d1a', border: 'none', borderRadius: '7px', padding: '0.35rem 0.5rem', cursor: 'pointer', display: 'inline-flex', alignItems: 'center' }}
+                                style={{ background: 'rgba(202,169,76,0.1)', color: '#9a7d1a', border: 'none', borderRadius: '6px', padding: '0.35rem 0.45rem', cursor: 'pointer', display: 'inline-flex', alignItems: 'center' }}
                               >
                                 <Copy size={13} />
                               </button>
                               <button
                                 onClick={() => handleLeadDelete(applicant.id)}
                                 title="Delete Application"
-                                style={{ background: 'rgba(220,53,69,0.08)', color: '#dc3545', border: 'none', borderRadius: '7px', padding: '0.35rem 0.5rem', cursor: 'pointer', display: 'inline-flex', alignItems: 'center' }}
+                                style={{ background: 'rgba(220,53,69,0.08)', color: '#dc3545', border: 'none', borderRadius: '6px', padding: '0.35rem 0.45rem', cursor: 'pointer', display: 'inline-flex', alignItems: 'center' }}
                               >
                                 <Trash2 size={13} />
                               </button>
@@ -1390,7 +1408,7 @@ const CareersAdmin = () => {
                 <p style={{ color: 'var(--text-muted)', fontSize: '0.85rem', marginTop: '0.25rem' }}>Visitor submissions will be saved here dynamically.</p>
               </div>
             ) : (
-              <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.9rem', textAlign: 'left' }}>
+              <table style={{ width: '100%', minWidth: '1100px', borderCollapse: 'collapse', fontSize: '0.9rem', textAlign: 'left' }}>
                 <thead>
                   <tr style={{ background: 'var(--primary)', color: '#fff', borderBottom: '2px solid var(--border)' }}>
                     <th style={{ padding: '1rem' }}>Date</th>
@@ -1560,10 +1578,199 @@ const CareersAdmin = () => {
         </>
       )}
       
+      {/* Full Applicant View Modal */}
+      {viewingApplicant && (
+        <div
+          style={{
+            position: 'fixed',
+            inset: 0,
+            background: 'rgba(13, 47, 54, 0.75)',
+            backdropFilter: 'blur(5px)',
+            zIndex: 10000,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            padding: '1.5rem',
+            boxSizing: 'border-box'
+          }}
+          onClick={() => setViewingApplicant(null)}
+        >
+          <div
+            style={{
+              background: '#FAF9F6',
+              borderRadius: '20px',
+              maxWidth: '720px',
+              width: '100%',
+              maxHeight: '90vh',
+              overflowY: 'auto',
+              boxShadow: '0 24px 60px rgba(0,0,0,0.3)',
+              border: '1.5px solid rgba(202,169,76,0.4)',
+              display: 'flex',
+              flexDirection: 'column',
+              boxSizing: 'border-box'
+            }}
+            onClick={e => e.stopPropagation()}
+          >
+            {/* Modal Header */}
+            <div style={{
+              background: 'linear-gradient(135deg, #184F5B 0%, #0D2F36 100%)',
+              color: '#fff',
+              padding: '1.75rem 2rem',
+              borderTopLeftRadius: '18px',
+              borderTopRightRadius: '18px',
+              display: 'flex',
+              justify: 'space-between',
+              alignItems: 'flex-start'
+            }}>
+              <div>
+                <span style={{ background: '#CAA94C', color: '#184F5B', padding: '0.25rem 0.75rem', borderRadius: '50px', fontSize: '0.78rem', fontWeight: '800', textTransform: 'uppercase', letterSpacing: '1px' }}>
+                  {viewingApplicant.jobTitle}
+                </span>
+                <h2 style={{ margin: '0.6rem 0 0.25rem 0', fontSize: '1.8rem', color: '#fff', fontWeight: '900' }}>
+                  {viewingApplicant.name || 'Anonymous Candidate'}
+                </h2>
+                <div style={{ fontSize: '0.85rem', color: 'rgba(255,255,255,0.85)', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+                  <Calendar size={14} color="#CAA94C" /> Applied on {viewingApplicant.appliedDate}
+                </div>
+              </div>
+              <button
+                onClick={() => setViewingApplicant(null)}
+                style={{ background: 'rgba(255,255,255,0.15)', color: '#fff', border: 'none', borderRadius: '50%', width: '36px', height: '36px', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', transition: 'background 0.2s' }}
+              >
+                <X size={20} />
+              </button>
+            </div>
+
+            {/* Modal Body */}
+            <div style={{ padding: '2rem', display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+              
+              {/* Key Details Grid */}
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1rem' }}>
+                
+                {/* Email */}
+                <div style={{ background: '#fff', padding: '1rem 1.25rem', borderRadius: '12px', border: '1px solid var(--border)' }}>
+                  <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', fontWeight: '700', textTransform: 'uppercase', marginBottom: '0.25rem' }}>Email Address</div>
+                  {viewingApplicant.email ? (
+                    <a href={`mailto:${viewingApplicant.email}`} style={{ color: 'var(--secondary)', fontWeight: '700', fontSize: '0.95rem', textDecoration: 'underline', wordBreak: 'break-all' }}>
+                      {viewingApplicant.email}
+                    </a>
+                  ) : <span style={{ color: 'var(--text-muted)', fontStyle: 'italic' }}>Not provided</span>}
+                </div>
+
+                {/* Phone */}
+                <div style={{ background: '#fff', padding: '1rem 1.25rem', borderRadius: '12px', border: '1px solid var(--border)' }}>
+                  <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', fontWeight: '700', textTransform: 'uppercase', marginBottom: '0.25rem' }}>Phone Number</div>
+                  {viewingApplicant.phone ? (
+                    <a href={`tel:${viewingApplicant.phone}`} style={{ color: 'var(--primary)', fontWeight: '700', fontSize: '0.95rem', textDecoration: 'none' }}>
+                      📞 {viewingApplicant.phone}
+                    </a>
+                  ) : <span style={{ color: 'var(--text-muted)', fontStyle: 'italic' }}>Not provided</span>}
+                </div>
+
+                {/* Location */}
+                <div style={{ background: '#fff', padding: '1rem 1.25rem', borderRadius: '12px', border: '1px solid var(--border)' }}>
+                  <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', fontWeight: '700', textTransform: 'uppercase', marginBottom: '0.25rem' }}>Location</div>
+                  <div style={{ fontWeight: '700', color: 'var(--primary)', fontSize: '0.95rem' }}>
+                    📍 {viewingApplicant.parsedLocation}
+                  </div>
+                </div>
+
+                {/* Experience */}
+                <div style={{ background: '#fff', padding: '1rem 1.25rem', borderRadius: '12px', border: '1px solid var(--border)' }}>
+                  <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', fontWeight: '700', textTransform: 'uppercase', marginBottom: '0.25rem' }}>Experience Level</div>
+                  <div style={{ fontWeight: '700', color: '#2A7A8C', fontSize: '0.95rem' }}>
+                    💼 {viewingApplicant.parsedExperience}
+                  </div>
+                </div>
+
+              </div>
+
+              {/* Attachments & Profile Links */}
+              <div style={{ background: '#fff', padding: '1.25rem 1.5rem', borderRadius: '14px', border: '1px solid var(--border)', display: 'flex', flexWrap: 'wrap', gap: '1rem', alignItems: 'center', justifyContent: 'space-between' }}>
+                <div>
+                  <div style={{ fontWeight: '800', color: 'var(--primary)', fontSize: '0.95rem' }}>Submitted Links & Files</div>
+                  <div style={{ fontSize: '0.82rem', color: 'var(--text-muted)', marginTop: '0.15rem' }}>Review candidate's Google Drive CV & LinkedIn profile</div>
+                </div>
+                <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
+                  {viewingApplicant.resumeLink ? (
+                    <a
+                      href={viewingApplicant.resumeLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="btn btn-primary"
+                      style={{ display: 'inline-flex', alignItems: 'center', gap: '0.4rem', fontSize: '0.88rem', padding: '0.6rem 1.2rem', textDecoration: 'none' }}
+                    >
+                      <ExternalLink size={15} /> Open Resume / CV
+                    </a>
+                  ) : (
+                    <span style={{ fontSize: '0.85rem', color: 'var(--text-muted)', fontStyle: 'italic', padding: '0.5rem' }}>No Resume Link</span>
+                  )}
+                  {viewingApplicant.linkedinProfile ? (
+                    <a
+                      href={viewingApplicant.linkedinProfile.startsWith('http') ? viewingApplicant.linkedinProfile : `https://linkedin.com/in/${viewingApplicant.linkedinProfile}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      style={{ display: 'inline-flex', alignItems: 'center', gap: '0.4rem', fontSize: '0.88rem', padding: '0.6rem 1.2rem', background: '#0A66C2', color: '#fff', borderRadius: '8px', fontWeight: '700', textDecoration: 'none' }}
+                    >
+                      <ExternalLink size={15} /> LinkedIn Profile
+                    </a>
+                  ) : (
+                    <span style={{ fontSize: '0.85rem', color: 'var(--text-muted)', fontStyle: 'italic', padding: '0.5rem' }}>No LinkedIn Provided</span>
+                  )}
+                </div>
+              </div>
+
+              {/* Cover Note / Application Message */}
+              <div style={{ background: '#fff', padding: '1.5rem', borderRadius: '14px', border: '1px solid var(--border)' }}>
+                <div style={{ fontSize: '0.85rem', color: 'var(--primary)', fontWeight: '800', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '0.75rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                  <FileText size={16} color="#CAA94C" /> Full Candidate Cover Note / Statement
+                </div>
+                <div style={{ background: '#FAF9F6', padding: '1.25rem', borderRadius: '10px', border: '1px solid rgba(24,79,91,0.08)', fontSize: '0.95rem', color: '#2C2B27', lineHeight: '1.7', whiteSpace: 'pre-wrap', wordBreak: 'break-word', maxHeight: '280px', overflowY: 'auto' }}>
+                  {viewingApplicant.bottleneck || 'No cover note or statement was provided by the candidate.'}
+                </div>
+              </div>
+
+              {/* Actions Footer inside modal */}
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem', paddingTop: '0.75rem', borderTop: '1px solid var(--border)' }}>
+                <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
+                  {viewingApplicant.email && (
+                    <a
+                      href={`mailto:${viewingApplicant.email}?subject=Re: ${encodeURIComponent(viewingApplicant.jobTitle)} Application - Tadbeer Transformations`}
+                      className="btn btn-primary"
+                      style={{ display: 'inline-flex', alignItems: 'center', gap: '0.4rem', fontSize: '0.88rem', padding: '0.6rem 1.2rem', textDecoration: 'none' }}
+                    >
+                      <MessageSquare size={16} /> Send Email Reply
+                    </a>
+                  )}
+                  <button
+                    onClick={() => {
+                      navigator.clipboard.writeText(`Name: ${viewingApplicant.name}\nJob: ${viewingApplicant.jobTitle}\nEmail: ${viewingApplicant.email}\nPhone: ${viewingApplicant.phone}\nLocation: ${viewingApplicant.parsedLocation}\nExperience: ${viewingApplicant.parsedExperience}\nResume: ${viewingApplicant.resumeLink}\nLinkedIn: ${viewingApplicant.linkedinProfile}\nMessage: ${viewingApplicant.bottleneck}`);
+                      triggerToast('All candidate details copied to clipboard!');
+                    }}
+                    className="btn btn-secondary"
+                    style={{ display: 'inline-flex', alignItems: 'center', gap: '0.4rem', fontSize: '0.88rem', padding: '0.6rem 1.2rem' }}
+                  >
+                    <Copy size={16} /> Copy All Information
+                  </button>
+                </div>
+
+                <button
+                  onClick={() => setViewingApplicant(null)}
+                  style={{ background: 'rgba(24,79,91,0.08)', color: 'var(--primary)', border: 'none', borderRadius: '8px', padding: '0.6rem 1.4rem', fontWeight: '700', cursor: 'pointer', fontSize: '0.88rem' }}
+                >
+                  Close
+                </button>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Table highlight styling */}
       <style dangerouslySetInnerHTML={{__html: `
         .lead-row:hover {
-          background-color: rgba(24,79,91,0.015);
+          background-color: rgba(24,79,91,0.025) !important;
         }
       `}} />
 

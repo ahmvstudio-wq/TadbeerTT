@@ -1,0 +1,982 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tadbeer TT - Enterprise Technology & AI Operations Presentation</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #184F5B;       /* Deep Slate Teal */
+            --primary-dark: #0B2B33;  /* Midnight Teal */
+            --secondary: #CAA94C;     /* Warm Omani Gold */
+            --bg-cream: #F9F8F3;      /* Warm Off-White Cream / Beige */
+            --bg-black: #051012;      /* Deep High-Tech Black / Midnight */
+            --text-dark: #0F172A;
+            --text-light: #FFFFFF;
+            --text-muted: #475569;
+            --text-muted-dark: #94A3B8;
+            --border-color: #CBD5E1;
+            --border-gold: rgba(202, 169, 76, 0.35);
+        }
+
+        @page {
+            size: A4 landscape;
+            margin: 0;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--text-dark);
+            background-color: #94A3B8;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+
+        .slide {
+            width: 297mm;
+            height: 210mm;
+            page-break-after: always;
+            break-after: page;
+            position: relative;
+            background-color: var(--bg-cream);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            margin: 0 auto;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            box-sizing: border-box;
+            padding: 10mm 16mm 8mm 16mm;
+        }
+
+        /* BLACK HIGH-TECH DOMAIN SLIDES */
+        .slide-tech-black {
+            background: linear-gradient(135deg, #051012 0%, #0B2B33 50%, #030B0D 100%) !important;
+            color: var(--text-light) !important;
+        }
+
+        /* Slide Header & Footer */
+        .slide-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            border-bottom: 2px solid var(--secondary);
+            padding-bottom: 4mm;
+            margin-bottom: 4.5mm;
+            position: relative;
+            z-index: 2;
+        }
+
+        .slide-tech-black .slide-header {
+            border-bottom-color: rgba(202, 169, 76, 0.45);
+        }
+
+        .logo-img {
+            height: 38px;
+            width: auto;
+            object-fit: contain;
+        }
+
+        .logo-img-dark {
+            filter: brightness(0) invert(1);
+        }
+
+        .header-tag {
+            font-size: 8.5pt;
+            font-weight: 800;
+            letter-spacing: 1.5px;
+            color: var(--primary);
+            text-transform: uppercase;
+            background: rgba(24, 79, 91, 0.1);
+            padding: 4px 14px;
+            border-radius: 20px;
+            border: 1px solid rgba(24, 79, 91, 0.25);
+        }
+
+        .slide-tech-black .header-tag {
+            color: var(--secondary);
+            background: rgba(202, 169, 76, 0.14);
+            border-color: rgba(202, 169, 76, 0.4);
+        }
+
+        .slide-footer {
+            margin-top: auto;
+            padding-top: 3.5mm;
+            border-top: 1px solid rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 8.2pt;
+            color: var(--text-muted);
+            position: relative;
+            z-index: 2;
+        }
+
+        .slide-tech-black .slide-footer {
+            border-top-color: rgba(255,255,255,0.12);
+            color: var(--text-muted-dark);
+        }
+
+        .slide-footer .slide-num {
+            font-weight: 800;
+            color: var(--secondary);
+        }
+
+        /* Typography & Stylized Handwritten Accents */
+        h1.slide-title {
+            font-size: 21pt;
+            font-weight: 900;
+            color: var(--primary-dark);
+            line-height: 1.2;
+            margin-bottom: 2mm;
+            letter-spacing: -0.5px;
+        }
+
+        .slide-tech-black h1.slide-title {
+            color: #FFFFFF;
+        }
+
+        .title-gold { color: var(--secondary); }
+        .title-teal { color: var(--primary); }
+        .slide-tech-black .title-teal { color: #38BDF8; }
+
+        p.slide-intro {
+            font-size: 9.8pt;
+            line-height: 1.45;
+            color: var(--text-muted);
+            margin-bottom: 4mm;
+            max-width: 98%;
+        }
+
+        .slide-tech-black p.slide-intro {
+            color: rgba(255,255,255,0.85);
+        }
+
+        .handwritten-accent {
+            font-family: 'Caveat', cursive;
+            font-size: 17pt;
+            font-weight: 700;
+            color: var(--secondary);
+            display: inline-block;
+            transform: rotate(-2.5deg);
+            margin-left: 2mm;
+        }
+
+        /* COVER SLIDE (LIGHT BEIGE BG) */
+        .cover-slide-beige {
+            background-color: var(--bg-cream) !important;
+            justify-content: space-between;
+            padding: 14mm 18mm 12mm 18mm;
+        }
+
+        .cover-hero-box {
+            margin: auto 0;
+            display: flex;
+            flex-direction: column;
+            gap: 5mm;
+        }
+
+        .national-pill-cream {
+            display: inline-flex;
+            align-items: center;
+            gap: 2mm;
+            background: rgba(24, 79, 91, 0.08);
+            border: 1.5px solid var(--primary);
+            color: var(--primary-dark);
+            padding: 5px 16px;
+            border-radius: 20px;
+            font-size: 8.8pt;
+            font-weight: 800;
+            letter-spacing: 1.2px;
+            text-transform: uppercase;
+            width: fit-content;
+        }
+
+        .cover-heading-beige {
+            font-size: 32pt;
+            font-weight: 900;
+            line-height: 1.12;
+            letter-spacing: -0.8px;
+            color: var(--primary-dark);
+        }
+
+        .cover-heading-beige span {
+            color: var(--secondary);
+        }
+
+        .cover-sub-beige {
+            font-size: 12pt;
+            line-height: 1.55;
+            color: var(--text-muted);
+            max-width: 92%;
+            font-weight: 400;
+        }
+
+        .cover-kpi-beige-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 5mm;
+            background: #ffffff;
+            border: 1px solid var(--border-color);
+            border-top: 4px solid var(--secondary);
+            border-radius: 14px;
+            padding: 5.5mm 8mm;
+            margin-top: 2mm;
+            box-shadow: 0 4px 14px rgba(0,0,0,0.04);
+        }
+
+        .kpi-num-beige {
+            font-size: 22pt;
+            font-weight: 900;
+            color: var(--primary-dark);
+            line-height: 1.1;
+        }
+
+        .kpi-desc-beige {
+            font-size: 8.2pt;
+            color: var(--text-muted);
+            margin-top: 1.5mm;
+            line-height: 1.3;
+        }
+
+        /* DEDICATED DOMAIN SLIDE LAYOUT */
+        .domain-featured-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.15fr;
+            gap: 6mm;
+            flex: 1;
+        }
+
+        .domain-pain-card-dark {
+            background: rgba(239, 68, 68, 0.08);
+            border: 1.5px solid rgba(239, 68, 68, 0.3);
+            border-radius: 14px;
+            padding: 6mm 7mm;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .pain-card-title {
+            font-size: 11.5pt;
+            font-weight: 800;
+            color: #FCA5A5;
+            margin-bottom: 3mm;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .pain-card-bullet {
+            font-size: 9pt;
+            color: rgba(255,255,255,0.9);
+            line-height: 1.48;
+            margin-bottom: 2.5mm;
+            padding-left: 4mm;
+            position: relative;
+        }
+
+        .pain-card-bullet::before {
+            content: "•";
+            color: #EF4444;
+            font-weight: 800;
+            position: absolute;
+            left: 0;
+        }
+
+        .domain-sol-card-dark {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1.5px solid rgba(202, 169, 76, 0.35);
+            border-top: 5px solid var(--secondary);
+            border-radius: 14px;
+            padding: 6mm 7mm;
+            display: flex;
+            flex-direction: column;
+            gap: 3.5mm;
+            justify-content: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .sol-card-title {
+            font-size: 12pt;
+            font-weight: 900;
+            color: #FFFFFF;
+            margin-bottom: 1mm;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .sol-card-item {
+            background: rgba(255, 255, 255, 0.06);
+            border-left: 3.5px solid var(--secondary);
+            padding: 3mm 4mm;
+            border-radius: 6px;
+            font-size: 8.8pt;
+            color: #FFFFFF;
+            line-height: 1.42;
+        }
+
+        .sol-card-item strong {
+            color: #38BDF8;
+        }
+
+        .domain-outcomes-box {
+            background: rgba(202, 169, 76, 0.12);
+            border: 1px solid var(--secondary);
+            border-radius: 10px;
+            padding: 3.5mm 5mm;
+            font-size: 8.8pt;
+            color: var(--secondary);
+            font-weight: 700;
+            line-height: 1.35;
+        }
+
+        /* TURNKEY PACKAGES GRID */
+        .packages-5-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 4mm;
+            margin-bottom: 3.5mm;
+        }
+
+        .pkg-card-dark {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-top: 4px solid var(--secondary);
+            border-radius: 12px;
+            padding: 4.5mm 5.5mm;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .pkg-card-dark.flagship-gold {
+            border-top: 5px solid var(--secondary);
+            background: linear-gradient(180deg, rgba(202, 169, 76, 0.15) 0%, rgba(255, 255, 255, 0.04) 100%);
+            border-color: rgba(202, 169, 76, 0.4);
+        }
+
+        .pkg-card-dark.blue-top { border-top-color: #38BDF8; }
+
+        .pkg-title-dark {
+            font-size: 11pt;
+            font-weight: 800;
+            color: #FFFFFF;
+            margin-bottom: 2mm;
+        }
+
+        .pkg-text-dark {
+            font-size: 8.3pt;
+            line-height: 1.38;
+            color: rgba(255,255,255,0.8);
+            margin-bottom: 2.5mm;
+        }
+
+        .pkg-wedge-dark {
+            font-size: 8pt;
+            font-weight: 700;
+            color: #38BDF8;
+            background: rgba(56, 189, 248, 0.1);
+            padding: 2mm 3mm;
+            border-radius: 6px;
+            margin-top: auto;
+        }
+
+        /* ARCHITECTURE STEPS */
+        .arch-steps-dark-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 4mm;
+            margin-bottom: 4mm;
+        }
+
+        .arch-step-dark-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(202, 169, 76, 0.3);
+            border-radius: 10px;
+            padding: 4.5mm 5mm;
+            text-align: center;
+        }
+
+        .step-num-icon-gold {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: var(--secondary);
+            color: var(--primary-dark);
+            font-weight: 900;
+            font-size: 10pt;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 2mm auto;
+        }
+
+        .step-title-white {
+            font-size: 9.8pt;
+            font-weight: 800;
+            color: #FFFFFF;
+            margin-bottom: 1.5mm;
+        }
+
+        .step-desc-white {
+            font-size: 8pt;
+            color: rgba(255,255,255,0.8);
+            line-height: 1.32;
+        }
+
+        .cta-dark-banner {
+            background: linear-gradient(135deg, rgba(202, 169, 76, 0.15) 0%, rgba(24, 79, 91, 0.35) 100%);
+            border: 1.5px solid var(--secondary);
+            border-radius: 14px;
+            padding: 6mm 10mm;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: auto;
+        }
+
+        .cta-dark-banner h2 {
+            font-size: 14pt;
+            font-weight: 900;
+            color: #FFFFFF;
+            margin-bottom: 1mm;
+        }
+
+        .cta-dark-banner p {
+            font-size: 9pt;
+            color: rgba(255,255,255,0.85);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ================= SLIDE 1: COVER (LIGHT BEIGE BG) ================= -->
+    <div class="slide cover-slide-beige">
+        <div class="slide-header">
+            <img src="../logo.png" alt="Tadbeer Logo" class="logo-img">
+            <div class="header-tag">Executive Technology Presentation</div>
+        </div>
+
+        <div class="cover-hero-box">
+            <div class="national-pill-cream">Aligned with Oman AI & Digital Future Program (2024–2026)</div>
+            <h1 class="cover-heading-beige">Done-For-You Paid Acquisition, <span>AI Lead Generation & Enterprise ERP</span></h1>
+            <p class="cover-sub-beige">Engineered for urban retail leaders across Muscat, Salalah, and Oman: Driving high-ROI targeted ad campaigns, AI-generated creatives, 100% automated omni-channel lead management, and modular retail operations infrastructure.</p>
+
+            <div class="cover-kpi-beige-grid">
+                <div class="cover-kpi-unit">
+                    <div class="kpi-num-beige">Primary Core</div>
+                    <div class="kpi-desc-beige">Done-For-You Targeted Paid Ads & AI Lead Generation</div>
+                </div>
+                <div class="cover-kpi-unit">
+                    <div class="kpi-num-beige">100% Automated</div>
+                    <div class="kpi-desc-beige">Omni-Channel Lead Routing across WhatsApp & Instagram</div>
+                </div>
+                <div class="cover-kpi-unit">
+                    <div class="kpi-num-beige">$21.65B</div>
+                    <div class="kpi-desc-beige">Oman Retail Sector Market Forecast by 2034</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide-footer">
+            <div>Tadbeer Transformation Trading &nbsp;|&nbsp; Enterprise Growth & Technology Division</div>
+            <div class="slide-num">Slide 01 of 11</div>
+        </div>
+    </div>
+
+    <!-- ================= SLIDE 2: STRATEGIC CONTEXT (LIGHT BEIGE BG) ================= -->
+    <div class="slide">
+        <div class="slide-header">
+            <img src="../logo.png" alt="Tadbeer Logo" class="logo-img">
+            <div class="header-tag">Slide 02 &nbsp;|&nbsp; Strategic Context</div>
+        </div>
+
+        <h1 class="slide-title">The Omani Enterprise Growth Context: <span class="title-gold">Urgency & Acquisition</span></h1>
+        <p class="slide-intro">Oman's urban retail sector is expanding rapidly, yet SMEs face high customer acquisition costs and fragmented lead tracking. Tadbeer delivers done-for-you paid ad engines and automated lead routers paired with custom ERP backbones.</p>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 6mm; margin-bottom: 4mm;">
+            <div style="background: #ffffff; border: 1px solid var(--border-color); border-top: 4.5px solid var(--primary); border-radius: 12px; padding: 5mm 6mm; box-shadow: 0 4px 14px rgba(0,0,0,0.04);">
+                <div style="font-size: 8pt; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; color: var(--secondary); margin-bottom: 1.5mm;">Acquisition Challenge</div>
+                <div style="font-size: 11.5pt; font-weight: 800; color: var(--primary-dark); margin-bottom: 2mm;">Wasted Ad Spend & Lost Leads</div>
+                <div style="font-size: 8.8pt; line-height: 1.45; color: var(--text-dark);">Most retail SMEs run unoptimized social ads or lose 50%+ of incoming inquiries due to delayed manual replies on WhatsApp & Instagram. Tadbeer manages paid campaigns end-to-end and routes every lead automatically.</div>
+            </div>
+
+            <div style="background: #ffffff; border: 1px solid var(--border-color); border-top: 4.5px solid var(--secondary); border-radius: 12px; padding: 5mm 6mm; box-shadow: 0 4px 14px rgba(0,0,0,0.04);">
+                <div style="font-size: 8pt; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; color: var(--secondary); margin-bottom: 1.5mm;">Operational Backbone</div>
+                <div style="font-size: 11.5pt; font-weight: 800; color: var(--primary-dark); margin-bottom: 2mm;">Seamless Infrastructure Integration</div>
+                <div style="font-size: 8.8pt; line-height: 1.45; color: var(--text-dark);">Captured leads flow directly into Tadbeer's cloud POS and stock inventory spine, allowing AI sales agents to verify live store stock and convert leads into paid orders instantly.</div>
+            </div>
+        </div>
+
+        <h1 class="slide-title" style="font-size: 14pt; margin-top: 1mm;">National Policy Alignment: <span class="title-teal">Oman Vision 2040</span></h1>
+        <div style="background: #ffffff; border: 1px solid var(--border-color); border-left: 5px solid var(--secondary); border-radius: 10px; padding: 4.5mm 6mm; display: grid; grid-template-columns: 1fr 1fr; gap: 6mm;">
+            <div>
+                <div style="font-size: 9.5pt; font-weight: 800; color: var(--primary-dark); margin-bottom: 1.5mm;">Traditional Lead Generation Bottlenecks</div>
+                <div style="font-size: 8.5pt; color: var(--text-muted); line-height: 1.4;">
+                    • High Customer Acquisition Costs (CAC) from unoptimized ads<br>
+                    • Leads sitting in Excel files or personal staff WhatsApp accounts<br>
+                    • Zero attribution between paid ads and actual store POS revenue
+                </div>
+            </div>
+            <div>
+                <div style="font-size: 9.5pt; font-weight: 800; color: var(--primary); margin-bottom: 1.5mm;">Tadbeer DFY Ad Engine & Lead Router</div>
+                <div style="font-size: 8.5pt; color: var(--primary-dark); font-weight: 600; line-height: 1.4;">
+                    • AI-made high-converting ad creatives & localized Omani hooks<br>
+                    • 100% automated omni-channel lead capture & instant AI replies<br>
+                    • Full revenue attribution from ad click to POS checkout
+                </div>
+            </div>
+        </div>
+
+        <div class="slide-footer">
+            <div>Tadbeer Transformation Trading &nbsp;|&nbsp; Executive Presentation</div>
+            <div class="slide-num">Slide 02 of 11</div>
+        </div>
+    </div>
+
+    <!-- ================= SLIDE 3: DOMAIN 01 PRIMARY FEATURED SERVICE (BLACK TECH) ================= -->
+    <div class="slide slide-tech-black">
+        <div class="slide-header">
+            <img src="../logo.png" alt="Tadbeer Logo" class="logo-img logo-img-dark">
+            <div class="header-tag">Primary Core Service &nbsp;|&nbsp; DFY Paid Ads & Lead Engine</div>
+        </div>
+
+        <h1 class="slide-title">Done-For-You Paid Ads & <span class="title-gold">Omni-Channel Lead Engine</span> <span class="handwritten-accent">~ Guaranteed High-ROI Lead Acquisition</span></h1>
+        <p class="slide-intro">Running targeted paid ad campaigns, AI-generated creatives, and managing 100% of incoming leads across WhatsApp, Instagram DMs & Web channels.</p>
+
+        <div class="domain-featured-grid">
+            <div class="domain-pain-card-dark">
+                <div class="pain-card-title">Operational Pain Points</div>
+                <div class="pain-card-bullet">Wasted ad budget on generic social media ads without clear lead ROI or store sales attribution.</div>
+                <div class="pain-card-bullet">Incoming leads lost or ignored due to staff failing to reply to Instagram DMs and WhatsApp inquiries quickly.</div>
+                <div class="pain-card-bullet">High Customer Acquisition Costs (CAC) caused by unoptimized target audiences and weak ad copy.</div>
+                <div class="pain-card-bullet">No centralized CRM to track lead conversion rates from initial inquiry to final retail transaction.</div>
+            </div>
+
+            <div class="domain-sol-card-dark" style="border-top-color: var(--secondary); background: linear-gradient(180deg, rgba(202, 169, 76, 0.12) 0%, rgba(255, 255, 255, 0.04) 100%);">
+                <div class="sol-card-title">
+                    <span>Tadbeer Done-For-You Ad & Lead Engine</span>
+                    <span style="font-size: 8pt; font-weight: 800; background: rgba(202,169,76,0.2); color: var(--secondary); padding: 2px 10px; border-radius: 12px; border: 1px solid var(--secondary);">Flagship Core Service</span>
+                </div>
+
+                <div class="sol-card-item">
+                    <strong>Targeted Paid Ad Campaigns:</strong> Meta (Instagram/FB), TikTok, and Google Ads strategy executed & optimized end-to-end by Tadbeer.
+                </div>
+                <div class="sol-card-item">
+                    <strong>AI-Made Creatives & Hooks:</strong> Autonomous AI generation of high-converting video reel concepts, ad graphics, and localized Omani copy.
+                </div>
+                <div class="sol-card-item">
+                    <strong>Omni-Channel Lead Routing:</strong> 100% automated capture of every ad lead into a centralized pipeline, triggering instant 24/7 AI sales replies on WhatsApp & IG.
+                </div>
+
+                <div class="domain-outcomes-box">
+                    Measurable Impact: Lower Customer Acquisition Costs (CAC), 100% lead capture speed (<30s response time), and higher conversion.
+                </div>
+            </div>
+        </div>
+
+        <div class="slide-footer">
+            <div>Tadbeer Transformation Trading &nbsp;|&nbsp; Done-For-You Lead Generation</div>
+            <div class="slide-num">Slide 03 of 11</div>
+        </div>
+    </div>
+
+    <!-- ================= SLIDE 4: DOMAIN 02 POS & STOCK (BLACK TECH) ================= -->
+    <div class="slide slide-tech-black">
+        <div class="slide-header">
+            <img src="../logo.png" alt="Tadbeer Logo" class="logo-img logo-img-dark">
+            <div class="header-tag">Domain 02 &nbsp;|&nbsp; POS & Stock Control</div>
+        </div>
+
+        <h1 class="slide-title">POS, Inventory & <span class="title-gold">Stock Control Spine</span> <span class="handwritten-accent">~ Virtual Stock Controller</span></h1>
+        <p class="slide-intro">Eliminating billing queues, stockouts of fast movers, intuitive over-stocking, and cash locked in dead inventory.</p>
+
+        <div class="domain-featured-grid">
+            <div class="domain-pain-card-dark">
+                <div class="pain-card-title">Operational Pain Points</div>
+                <div class="pain-card-bullet">Billing delays and cashier bottlenecks during peak trading hours.</div>
+                <div class="pain-card-bullet">Stockouts of fast-moving SKUs leading to lost revenue and frustrated shoppers.</div>
+                <div class="pain-card-bullet">Intuitive reordering by store managers causing dead stock and locked cash.</div>
+                <div class="pain-card-bullet">Heavy end-of-season discounting required to clear overstocked inventory.</div>
+            </div>
+
+            <div class="domain-sol-card-dark">
+                <div class="sol-card-title">
+                    <span>Tadbeer Enterprise AI Solution</span>
+                    <span style="font-size: 8pt; font-weight: 800; background: rgba(56,189,248,0.15); color: #38BDF8; padding: 2px 10px; border-radius: 12px; border: 1px solid rgba(56,189,248,0.3);">Cloud POS + AI Agent</span>
+                </div>
+
+                <div class="sol-card-item">
+                    <strong>Cloud POS Spine:</strong> Multilingual (Arabic/English), offline-tolerant POS integrated with local receipt printers & payment terminals.
+                </div>
+                <div class="sol-card-item">
+                    <strong>AI Stock Controller Employee:</strong> Watches sell-through velocities, alerts on overstock/understock risks, and proposes automated supplier POs.
+                </div>
+                <div class="sol-card-item">
+                    <strong>Daily Founder WhatsApp Digest:</strong> Delivers daily sales, top sellers, stock risks, and suggested markdowns straight to the owner's phone.
+                </div>
+
+                <div class="domain-outcomes-box">
+                    Measurable Impact: Zero stockouts of core SKUs & up to 35% reduction in cash tied in dead inventory.
+                </div>
+            </div>
+        </div>
+
+        <div class="slide-footer">
+            <div>Tadbeer Transformation Trading &nbsp;|&nbsp; POS & Stock Infrastructure</div>
+            <div class="slide-num">Slide 04 of 11</div>
+        </div>
+    </div>
+
+    <!-- ================= SLIDE 5: DOMAIN 03 SOCIAL COMMERCE (BLACK TECH) ================= -->
+    <div class="slide slide-tech-black">
+        <div class="slide-header">
+            <img src="../logo.png" alt="Tadbeer Logo" class="logo-img logo-img-dark">
+            <div class="header-tag">Domain 03 &nbsp;|&nbsp; Social Commerce</div>
+        </div>
+
+        <h1 class="slide-title">Omni-Channel & <span class="title-gold">Social Commerce Router</span> <span class="handwritten-accent">~ Direct WhatsApp Sales Engine</span></h1>
+        <p class="slide-intro">Unifying physical store POS, e-commerce stores, WhatsApp chats, and Instagram DMs into one automated pipeline.</p>
+
+        <div class="domain-featured-grid">
+            <div class="domain-pain-card-dark">
+                <div class="pain-card-title">Operational Pain Points</div>
+                <div class="pain-card-bullet">Double-sold items due to disconnected store POS and WhatsApp/Instagram channels.</div>
+                <div class="pain-card-bullet">Lost orders caused by slow manual response times on messaging platforms.</div>
+                <div class="pain-card-bullet">Inconsistent pricing and promotions across physical outlets and digital DMs.</div>
+                <div class="pain-card-bullet">Fulfillment chaos and delayed deliveries leading to customer complaints.</div>
+            </div>
+
+            <div class="domain-sol-card-dark">
+                <div class="sol-card-title">
+                    <span>Tadbeer Enterprise AI Solution</span>
+                    <span style="font-size: 8pt; font-weight: 800; background: rgba(56,189,248,0.15); color: #38BDF8; padding: 2px 10px; border-radius: 12px; border: 1px solid rgba(56,189,248,0.3);">RetailOps Router</span>
+                </div>
+
+                <div class="sol-card-item">
+                    <strong>Unified RetailOps Order Hub:</strong> Connects POS, Shopify/Woo, WhatsApp & Instagram DMs into one JSON data pipeline backed by Supabase.
+                </div>
+                <div class="sol-card-item">
+                    <strong>AI WhatsApp/IG Sales Agents:</strong> Displays catalog, verifies live stock from POS, processes payments, and creates orders 24/7 automatically.
+                </div>
+                <div class="sol-card-item">
+                    <strong>Fulfillment Automation:</strong> Assigns delivery tasks, tracks order status, and auto-notifies customers via automated WhatsApp updates.
+                </div>
+
+                <div class="domain-outcomes-box">
+                    Measurable Impact: Zero lost WhatsApp orders, 100% stock sync across all channels, and faster delivery fulfillment.
+                </div>
+            </div>
+        </div>
+
+        <div class="slide-footer">
+            <div>Tadbeer Transformation Trading &nbsp;|&nbsp; Social Commerce Architecture</div>
+            <div class="slide-num">Slide 05 of 11</div>
+        </div>
+    </div>
+
+    <!-- ================= SLIDE 6: DOMAIN 04 CDP & LOYALTY (BLACK TECH) ================= -->
+    <div class="slide slide-tech-black">
+        <div class="slide-header">
+            <img src="../logo.png" alt="Tadbeer Logo" class="logo-img logo-img-dark">
+            <div class="header-tag">Domain 04 &nbsp;|&nbsp; Customer CDP & Loyalty</div>
+        </div>
+
+        <h1 class="slide-title">Micro-CDP & <span class="title-gold">Customer Loyalty Engine</span> <span class="handwritten-accent">~ Done-for-You Retention</span></h1>
+        <p class="slide-intro">Transforming silent POS receipts into intelligent customer profiles, automated WhatsApp campaigns, and friction-free loyalty.</p>
+
+        <div class="domain-featured-grid">
+            <div class="domain-pain-card-dark">
+                <div class="pain-card-title">Operational Pain Points</div>
+                <div class="pain-card-bullet">Customer data sits isolated inside POS receipts with zero marketing activation.</div>
+                <div class="pain-card-bullet">Generic discount spams that erode margins without driving true customer loyalty.</div>
+                <div class="pain-card-bullet">High customer churn with owners unaware of lapsed repeat buyers.</div>
+                <div class="pain-card-bullet">Complicated loyalty apps that customers refuse to download or register for.</div>
+            </div>
+
+            <div class="domain-sol-card-dark">
+                <div class="sol-card-title">
+                    <span>Tadbeer Enterprise AI Solution</span>
+                    <span style="font-size: 8pt; font-weight: 800; background: rgba(56,189,248,0.15); color: #38BDF8; padding: 2px 10px; border-radius: 12px; border: 1px solid rgba(56,189,248,0.3);">Micro-CDP + AI Marketer</span>
+                </div>
+
+                <div class="sol-card-item">
+                    <strong>SME Micro-CDP:</strong> Ingests POS receipts, WhatsApp chats & sign-up forms into a unified customer table with purchase history.
+                </div>
+                <div class="sol-card-item">
+                    <strong>AI Customer Segmentation Agent:</strong> Auto-groups buyers into VIPs, frequent visitors, lapsed buyers, and category affinities.
+                </div>
+                <div class="sol-card-item">
+                    <strong>App-Free Loyalty & WhatsApp Campaigns:</strong> Tiered points & punch-card rewards tracked seamlessly via phone number at POS checkout.
+                </div>
+
+                <div class="domain-outcomes-box">
+                    Measurable Impact: 25%+ increase in repeat customer visits & higher average cart value through automated retention.
+                </div>
+            </div>
+        </div>
+
+        <div class="slide-footer">
+            <div>Tadbeer Transformation Trading &nbsp;|&nbsp; Customer Intelligence</div>
+            <div class="slide-num">Slide 06 of 11</div>
+        </div>
+    </div>
+
+    <!-- ================= SLIDE 7: DOMAIN 05 AI CFO (BLACK TECH) ================= -->
+    <div class="slide slide-tech-black">
+        <div class="slide-header">
+            <img src="../logo.png" alt="Tadbeer Logo" class="logo-img logo-img-dark">
+            <div class="header-tag">Domain 05 &nbsp;|&nbsp; Executive Visibility</div>
+        </div>
+
+        <h1 class="slide-title">Founder Cockpit & <span class="title-gold">Conversational AI CFO</span> <span class="handwritten-accent">~ Live CFO in Your Pocket</span></h1>
+        <p class="slide-intro">Replacing bank statement guesswork with real-time financial dashboards, margin visibility, and on-demand AI financial simulation.</p>
+
+        <div class="domain-featured-grid">
+            <div class="domain-pain-card-dark">
+                <div class="pain-card-title">Operational Pain Points</div>
+                <div class="pain-card-bullet">Owners juggling POS exports, bank statements, and gut feel without true margin metrics.</div>
+                <div class="pain-card-bullet">Inability to forecast cash flow or run scenario analysis before expanding outlets.</div>
+                <div class="pain-card-bullet">Undetected margin compression and sudden inventory write-offs killing profitability.</div>
+                <div class="pain-card-bullet">Lack of time or specialized staff to analyze complex financial spreadsheets.</div>
+            </div>
+
+            <div class="domain-sol-card-dark">
+                <div class="sol-card-title">
+                    <span>Tadbeer Enterprise AI Solution</span>
+                    <span style="font-size: 8pt; font-weight: 800; background: rgba(56,189,248,0.15); color: #38BDF8; padding: 2px 10px; border-radius: 12px; border: 1px solid rgba(56,189,248,0.3);">Founder Cockpit + AI CFO</span>
+                </div>
+
+                <div class="sol-card-item">
+                    <strong>Founder Cockpit Dashboard:</strong> Real-time visual views of daily revenue, gross margins, stock health, and cash conversion cycle.
+                </div>
+                <div class="sol-card-item">
+                    <strong>Conversational AI CFO on WhatsApp:</strong> Owners chat with an AI having live data access to ask "Can I open branch #2?", "Will this discount kill margins?".
+                </div>
+                <div class="sol-card-item">
+                    <strong>Automated Anomaly Alerting:</strong> Proactive WhatsApp flags for sudden sales drops, stock write-offs, or unexpected cost spikes.
+                </div>
+
+                <div class="domain-outcomes-box">
+                    Measurable Impact: Total financial clarity for store owners & data-backed expansion decision-making.
+                </div>
+            </div>
+        </div>
+
+        <div class="slide-footer">
+            <div>Tadbeer Transformation Trading &nbsp;|&nbsp; Executive Visibility</div>
+            <div class="slide-num">Slide 07 of 11</div>
+        </div>
+    </div>
+
+    <!-- ================= SLIDE 8: DOMAIN 06 PROCUREMENT (BLACK TECH) ================= -->
+    <div class="slide slide-tech-black">
+        <div class="slide-header">
+            <img src="../logo.png" alt="Tadbeer Logo" class="logo-img logo-img-dark">
+            <div class="header-tag">Domain 06 &nbsp;|&nbsp; Procurement & Cash Guard</div>
+        </div>
+
+        <h1 class="slide-title">Procurement & <span class="title-gold">Supplier Cash Guard</span> <span class="handwritten-accent">~ Smart Capital Discipline</span></h1>
+        <p class="slide-intro">Structuring chaotic phone/WhatsApp supplier reorders into automated purchasing policies that protect cash liquidity.</p>
+
+        <div class="domain-featured-grid">
+            <div class="domain-pain-card-dark">
+                <div class="pain-card-title">Operational Pain Points</div>
+                <div class="pain-card-bullet">Chaotic purchasing via informal phone calls and WhatsApp messages with local importers.</div>
+                <div class="pain-card-bullet">Unplanned bulk buying that ties up working capital in slow-moving inventory.</div>
+                <div class="pain-card-bullet">Lack of visibility into supplier lead times causing unexpected stockouts.</div>
+                <div class="pain-card-bullet">Manual invoice reconciliation leading to payment errors and supplier disputes.</div>
+            </div>
+
+            <div class="domain-sol-card-dark">
+                <div class="sol-card-title">
+                    <span>Tadbeer Enterprise AI Solution</span>
+                    <span style="font-size: 8pt; font-weight: 800; background: rgba(56,189,248,0.15); color: #38BDF8; padding: 2px 10px; border-radius: 12px; border: 1px solid rgba(56,189,248,0.3);">Supplier Portal + Purchasing Agent</span>
+                </div>
+
+                <div class="sol-card-item">
+                    <strong>Supplier Portal & API:</strong> Web interface where local wholesalers view demand forecasts, recommended orders, and confirm deliveries.
+                </div>
+                <div class="sol-card-item">
+                    <strong>AI Purchasing Agent:</strong> Monitors sell-through velocities, lead times, and cash reserves to propose balanced purchase orders.
+                </div>
+                <div class="sol-card-item">
+                    <strong>Cash Discipline Workflows:</strong> Strict rules (e.g. "Do not exceed X% cash in slow stock") enforced before approving new purchase orders.
+                </div>
+
+                <div class="domain-outcomes-box">
+                    Measurable Impact: Optimized purchasing cycles, zero emergency high-price reorders, and protected working capital.
+                </div>
+            </div>
+        </div>
+
+        <div class="slide-footer">
+            <div>Tadbeer Transformation Trading &nbsp;|&nbsp; Procurement Control</div>
+            <div class="slide-num">Slide 08 of 11</div>
+        </div>
+    </div>
+
+    <!-- ================= SLIDE 9: DOMAIN 07 WORKFORCE & PAYMENTS (BLACK TECH) ================= -->
+    <div class="slide slide-tech-black">
+        <div class="slide-header">
+            <img src="../logo.png" alt="Tadbeer Logo" class="logo-img logo-img-dark">
+            <div class="header-tag">Domain 07 &nbsp;|&nbsp; Workforce & Compliance</div>
+        </div>
+
+        <h1 class="slide-title">Staff Productivity & <span class="title-gold">Compliance Operations</span> <span class="handwritten-accent">~ Automated Store Onboarding</span></h1>
+        <p class="slide-intro">Overcoming retail talent shortages through AI floor guidance, contextual micro-learning, and CBO digital fee waiver optimization.</p>
+
+        <div class="domain-featured-grid">
+            <div class="domain-pain-card-dark">
+                <div class="pain-card-title">Operational Pain Points</div>
+                <div class="pain-card-bullet">High staff turnover requiring constant, repetitive training overhead from store managers.</div>
+                <div class="pain-card-bullet">Mistakes in POS system usage, wrong stock adjustments, and incorrect discounting.</div>
+                <div class="pain-card-bullet">Uncertainty surrounding Central Bank of Oman (CBO) digital transfer fees & VAT rules.</div>
+                <div class="pain-card-bullet">Reconciliation discrepancies between store POS card terminals and bank deposits.</div>
+            </div>
+
+            <div class="domain-sol-card-dark">
+                <div class="sol-card-title">
+                    <span>Tadbeer Enterprise AI Solution</span>
+                    <span style="font-size: 8pt; font-weight: 800; background: rgba(56,189,248,0.15); color: #38BDF8; padding: 2px 10px; border-radius: 12px; border: 1px solid rgba(56,189,248,0.3);">AI Floor Manager + Payment Layer</span>
+                </div>
+
+                <div class="sol-card-item">
+                    <strong>AI Floor Manager Agent:</strong> Accessible via WhatsApp or store kiosk, answering "How do I process X?", walking staff through system steps.
+                </div>
+                <div class="sol-card-item">
+                    <strong>Contextual Micro-Learning:</strong> Short video/text lessons automatically triggered when staff make POS adjustment mistakes.
+                </div>
+                <div class="sol-card-item">
+                    <strong>CBO Digital Fee Waiver Optimization:</strong> Configures cashless flows to maximize benefit from Central Bank transfer fee waivers.
+                </div>
+
+                <div class="domain-outcomes-box">
+                    Measurable Impact: 70% reduction in staff onboarding time & 100% automated regulatory compliance alignment.
+                </div>
+            </div>
+        </div>
+
+        <div class="slide-footer">
+            <div>Tadbeer Transformation Trading &nbsp;|&nbsp; Workforce Enablement</div>
+            <div class="slide-num">Slide 09 of 11</div>
+        </div>
+    </div>
+
+    <!-- ================= SLIDE 10: 5 TURNKEY PACKAGES (BLACK TECH) ================= -->
+    <div class="slide slide-tech-black">
+        <div class="slide-header">
+            <img src="../logo.png" alt="Tadbeer Logo" class="logo-img logo-img-dark">
+            <div class="header-tag">Slide 10 &nbsp;|&nbsp; Turnkey Packages</div>
+        </div>
+
+        <h1 class="slide-title">5 Productized <span class="title-gold">Turnkey Growth Packages</span></h1>
+        <p class="slide-intro">Modular enterprise packages engineered for rapid deployment with immediate operational ROI.</p>
+
+        <div class="packages-5-grid">
+            <div class="pkg-card-dark flagship-gold">
+                <div style="font-size: 7.5pt; font-weight: 800; color: var(--secondary); text-transform: uppercase; margin-bottom: 1mm;">Package 01 (Flagship)</div>
+                <div class="pkg-title-dark">DFY Ad Growth & Lead Engine</div>
+                <div class="pkg-text-dark">Targeted Ads Execution + AI-Made Creatives + Omni-Channel WhatsApp/IG Lead Router + AI Sales Qualifier.</div>
+                <div class="pkg-wedge-dark" style="color: var(--secondary); background: rgba(202,169,76,0.15);">Target: Businesses scaling customer acquisition</div>
+            </div>
+
+            <div class="pkg-card-dark blue-top">
+                <div style="font-size: 7.5pt; font-weight: 800; color: #38BDF8; text-transform: uppercase; margin-bottom: 1mm;">Package 02</div>
+                <div class="pkg-title-dark">RetailOps Enterprise Core</div>
+                <div class="pkg-text-dark">Cloud POS setup + Unified Stock Inventory + AI Stock Controller Agent + Daily Founder WhatsApp Digest.</div>
+                <div class="pkg-wedge-dark">Target: Fashion, Electronics & Cafes facing stockouts</div>
+            </div>
+
+            <div class="pkg-card-dark">
+                <div style="font-size: 7.5pt; font-weight: 800; color: rgba(255,255,255,0.7); text-transform: uppercase; margin-bottom: 1mm;">Package 03</div>
+                <div class="pkg-title-dark">Social Commerce Engine</div>
+                <div class="pkg-text-dark">Unified Order Router + WhatsApp/IG AI Sales Agents + Live Stock Sync + Fulfillment Tracking.</div>
+                <div class="pkg-wedge-dark">Target: Boutiques & Retailers with high DM volume</div>
+            </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 4mm;">
+            <div class="pkg-card-dark">
+                <div style="font-size: 7.5pt; font-weight: 800; color: rgba(255,255,255,0.7); text-transform: uppercase; margin-bottom: 1mm;">Package 04</div>
+                <div class="pkg-title-dark">Customer Brain CDP</div>
+                <div class="pkg-text-dark">Micro-CDP + AI Customer Segmentation + Automated WhatsApp Broadcasts + App-Free Loyalty Logic.</div>
+                <div class="pkg-wedge-dark">Target: Multi-branch chains driving repeat sales</div>
+            </div>
+
+            <div class="pkg-card-dark blue-top">
+                <div style="font-size: 7.5pt; font-weight: 800; color: #38BDF8; text-transform: uppercase; margin-bottom: 1mm;">Package 05</div>
+                <div class="pkg-title-dark">Owner Cockpit & AI CFO</div>
+                <div class="pkg-text-dark">Real-time Margin Dashboards + Scenario Simulator + Conversational AI CFO on WhatsApp.</div>
+                <div class="pkg-wedge-dark">Target: Growth-minded founders expanding branch outlets</div>
+            </div>
+        </div>
+
+        <div class="slide-footer">
+            <div>Tadbeer Transformation Trading &nbsp;|&nbsp; Enterprise Packages</div>
+            <div class="slide-num">Slide 10 of 11</div>
+        </div>
+    </div>
+
+    <!-- ================= SLIDE 11: SYSTEM ARCHITECTURE & ROLLOUT (BLACK TECH) ================= -->
+    <div class="slide slide-tech-black">
+        <div class="slide-header">
+            <img src="../logo.png" alt="Tadbeer Logo" class="logo-img logo-img-dark">
+            <div class="header-tag">Slide 11 &nbsp;|&nbsp; Architecture & Methodology</div>
+        </div>
+
+        <h1 class="slide-title">Enterprise Infrastructure & <span class="title-gold">Pilot-to-Scale Rollout</span></h1>
+        <p class="slide-intro">Our proven 4-phase methodology guarantees zero operational disruption during system deployment.</p>
+
+        <div class="arch-steps-dark-grid">
+            <div class="arch-step-dark-card">
+                <div class="step-num-icon-gold">01</div>
+                <div class="step-title-white">Phase 1: Audit & Design</div>
+                <div class="step-desc-white">Ad channel & workflow audit, POS evaluation, lead routing setup, and AI agent scoping.</div>
+            </div>
+
+            <div class="arch-step-dark-card">
+                <div class="step-num-icon-gold">02</div>
+                <div class="step-title-white">Phase 2: Pilot Rollout</div>
+                <div class="step-desc-white">Deploy targeted ad campaigns, AI Lead Router & POS spine in 1 flagship location.</div>
+            </div>
+
+            <div class="arch-step-dark-card">
+                <div class="step-num-icon-gold">03</div>
+                <div class="step-title-white">Phase 3: Validation</div>
+                <div class="step-desc-white">Measure Customer Acquisition Cost (CAC), lead conversion speed, stock accuracy, and sales growth.</div>
+            </div>
+
+            <div class="arch-step-dark-card">
+                <div class="step-num-icon-gold">04</div>
+                <div class="step-title-white">Phase 4: Full Scale</div>
+                <div class="step-desc-white">Seamlessly scale ad budgets & AI operations across all showroom branches in Oman & Dubai.</div>
+            </div>
+        </div>
+
+        <div class="cta-dark-banner">
+            <div>
+                <h2>Schedule an Executive Technology Discovery Session</h2>
+                <p>Collaborate with Tadbeer's Enterprise Systems team to evaluate your acquisition & retail infrastructure.</p>
+            </div>
+            <div style="text-align: right; font-size: 9.5pt; color: #FFFFFF; line-height: 1.4;">
+                <div>Direct Email: <span style="color: var(--secondary); font-weight: 800;">operation@tadbeertt.com</span></div>
+                <div>Website: <span style="color: var(--secondary); font-weight: 800;">www.tadbeertt.com</span></div>
+                <div>Head Office: <span style="color: #FFFFFF; font-weight: 700;">Muscat, Sultanate of Oman</span></div>
+            </div>
+        </div>
+
+        <div class="slide-footer">
+            <div>Tadbeer Transformation Trading © 2026 &nbsp;|&nbsp; All Rights Reserved</div>
+            <div class="slide-num">Slide 11 of 11</div>
+        </div>
+    </div>
+
+</body>
+</html>

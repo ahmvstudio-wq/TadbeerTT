@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tadbeer - Client Requirements Collection Checklist</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #184F5B;       /* Deep Slate Teal */
+            --primary-dark: #0B2B33;  /* Midnight Teal */
+            --secondary: #CAA94C;     /* Warm Omani Gold */
+            --bg-light: #F9F8F3;      /* Warm Off-White Cream */
+            --text-dark: #1C1B17;
+            --text-muted: #475569;
+            --border-color: #CBD5E1;
+        }
+
+        @page {
+            size: A4 portrait;
+            margin: 0;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--text-dark);
+            background-color: var(--bg-light);
+            padding: 12mm 15mm;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+
+        .header-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2.5px solid var(--secondary);
+            padding-bottom: 5mm;
+            margin-bottom: 6mm;
+        }
+
+        .logo-img {
+            height: 38px;
+            width: auto;
+        }
+
+        .header-tag {
+            font-size: 8.5pt;
+            font-weight: 800;
+            letter-spacing: 1.5px;
+            color: var(--primary);
+            text-transform: uppercase;
+            background: rgba(24, 79, 91, 0.08);
+            padding: 4px 14px;
+            border-radius: 20px;
+            border: 1px solid rgba(24, 79, 91, 0.2);
+        }
+
+        h1.title {
+            font-size: 20pt;
+            font-weight: 800;
+            color: var(--primary-dark);
+            margin-bottom: 2mm;
+        }
+
+        p.subtitle {
+            font-size: 9.5pt;
+            color: var(--text-muted);
+            line-height: 1.45;
+            margin-bottom: 6mm;
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 5mm;
+        }
+
+        .section-card {
+            background: #ffffff;
+            border: 1px solid var(--border-color);
+            border-top: 4px solid var(--primary);
+            border-radius: 10px;
+            padding: 5mm 6mm;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+        }
+
+        .section-card.gold-border {
+            border-top-color: var(--secondary);
+        }
+
+        .section-num {
+            font-size: 8pt;
+            font-weight: 800;
+            color: var(--secondary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 1mm;
+        }
+
+        .section-title {
+            font-size: 11pt;
+            font-weight: 800;
+            color: var(--primary-dark);
+            margin-bottom: 3mm;
+            padding-bottom: 1.5mm;
+            border-bottom: 1px solid rgba(0,0,0,0.08);
+        }
+
+        .check-list {
+            display: flex;
+            flex-direction: column;
+            gap: 2.5mm;
+        }
+
+        .check-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 3mm;
+            font-size: 8.8pt;
+            color: var(--text-dark);
+            line-height: 1.38;
+        }
+
+        .check-box {
+            width: 14px;
+            height: 14px;
+            border: 1.8px solid var(--primary);
+            border-radius: 3px;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .note-box {
+            grid-column: span 2;
+            background: rgba(24, 79, 91, 0.05);
+            border: 1px solid rgba(24, 79, 91, 0.2);
+            border-radius: 8px;
+            padding: 4mm 6mm;
+            margin-top: 2mm;
+            font-size: 8.8pt;
+            color: var(--primary-dark);
+            line-height: 1.45;
+        }
+
+        .footer-bar {
+            margin-top: 6mm;
+            padding-top: 4mm;
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 8.5pt;
+            color: var(--text-muted);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header-bar">
+        <img src="../logo.png" alt="Tadbeer Logo" class="logo-img">
+        <div class="header-tag">Client Data Collection Requirements</div>
+    </div>
+
+    <h1 class="title">Information & Data Collection Checklist</h1>
+    <p class="subtitle">To customize the Human Capital Transformation System, design tailor-made SOPs, and configure the digital management dashboard for your retail group, Tadbeer requests the following organizational data:</p>
+
+    <div class="grid-container">
+        <!-- 1. Store Locations & Capacity -->
+        <div class="section-card">
+            <div class="section-num">Category 01</div>
+            <div class="section-title">Store Network & Showroom Locations</div>
+            <div class="check-list">
+                <div class="check-item">
+                    <div class="check-box"></div>
+                    <div><strong>Pilot Showroom Location:</strong> Exact address & layout details of the flagship showroom selected for Phase 1 pilot.</div>
+                </div>
+                <div class="check-item">
+                    <div class="check-box"></div>
+                    <div><strong>Branch Locations List:</strong> Addresses and store sizes of all remaining showroom branches across Oman and Dubai.</div>
+                </div>
+                <div class="check-item">
+                    <div class="check-box"></div>
+                    <div><strong>Store Headcount:</strong> Number of frontline sales staff, cashiers, supervisors, and store managers per showroom location.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 2. Employee Profile & Staff Details -->
+        <div class="section-card gold-border">
+            <div class="section-num">Category 02</div>
+            <div class="section-title">Employee Profiles & Roster Data</div>
+            <div class="check-list">
+                <div class="check-item">
+                    <div class="check-box"></div>
+                    <div><strong>Complete Staff Roster:</strong> List of current store employees with Job Titles, Designations & Department.</div>
+                </div>
+                <div class="check-item">
+                    <div class="check-box"></div>
+                    <div><strong>Employee Demographics:</strong> Age, nationality, years of service, and language capabilities.</div>
+                </div>
+                <div class="check-item">
+                    <div class="check-box"></div>
+                    <div><strong>Role Responsibility Mapping:</strong> Current assigned daily duties per job title (Sales, Stocking, Cashiering, Supervision).</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 3. Current Operational SOPs & Policies -->
+        <div class="section-card gold-border">
+            <div class="section-num">Category 03</div>
+            <div class="section-title">Current Operations & SOP Manuals</div>
+            <div class="check-list">
+                <div class="check-item">
+                    <div class="check-box"></div>
+                    <div><strong>Company Policy Manual:</strong> Existing Employee Handbook, Code of Conduct & HR policies.</div>
+                </div>
+                <div class="check-item">
+                    <div class="check-box"></div>
+                    <div><strong>Current SOP Documents:</strong> Store opening/closing checklists, product handling, grooming & customer service guidelines.</div>
+                </div>
+                <div class="check-item">
+                    <div class="check-box"></div>
+                    <div><strong>Attendance & Shift Tracking System:</strong> Details on current time-attendance software or manual roster tracking.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 4. Compensation & HR Benefits Structure -->
+        <div class="section-card">
+            <div class="section-num">Category 04</div>
+            <div class="section-title">Compensation & HR Benefits Structure</div>
+            <div class="check-list">
+                <div class="check-item">
+                    <div class="check-box"></div>
+                    <div><strong>Salary & Commission Structure:</strong> Base salary bands, target commissions, and performance bonus policies.</div>
+                </div>
+                <div class="check-item">
+                    <div class="check-box"></div>
+                    <div><strong>Leave & Flight Allowance:</strong> Annual leave entitlement, air ticket allowance rules & gratuity payout terms (e.g. 2-year payout cycle).</div>
+                </div>
+                <div class="check-item">
+                    <div class="check-box"></div>
+                    <div><strong>Medical & Secondary Benefits:</strong> Employer medical insurance coverage levels for employees and dependents.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 5. Organizational Chart & Approval Workflows -->
+        <div class="note-box">
+            <div style="font-weight: 800; text-transform: uppercase; letter-spacing: 0.8px; color: var(--primary-dark); margin-bottom: 1.5mm;">Category 05: Organizational Hierarchy & Approval Workflows</div>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 4mm;">
+                <div class="check-item">
+                    <div class="check-box"></div>
+                    <div><strong>Current Org Chart:</strong> Reporting lines from frontline staff up to Store Managers, Regional Managers, and C-Suite.</div>
+                </div>
+                <div class="check-item">
+                    <div class="check-box"></div>
+                    <div><strong>Approval Workflows:</strong> Escalation paths for discount approvals, customer complaints, stock returns, and schedule swaps.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer-bar">
+        <div>Tadbeer Transformation Trading © 2026 &nbsp;|&nbsp; Confidential Client Document</div>
+        <div style="font-weight: 700; color: var(--primary);">Direct Inquiries: operation@tadbeertt.com</div>
+    </div>
+
+</body>
+</html>
