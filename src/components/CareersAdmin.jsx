@@ -1009,50 +1009,109 @@ const CareersAdmin = () => {
         const filteredApplicants = getFilteredApplicants();
         const availableJobs = getAvailableJobTitles();
         return (
-          <div>
+          <div style={{ width: '100%' }}>
             {/* Header Bar */}
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '1.5rem', flexWrap: 'wrap', gap: '0.75rem' }}>
               <div>
-                <h3 style={{ color: 'var(--primary)', margin: 0, display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                  <UserCheck size={22} /> Job Applicants
+                <h3 style={{ color: 'var(--primary)', margin: 0, display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '1.5rem', fontWeight: '800' }}>
+                  <UserCheck size={26} color="var(--primary)" /> Job Applicants Dashboard
                 </h3>
-                <p style={{ color: 'var(--text-muted)', fontSize: '0.85rem', marginTop: '0.25rem' }}>
-                  {allJobApplicants.length} total application{allJobApplicants.length !== 1 ? 's' : ''} received across all job postings
+                <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem', marginTop: '0.25rem' }}>
+                  Manage candidate applications, view attached resumes, and review qualifications.
                 </p>
               </div>
               <div style={{ display: 'flex', gap: '0.6rem', flexWrap: 'wrap', alignItems: 'center' }}>
                 <button
                   onClick={() => { setLoading(true); const pwd = getPassword(); Promise.all([fetchLeads(pwd), fetchJobs()]).then(([ldata, jdata]) => { setLeads(ldata); setJobs(jdata); setLoading(false); triggerToast('Refreshed applicant data.'); }); }}
-                  style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', fontSize: '0.85rem', padding: '0.5rem 1rem', background: 'rgba(24,79,91,0.07)', color: 'var(--primary)', border: '1px solid var(--border)', borderRadius: '8px', cursor: 'pointer', fontWeight: '600' }}
+                  style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', fontSize: '0.85rem', padding: '0.6rem 1.1rem', background: 'rgba(24,79,91,0.07)', color: 'var(--primary)', border: '1px solid var(--border)', borderRadius: '10px', cursor: 'pointer', fontWeight: '700', transition: 'all 0.2s' }}
                 >
                   <RefreshCw size={14} /> Refresh
                 </button>
                 <button
                   className="btn btn-primary"
                   onClick={handleExportApplicantsCSV}
-                  style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', fontSize: '0.85rem', padding: '0.5rem 1rem' }}
+                  style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', fontSize: '0.85rem', padding: '0.6rem 1.1rem', borderRadius: '10px', fontWeight: '700' }}
                 >
                   <Download size={15} /> Export CSV ({filteredApplicants.length})
                 </button>
               </div>
             </div>
 
+            {/* ── TOP APPLICANT METRICS SHOWCASE BAR ── */}
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '1rem', marginBottom: '1.75rem' }}>
+              
+              {/* Card 1: Total Applicants */}
+              <div style={{ background: 'linear-gradient(135deg, #184F5B 0%, #256a79 100%)', color: '#fff', padding: '1.25rem 1.5rem', borderRadius: '16px', boxShadow: '0 8px 24px rgba(24,79,91,0.15)', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                <div>
+                  <div style={{ fontSize: '0.78rem', textTransform: 'uppercase', letterSpacing: '0.8px', opacity: 0.85, fontWeight: '700' }}>Total Applicants</div>
+                  <div style={{ fontSize: '2.2rem', fontWeight: '800', marginTop: '0.2rem', lineHeight: 1 }}>{allJobApplicants.length}</div>
+                  <div style={{ fontSize: '0.78rem', opacity: 0.8, marginTop: '0.35rem' }}>Across all job postings</div>
+                </div>
+                <div style={{ width: '48px', height: '48px', borderRadius: '12px', background: 'rgba(255,255,255,0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                  <UserCheck size={24} color="#fff" />
+                </div>
+              </div>
+
+              {/* Card 2: Filter Matches */}
+              <div style={{ background: '#fff', border: '1px solid var(--border)', padding: '1.25rem 1.5rem', borderRadius: '16px', boxShadow: '0 4px 16px rgba(0,0,0,0.03)', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                <div>
+                  <div style={{ fontSize: '0.78rem', textTransform: 'uppercase', letterSpacing: '0.8px', color: 'var(--text-muted)', fontWeight: '700' }}>Matching Filter</div>
+                  <div style={{ fontSize: '2.2rem', fontWeight: '800', marginTop: '0.2rem', color: 'var(--primary)', lineHeight: 1 }}>{filteredApplicants.length}</div>
+                  <div style={{ fontSize: '0.78rem', color: 'var(--text-muted)', marginTop: '0.35rem' }}>
+                    {applicantJobFilter !== 'ALL' ? applicantJobFilter : 'Active candidates'}
+                  </div>
+                </div>
+                <div style={{ width: '48px', height: '48px', borderRadius: '12px', background: 'rgba(202,169,76,0.12)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                  <Filter size={22} color="#CAA94C" />
+                </div>
+              </div>
+
+              {/* Card 3: Active Job Roles */}
+              <div style={{ background: '#fff', border: '1px solid var(--border)', padding: '1.25rem 1.5rem', borderRadius: '16px', boxShadow: '0 4px 16px rgba(0,0,0,0.03)', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                <div>
+                  <div style={{ fontSize: '0.78rem', textTransform: 'uppercase', letterSpacing: '0.8px', color: 'var(--text-muted)', fontWeight: '700' }}>Job Roles Open</div>
+                  <div style={{ fontSize: '2.2rem', fontWeight: '800', marginTop: '0.2rem', color: 'var(--primary)', lineHeight: 1 }}>{jobs.length}</div>
+                  <div style={{ fontSize: '0.78rem', color: 'var(--text-muted)', marginTop: '0.35rem' }}>Active positions</div>
+                </div>
+                <div style={{ width: '48px', height: '48px', borderRadius: '12px', background: 'rgba(24,79,91,0.08)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                  <Briefcase size={22} color="var(--primary)" />
+                </div>
+              </div>
+
+              {/* Card 4: Recent Submission */}
+              <div style={{ background: '#fff', border: '1px solid var(--border)', padding: '1.25rem 1.5rem', borderRadius: '16px', boxShadow: '0 4px 16px rgba(0,0,0,0.03)', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                <div>
+                  <div style={{ fontSize: '0.78rem', textTransform: 'uppercase', letterSpacing: '0.8px', color: 'var(--text-muted)', fontWeight: '700' }}>Latest Candidate</div>
+                  <div style={{ fontSize: '1.4rem', fontWeight: '800', marginTop: '0.4rem', color: 'var(--primary)', lineHeight: 1.1 }}>
+                    {allJobApplicants.length > 0 && allJobApplicants[0].date
+                      ? new Date(allJobApplicants[0].date).toLocaleDateString('en-GB', { day: '2-digit', month: 'short' })
+                      : 'None yet'}
+                  </div>
+                  <div style={{ fontSize: '0.78rem', color: 'var(--text-muted)', marginTop: '0.35rem' }}>Most recent submission</div>
+                </div>
+                <div style={{ width: '48px', height: '48px', borderRadius: '12px', background: 'rgba(42,122,140,0.08)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                  <Calendar size={22} color="#2A7A8C" />
+                </div>
+              </div>
+
+            </div>
+
             {/* ── FILTER TOOLBAR ── */}
-            <div style={{ background: '#fff', border: '1px solid var(--border)', borderRadius: '12px', padding: '1.25rem 1.5rem', marginBottom: '1.5rem', display: 'flex', flexWrap: 'wrap', gap: '1rem', alignItems: 'flex-end' }}>
+            <div style={{ background: '#fff', border: '1px solid var(--border)', borderRadius: '16px', padding: '1.25rem 1.5rem', marginBottom: '1.5rem', display: 'flex', flexWrap: 'wrap', gap: '1rem', alignItems: 'flex-end', boxShadow: '0 4px 16px rgba(0,0,0,0.02)' }}>
               
               {/* Search */}
-              <div style={{ flex: '1 1 220px' }}>
+              <div style={{ flex: '1 1 240px' }}>
                 <label style={{ fontSize: '0.75rem', fontWeight: '700', color: 'var(--text-muted)', display: 'block', marginBottom: '0.35rem', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
-                  Search
+                  Search Candidates
                 </label>
                 <div style={{ position: 'relative' }}>
-                  <Search size={15} style={{ position: 'absolute', left: '0.75rem', top: '50%', transform: 'translateY(-50%)', color: 'var(--text-muted)' }} />
+                  <Search size={15} style={{ position: 'absolute', left: '0.85rem', top: '50%', transform: 'translateY(-50%)', color: 'var(--text-muted)' }} />
                   <input
                     type="text"
-                    placeholder="Name, email, phone..."
+                    placeholder="Search by name, email, phone..."
                     value={applicantSearchQuery}
                     onChange={e => setApplicantSearchQuery(e.target.value)}
-                    style={{ paddingLeft: '2.2rem', width: '100%', boxSizing: 'border-box' }}
+                    style={{ paddingLeft: '2.4rem', width: '100%', boxSizing: 'border-box', height: '42px', borderRadius: '10px', border: '1px solid var(--border)' }}
                   />
                 </div>
               </div>
@@ -1065,7 +1124,7 @@ const CareersAdmin = () => {
                 <select
                   value={applicantJobFilter}
                   onChange={e => setApplicantJobFilter(e.target.value)}
-                  style={{ width: '100%', boxSizing: 'border-box' }}
+                  style={{ width: '100%', boxSizing: 'border-box', height: '42px', borderRadius: '10px', border: '1px solid var(--border)' }}
                 >
                   <option value="ALL">All Positions ({allJobApplicants.length})</option>
                   {availableJobs.map(title => {
@@ -1086,7 +1145,7 @@ const CareersAdmin = () => {
                 <select
                   value={applicantDateFilter}
                   onChange={e => setApplicantDateFilter(e.target.value)}
-                  style={{ width: '100%', boxSizing: 'border-box' }}
+                  style={{ width: '100%', boxSizing: 'border-box', height: '42px', borderRadius: '10px', border: '1px solid var(--border)' }}
                 >
                   <option value="ALL">All Time</option>
                   <option value="TODAY">Today</option>
@@ -1108,7 +1167,7 @@ const CareersAdmin = () => {
                       type="date"
                       value={applicantCustomStartDate}
                       onChange={e => setApplicantCustomStartDate(e.target.value)}
-                      style={{ width: '100%', boxSizing: 'border-box' }}
+                      style={{ width: '100%', boxSizing: 'border-box', height: '42px', borderRadius: '10px', border: '1px solid var(--border)' }}
                     />
                   </div>
                   <div style={{ flex: '1 1 150px' }}>
@@ -1119,7 +1178,7 @@ const CareersAdmin = () => {
                       type="date"
                       value={applicantCustomEndDate}
                       onChange={e => setApplicantCustomEndDate(e.target.value)}
-                      style={{ width: '100%', boxSizing: 'border-box' }}
+                      style={{ width: '100%', boxSizing: 'border-box', height: '42px', borderRadius: '10px', border: '1px solid var(--border)' }}
                     />
                   </div>
                 </>
@@ -1133,7 +1192,7 @@ const CareersAdmin = () => {
                 <select
                   value={applicantSortOrder}
                   onChange={e => setApplicantSortOrder(e.target.value)}
-                  style={{ width: '100%', boxSizing: 'border-box' }}
+                  style={{ width: '100%', boxSizing: 'border-box', height: '42px', borderRadius: '10px', border: '1px solid var(--border)' }}
                 >
                   <option value="NEWEST">Newest First</option>
                   <option value="OLDEST">Oldest First</option>
@@ -1146,7 +1205,7 @@ const CareersAdmin = () => {
               {(applicantJobFilter !== 'ALL' || applicantDateFilter !== 'ALL' || applicantSearchQuery || applicantExpFilter !== 'ALL') && (
                 <button
                   onClick={() => { setApplicantJobFilter('ALL'); setApplicantDateFilter('ALL'); setApplicantSearchQuery(''); setApplicantExpFilter('ALL'); setApplicantCustomStartDate(''); setApplicantCustomEndDate(''); }}
-                  style={{ background: 'rgba(220,53,69,0.08)', color: '#dc3545', border: '1px solid rgba(220,53,69,0.2)', borderRadius: '8px', padding: '0.5rem 1rem', fontSize: '0.85rem', fontWeight: '700', cursor: 'pointer', whiteSpace: 'nowrap', height: 'fit-content' }}
+                  style={{ background: 'rgba(220,53,69,0.08)', color: '#dc3545', border: '1px solid rgba(220,53,69,0.2)', borderRadius: '10px', padding: '0 1rem', fontSize: '0.85rem', fontWeight: '700', cursor: 'pointer', whiteSpace: 'nowrap', height: '42px' }}
                 >
                   ✕ Clear Filters
                 </button>
@@ -1154,51 +1213,48 @@ const CareersAdmin = () => {
             </div>
 
             {/* Results Summary */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1rem' }}>
-              <span style={{ fontSize: '0.88rem', color: 'var(--text-muted)', fontWeight: '600' }}>
-                Showing <strong style={{ color: 'var(--primary)' }}>{filteredApplicants.length}</strong> of {allJobApplicants.length} applicant{allJobApplicants.length !== 1 ? 's' : ''}
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1rem', flexWrap: 'wrap' }}>
+              <span style={{ fontSize: '0.9rem', color: 'var(--text-muted)', fontWeight: '600' }}>
+                Showing <strong style={{ color: 'var(--primary)', fontSize: '1rem' }}>{filteredApplicants.length}</strong> of {allJobApplicants.length} applicant{allJobApplicants.length !== 1 ? 's' : ''}
               </span>
               {applicantJobFilter !== 'ALL' && (
-                <span style={{ background: 'rgba(24,79,91,0.08)', color: 'var(--primary)', padding: '0.2rem 0.65rem', borderRadius: '50px', fontSize: '0.78rem', fontWeight: '700' }}>
+                <span style={{ background: 'rgba(24,79,91,0.08)', color: 'var(--primary)', padding: '0.25rem 0.75rem', borderRadius: '50px', fontSize: '0.8rem', fontWeight: '700' }}>
                   📌 {applicantJobFilter}
                 </span>
               )}
               {applicantDateFilter !== 'ALL' && (
-                <span style={{ background: 'rgba(202,169,76,0.1)', color: '#9a7d1a', padding: '0.2rem 0.65rem', borderRadius: '50px', fontSize: '0.78rem', fontWeight: '700' }}>
+                <span style={{ background: 'rgba(202,169,76,0.12)', color: '#9a7d1a', padding: '0.25rem 0.75rem', borderRadius: '50px', fontSize: '0.8rem', fontWeight: '700' }}>
                   📅 {applicantDateFilter.replace(/_/g, ' ')}
                 </span>
               )}
             </div>
 
-            {/* Applicants Table */}
-            <div style={{ overflowX: 'auto', background: '#fff', borderRadius: '14px', border: '1px solid var(--border)', boxShadow: '0 4px 16px rgba(0,0,0,0.03)' }}>
+            {/* ── EXPANSIVE FULL-WIDTH APPLICANTS TABLE ── */}
+            <div style={{ width: '100%', overflowX: 'auto', background: '#fff', borderRadius: '16px', border: '1px solid var(--border)', boxShadow: '0 10px 30px rgba(24,79,91,0.05)', boxSizing: 'border-box' }}>
               {filteredApplicants.length === 0 ? (
                 <div style={{ textAlign: 'center', padding: '5rem 2rem' }}>
-                  <UserCheck size={44} style={{ color: 'var(--text-muted)', opacity: 0.25, marginBottom: '1rem' }} />
-                  <h4 style={{ margin: 0, color: 'var(--primary)' }}>
+                  <UserCheck size={48} style={{ color: 'var(--text-muted)', opacity: 0.25, marginBottom: '1rem' }} />
+                  <h4 style={{ margin: 0, color: 'var(--primary)', fontSize: '1.25rem', fontWeight: '700' }}>
                     {allJobApplicants.length === 0 ? 'No job applications received yet' : 'No applicants match the current filters'}
                   </h4>
-                  <p style={{ color: 'var(--text-muted)', fontSize: '0.85rem', marginTop: '0.4rem' }}>
+                  <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem', marginTop: '0.4rem' }}>
                     {allJobApplicants.length === 0
-                      ? 'Once candidates apply through the Careers page, they will appear here.'
-                      : 'Try clearing filters or adjusting the date range.'}
+                      ? 'Once candidates apply through the Careers page, their profiles will appear here.'
+                      : 'Try clearing search filters or adjusting the date range.'}
                   </p>
                 </div>
               ) : (
-                <table style={{ width: '100%', minWidth: '1250px', borderCollapse: 'collapse', fontSize: '0.88rem', textAlign: 'left', tableLayout: 'fixed' }}>
+                <table style={{ width: '100%', minWidth: '1100px', borderCollapse: 'collapse', fontSize: '0.9rem', textAlign: 'left' }}>
                   <thead>
                     <tr style={{ background: 'var(--primary)', color: '#fff' }}>
-                      <th style={{ padding: '0.9rem 0.8rem', width: '115px', whiteSpace: 'nowrap' }}>Date Applied</th>
-                      <th style={{ padding: '0.9rem 0.8rem', width: '160px' }}>Job Position</th>
-                      <th style={{ padding: '0.9rem 0.8rem', width: '140px' }}>Candidate Name</th>
-                      <th style={{ padding: '0.9rem 0.8rem', width: '170px' }}>Email</th>
-                      <th style={{ padding: '0.9rem 0.8rem', width: '130px', whiteSpace: 'nowrap' }}>Phone</th>
-                      <th style={{ padding: '0.9rem 0.8rem', width: '120px' }}>Location</th>
-                      <th style={{ padding: '0.9rem 0.8rem', width: '110px', whiteSpace: 'nowrap' }}>Experience</th>
-                      <th style={{ padding: '0.9rem 0.8rem', width: '115px', whiteSpace: 'nowrap' }}>Resume / CV</th>
-                      <th style={{ padding: '0.9rem 0.8rem', width: '115px', whiteSpace: 'nowrap' }}>LinkedIn</th>
-                      <th style={{ padding: '0.9rem 0.8rem', width: '240px' }}>Cover Note</th>
-                      <th style={{ padding: '0.9rem 0.8rem', width: '140px', textAlign: 'center', whiteSpace: 'nowrap' }}>Actions</th>
+                      <th style={{ padding: '1.1rem 1rem', width: '11%', whiteSpace: 'nowrap', fontWeight: '700', fontSize: '0.82rem', letterSpacing: '0.5px', textTransform: 'uppercase', borderTopLeftRadius: '16px' }}>Date Applied</th>
+                      <th style={{ padding: '1.1rem 1rem', width: '16%', fontWeight: '700', fontSize: '0.82rem', letterSpacing: '0.5px', textTransform: 'uppercase' }}>Job Position</th>
+                      <th style={{ padding: '1.1rem 1rem', width: '14%', fontWeight: '700', fontSize: '0.82rem', letterSpacing: '0.5px', textTransform: 'uppercase' }}>Candidate Name</th>
+                      <th style={{ padding: '1.1rem 1rem', width: '17%', fontWeight: '700', fontSize: '0.82rem', letterSpacing: '0.5px', textTransform: 'uppercase' }}>Email</th>
+                      <th style={{ padding: '1.1rem 1rem', width: '11%', whiteSpace: 'nowrap', fontWeight: '700', fontSize: '0.82rem', letterSpacing: '0.5px', textTransform: 'uppercase' }}>Phone</th>
+                      <th style={{ padding: '1.1rem 1rem', width: '12%', fontWeight: '700', fontSize: '0.82rem', letterSpacing: '0.5px', textTransform: 'uppercase' }}>Location / Exp</th>
+                      <th style={{ padding: '1.1rem 1rem', width: '10%', whiteSpace: 'nowrap', fontWeight: '700', fontSize: '0.82rem', letterSpacing: '0.5px', textTransform: 'uppercase' }}>CV & Links</th>
+                      <th style={{ padding: '1.1rem 1rem', width: '9%', textAlign: 'center', whiteSpace: 'nowrap', fontWeight: '700', fontSize: '0.82rem', letterSpacing: '0.5px', textTransform: 'uppercase', borderTopRightRadius: '16px' }}>Actions</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -1238,112 +1294,98 @@ const CareersAdmin = () => {
                       return (
                         <tr
                           key={applicant.id || idx}
-                          style={{ borderBottom: '1px solid var(--border)', transition: 'background 0.15s', cursor: 'pointer' }}
+                          style={{ borderBottom: '1px solid var(--border)', transition: 'all 0.15s ease-in-out', cursor: 'pointer' }}
                           className="lead-row"
                           onClick={() => setViewingApplicant(applicantDetails)}
                         >
-                          <td style={{ padding: '0.85rem 0.8rem', color: 'var(--text-muted)', fontSize: '0.82rem', whiteSpace: 'nowrap' }}>
-                            <div style={{ display: 'flex', alignItems: 'center', gap: '0.35rem' }}>
-                              <Calendar size={13} />
+                          <td style={{ padding: '1rem 1rem', color: 'var(--text-muted)', fontSize: '0.85rem', whiteSpace: 'nowrap' }}>
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', fontWeight: '600' }}>
+                              <Calendar size={14} color="var(--primary)" />
                               {appliedDate}
                             </div>
                           </td>
-                          <td style={{ padding: '0.85rem 0.8rem' }}>
-                            <span style={{ background: 'rgba(24,79,91,0.08)', color: 'var(--primary)', padding: '0.25rem 0.6rem', borderRadius: '50px', fontSize: '0.78rem', fontWeight: '700', display: 'inline-block', maxWidth: '100%', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }} title={jobTitle}>
+                          <td style={{ padding: '1rem 1rem' }}>
+                            <span style={{ background: 'rgba(24,79,91,0.08)', color: 'var(--primary)', padding: '0.3rem 0.75rem', borderRadius: '50px', fontSize: '0.82rem', fontWeight: '700', display: 'inline-block', maxWidth: '100%', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }} title={jobTitle}>
                               {jobTitle}
                             </span>
                           </td>
-                          <td style={{ padding: '0.85rem 0.8rem', fontWeight: '700', color: 'var(--primary)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }} title={applicant.name}>
+                          <td style={{ padding: '1rem 1rem', fontWeight: '700', color: 'var(--primary)', fontSize: '0.95rem' }} title={applicant.name}>
                             {applicant.name || '—'}
                           </td>
-                          <td style={{ padding: '0.85rem 0.8rem', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }} title={applicant.email} onClick={e => e.stopPropagation()}>
+                          <td style={{ padding: '1rem 1rem', wordBreak: 'break-all' }} onClick={e => e.stopPropagation()}>
                             {applicant.email ? (
                               <a href={`mailto:${applicant.email}`} style={{ color: 'var(--secondary)', fontWeight: '600', textDecoration: 'underline' }}>
                                 {applicant.email}
                               </a>
                             ) : <span style={{ color: 'var(--text-muted)', fontStyle: 'italic' }}>—</span>}
                           </td>
-                          <td style={{ padding: '0.85rem 0.8rem', whiteSpace: 'nowrap' }} onClick={e => e.stopPropagation()}>
+                          <td style={{ padding: '1rem 1rem', whiteSpace: 'nowrap' }} onClick={e => e.stopPropagation()}>
                             {applicant.phone ? (
-                              <a href={`tel:${applicant.phone}`} style={{ color: 'inherit', textDecoration: 'none' }}>
+                              <a href={`tel:${applicant.phone}`} style={{ color: 'inherit', textDecoration: 'none', fontWeight: '600' }}>
                                 📞 {applicant.phone}
                               </a>
                             ) : <span style={{ color: 'var(--text-muted)', fontStyle: 'italic' }}>N/A</span>}
                           </td>
-                          <td style={{ padding: '0.85rem 0.8rem', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }} title={parsedLocation}>
-                            {parsedLocation !== '—'
-                              ? <span>📍 {parsedLocation}</span>
-                              : <span style={{ color: 'var(--text-muted)', fontStyle: 'italic' }}>N/A</span>}
-                          </td>
-                          <td style={{ padding: '0.85rem 0.8rem', whiteSpace: 'nowrap' }}>
-                            {parsedExperience !== '—'
-                              ? <span style={{ background: 'rgba(42,122,140,0.08)', color: '#2A7A8C', padding: '0.2rem 0.5rem', borderRadius: '6px', fontWeight: '700', fontSize: '0.8rem' }}>
+                          <td style={{ padding: '1rem 1rem' }}>
+                            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.2rem' }}>
+                              <span style={{ fontSize: '0.85rem', fontWeight: '600', color: 'var(--text-main)' }}>
+                                📍 {parsedLocation}
+                              </span>
+                              {parsedExperience !== '—' && (
+                                <span style={{ background: 'rgba(42,122,140,0.08)', color: '#2A7A8C', padding: '0.15rem 0.5rem', borderRadius: '6px', fontWeight: '700', fontSize: '0.78rem', width: 'fit-content' }}>
                                   {parsedExperience}
                                 </span>
-                              : <span style={{ color: 'var(--text-muted)', fontStyle: 'italic' }}>N/A</span>}
+                              )}
+                            </div>
                           </td>
-                          <td style={{ padding: '0.85rem 0.8rem' }} onClick={e => e.stopPropagation()}>
-                            {resumeLink ? (
-                              <a
-                                href={resumeLink}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                style={{ display: 'inline-flex', alignItems: 'center', gap: '0.3rem', background: 'rgba(24,79,91,0.07)', color: 'var(--primary)', padding: '0.25rem 0.6rem', borderRadius: '6px', fontWeight: '700', fontSize: '0.8rem', textDecoration: 'none', whiteSpace: 'nowrap' }}
-                                title={resumeLink}
-                              >
-                                <ExternalLink size={12} /> View CV
-                              </a>
-                            ) : <span style={{ color: 'var(--text-muted)', fontStyle: 'italic', fontSize: '0.8rem' }}>N/A</span>}
+                          <td style={{ padding: '1rem 1rem' }} onClick={e => e.stopPropagation()}>
+                            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.35rem' }}>
+                              {resumeLink ? (
+                                <a
+                                  href={resumeLink}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  style={{ display: 'inline-flex', alignItems: 'center', gap: '0.3rem', background: 'rgba(24,79,91,0.07)', color: 'var(--primary)', padding: '0.3rem 0.65rem', borderRadius: '8px', fontWeight: '700', fontSize: '0.8rem', textDecoration: 'none', whiteSpace: 'nowrap', width: 'fit-content' }}
+                                  title={resumeLink}
+                                >
+                                  <ExternalLink size={13} /> View CV ↗
+                                </a>
+                              ) : <span style={{ color: 'var(--text-muted)', fontStyle: 'italic', fontSize: '0.8rem' }}>No CV</span>}
+                              {linkedinProfile && (
+                                <a
+                                  href={linkedinProfile.startsWith('http') ? linkedinProfile : `https://linkedin.com/in/${linkedinProfile}`}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  style={{ display: 'inline-flex', alignItems: 'center', gap: '0.3rem', background: 'rgba(10,102,194,0.08)', color: '#0A66C2', padding: '0.25rem 0.6rem', borderRadius: '6px', fontWeight: '700', fontSize: '0.78rem', textDecoration: 'none', whiteSpace: 'nowrap', width: 'fit-content' }}
+                                  title={linkedinProfile}
+                                >
+                                  <ExternalLink size={11} /> LinkedIn ↗
+                                </a>
+                              )}
+                            </div>
                           </td>
-                          <td style={{ padding: '0.85rem 0.8rem' }} onClick={e => e.stopPropagation()}>
-                            {linkedinProfile ? (
-                              <a
-                                href={linkedinProfile.startsWith('http') ? linkedinProfile : `https://linkedin.com/in/${linkedinProfile}`}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                style={{ display: 'inline-flex', alignItems: 'center', gap: '0.3rem', background: 'rgba(10,102,194,0.07)', color: '#0A66C2', padding: '0.25rem 0.6rem', borderRadius: '6px', fontWeight: '700', fontSize: '0.8rem', textDecoration: 'none', whiteSpace: 'nowrap' }}
-                                title={linkedinProfile}
-                              >
-                                <ExternalLink size={12} /> LinkedIn
-                              </a>
-                            ) : <span style={{ color: 'var(--text-muted)', fontStyle: 'italic', fontSize: '0.8rem' }}>N/A</span>}
-                          </td>
-                          <td style={{ padding: '0.85rem 0.8rem', fontSize: '0.83rem', color: '#4A4A48', lineHeight: '1.4' }}>
-                            {applicant.bottleneck ? (
-                              <div>
-                                <span style={{ display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden', wordBreak: 'break-word' }}>
-                                  {applicant.bottleneck}
-                                </span>
-                                <span style={{ fontSize: '0.75rem', color: 'var(--secondary)', fontWeight: '700', display: 'inline-flex', alignItems: 'center', gap: '0.2rem', marginTop: '0.2rem' }}>
-                                  Full View →
-                                </span>
-                              </div>
-                            ) : (
-                              <span style={{ color: 'var(--text-muted)', fontStyle: 'italic' }}>No cover note</span>
-                            )}
-                          </td>
-                          <td style={{ padding: '0.85rem 0.8rem', textAlign: 'center' }} onClick={e => e.stopPropagation()}>
-                            <div style={{ display: 'flex', gap: '0.3rem', justifyContent: 'center' }}>
+                          <td style={{ padding: '1rem 1rem', textAlign: 'center' }} onClick={e => e.stopPropagation()}>
+                            <div style={{ display: 'flex', gap: '0.4rem', justifyContent: 'center' }}>
                               <button
                                 onClick={() => setViewingApplicant(applicantDetails)}
-                                title="View Full Details"
-                                style={{ background: 'rgba(24,79,91,0.08)', color: 'var(--primary)', border: 'none', borderRadius: '6px', padding: '0.35rem 0.55rem', cursor: 'pointer', display: 'inline-flex', alignItems: 'center', gap: '0.25rem', fontSize: '0.78rem', fontWeight: '700' }}
+                                title="View Full Candidate Profile"
+                                style={{ background: 'var(--primary)', color: '#fff', border: 'none', borderRadius: '8px', padding: '0.45rem 0.75rem', cursor: 'pointer', display: 'inline-flex', alignItems: 'center', gap: '0.3rem', fontSize: '0.8rem', fontWeight: '700' }}
                               >
-                                <Eye size={13} /> View
+                                <Eye size={14} /> Full Profile
                               </button>
                               <button
                                 onClick={() => { navigator.clipboard.writeText(`Name: ${applicant.name}\nEmail: ${applicant.email}\nPhone: ${applicant.phone}\nJob: ${jobTitle}\nLocation: ${parsedLocation}\nExperience: ${parsedExperience}\nResume: ${resumeLink}\nLinkedIn: ${linkedinProfile}\nNote: ${applicant.bottleneck}`); triggerToast('Applicant details copied!'); }}
-                                title="Copy All Details"
-                                style={{ background: 'rgba(202,169,76,0.1)', color: '#9a7d1a', border: 'none', borderRadius: '6px', padding: '0.35rem 0.45rem', cursor: 'pointer', display: 'inline-flex', alignItems: 'center' }}
+                                title="Copy Candidate Details"
+                                style={{ background: 'rgba(202,169,76,0.12)', color: '#9a7d1a', border: 'none', borderRadius: '8px', padding: '0.45rem 0.55rem', cursor: 'pointer', display: 'inline-flex', alignItems: 'center' }}
                               >
-                                <Copy size={13} />
+                                <Copy size={14} />
                               </button>
                               <button
                                 onClick={() => handleLeadDelete(applicant.id)}
-                                title="Delete Application"
-                                style={{ background: 'rgba(220,53,69,0.08)', color: '#dc3545', border: 'none', borderRadius: '6px', padding: '0.35rem 0.45rem', cursor: 'pointer', display: 'inline-flex', alignItems: 'center' }}
+                                title="Delete Candidate Application"
+                                style={{ background: 'rgba(220,53,69,0.08)', color: '#dc3545', border: 'none', borderRadius: '8px', padding: '0.45rem 0.55rem', cursor: 'pointer', display: 'inline-flex', alignItems: 'center' }}
                               >
-                                <Trash2 size={13} />
+                                <Trash2 size={14} />
                               </button>
                             </div>
                           </td>

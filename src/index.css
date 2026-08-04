@@ -2044,9 +2044,10 @@ img {
 
 /* ===== ADMIN PAGE ===== */
 .admin-container {
-  padding: 8rem 5% 4rem;
-  max-width: 1000px;
+  padding: 7rem 4% 4rem;
+  max-width: 1480px;
   margin: 0 auto;
+  width: 100%;
 }
 
 .admin-login {
