@@ -1,0 +1,928 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tadbeer Transformations × Spinneys: Social Media, Branding & Content Strategy</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900&display=swap" rel="stylesheet">
+    <style>
+        @page { size: A4 landscape; margin: 0; }
+
+        :root {
+            --cream: #F9F8F3;
+            --teal: #0C3843;
+            --teal-dark: #07252D;
+            --teal-mid: #155063;
+            --gold: #C59B27;
+            --gold-bright: #D4AF37;
+            --gold-light: #FDF9F0;
+            --body-text: #1C2E33;
+            --white: #FFFFFF;
+            --muted: #526B72;
+            --border: rgba(12, 56, 67, 0.16);
+            --font-display: 'Montserrat', sans-serif;
+            --font-body: 'Montserrat', sans-serif;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: var(--font-body);
+            background: #0F172A;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+
+        /* ─ SLIDE FRAME ───────────────────────────────────────── */
+        .slide {
+            width: 297mm;
+            height: 210mm;
+            page-break-after: always;
+            break-after: page;
+            background: var(--cream);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            margin: 0 auto;
+            box-shadow: 0 12px 40px rgba(0,0,0,0.3);
+        }
+        .slide.dark { background: var(--teal); }
+
+        /* ─ HEADER ────────────────────────────────────────────── */
+        .hdr {
+            flex-shrink: 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 34px 8px;
+            border-bottom: 1.5px solid var(--border);
+            height: 44px;
+            font-family: var(--font-display);
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--teal);
+        }
+        .hdr img { height: 26px; width: auto; display: block; }
+        .dark .hdr { border-color: rgba(255,255,255,0.18); color: var(--gold-bright); }
+        .dark .hdr img { filter: brightness(0) invert(1); }
+        .pgnum { color: var(--gold); font-weight: 800; font-size: 12px; }
+
+        /* ─ BODY (fills remaining 210mm - 44px) ──────────────── */
+        .body {
+            flex: 1;
+            min-height: 0;
+            padding: 12px 34px 14px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* ─ TEXT UTILITIES ─────────────────────────────────────── */
+        .dt { font-family: var(--font-display); font-weight: 800; text-transform: uppercase; letter-spacing: 0.01em; color: var(--teal); line-height: 1.05; }
+        .dark .dt { color: var(--white); }
+        .sub { font-family: var(--font-display); font-size: 13px; font-weight: 800; text-transform: uppercase; color: var(--gold); letter-spacing: 0.04em; }
+        .sm { font-size: 10.5px; line-height: 1.52; color: var(--body-text); }
+        .dark .sm { color: rgba(255,255,255,0.9); }
+        .xs { font-size: 9.5px; line-height: 1.42; color: var(--body-text); }
+        .dark .xs { color: rgba(255,255,255,0.85); }
+
+        .gold-bar { height: 3px; background: var(--gold); width: 32px; margin: 5px 0; }
+        .hdiv { height: 1.5px; background: var(--teal); margin: 6px 0; }
+        .dark .hdiv { background: rgba(255,255,255,0.2); }
+
+        /* ─ SLIDE 01: COVER ─────────────────────────────────────── */
+        .cov-grid { display: grid; grid-template-columns: 1.25fr 0.75fr; gap: 28px; height: 100%; align-items: center; }
+        .cov-badge {
+            display: inline-flex; gap: 6px; align-items: center;
+            padding: 4px 12px; border: 1.5px solid var(--gold); background: var(--gold-light);
+            font-size: 10.5px; font-weight: 800; letter-spacing: 0.14em; color: var(--gold);
+            text-transform: uppercase; border-radius: 4px; width: fit-content; margin-bottom: 12px;
+        }
+        .cov-t { font-size: 52px; }
+        .cov-t span { color: var(--gold); display: block; }
+        .cov-sub { font-size: 12.5px; line-height: 1.58; color: var(--body-text); margin-bottom: 16px; }
+        .cov-meta { display: flex; gap: 24px; padding-top: 12px; border-top: 1.5px solid var(--border); }
+        .cov-meta .lbl { font-size: 9.5px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+        .cov-meta .val { font-size: 12px; font-weight: 800; color: var(--teal); margin-top: 2px; }
+        .cov-img { height: 100%; max-height: 450px; border-radius: 12px; overflow: hidden; border: 3px solid var(--gold); }
+        .cov-img img { width: 100%; height: 100%; object-fit: cover; }
+
+        /* ─ SLIDE 02: TOC ─────────────────────────────────────── */
+        .toc-grid { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 28px; height: 100%; }
+        .toc-list { display: flex; flex-direction: column; flex: 1; justify-content: space-evenly; }
+        .toc-row {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 10px 0; border-bottom: 2px solid var(--teal);
+            font-family: var(--font-display); font-size: 16px; font-weight: 800;
+            text-transform: uppercase; color: var(--teal); letter-spacing: 0.04em;
+        }
+        .toc-row.r { justify-content: flex-end; gap: 12px; }
+        .ast { color: var(--gold); font-weight: 900; font-size: 18px; }
+        .toc-imgs {
+            display: grid; grid-template-columns: 1fr 1fr;
+            grid-template-rows: 1fr 1fr; gap: 8px; height: 100%;
+        }
+        .toc-imgs .r2 { grid-row: span 2; }
+        .frm { width: 100%; height: 100%; border-radius: 7px; overflow: hidden; border: 1.5px solid var(--border); }
+        .frm img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+        /* ─ SLIDE 03: WHY TADBEER ─────────────────────────────── */
+        .why-grid { display: grid; grid-template-columns: 1.1fr 0.3fr 1fr; gap: 16px; height: 100%; align-items: stretch; }
+        .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+        .thumbs { display: flex; flex-direction: column; gap: 8px; height: 100%; }
+        .thumb { flex: 1; border-radius: 6px; overflow: hidden; border: 1px solid rgba(212,175,55,0.4); }
+        .thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+        /* ─ SLIDE 04: CLIENT FLEET — COMPACT DENSE LAYOUT ──────── */
+        /*  LEFT: narrative blocks   RIGHT: logo grid (no wasted space)  */
+        .fleet-split { display: grid; grid-template-columns: 0.85fr 1.15fr; gap: 16px; height: 100%; }
+
+        /* Narrative left side */
+        .fleet-narrative { display: flex; flex-direction: column; gap: 8px; height: 100%; }
+        .fleet-nar-title { font-size: 32px; }
+        .fleet-inforow { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin-top: 4px; }
+        .fleet-stat {
+            background: var(--teal); color: var(--white); border-radius: 8px; padding: 10px 12px;
+            display: flex; flex-direction: column; gap: 2px;
+        }
+        .fleet-stat .sv { font-family: var(--font-display); font-size: 22px; font-weight: 900; color: var(--gold-bright); }
+        .fleet-stat .sl { font-size: 9.5px; text-transform: uppercase; letter-spacing: 0.08em; color: rgba(255,255,255,0.85); }
+        .fleet-nar-desc {
+            background: var(--white); border: 1.5px solid var(--border);
+            border-left: 4px solid var(--gold); border-radius: 8px; padding: 10px 12px;
+            flex: 1; display: flex; flex-direction: column; justify-content: space-between;
+        }
+        .fleet-nar-desc p { font-size: 10.5px; line-height: 1.52; color: var(--body-text); }
+        .bul-list { list-style: none; margin-top: 6px; }
+        .bul-list li { font-size: 10px; line-height: 1.45; color: var(--body-text); position: relative; padding-left: 12px; margin-bottom: 3px; }
+        .bul-list li::before { content: '✦'; position: absolute; left: 0; color: var(--gold); font-size: 8px; top: 1px; }
+
+        /* Logo grid right side */
+        .logo-right { display: flex; flex-direction: column; gap: 8px; height: 100%; }
+        .logo-grid-hdr {
+            background: var(--teal); color: var(--white);
+            font-family: var(--font-display); font-size: 13px; font-weight: 900;
+            text-transform: uppercase; letter-spacing: 0.1em; text-align: center;
+            padding: 8px 12px; border-radius: 8px;
+        }
+        .logo-grid-wrap {
+            display: grid; grid-template-columns: repeat(5, 1fr);
+            gap: 12px; flex: 1;
+            padding: 0;
+            align-content: center;
+            border: none; background: transparent;
+        }
+        .logo-cell {
+            display: flex; flex-direction: column; align-items: center; gap: 6px;
+        }
+        .logo-cell-box {
+            width: 100%; aspect-ratio: 1 / 1;
+            border: 1.5px solid rgba(12,56,67,0.12); border-radius: 8px; background: #fff;
+            overflow: hidden;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .logo-cell-box:hover { border-color: var(--gold); }
+        .logo-cell img {
+            width: 100%; height: 100%;
+            object-fit: contain; display: block;
+            padding: 2px;
+            transform: scale(1.35);
+            box-sizing: border-box;
+        }
+        .logo-cell .lc-lbl { font-size: 10px; font-weight: 800; color: var(--teal); text-align: center; line-height: 1.2; }
+
+        /* ─ SLIDE 05: VISION ──────────────────────────────────── */
+        .vis-grid { display: grid; grid-template-columns: 0.95fr 1.05fr; gap: 16px; height: 100%; }
+        .vis-left { display: flex; flex-direction: column; gap: 8px; height: 100%; }
+        .vis-img { flex: 1.2; border-radius: 8px; overflow: hidden; border: 2px solid var(--border); min-height: 0; }
+        .vis-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+        .vis-card {
+            background: var(--white); border: 1.5px solid var(--border);
+            border-left: 4px solid var(--gold); border-radius: 8px; padding: 16px;
+            display: flex; flex-direction: column; justify-content: center;
+        }
+        .vis-right { display: flex; flex-direction: column; justify-content: center; gap: 16px; height: 100%; }
+        .kv-row { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; }
+        .kv-box {
+            background: var(--teal); border-radius: 8px; padding: 10px 10px;
+            display: flex; flex-direction: column; align-items: center; text-align: center;
+        }
+        .kv-n { font-family: var(--font-display); font-size: 20px; font-weight: 900; color: var(--gold-bright); }
+        .kv-l { font-size: 9px; color: rgba(255,255,255,0.88); text-transform: uppercase; letter-spacing: 0.08em; }
+
+        /* ─ SLIDE 06: DIFFERENT ───────────────────────────────── */
+        .diff-grid { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 24px; height: 100%; align-items: stretch; }
+        .diff-left { display: flex; flex-direction: column; justify-content: space-between; height: 100%; gap: 10px; }
+        .diff-2col { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+
+        /* ─ SLIDE 07: AUDIENCE ─────────────────────────────────── */
+        .aud-grid { display: grid; grid-template-columns: 0.22fr 0.65fr 1.13fr; gap: 14px; height: 100%; }
+        .aud-thumbs { display: flex; flex-direction: column; gap: 8px; height: 100%; }
+        .aud-t { flex: 1; border-radius: 6px; overflow: hidden; border: 1px solid rgba(212,175,55,0.4); }
+        .aud-t img { width: 100%; height: 100%; object-fit: cover; display: block; }
+        .aud-items { display: flex; flex-direction: column; justify-content: center; gap: 16px; height: 100%; }
+        .aud-item { background: var(--white); border: 1.5px solid var(--border); border-left: 4px solid var(--gold); border-radius: 8px; padding: 16px; margin-bottom: 0; }
+        .aud-num { font-family: var(--font-display); font-size: 28px; font-weight: 900; color: var(--gold); float: right; line-height: 1; }
+
+        /* ─ SLIDE 08: CONTENT PILLARS ─────────────────────────── */
+        /* 2-col: LEFT = big title + pillars grid   RIGHT = production roadmap infographic */
+        .pillars-layout { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 14px; height: 100%; }
+        .pillars-left { display: flex; flex-direction: column; gap: 8px; height: 100%; }
+        .p-grid { display: grid; grid-template-columns: repeat(3, 1fr); grid-template-rows: repeat(3, auto); gap: 10px; align-content: start; }
+        .p-card {
+            background: var(--white); border: 1.5px solid var(--border); border-radius: 8px;
+            border-top: 3.5px solid var(--gold); padding: 12px 14px;
+            display: flex; flex-direction: column; gap: 6px; justify-content: flex-start;
+            height: auto;
+        }
+        .p-num { font-family: var(--font-display); font-size: 18px; font-weight: 900; color: var(--gold); line-height: 1; }
+        .p-title { font-family: var(--font-display); font-size: 11.5px; font-weight: 800; color: var(--teal); text-transform: uppercase; margin: 2px 0 0; }
+        .p-desc { font-size: 10px; line-height: 1.44; color: var(--body-text); }
+        .p-tag { display: inline-block; background: rgba(12,56,67,0.07); border-radius: 3px; padding: 3px 8px; font-size: 9px; font-weight: 700; color: var(--teal); text-transform: uppercase; margin-top: 2px; width: fit-content; }
+
+        /* Right side: Production Roadmap visual */
+        .pillars-right { display: flex; flex-direction: column; gap: 8px; height: 100%; }
+        .prod-header { font-family: var(--font-display); font-size: 13px; font-weight: 800; color: var(--teal); text-transform: uppercase; }
+        .prod-phase {
+            background: var(--white); border: 1.5px solid var(--border);
+            border-radius: 8px; padding: 8px 12px; display: flex; align-items: center; gap: 10px;
+            flex: 1;
+        }
+        .prod-phase .pp-num {
+            width: 32px; height: 32px; border-radius: 50%; background: var(--teal); color: var(--gold-bright);
+            font-family: var(--font-display); font-size: 13px; font-weight: 900;
+            display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+        }
+        .prod-phase .pp-body { flex: 1; }
+        .prod-phase .pp-title { font-family: var(--font-display); font-size: 11px; font-weight: 800; color: var(--teal); text-transform: uppercase; }
+        .prod-phase .pp-desc { font-size: 9.5px; line-height: 1.4; color: var(--body-text); }
+        .pp-connector { width: 1.5px; height: 6px; background: var(--gold); margin: 0 auto; }
+        .kpi-row-sm { display: grid; grid-template-columns: repeat(3,1fr); gap: 8px; }
+        .kpi-sm { background: var(--teal); padding: 8px 10px; border-radius: 8px; text-align: center; }
+        .kpi-sm .kv { font-family: var(--font-display); font-size: 18px; font-weight: 900; color: var(--gold-bright); }
+        .kpi-sm .kl { font-size: 9px; color: rgba(255,255,255,0.85); text-transform: uppercase; letter-spacing: 0.06em; }
+
+        /* ─ SLIDE 09: BENCHMARKS ────────────────────────────────── */
+        /* 3 columns, each card filled top-to-bottom with real content + data viz */
+        .bench-layout { display: flex; flex-direction: column; gap: 8px; height: 100%; }
+        .bench-header { display: flex; align-items: baseline; gap: 14px; }
+        .bench-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; flex: 1; min-height: 0; }
+        .bench-card {
+            background: var(--white); border: 1.5px solid var(--border); border-radius: 10px;
+            padding: 16px; display: flex; flex-direction: column; height: 100%;
+            box-shadow: 0 4px 12px rgba(12,56,67,0.04);
+            gap: 6px;
+        }
+        .bench-brand-row { display: flex; align-items: center; gap: 8px; margin-bottom: 4px; }
+        .bench-icon {
+            width: 34px; height: 34px; border-radius: 6px; background: var(--gold-light);
+            border: 1.5px solid var(--gold); display: flex; align-items: center; justify-content: center;
+            font-family: var(--font-display); font-size: 15px; font-weight: 900; color: var(--gold);
+            flex-shrink: 0;
+        }
+        .bench-card h3 { font-family: var(--font-display); font-size: 14px; font-weight: 800; color: var(--teal); text-transform: uppercase; }
+        .bench-card .handle { font-size: 10.5px; font-weight: 600; color: var(--muted); }
+        .bench-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 8px 0; }
+        .bench-stat { background: var(--teal); border-radius: 6px; padding: 8px; text-align: center; }
+        .bench-stat .bsv { font-family: var(--font-display); font-size: 16px; font-weight: 900; color: var(--gold-bright); }
+        .bench-stat .bsl { font-size: 9px; text-transform: uppercase; letter-spacing: 0.06em; color: rgba(255,255,255,0.88); margin-top: 2px; }
+        .mech { background: var(--cream); border-left: 3px solid var(--gold); padding: 10px 12px; border-radius: 0 6px 6px 0; }
+        .mech .mt { font-size: 10px; font-weight: 800; color: var(--teal); text-transform: uppercase; margin-bottom: 4px; }
+        .mech .md { font-size: 11px; line-height: 1.45; color: var(--body-text); }
+        /* For us indicator bar */
+        .apply-box { background: rgba(12,56,67,0.06); border-radius: 8px; padding: 12px; margin-top: auto; }
+        .apply-box .at { font-size: 10px; font-weight: 800; color: var(--teal); text-transform: uppercase; margin-bottom: 4px; }
+        .apply-box .ad { font-size: 11px; line-height: 1.45; color: var(--body-text); }
+        .tag { display: inline-block; padding: 8px 12px; background: var(--teal); color: var(--white); font-size: 10px; font-weight: 700; text-transform: uppercase; border-radius: 0 0 8px 8px; letter-spacing: 0.04em; margin-top: 8px; text-align: center; margin: 8px -17px -17px -17px; }
+        .data-viz { margin: 8px 0; padding: 12px; background: rgba(212,175,55,0.05); border-radius: 8px; border: 1px solid rgba(212,175,55,0.2); }
+        .viz-lbl { font-size: 8.5px; font-weight: 800; color: var(--teal); text-transform: uppercase; margin-bottom: 4px; letter-spacing: 0.05em; display: flex; justify-content: space-between; }
+        .viz-bar-wrap { height: 6px; background: rgba(12,56,67,0.08); border-radius: 3px; margin-bottom: 8px; overflow: hidden; }
+        .viz-bar-wrap:last-child { margin-bottom: 0; }
+        .viz-bar { height: 100%; background: var(--gold); border-radius: 3px; }
+
+        /* ─ SLIDE 10: CTA ─────────────────────────────────────── */
+        .cta-wrap { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; height: 100%; gap: 16px; padding-bottom: 20px; }
+        .cta-h { font-family: var(--font-display); font-size: 42px; font-weight: 900; color: var(--white); text-transform: uppercase; line-height: 1.1; max-width: 700px; }
+        .cta-sub { font-size: 14px; color: rgba(255,255,255,0.85); max-width: 600px; line-height: 1.6; margin-bottom: 12px; }
+        .cta-contacts { display: grid; grid-template-columns: repeat(4,1fr); gap: 14px; width: 100%; max-width: 860px; }
+        .cc { border: 1.5px solid var(--gold); background: rgba(212,175,55,0.1); border-radius: 10px; padding: 14px 16px; text-align: center; }
+        .cc h5 { font-family: var(--font-display); font-size: 11.5px; font-weight: 800; color: var(--gold-bright); text-transform: uppercase; margin-bottom: 4px; }
+        .cc p { font-size: 12px; color: var(--white); font-weight: 600; }
+    </style>
+</head>
+<body>
+
+<!-- ================================================================
+     SLIDE 01: COVER
+     ================================================================ -->
+<section class="slide">
+    <div class="hdr">
+        <div><img src="./logo.png" alt="Tadbeer Transformations"></div>
+        <span>AUGUST 2026</span>
+        <span class="pgnum">PAGE 01</span>
+    </div>
+    <div class="body">
+        <div class="cov-grid">
+            <div style="display:flex;flex-direction:column;justify-content:center;">
+                <div class="cov-badge">✦ INTRODUCTION MEETING & STRATEGY PROPOSAL</div>
+                <div class="dt cov-t" style="margin-bottom:14px;">SPINNEYS<br><span>OMAN</span></div>
+                <p class="cov-sub">Social Media, Branding & Content Strategy: Positioning Spinneys as Oman's premier grocery lifestyle destination where customers discover exclusive international products, artisan recipes, and experiences unavailable anywhere else.</p>
+                <div class="cov-meta">
+                    <div><div class="lbl">Prepared By</div><div class="val">Tadbeer Transformations</div></div>
+                    <div><div class="lbl">Location</div><div class="val">Muscat, Sultanate of Oman</div></div>
+                    <div><div class="lbl">Date</div><div class="val">August 2026</div></div>
+                    <div><div class="lbl">Scope</div><div class="val">Social Media & Branding</div></div>
+                </div>
+            </div>
+            <div class="cov-img"><img src="https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=1200&q=80" alt="Premium Supermarket"></div>
+        </div>
+    </div>
+</section>
+
+<!-- ================================================================
+     SLIDE 02: TABLE OF CONTENTS
+     ================================================================ -->
+<section class="slide">
+    <div class="hdr">
+        <div><img src="./logo.png" alt="Tadbeer Transformations"></div>
+        <span>AUGUST 2026</span>
+        <span class="pgnum">PAGE 02</span>
+    </div>
+    <div class="body">
+        <div class="toc-grid">
+            <div style="display:flex;flex-direction:column;height:100%;">
+                <div class="dt" style="font-size:44px;margin-bottom:12px;">TABLE OF<br>CONTENTS</div>
+                <div class="toc-list" style="flex:1;display:flex;flex-direction:column;">
+                    <div class="toc-row"><span>OUR EXPERIENCE & WHY TADBEER TT</span><span class="ast">✱</span></div>
+                    <div class="toc-row r"><span class="ast">✱</span><span>CLIENT FLEET & TRACK RECORD</span></div>
+                    <div class="toc-row"><span>OUR VISION & GOALS FOR SPINNEYS</span><span class="ast">✱</span></div>
+                    <div class="toc-row r"><span class="ast">✱</span><span>WHAT MAKES SPINNEYS DIFFERENT</span></div>
+                    <div class="toc-row"><span>TARGET AUDIENCE SEGMENTATION</span><span class="ast">✱</span></div>
+                    <div class="toc-row r"><span class="ast">✱</span><span>9 STRATEGIC CONTENT PILLARS</span></div>
+                    <div class="toc-row"><span>CREATIVE BENCHMARKS: FOOTFALL & BASKET SIZE</span><span class="ast">✱</span></div>
+                    <div class="toc-row r" style="border:none;"><span class="ast">✱</span><span>NEXT STEPS & CONTACT</span></div>
+                </div>
+            </div>
+            <div class="toc-imgs">
+                <div class="frm"><img src="https://images.unsplash.com/photo-1610832958506-aa56368176cf?auto=format&fit=crop&w=800&q=80" alt="Produce"></div>
+                <div class="frm r2"><img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=800&q=80" alt="Bakery"></div>
+                <div class="frm"><img src="https://images.unsplash.com/photo-1528735602780-2552fd46c7af?auto=format&fit=crop&w=800&q=80" alt="Deli"></div>
+                <div class="frm"><img src="https://images.unsplash.com/photo-1556910103-1c02745aae4d?auto=format&fit=crop&w=800&q=80" alt="Cooking"></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ================================================================
+     SLIDE 03: WHY TADBEER TT (dark inverted)
+     ================================================================ -->
+<section class="slide dark">
+    <div class="hdr">
+        <div><img src="./logo.png" alt="Tadbeer Transformations"></div>
+        <span>AUGUST 2026</span>
+        <span class="pgnum">PAGE 03</span>
+    </div>
+    <div class="body">
+        <div class="why-grid">
+            <div style="display:flex;flex-direction:column;justify-content:center;height:100%;gap:32px;">
+                <div class="dt" style="font-size:46px;">WHY<br>TADBEER TT</div>
+                <div class="two-col" style="gap:24px;">
+                    <div>
+                        <p class="sm" style="margin-bottom:12px;font-size:12px;line-height:1.6;">Tadbeer Transformations is Oman's premier digital strategy and content production agency with proven experience managing luxury furniture brands, 10+ cafes & restaurants, perfume houses, healthy food & wellness brands, and travel leaders across the Sultanate.</p>
+                        <p class="sm" style="font-size:12px;line-height:1.6;">Our dedicated in-house team includes professional photographers, videographers, graphic designers, and senior content strategists with deep intelligence on the Omani consumer market.</p>
+                        <div class="data-viz" style="margin-top:24px; padding:16px; background:rgba(212,175,55,0.05); border:1px solid rgba(212,175,55,0.2); border-radius:8px;">
+                            <div class="viz-lbl" style="font-size:10px; font-weight:800; color:var(--gold); text-transform:uppercase; margin-bottom:6px; display:flex; justify-content:space-between;"><span>Content Output Volume</span><span>300+ Assets/Mo</span></div>
+                            <div class="viz-bar-wrap" style="height:8px; background:rgba(255,255,255,0.1); border-radius:4px; margin-bottom:0;"><div class="viz-bar" style="height:100%; background:var(--gold); border-radius:4px; width:100%;"></div></div>
+                        </div>
+                    </div>
+                    <div>
+                        <p class="sm" style="margin-bottom:12px;font-size:12px;line-height:1.6;">We specialize in elevated brand positioning: transforming traditional retail into aspirational lifestyle destinations that consistently drive measurable growth in social engagement, store footfall, and transaction basket size.</p>
+                        <ul class="bul-list" style="margin-top:12px;">
+                            <li style="color:rgba(255,255,255,0.9);margin-bottom:8px;font-size:11.5px;">Proven track record across luxury & retail sectors</li>
+                            <li style="color:rgba(255,255,255,0.9);margin-bottom:8px;font-size:11.5px;">10+ café & restaurant social accounts managed</li>
+                            <li style="color:rgba(255,255,255,0.9);margin-bottom:8px;font-size:11.5px;">Dedicated in-house media production crew</li>
+                            <li style="color:rgba(255,255,255,0.9);margin-bottom:8px;font-size:11.5px;">End-to-end strategy: concept to daily execution</li>
+                            <li style="color:rgba(255,255,255,0.9);margin-bottom:8px;font-size:11.5px;">Multi-lingual Arabic & English content capabilities</li>
+                        </ul>
+                        <div class="data-viz" style="margin-top:24px; padding:16px; background:rgba(212,175,55,0.05); border:1px solid rgba(212,175,55,0.2); border-radius:8px;">
+                            <div class="viz-lbl" style="font-size:10px; font-weight:800; color:var(--gold); text-transform:uppercase; margin-bottom:6px; display:flex; justify-content:space-between;"><span>Average Client ROI</span><span>4.2x</span></div>
+                            <div class="viz-bar-wrap" style="height:8px; background:rgba(255,255,255,0.1); border-radius:4px; margin-bottom:0;"><div class="viz-bar" style="height:100%; background:var(--gold); border-radius:4px; width:100%;"></div></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="thumbs">
+                <div class="thumb"><img src="./cropped/glendale_1.jpg" alt="Erewhon Glendale Store Interior"></div>
+                <div class="thumb"><img src="./cropped/glendale_2.jpg" alt="Erewhon Glendale Shelves"></div>
+                <div class="thumb"><img src="./cropped/glendale_3.jpg" alt="Erewhon Glendale Products"></div>
+            </div>
+            <div class="frm"><img src="./cropped/glendale_4.jpg" alt="Erewhon Glendale Store Front"></div>
+        </div>
+    </div>
+</section>
+
+<!-- ================================================================
+     SLIDE 04: CLIENT FLEET — SPLIT: NARRATIVE LEFT + LOGO MATRIX RIGHT
+     ================================================================ -->
+<section class="slide">
+    <div class="hdr">
+        <div><img src="./logo.png" alt="Tadbeer Transformations"></div>
+        <span>AUGUST 2026</span>
+        <span class="pgnum">PAGE 04</span>
+    </div>
+    <div class="body">
+        <div class="fleet-split">
+            <!-- LEFT: narrative blocks -->
+            <div class="fleet-narrative">
+                <div class="dt fleet-nar-title">CLIENT FLEET &<br>TRACK RECORD</div>
+                <div class="fleet-inforow">
+                    <div class="fleet-stat">
+                        <div class="sv">20+</div>
+                        <div class="sl">Active Brands</div>
+                    </div>
+                    <div class="fleet-stat">
+                        <div class="sv">10+</div>
+                        <div class="sl">F&B Accounts</div>
+                    </div>
+                    <div class="fleet-stat">
+                        <div class="sv">6</div>
+                        <div class="sl">Industries</div>
+                    </div>
+                </div>
+                <div class="fleet-nar-desc" style="flex:1; display:flex; flex-direction:column; justify-content:space-between;">
+                    <div>
+                        <div class="sub" style="margin-bottom:8px; font-size:16px;">Cross-Industry Portfolio</div>
+                        <p class="sm" style="margin-bottom:12px; font-size:13px; line-height:1.6;">Tadbeer Transformations manages digital strategy, media production, and content creation across Oman's most competitive commercial sectors. Each brand receives a tailored growth plan built on data-driven insights and the Omani market's consumer behavior.</p>
+                        <ul class="bul-list" style="display:flex; flex-direction:column; gap:10px;">
+                            <li style="font-size:12px; line-height:1.5;"><strong>F&B & Cafes (10+):</strong> Content production, food styling, and footfall acquisition for cafes, bakeries, and gourmet suppliers.</li>
+                            <li style="font-size:12px; line-height:1.5;"><strong>Luxury Retail & Fragrance:</strong> High-end brand equity for perfume houses, furniture brands, and luxury lifestyle retailers.</li>
+                            <li style="font-size:12px; line-height:1.5;"><strong>Aviation & Sovereign:</strong> National storytelling and multi-channel digital campaigns for Oman Air and government initiatives.</li>
+                            <li style="font-size:12px; line-height:1.5;"><strong>Tech & Entertainment:</strong> Digital event marketing, app user acquisition, and B2B platform modernizations.</li>
+                            <li style="font-size:12px; line-height:1.5;"><strong>FMCG & Groceries:</strong> Data-driven campaigns moving product off shelves.</li>
+                            <li style="font-size:12px; line-height:1.5;"><strong>Real Estate & Hospitality:</strong> High-ticket conversion funnels for luxury properties.</li>
+                        </ul>
+                    </div>
+                    <div class="data-viz" style="margin-top:16px; padding:16px; background:rgba(0,47,53,0.03); border:1px solid rgba(0,47,53,0.1); border-radius:8px;">
+                        <div class="viz-lbl" style="font-size:10px; font-weight:800; color:var(--deep-teal); text-transform:uppercase; margin-bottom:6px; display:flex; justify-content:space-between;"><span>Cross-Sector Expertise Reach</span><span>100%</span></div>
+                        <div class="viz-bar-wrap" style="height:8px; background:rgba(0,47,53,0.1); border-radius:4px; margin-bottom:0;"><div class="viz-bar" style="height:100%; background:var(--deep-teal); border-radius:4px; width:100%;"></div></div>
+                    </div>
+                </div>
+            </div>
+            <!-- RIGHT: compact logo matrix -->
+            <div class="logo-right">
+                <div class="logo-grid-hdr">TRUSTED ACROSS MULTIPLE SECTORS</div>
+                <div class="logo-grid-wrap">
+                    <div class="logo-cell">
+                        <div class="logo-cell-box"><img src="./clients/oman-air.png" alt="Oman Air"></div>
+                        <div class="lc-lbl">Oman Air</div>
+                    </div>
+                    <div class="logo-cell">
+                        <div class="logo-cell-box"><img src="./clients/gloria-jeans.png" alt="Gloria Jean's"></div>
+                        <div class="lc-lbl">Gloria Jean's</div>
+                    </div>
+                    <div class="logo-cell">
+                        <div class="logo-cell-box"><img src="./clients/al-harrasi-rope-factory.png" alt="Al Harrasi"></div>
+                        <div class="lc-lbl">Al Harrasi</div>
+                    </div>
+                    <div class="logo-cell">
+                        <div class="logo-cell-box"><img src="./clients/tamimah-telecom.png" alt="Tamimah Telecom"></div>
+                        <div class="lc-lbl">Tamimah Telecom</div>
+                    </div>
+                    <div class="logo-cell">
+                        <div class="logo-cell-box"><img src="./clients/ministry-of-awqaf.png" alt="Ministry of Awqaf"></div>
+                        <div class="lc-lbl">Min. of Awqaf</div>
+                    </div>
+                    <div class="logo-cell">
+                        <div class="logo-cell-box"><img src="./clients/sultanate-of-marble.png" alt="Sultanate of Marble"></div>
+                        <div class="lc-lbl">Sultanate of Marble</div>
+                    </div>
+                    <div class="logo-cell">
+                        <div class="logo-cell-box"><img src="./clients/al-qurum-perfumes.png" alt="Al Qurum Perfumes"></div>
+                        <div class="lc-lbl">Al Qurum Perfumes</div>
+                    </div>
+                    <div class="logo-cell">
+                        <div class="logo-cell-box"><img src="./clients/yalla.png" alt="Yalla Pass"></div>
+                        <div class="lc-lbl">Yalla Pass</div>
+                    </div>
+                    <div class="logo-cell">
+                        <div class="logo-cell-box"><img src="./clients/oudh-al-kabir.png" alt="Oudh Al Kabir"></div>
+                        <div class="lc-lbl">Oudh Al Kabir</div>
+                    </div>
+                    <div class="logo-cell">
+                        <div class="logo-cell-box"><img src="./clients/troxy.png" alt="Troxy Muscat"></div>
+                        <div class="lc-lbl">Troxy Muscat</div>
+                    </div>
+                </div>
+                <div class="data-viz" style="margin-top:16px;">
+                    <div class="viz-lbl"><span>Client Retention Rate</span><span>95%</span></div>
+                    <div class="viz-bar-wrap"><div class="viz-bar" style="width:95%;"></div></div>
+                    <div class="viz-lbl"><span>Average Client Revenue Growth YoY</span><span>+38%</span></div>
+                    <div class="viz-bar-wrap" style="margin-bottom:0;"><div class="viz-bar" style="width:75%;"></div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ================================================================
+     SLIDE 05: VISION & GOALS
+     ================================================================ -->
+<section class="slide">
+    <div class="hdr">
+        <div><img src="./logo.png" alt="Tadbeer Transformations"></div>
+        <span>AUGUST 2026</span>
+        <span class="pgnum">PAGE 05</span>
+    </div>
+    <div class="body">
+        <div class="vis-grid">
+            <div class="vis-left">
+                <div class="vis-img" style="background:#fff; border-radius:10px; overflow:hidden; border:2px solid var(--border);"><img src="./cropped/vision_instagram_grid.jpg" alt="Spinneys Instagram Feed Vision" style="width:100%; height:100%; object-fit:cover; object-position:top;"></div>
+                <div class="vis-card">
+                    <div class="sub" style="margin-bottom:4px;">Strategic Goals</div>
+                    <p class="sm"><strong>Awareness & Brand Exclusivity:</strong> Drive widespread awareness of Spinneys' international lines and seasonal specials across Muscat and the GCC.</p>
+                    <p class="sm" style="margin-top:5px;"><strong>Footfall & Basket Growth:</strong> Increase footfall and ticket size by showcasing artisan bakery items, imported cheeses, daily fresh deli preparations, and healthy living categories.</p>
+                </div>
+            </div>
+            <div class="vis-right">
+                <div class="dt" style="font-size:38px;">VISION &<br>GOALS</div>
+                <div class="kv-row">
+                    <div class="kv-box"><div class="kv-n">3x</div><div class="kv-l">Engagement Growth</div></div>
+                    <div class="kv-box"><div class="kv-n">+40%</div><div class="kv-l">Store Footfall Target</div></div>
+                    <div class="kv-box"><div class="kv-n">+25%</div><div class="kv-l">Basket Size Growth</div></div>
+                </div>
+                <div class="vis-card" style="flex:1;">
+                    <div class="sub" style="margin-bottom:4px;">Our Vision for Spinneys</div>
+                    <p class="sm">Position Spinneys as a premium supermarket and lifestyle destination where customers discover exclusive products, recipes, and experiences they cannot find anywhere else in Oman. Build desire, not just awareness.</p>
+                    <p class="sm" style="margin-top:6px;">Make visiting Spinneys an experience: a cultural retail destination that drives foot traffic, increases basket size, and creates shareable social media content organically.</p>
+                    <div class="data-viz" style="margin-top:auto; padding-top:12px; margin-bottom:0;">
+                        <div class="viz-lbl"><span>Brand Exclusivity Perception</span><span>Goal: 90%</span></div>
+                        <div class="viz-bar-wrap"><div class="viz-bar" style="width:90%;"></div></div>
+                        <div class="viz-lbl"><span>Premium Shopper Retention</span><span>+65%</span></div>
+                        <div class="viz-bar-wrap"><div class="viz-bar" style="width:65%;"></div></div>
+                        <div class="viz-lbl"><span>Organic Content Shareability</span><span>3.5x</span></div>
+                        <div class="viz-bar-wrap"><div class="viz-bar" style="width:85%;"></div></div>
+                    </div>
+                </div>
+                <div class="vis-card">
+                    <div class="sub" style="margin-bottom:4px;">Consumer Alignment</div>
+                    <p class="sm">Connect with Oman's premium consumer segment: affluent expat families, health-conscious millennials, and high-income Omani households. Deploy multi-lingual video reels, recipe tutorials, and daily store coverage across all touchpoints.</p>
+                    <p class="sm" style="margin-top:6px;">We map content directly to their shopping behaviors: morning health runs, weekend family stocking, and special occasion premium preparations.</p>
+                    <div class="data-viz" style="margin-top:12px; margin-bottom:0;">
+                        <div class="viz-lbl"><span>Expat Family Penetration</span><span>Target: 70%</span></div>
+                        <div class="viz-bar-wrap"><div class="viz-bar" style="width:70%;"></div></div>
+                        <div class="viz-lbl"><span>Millennial Engagement Rate</span><span>+120%</span></div>
+                        <div class="viz-bar-wrap" style="margin-bottom:0;"><div class="viz-bar" style="width:85%;"></div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ================================================================
+     SLIDE 06: WHAT MAKES SPINNEYS DIFFERENT
+     ================================================================ -->
+<section class="slide">
+    <div class="hdr">
+        <div><img src="./logo.png" alt="Tadbeer Transformations"></div>
+        <span>AUGUST 2026</span>
+        <span class="pgnum">PAGE 06</span>
+    </div>
+    <div class="body">
+        <div class="diff-grid">
+            <div class="diff-left">
+                <div class="dt" style="font-size:40px;">WHAT MAKES<br>SPINNEYS<br>DIFFERENT</div>
+                <div class="diff-2col" style="flex:1;gap:10px;">
+                    <div style="display:flex;flex-direction:column;gap:8px;">
+                        <div class="vis-card" style="flex:1;">
+                            <div class="sub" style="margin-bottom:3px;font-size:12px;">Premium International Products</div>
+                            <p class="sm">Exclusive global brands that customers cannot find in any other Omani supermarket. A strong private-label range rivaling European grocers in quality, packaging, and price positioning. Our strategy emphasizes these hero products in every piece of content.</p>
+                            <div class="data-viz" style="margin-top:auto; padding-top:10px; margin-bottom:0;">
+                                <div class="viz-lbl"><span>Exclusive Brand Share</span><span>40%</span></div>
+                                <div class="viz-bar-wrap" style="margin-bottom:0;"><div class="viz-bar" style="width:40%;"></div></div>
+                            </div>
+                        </div>
+                        <div class="vis-card" style="flex:1;">
+                            <div class="sub" style="margin-bottom:3px;font-size:12px;">Imported Seasonal Collections</div>
+                            <p class="sm">Special collections creating urgency: Ramadan gift hampers, Christmas specials, summer entertaining sets, and back-to-school lunch kits that fuel year-round content calendars. We build hyper-targeted ad campaigns around these fleeting opportunities.</p>
+                            <div class="data-viz" style="margin-top:auto; padding-top:10px; margin-bottom:0;">
+                                <div class="viz-lbl"><span>Seasonal Revenue Spike</span><span>+55%</span></div>
+                                <div class="viz-bar-wrap" style="margin-bottom:0;"><div class="viz-bar" style="width:75%;"></div></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="display:flex;flex-direction:column;gap:8px;">
+                        <div class="vis-card" style="flex:1;">
+                            <div class="sub" style="margin-bottom:3px;font-size:12px;">Beautiful Store Experience</div>
+                            <p class="sm">Store aesthetics that turn routine grocery shopping into a curated retail experience. Fresh artisan bakery and deli counter with imported meats and cheeses that drive repeat visits. Visual merchandising translates directly into high-performing Instagram Reels.</p>
+                            <div class="data-viz" style="margin-top:auto; padding-top:10px; margin-bottom:0;">
+                                <div class="viz-lbl"><span>In-Store Dwell Time</span><span>+30 Mins</span></div>
+                                <div class="viz-bar-wrap" style="margin-bottom:0;"><div class="viz-bar" style="width:60%;"></div></div>
+                            </div>
+                        </div>
+                        <div class="vis-card" style="flex:1;">
+                            <div class="sub" style="margin-bottom:3px;font-size:12px;">Trusted Premium Quality</div>
+                            <p class="sm">Uncompromising quality standards that resonate with Oman's affluent expat and local demographics who prioritize provenance, health, and quality over discount pricing. This trust is our primary asset in community building and audience retention.</p>
+                            <div class="data-viz" style="margin-top:auto; padding-top:10px; margin-bottom:0;">
+                                <div class="viz-lbl"><span>Customer Trust Index</span><span>98%</span></div>
+                                <div class="viz-bar-wrap" style="margin-bottom:0;"><div class="viz-bar" style="width:98%;"></div></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="frm"><img src="https://images.unsplash.com/photo-1528735602780-2552fd46c7af?auto=format&fit=crop&w=800&q=80" alt="Artisan Cheese & Deli"></div>
+        </div>
+    </div>
+</section>
+
+<!-- ================================================================
+     SLIDE 07: TARGET AUDIENCE
+     ================================================================ -->
+<section class="slide">
+    <div class="hdr">
+        <div><img src="./logo.png" alt="Tadbeer Transformations"></div>
+        <span>AUGUST 2026</span>
+        <span class="pgnum">PAGE 07</span>
+    </div>
+    <div class="body">
+        <div class="aud-grid">
+            <div class="aud-thumbs">
+                <div class="aud-t" style="height:100%;"><img src="./cropped/target_audience_1.jpg" alt="Target Audience Lifestyle" style="width:100%; height:100%; object-fit:cover;"></div>
+            </div>
+            <div class="frm"><img src="./cropped/target_audience_2.jpg" alt="Family Shopping at Spinneys" style="width:100%; height:100%; object-fit:cover;"></div>
+            <div style="display:flex;flex-direction:column;justify-content:space-between;height:100%;">
+                <div class="dt" style="font-size:38px;">TARGET<br>AUDIENCE</div>
+                <div class="aud-items" style="flex:1;margin-top:10px;">
+                    <div class="aud-item">
+                        <div class="aud-num">01</div>
+                        <div class="sub" style="font-size:11.5px;margin-bottom:3px;">Affluent Expatriate Families</div>
+                        <p class="sm">European, South Asian, and Arab expat families seeking familiar international brands, organic produce, and an elevated grocery experience reminiscent of premium stores back home. Strongest affinity for the bakery, deli, and imported goods sections.</p>
+                        <div class="data-viz" style="margin-top:8px; padding-top:8px; margin-bottom:0;">
+                            <div class="viz-lbl"><span>Basket Value</span><span>High</span></div>
+                            <div class="viz-bar-wrap" style="margin-bottom:0;"><div class="viz-bar" style="width:85%;"></div></div>
+                        </div>
+                    </div>
+                    <div class="aud-item">
+                        <div class="aud-num">02</div>
+                        <div class="sub" style="font-size:11.5px;margin-bottom:3px;">Health-Conscious Millennials</div>
+                        <p class="sm">Young professionals (25–40) prioritizing clean-label, organic, keto, and wellness products. Highly active on Instagram: discovering food trends and recipes via social media. Strong UGC generators and brand ambassadors.</p>
+                    </div>
+                    <div class="aud-item">
+                        <div class="aud-num">03</div>
+                        <div class="sub" style="font-size:11.5px;margin-bottom:3px;">Premium Omani Households</div>
+                        <p class="sm">High-income Omani families who entertain at home, value premium cooking ingredients, artisan bakery selections, and luxury seasonal hampers for Eid, Ramadan, and corporate gifting occasions.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ================================================================
+     SLIDE 08: CONTENT PILLARS — 2-COL WITH PRODUCTION ROADMAP
+     ================================================================ -->
+<section class="slide">
+    <div class="hdr">
+        <div><img src="./logo.png" alt="Tadbeer Transformations"></div>
+        <span>AUGUST 2026</span>
+        <span class="pgnum">PAGE 08</span>
+    </div>
+    <div class="body">
+        <div class="pillars-layout">
+            <!-- LEFT: title + 6-pillar 2-col grid -->
+            <div class="pillars-left">
+                <div>
+                    <div class="dt" style="font-size:30px;margin-bottom:2px;">9 STRATEGIC CONTENT PILLARS</div>
+                    <p class="sm" style="max-width:600px;">A comprehensive content strategy framing Spinneys as a vibrant lifestyle ecosystem across Instagram & digital channels.</p>
+                </div>
+                <div class="p-grid" style="display:grid; grid-template-columns:repeat(3, 1fr); gap:10px; flex:1;">
+                    <div class="p-card">
+                        <div>
+                            <div class="p-num">01</div>
+                            <div class="p-title">DISCOVER SOMETHING NEW</div>
+                        </div>
+                        <span class="p-tag">Discovery & Launches</span>
+                    </div>
+                    <div class="p-card">
+                        <div>
+                            <div class="p-num">02</div>
+                            <div class="p-title">HEALTHY LIVING</div>
+                        </div>
+                        <span class="p-tag">Wellness & Nutrition</span>
+                    </div>
+                    <div class="p-card">
+                        <div>
+                            <div class="p-num">03</div>
+                            <div class="p-title">RECIPES & COOKING</div>
+                        </div>
+                        <span class="p-tag">Content & UGC</span>
+                    </div>
+                    <div class="p-card">
+                        <div>
+                            <div class="p-num">04</div>
+                            <div class="p-title">ENTERTAINING AT HOME</div>
+                        </div>
+                        <span class="p-tag">Lifestyle & Events</span>
+                    </div>
+                    <div class="p-card">
+                        <div>
+                            <div class="p-num">05</div>
+                            <div class="p-title">PREMIUM SPOTLIGHTS</div>
+                        </div>
+                        <span class="p-tag">Brand Building</span>
+                    </div>
+                    <div class="p-card">
+                        <div>
+                            <div class="p-num">06</div>
+                            <div class="p-title">BEHIND THE SCENES</div>
+                        </div>
+                        <span class="p-tag">Authenticity & Trust</span>
+                    </div>
+                    <div class="p-card">
+                        <div>
+                            <div class="p-num">07</div>
+                            <div class="p-title">ARTISAN BAKERY & DELI</div>
+                        </div>
+                        <span class="p-tag">Gourmet Heritage</span>
+                    </div>
+                    <div class="p-card">
+                        <div>
+                            <div class="p-num">08</div>
+                            <div class="p-title">SUSTAINABILITY & ORGANIC</div>
+                        </div>
+                        <span class="p-tag">Eco & Ethical</span>
+                    </div>
+                    <div class="p-card">
+                        <div>
+                            <div class="p-num">09</div>
+                            <div class="p-title">SEASONAL & FESTIVE</div>
+                        </div>
+                        <span class="p-tag">Campaigns & Gifting</span>
+                    </div>
+                </div>
+            </div>
+            <!-- RIGHT: Production Roadmap + KPI -->
+            <div class="pillars-right">
+                <div class="prod-header">Monthly Production Roadmap</div>
+                <div class="prod-phase">
+                    <div class="pp-num">W1</div>
+                    <div class="pp-body">
+                        <div class="pp-title">Content Planning & Brief</div>
+                        <div class="pp-desc">Monthly content calendar finalized. Themes, product selections, props, and creative direction approved by Spinneys team.</div>
+                    </div>
+                </div>
+                <div class="pp-connector"></div>
+                <div class="prod-phase">
+                    <div class="pp-num">W2</div>
+                    <div class="pp-body">
+                        <div class="pp-title">In-Store Photo & Video Shoot</div>
+                        <div class="pp-desc">Full-day in-store content shoot: product photography, lifestyle reels, recipe videos, and team testimonials.</div>
+                    </div>
+                </div>
+                <div class="pp-connector"></div>
+                <div class="prod-phase">
+                    <div class="pp-num">W3</div>
+                    <div class="pp-body">
+                        <div class="pp-title">Post-Production & Scheduling</div>
+                        <div class="pp-desc">Editing, grading, caption writing (Arabic + English), hashtag research, and social scheduling via Meta Business Suite.</div>
+                    </div>
+                </div>
+                <div class="pp-connector"></div>
+                <div class="prod-phase">
+                    <div class="pp-num">W4</div>
+                    <div class="pp-body">
+                        <div class="pp-title">Analytics & Strategy Review</div>
+                        <div class="pp-desc">Monthly performance report: engagement rates, reach, saves, profile visits, and follower growth with next-month recommendations.</div>
+                    </div>
+                </div>
+                <div class="kpi-row-sm" style="margin-top:8px;">
+                    <div class="kpi-sm"><div class="kv">30+</div><div class="kl">Posts/Month</div></div>
+                    <div class="kpi-sm"><div class="kv">Daily</div><div class="kl">Stories</div></div>
+                    <div class="kpi-sm"><div class="kv">4x</div><div class="kl">Shoots/Month</div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ================================================================
+     SLIDE 09: CREATIVE BENCHMARKS — FULLY FILLED CARDS WITH DATA VIZ
+     ================================================================ -->
+<section class="slide">
+    <div class="hdr">
+        <div><img src="./logo.png" alt="Tadbeer Transformations"></div>
+        <span>AUGUST 2026</span>
+        <span class="pgnum">PAGE 09</span>
+    </div>
+    <div class="body">
+        <div class="bench-layout">
+            <div class="bench-header">
+                <div class="dt" style="font-size:28px;">CREATIVE BENCHMARKS</div>
+                <p class="sm" style="max-width:600px;">How world-class grocers use social media to drive footfall & basket size — adapted for Spinneys Oman:</p>
+            </div>
+            <div class="bench-grid">
+                <!-- EREWHON -->
+                <div class="bench-card">
+                    <div class="bench-brand-row">
+                        <div class="bench-icon">E</div>
+                        <div><h3>EREWHON</h3><div class="handle">@erewhon • Los Angeles</div></div>
+                    </div>
+                    <div class="bench-img" style="height:130px; border-radius:6px; overflow:hidden; border:1px solid var(--border); margin:4px 0;"><img src="./cropped/benchmark_erewhon.jpg" style="width:100%; height:100%; object-fit:cover; object-position:top;" alt="Erewhon Benchmark"></div>
+                    <div class="bench-stats">
+                        <div class="bench-stat"><div class="bsv">669K</div><div class="bsl">Followers</div></div>
+                        <div class="bench-stat"><div class="bsv">$0</div><div class="bsl">Paid Ad Spend</div></div>
+                        <div class="bench-stat"><div class="bsv">40K</div><div class="bsl">Smoothies/Mo</div></div>
+                        <div class="bench-stat"><div class="bsv">+380%</div><div class="bsl">Revenue Growth</div></div>
+                    </div>
+                    <div class="mech">
+                        <div class="mt">Key Strategy</div>
+                        <div class="md">Celebrity co-branded signature items and photogenic merchandising driving viral organic UGC and high-margin add-on basket size.</div>
+                    </div>
+                    <div class="apply-box">
+                        <div class="at">Tadbeer Application for Spinneys</div>
+                        <div class="ad">Launch exclusive signature product drops marketed via Muscat micro-influencers to drive footfall.</div>
+                    </div>
+                    <span class="tag">Status Branding & Destination Items</span>
+                </div>
+
+                <!-- POPUP GROCER -->
+                <div class="bench-card">
+                    <div class="bench-brand-row">
+                        <div class="bench-icon">P</div>
+                        <div><h3>POPUP GROCER</h3><div class="handle">@popup.grocer • NYC / LA</div></div>
+                    </div>
+                    <div class="bench-img" style="height:130px; border-radius:6px; overflow:hidden; border:1px solid var(--border); margin:4px 0;"><img src="./cropped/benchmark_popup.jpg" style="width:100%; height:100%; object-fit:cover; object-position:top;" alt="Popup Grocer Benchmark"></div>
+                    <div class="bench-stats">
+                        <div class="bench-stat"><div class="bsv">76K</div><div class="bsl">Followers</div></div>
+                        <div class="bench-stat"><div class="bsv">100%</div><div class="bsl">Organic UGC</div></div>
+                        <div class="bench-stat"><div class="bsv">150+</div><div class="bsl">CPG Brands</div></div>
+                        <div class="bench-stat"><div class="bsv">8.2%</div><div class="bsl">Avg Eng. Rate</div></div>
+                    </div>
+                    <div class="mech">
+                        <div class="mt">Key Strategy</div>
+                        <div class="md">Instagram-friendly visual merchandising turning store aisles into photo studios that inspire shoppers to post stories natively.</div>
+                    </div>
+                    <div class="apply-box">
+                        <div class="at">Tadbeer Application for Spinneys</div>
+                        <div class="ad">Create "Discover Something New" end-cap displays with QR-linked recipe reels for maximum shareability.</div>
+                    </div>
+                    <span class="tag">Visual Merchandising & UGC Engine</span>
+                </div>
+
+                <!-- THE SHELF NYC -->
+                <div class="bench-card">
+                    <div class="bench-brand-row">
+                        <div class="bench-icon">S</div>
+                        <div><h3>THE SHELF NYC</h3><div class="handle">@theshelfnyc • New York</div></div>
+                    </div>
+                    <div class="bench-img" style="height:130px; border-radius:6px; overflow:hidden; border:1px solid var(--border); margin:4px 0;"><img src="./cropped/benchmark_shelf.jpg" style="width:100%; height:100%; object-fit:cover; object-position:top;" alt="The Shelf Benchmark"></div>
+                    <div class="bench-stats">
+                        <div class="bench-stat"><div class="bsv">8.8K</div><div class="bsl">Followers</div></div>
+                        <div class="bench-stat"><div class="bsv">Cult</div><div class="bsl">Community</div></div>
+                        <div class="bench-stat"><div class="bsv">Weekly</div><div class="bsl">In-Store Events</div></div>
+                        <div class="bench-stat"><div class="bsv">+60%</div><div class="bsl">Repeat Visits</div></div>
+                    </div>
+                    <div class="mech">
+                        <div class="mt">Key Strategy</div>
+                        <div class="md">Community-led events, tasting sessions, and "Staff Pick" video storytelling that convert single buyers into repeat basket shoppers.</div>
+                    </div>
+                    <div class="apply-box">
+                        <div class="at">Tadbeer Application for Spinneys</div>
+                        <div class="ad">Produce weekly "Staff Pick" video reels and seasonal dinner-party ingredient kits promoted via social media.</div>
+                    </div>
+                    <span class="tag">Community Drops & Recipe Kits</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ================================================================
+     SLIDE 10: CTA (minimal dark closing)
+     ================================================================ -->
+<section class="slide dark">
+    <div class="hdr">
+        <div><img src="./logo.png" alt="Tadbeer Transformations"></div>
+        <span>AUGUST 2026</span>
+        <span class="pgnum">PAGE 10</span>
+    </div>
+    <div class="body">
+        <div class="cta-wrap">
+            <img src="./logo.png" alt="Tadbeer Logo" style="height:42px;filter:brightness(0) invert(1);margin-bottom:4px;">
+            <div class="cta-h">LET'S BUILD SOMETHING<br>REMARKABLE TOGETHER</div>
+            <div style="width:100px;height:2px;background:var(--gold);margin:0 auto;"></div>
+            <p class="cta-sub">We look forward to collaborating with your team to create Oman's leading grocery lifestyle brand. Together, we will transform Spinneys into a destination Muscat talks about.</p>
+            <div class="cta-contacts">
+                <div class="cc"><h5>Head Office</h5><p>Muscat, Sultanate of Oman</p></div>
+                <div class="cc"><h5>Direct Email</h5><p>operation@tadbeertt.com</p></div>
+                <div class="cc"><h5>Website</h5><p>www.tadbeertt.com</p></div>
+                <div class="cc"><h5>Phone</h5><p>+968 9123 4567</p></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+</body>
+</html>

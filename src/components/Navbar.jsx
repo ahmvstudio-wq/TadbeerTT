@@ -69,11 +69,16 @@ const Navbar = () => {
   useEffect(() => {
     if (mobileOpen) {
       document.body.style.overflow = 'hidden';
+      window.lenis?.stop?.();
     } else {
       document.body.style.overflow = '';
+      window.lenis?.start?.();
+      window.lenis?.resize?.();
     }
     return () => {
       document.body.style.overflow = '';
+      window.lenis?.start?.();
+      window.lenis?.resize?.();
     };
   }, [mobileOpen]);
 

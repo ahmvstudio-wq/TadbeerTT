@@ -1,0 +1,1468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tadbeer - PerfumesByHuda Oman Fragrance Retail Transformation Proposal</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #184F5B;       /* Deep Slate Teal */
+            --primary-dark: #0B2B33;  /* Midnight Teal */
+            --secondary: #CAA94C;     /* Warm Omani Gold */
+            --bg-light: #F9F8F3;      /* Warm Off-White Cream */
+            --bg-card: #FFFFFF;
+            --text-dark: #1C1B17;
+            --text-muted: #333333;
+            --border-color: #CBD5E1;
+        }
+
+        @page {
+            size: A4 landscape;
+            margin: 0;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--text-dark);
+            background-color: #D1D5DB;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+
+        .slide {
+            width: 297mm;
+            height: 210mm;
+            page-break-after: always;
+            break-after: page;
+            position: relative;
+            background-color: var(--bg-light);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            margin: 0 auto;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+            box-sizing: border-box;
+        }
+
+        /* Header & Footer */
+        .slide-header {
+            padding: 9mm 18mm 4mm 18mm;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            border-bottom: 2px solid rgba(202, 169, 76, 0.35);
+            position: relative;
+            z-index: 2;
+        }
+
+        .logo-img {
+            height: 42px;
+            width: auto;
+            object-fit: contain;
+        }
+
+        .header-tag {
+            font-size: 9pt;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            color: var(--primary);
+            text-transform: uppercase;
+            background: rgba(24, 79, 91, 0.1);
+            padding: 4px 14px;
+            border-radius: 20px;
+            border: 1px solid rgba(24, 79, 91, 0.25);
+        }
+
+        .slide-body {
+            flex: 1;
+            padding: 5mm 18mm 5mm 18mm;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            gap: 4mm;
+            position: relative;
+            z-index: 2;
+        }
+
+        .slide-footer {
+            padding: 4mm 18mm 5mm 18mm;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 8.8pt;
+            color: var(--text-muted);
+            border-top: 1px solid rgba(0,0,0,0.1);
+            margin-top: auto;
+            position: relative;
+            z-index: 2;
+            background: rgba(24, 79, 91, 0.02);
+        }
+
+        .slide-footer .slide-number {
+            font-weight: 800;
+            color: var(--secondary);
+        }
+
+        h1.slide-title {
+            font-size: 20pt;
+            font-weight: 800;
+            color: var(--primary-dark);
+            line-height: 1.2;
+            margin-bottom: 1.5mm;
+            letter-spacing: -0.5px;
+        }
+
+        .title-gold { color: var(--secondary); }
+        .title-teal { color: var(--primary); }
+
+        p.slide-intro {
+            font-size: 9.8pt;
+            line-height: 1.38;
+            color: var(--text-muted);
+            margin-bottom: 1mm;
+            max-width: 98%;
+        }
+
+        /* SLIDE 1: RESTORED ORIGINAL COVER LAYOUT (WITH REDUCED TEXT) */
+        .slide-cover {
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            justify-content: space-between;
+            padding: 0;
+        }
+
+        .cover-top {
+            padding: 16mm 20mm 0 20mm;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .cover-accent-line {
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 50%, var(--primary) 100%);
+            margin: 8mm 20mm 0 20mm;
+            border-radius: 2px;
+        }
+
+        .cover-hero {
+            padding: 0 20mm;
+            margin: auto 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15mm;
+        }
+
+        .cover-left { flex: 1.4; }
+        .cover-right { flex: 0.8; display: flex; justify-content: flex-end; }
+
+        .cover-tag {
+            display: inline-block;
+            padding: 4px 14px;
+            background: rgba(202, 169, 76, 0.18);
+            border: 1.5px solid var(--secondary);
+            color: var(--primary-dark);
+            border-radius: 20px;
+            font-size: 8.5pt;
+            font-weight: 800;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            margin-bottom: 5mm;
+        }
+
+        .cover-title {
+            font-size: 28pt;
+            font-weight: 800;
+            line-height: 1.18;
+            letter-spacing: -0.8px;
+            margin-bottom: 4mm;
+            color: var(--primary-dark);
+        }
+
+        .cover-subtitle {
+            font-size: 11pt;
+            font-weight: 500;
+            line-height: 1.5;
+            color: var(--text-muted);
+            max-width: 95%;
+        }
+
+        .client-box {
+            background: #ffffff;
+            border: 2px solid var(--border-color);
+            border-top: 6px solid var(--secondary);
+            border-radius: 16px;
+            padding: 7mm 9mm;
+            box-shadow: 0 10px 28px rgba(0,0,0,0.08);
+            text-align: center;
+            width: 100%;
+            max-width: 310px;
+        }
+
+        .client-label {
+            font-size: 8pt;
+            font-weight: 800;
+            letter-spacing: 1.5px;
+            color: var(--primary);
+            text-transform: uppercase;
+            margin-bottom: 2.5mm;
+        }
+
+        .client-name {
+            font-size: 17pt;
+            font-weight: 800;
+            color: var(--primary-dark);
+            margin-bottom: 1.5mm;
+        }
+
+        .client-subtext {
+            font-size: 9pt;
+            color: var(--text-muted);
+            line-height: 1.4;
+            font-weight: 500;
+        }
+
+        .cover-bottom {
+            padding: 8mm 20mm 10mm 20mm;
+            background: rgba(24, 79, 91, 0.05);
+            border-top: 1px solid rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* SLIDE 2: ABOUT TADBEER LOGOS */
+        .about-container {
+            display: flex;
+            flex-direction: column;
+            gap: 3.5mm;
+            flex: 1;
+        }
+
+        .about-top-split {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5.5mm;
+        }
+
+        .vision-box {
+            background: #ffffff;
+            border: 1px solid var(--border-color);
+            border-left: 5px solid var(--primary);
+            border-radius: 12px;
+            padding: 4.5mm 5.5mm;
+            box-shadow: 0 4px 14px rgba(0,0,0,0.03);
+            display: flex;
+            flex-direction: column;
+            gap: 2mm;
+        }
+
+        .vision-title {
+            font-size: 10.5pt;
+            font-weight: 800;
+            color: var(--primary-dark);
+            margin-bottom: 1mm;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .vision-bullet-item {
+            font-size: 8.5pt;
+            line-height: 1.35;
+            color: var(--text-dark);
+            background: rgba(24, 79, 91, 0.03);
+            padding: 2.5mm 3.5mm;
+            border-radius: 6px;
+            border-left: 3px solid var(--secondary);
+            font-weight: 500;
+        }
+
+        .pillars-list-box {
+            background: #ffffff;
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 4.5mm 5.5mm;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .pillars-list-title {
+            font-size: 10pt;
+            font-weight: 800;
+            color: var(--primary-dark);
+            margin-bottom: 2.5mm;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .pillars-chips-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2mm;
+        }
+
+        .pillar-tag-chip {
+            background: rgba(24, 79, 91, 0.08);
+            border: 1px solid rgba(24, 79, 91, 0.2);
+            color: var(--primary-dark);
+            padding: 2.5mm 4.5mm;
+            border-radius: 8px;
+            font-size: 8.5pt;
+            font-weight: 700;
+        }
+
+        .trusted-box-full {
+            background: #ffffff;
+            border: 1px solid var(--border-color);
+            border-top: 5px solid var(--secondary);
+            border-radius: 12px;
+            padding: 4mm 5.5mm;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 4px 14px rgba(0,0,0,0.03);
+            flex: 1;
+        }
+
+        .trusted-title {
+            font-size: 10.5pt;
+            font-weight: 800;
+            color: var(--primary-dark);
+            margin-bottom: 2.5mm;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            text-align: center;
+        }
+
+        .logos-grid-5x2 {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 4mm 3.5mm;
+            flex: 1;
+            align-content: center;
+        }
+
+        .logo-unit {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .logo-box-filled {
+            background: #ffffff;
+            border: 1.5px solid #CBD5E1;
+            border-radius: 12px;
+            width: 100%;
+            height: 75px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 4px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.04);
+            overflow: hidden;
+        }
+
+        .logo-box-filled img {
+            max-height: 65px;
+            max-width: 95%;
+            width: auto;
+            object-fit: contain;
+            transform: scale(1.35);
+        }
+
+        .logo-text-outside {
+            font-size: 8.2pt;
+            font-weight: 800;
+            color: var(--primary-dark);
+            margin-top: 2mm;
+            text-align: center;
+            line-height: 1.2;
+        }
+
+        /* SLIDE 3: CASE STUDIES (2x2 Grid with Logos) */
+        .usecases-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 3mm 5.5mm;
+            flex: 1;
+        }
+
+        .uc-card {
+            background: #ffffff;
+            border: 1px solid var(--border-color);
+            border-top: 4px solid var(--primary);
+            border-radius: 12px;
+            padding: 4mm 5.5mm;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            gap: 2mm;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.03);
+        }
+
+        .uc-card.gold-top {
+            border-top-color: var(--secondary);
+        }
+
+        .uc-card-header {
+            display: flex;
+            align-items: center;
+            gap: 3.5mm;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+            padding-bottom: 2mm;
+            margin-bottom: 1.5mm;
+        }
+
+        .uc-logo-box {
+            width: 80px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            flex-shrink: 0;
+            background: transparent;
+        }
+
+        .uc-logo-img {
+            max-height: 45px;
+            max-width: 100%;
+            object-fit: contain;
+        }
+
+        .uc-title-area {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5mm;
+        }
+
+        .uc-badge {
+            font-size: 7.8pt;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--secondary);
+            background: rgba(202, 169, 76, 0.15);
+            padding: 2px 8px;
+            border-radius: 10px;
+            width: fit-content;
+        }
+
+        .uc-title {
+            font-size: 11.5pt;
+            font-weight: 800;
+            color: var(--primary-dark);
+        }
+
+        .uc-bullets {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5mm;
+            flex: 1;
+        }
+
+        .uc-bullet-item {
+            font-size: 8.8pt;
+            line-height: 1.35;
+            color: var(--text-dark);
+            font-weight: 500;
+            display: flex;
+            align-items: flex-start;
+            gap: 2mm;
+        }
+
+        .uc-bullet-item::before {
+            content: "•";
+            color: var(--secondary);
+            font-weight: 800;
+            font-size: 11pt;
+        }
+
+        .uc-impact-box {
+            font-size: 8.8pt;
+            font-weight: 700;
+            color: var(--primary-dark);
+            background: rgba(24, 79, 91, 0.05);
+            padding: 2.5mm 3.5mm;
+            border-radius: 6px;
+            border-left: 3.5px solid var(--secondary);
+            margin-top: auto;
+            line-height: 1.3;
+        }
+
+        /* SLIDE 4: BOTTLENECKS (NO INSIDE VOID) */
+        .bottlenecks-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 5mm;
+            flex: 1;
+        }
+
+        .bn-card {
+            background: #ffffff;
+            border: 1px solid var(--border-color);
+            border-left: 5px solid #EF4444;
+            border-radius: 12px;
+            border-left: 4px solid #EF4444;
+            border-radius: 12px;
+            padding: 5mm 5.5mm;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            gap: 2.5mm;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.02);
+        }
+
+        .bn-num {
+            font-size: 8pt;
+            font-weight: 800;
+            letter-spacing: 0.8px;
+            color: #EF4444;
+            text-transform: uppercase;
+        }
+
+        .bn-title {
+            font-size: 10.5pt;
+            font-weight: 800;
+            color: var(--primary-dark);
+            line-height: 1.25;
+        }
+
+        .bn-desc {
+            font-size: 8.5pt;
+            line-height: 1.35;
+            color: var(--text-dark);
+        }
+
+        .bn-bullets {
+            display: flex;
+            flex-direction: column;
+            gap: 3.5mm;
+            background: rgba(239, 68, 68, 0.04);
+            padding: 4mm 5mm;
+            border-radius: 6px;
+            flex: 1;
+            justify-content: space-around;
+        }
+
+        .bn-bullet {
+            font-size: 8.2pt;
+            color: #7F1D1D;
+            font-weight: 500;
+            display: flex;
+            align-items: flex-start;
+            gap: 1.5mm;
+            line-height: 1.3;
+        }
+
+        .bn-bullet::before {
+            content: "✖";
+            font-size: 7.5pt;
+            color: #EF4444;
+        }
+
+        .bn-impact-tag {
+            font-size: 8.2pt;
+            font-weight: 700;
+            color: #B91C1C;
+            background: #FEF2F2;
+            padding: 2.5mm 3.5mm;
+            border-radius: 6px;
+            border: 1px solid #FCA5A5;
+            margin-top: auto;
+            line-height: 1.3;
+        }
+
+        /* SLIDE 5: SOLUTION ARCHITECTURE */
+        .sol-arch-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 4.5mm;
+            flex: 1;
+        }
+
+        .sol-arch-card {
+            background: #ffffff;
+            border: 1px solid var(--border-color);
+            border-top: 4px solid var(--primary);
+            border-radius: 12px;
+            padding: 5mm 5.5mm;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            gap: 2.5mm;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.02);
+        }
+
+        .sol-arch-card.gold-top { border-top-color: var(--secondary); }
+
+        .sol-arch-num {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: var(--primary);
+            color: #ffffff;
+            font-weight: 800;
+            font-size: 10pt;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .sol-arch-card.gold-top .sol-arch-num {
+            background: var(--secondary);
+            color: var(--primary-dark);
+        }
+
+        .sol-arch-name {
+            font-size: 11pt;
+            font-weight: 800;
+            color: var(--primary-dark);
+        }
+
+        .sol-arch-items {
+            display: flex;
+            flex-direction: column;
+            gap: 3.5mm;
+            flex: 1;
+            justify-content: space-between;
+        }
+
+        .sol-arch-item {
+            font-size: 8.5pt;
+            line-height: 1.35;
+            color: var(--text-dark);
+            display: flex;
+            align-items: flex-start;
+            gap: 1.5mm;
+            font-weight: 500;
+        }
+
+        .sol-arch-item::before {
+            content: "✓";
+            color: var(--primary);
+            font-weight: 800;
+        }
+
+        .sol-arch-card.gold-top .sol-arch-item::before {
+            color: var(--secondary);
+        }
+
+        .sol-arch-result {
+            font-size: 8.2pt;
+            font-weight: 700;
+            color: var(--primary-dark);
+            background: rgba(24, 79, 91, 0.05);
+            padding: 2.5mm 3.5mm;
+            border-radius: 6px;
+            border-left: 3px solid var(--secondary);
+            margin-top: auto;
+            line-height: 1.3;
+        }
+
+        .process-summary-banner {
+            background: rgba(202, 169, 76, 0.14);
+            border: 1px solid var(--secondary);
+            border-radius: 10px;
+            padding: 3.5mm 6mm;
+            font-size: 9.2pt;
+            color: var(--primary-dark);
+            font-weight: 700;
+            text-align: center;
+        }
+
+        /* SLIDE 6: FULL SERVICES */
+        .capabilities-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 4.5mm;
+            flex: 1;
+        }
+
+        .cap-column {
+            background: #ffffff;
+            border: 1px solid var(--border-color);
+            border-top: 4px solid var(--primary);
+            border-radius: 12px;
+            padding: 5mm 5.5mm;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            gap: 2.5mm;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.02);
+        }
+
+        .cap-column.gold-top { border-top-color: var(--secondary); }
+
+        .cap-title {
+            font-size: 11pt;
+            font-weight: 800;
+            color: var(--primary-dark);
+            padding-bottom: 1.5mm;
+            border-bottom: 1.5px solid var(--border-color);
+        }
+
+        .cap-bullets {
+            display: flex;
+            flex-direction: column;
+            gap: 4.5mm;
+            flex: 1;
+            justify-content: space-between;
+        }
+
+        .cap-bullet-item {
+            font-size: 8.5pt;
+            color: var(--text-dark);
+            line-height: 1.35;
+            font-weight: 500;
+            display: flex;
+            align-items: flex-start;
+            gap: 1.5mm;
+        }
+
+        .cap-bullet-item::before {
+            content: "•";
+            color: var(--secondary);
+            font-weight: 800;
+            font-size: 10pt;
+        }
+
+        .cap-highlight-box {
+            background: rgba(24, 79, 91, 0.05);
+            border-left: 3px solid var(--secondary);
+            padding: 2.5mm 3.5mm;
+            border-radius: 6px;
+            font-size: 8.2pt;
+            font-weight: 700;
+            color: var(--primary-dark);
+            margin-top: auto;
+            line-height: 1.3;
+        }
+
+        .summary-banner {
+            background: rgba(24, 79, 91, 0.06);
+            border: 1px solid rgba(24, 79, 91, 0.2);
+            border-radius: 10px;
+            padding: 3.5mm 6mm;
+            font-size: 9.2pt;
+            color: var(--primary-dark);
+            font-weight: 700;
+            text-align: center;
+        }
+
+        /* SLIDE 7: DISCOVERY SESSION */
+        .discovery-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 4.5mm;
+            flex: 1;
+        }
+
+        .disc-card {
+            background: #ffffff;
+            border: 1px solid var(--border-color);
+            border-left: 4px solid var(--primary);
+            border-radius: 12px;
+            padding: 5mm 5.5mm;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            gap: 2.5mm;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.02);
+        }
+
+        .disc-card.gold-accent { border-left-color: var(--secondary); }
+
+        .disc-num {
+            font-size: 10pt;
+            font-weight: 800;
+            color: var(--secondary);
+        }
+
+        .disc-title {
+            font-size: 11pt;
+            font-weight: 800;
+            color: var(--primary-dark);
+            line-height: 1.25;
+        }
+
+        .disc-question {
+            font-size: 8.5pt;
+            line-height: 1.35;
+            color: var(--text-dark);
+            font-weight: 500;
+        }
+
+        .disc-subpoints {
+            display: flex;
+            flex-direction: column;
+            gap: 4mm;
+            background: rgba(24, 79, 91, 0.03);
+            padding: 4.5mm 5mm;
+            border-radius: 6px;
+            flex: 1;
+            justify-content: space-around;
+        }
+
+        .disc-subpoint {
+            font-size: 8.2pt;
+            color: var(--text-dark);
+            display: flex;
+            align-items: flex-start;
+            gap: 1.5mm;
+            line-height: 1.3;
+        }
+
+        .disc-subpoint::before {
+            content: "➔";
+            font-size: 7.5pt;
+            color: var(--secondary);
+        }
+
+        .disc-tag {
+            font-size: 8.2pt;
+            font-weight: 700;
+            color: var(--primary);
+            background: rgba(24, 79, 91, 0.05);
+            padding: 2.5mm 3.5mm;
+            border-radius: 6px;
+            border-left: 3px solid var(--secondary);
+            margin-top: auto;
+            line-height: 1.3;
+        }
+
+        .disc-closing-banner {
+            background: rgba(202, 169, 76, 0.14);
+            border: 1px solid var(--secondary);
+            border-radius: 10px;
+            padding: 3.5mm 6mm;
+            font-size: 9.2pt;
+            color: var(--primary-dark);
+            font-weight: 700;
+            text-align: center;
+        }
+
+        /* SLIDE 8: CLOSING */
+        .slide-back {
+            background: linear-gradient(135deg, #0B2B33 0%, #184F5B 100%) !important;
+            color: #ffffff !important;
+            justify-content: space-between;
+            padding: 0;
+        }
+
+        .back-top {
+            padding: 14mm 18mm 0 18mm;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .back-hero {
+            padding: 0 18mm;
+            margin: auto 0;
+            text-align: center;
+            max-width: 90%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .back-title {
+            font-size: 26pt;
+            font-weight: 800;
+            color: #ffffff;
+            margin-bottom: 3mm;
+            line-height: 1.25;
+        }
+
+        .back-subtitle {
+            font-size: 11.5pt;
+            color: rgba(255,255,255,0.88);
+            line-height: 1.5;
+            margin-bottom: 7mm;
+        }
+
+        .contact-grid {
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(202, 169, 76, 0.35);
+            border-radius: 14px;
+            padding: 6mm 9mm;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 5mm;
+            text-align: left;
+        }
+
+        .contact-col h4 {
+            font-size: 8.5pt;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            color: var(--secondary);
+            margin-bottom: 1.5mm;
+        }
+
+        .contact-col p {
+            font-size: 9.5pt;
+            color: #ffffff;
+            font-weight: 500;
+        }
+
+        .back-bottom {
+            padding: 8mm 18mm 10mm 18mm;
+            border-top: 1px solid rgba(255,255,255,0.15);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 8.5pt;
+            color: rgba(255,255,255,0.7);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ================= SLIDE 1: RESTORED ORIGINAL COVER LAYOUT (CONCISE TEXT) ================= -->
+    <div class="slide slide-cover">
+        <div class="cover-top">
+            <img src="../logo.png" alt="Tadbeer Logo" class="logo-img">
+            <div style="font-size: 8.5pt; font-weight: 700; letter-spacing: 1.5px; color: var(--primary); text-transform: uppercase; background: rgba(24, 79, 91, 0.08); padding: 4px 12px; border-radius: 20px; border: 1px solid rgba(24, 79, 91, 0.2);">Retail Growth Strategy</div>
+        </div>
+
+        <div class="cover-accent-line"></div>
+
+        <div class="cover-hero">
+            <div class="cover-left">
+                <div class="cover-tag">Tadbeer Transformation Trading</div>
+                <h1 class="cover-title">Retail Transformation & <br><span class="title-gold">E-Commerce Scale</span></h1>
+                <p class="cover-subtitle">Scaling @perfumesbyhuda into a high-margin fragrance brand through custom e-commerce storefronts, 24/7 WhatsApp AI sales engines, and VIP customer retention.</p>
+            </div>
+
+            <div class="cover-right">
+                <div class="client-box">
+                    <div class="client-label">Prepared Exclusively For</div>
+                    <div class="client-name">PerfumesByHuda</div>
+                    <div class="client-subtext">Fragrance Retailer & Wholesaler<br><span style="color: var(--primary); font-weight: 700;">@perfumesbyhuda</span></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="cover-bottom">
+            <div style="font-size: 8.5pt; color: var(--text-muted);">Muscat, Sultanate of Oman &nbsp;|&nbsp; Executive Proposal</div>
+            <div style="font-size: 9.5pt; font-weight: 700; color: var(--primary);">Tadbeer Transformation Trading</div>
+        </div>
+    </div>
+
+    <!-- ================= SLIDE 2: ABOUT TADBEER & LOGOS ================= -->
+    <div class="slide">
+        <div class="slide-header">
+            <img src="../logo.png" alt="Tadbeer Logo" class="logo-img">
+            <div class="header-tag">Slide 02 &nbsp;|&nbsp; About Tadbeer</div>
+        </div>
+
+        <div class="slide-body">
+            <div>
+                <h1 class="slide-title">Who We Are: <span class="title-gold">Your Digital Growth Partner</span></h1>
+                <p class="slide-intro">Tadbeer helps Omani retail brands increase their sales, run smoother operations, and build loyal customer bases.</p>
+            </div>
+
+            <div class="about-container">
+                <div class="about-top-split">
+                    <div class="vision-box">
+                        <div class="vision-title">Aligned with Oman Vision 2040</div>
+                        <div class="vision-bullet-item">Building national commercial capabilities & digital retail infrastructure.</div>
+                        <div class="vision-bullet-item">Modernizing store & e-commerce operations through custom software, ERPs, and AI agents.</div>
+                        <div class="vision-bullet-item">Driving luxury retail growth through prestige brand positioning & direct acquisition channels.</div>
+                    </div>
+
+                    <div class="pillars-list-box">
+                        <div class="pillars-list-title">Core Transformation Pillars</div>
+                        <div class="pillars-chips-container">
+                            <div class="pillar-tag-chip">E-Commerce Storefronts</div>
+                            <div class="pillar-tag-chip">WhatsApp Commerce Router</div>
+                            <div class="pillar-tag-chip">Micro-CDP & Loyalty</div>
+                            <div class="pillar-tag-chip">DFY Paid Lead Gen</div>
+                            <div class="pillar-tag-chip">POS & Stock Control</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="trusted-box-full">
+                    <div class="trusted-title">Trusted Across Multiple Sectors</div>
+                    
+                    <div class="logos-grid-5x2">
+                        <div class="logo-unit"><div class="logo-box-filled"><img src="./clients/oman-air.png" alt="Oman Air"></div><div class="logo-text-outside">Semi-Government</div></div>
+                        <div class="logo-unit"><div class="logo-box-filled"><img src="./clients/gloria-jeans.png" alt="Gloria Jean's"></div><div class="logo-text-outside">Cafés & Hospitality</div></div>
+                        <div class="logo-unit"><div class="logo-box-filled"><img src="./clients/al-harrasi-rope-factory.png" alt="Al Harrasi"></div><div class="logo-text-outside">Manufacturing</div></div>
+                        <div class="logo-unit"><div class="logo-box-filled"><img src="./clients/tamimah-telecom.png" alt="TechNova"></div><div class="logo-text-outside">Telecom</div></div>
+                        <div class="logo-unit"><div class="logo-box-filled"><img src="./clients/ministry-of-awqaf.png" alt="Awqaf"></div><div class="logo-text-outside">Public Sector</div></div>
+                        <div class="logo-unit"><div class="logo-box-filled"><img src="./clients/sultanate-of-marble.png" alt="Marble"></div><div class="logo-text-outside">Industrial & Mining</div></div>
+                        <div class="logo-unit"><div class="logo-box-filled"><img src="./clients/al-qurum-perfumes.png" alt="Perfumes"></div><div class="logo-text-outside">Retail Chains</div></div>
+                        <div class="logo-unit"><div class="logo-box-filled"><img src="./clients/yalla.png" alt="Yalla"></div><div class="logo-text-outside">Apps & Services</div></div>
+                        <div class="logo-unit"><div class="logo-box-filled"><img src="./clients/oudh-al-kabir.png" alt="Oudh"></div><div class="logo-text-outside">Luxury Brands</div></div>
+                        <div class="logo-unit"><div class="logo-box-filled"><img src="./clients/sheraton-muscat.svg" alt="Sheraton"></div><div class="logo-text-outside">Hospitality & Tourism</div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide-footer">
+            <div>Tadbeer Transformation Trading &nbsp;|&nbsp; Company Profile</div>
+            <div class="slide-number">Slide 02 of 08</div>
+        </div>
+    </div>
+
+    <!-- ================= SLIDE 3: TRACK RECORD ================= -->
+    <div class="slide">
+        <div class="slide-header">
+            <img src="../logo.png" alt="Tadbeer Logo" class="logo-img">
+            <div class="header-tag">Slide 03 &nbsp;|&nbsp; Proven Impact</div>
+        </div>
+
+        <div class="slide-body">
+            <div>
+                <h1 class="slide-title">Our Success Stories: <span class="title-gold">What We Have Done</span></h1>
+                <p class="slide-intro">See how we have helped brands across the GCC build automated sales systems and grow their revenue.</p>
+            </div>
+
+            <div class="usecases-grid">
+                <!-- UC 1: Oudh Al Kabir -->
+                <div class="uc-card">
+                    <div class="uc-card-header">
+                        <div class="uc-logo-box">
+                            <img src="./clients/oudh-al-kabir.png" alt="Oudh Al Kabir" class="uc-logo-img" style="transform: scale(1.15);">
+                        </div>
+                        <div class="uc-title-area">
+                            <div class="uc-badge">LUXURY RETAIL</div>
+                            <div class="uc-title">Oudh Al Kabir & Perfumes</div>
+                        </div>
+                    </div>
+                    <div class="uc-bullets">
+                        <div class="uc-bullet-item">Luxury fragrance positioning, targeted paid ads & VIP gifting campaigns</div>
+                        <div class="uc-bullet-item">WhatsApp automated catalog & direct ordering engine</div>
+                        <div class="uc-bullet-item">High-margin gift set bundling & prestige scent storytelling</div>
+                        <div class="uc-bullet-item">Direct POS integration & VIP repeat buyer rewards</div>
+                    </div>
+                    <div class="uc-impact-box">Outcome: High-margin luxury sales & zero reliance on discount spams</div>
+                </div>
+
+                <!-- UC 2: Al Qurum Perfumes -->
+                <div class="uc-card gold-top">
+                    <div class="uc-card-header">
+                        <div class="uc-logo-box">
+                            <img src="./clients/al-qurum-perfumes.png" alt="Al Qurum Perfumes" class="uc-logo-img" style="transform: scale(2.4); max-height: 48px;">
+                        </div>
+                        <div class="uc-title-area">
+                            <div class="uc-badge">RETAIL CHAINS</div>
+                            <div class="uc-title">Al Qurum Perfumes & Retail</div>
+                        </div>
+                    </div>
+                    <div class="uc-bullets">
+                        <div class="uc-bullet-item">Multi-channel digital marketing & in-store promo activations</div>
+                        <div class="uc-bullet-item">WhatsApp lead router & instant 24/7 AI sales qualifier</div>
+                        <div class="uc-bullet-item">Automated lead tracking & localized ad conversion funnels</div>
+                        <div class="uc-bullet-item">Omni-channel store locator & instant stock verification</div>
+                    </div>
+                    <div class="uc-impact-box">Outcome: +200 new leads/month; daily inquiries grew 5x</div>
+                </div>
+
+                <!-- UC 3: Al Harrasi Rope Factory -->
+                <div class="uc-card">
+                    <div class="uc-card-header">
+                        <div class="uc-logo-box">
+                            <img src="./clients/al-harrasi-rope-factory.png" alt="Al Harrasi" class="uc-logo-img" style="transform: scale(2.8); max-height: 48px;">
+                        </div>
+                        <div class="uc-title-area">
+                            <div class="uc-badge">MANUFACTURING & B2B</div>
+                            <div class="uc-title">Al Harrasi Rope Factory</div>
+                        </div>
+                    </div>
+                    <div class="uc-bullets">
+                        <div class="uc-bullet-item">Full B2B customer acquisition funnels & CRM integration</div>
+                        <div class="uc-bullet-item">Automated client request routing & sales staff handoffs</div>
+                        <div class="uc-bullet-item">Product catalog optimization & volume-based pricing flows</div>
+                        <div class="uc-bullet-item">Performance tracking dashboard showing live lead values</div>
+                    </div>
+                    <div class="uc-impact-box">Outcome: 40% reduction in manual order processing friction</div>
+                </div>
+
+                <!-- UC 4: Gloria Jean's Coffees -->
+                <div class="uc-card gold-top">
+                    <div class="uc-card-header">
+                        <div class="uc-logo-box">
+                            <img src="./clients/gloria-jeans.png" alt="Gloria Jean's" class="uc-logo-img" style="transform: scale(2.2); max-height: 48px;">
+                        </div>
+                        <div class="uc-title-area">
+                            <div class="uc-badge">CAFES & HOSPITALITY</div>
+                            <div class="uc-title">Gloria Jean's Coffees</div>
+                        </div>
+                    </div>
+                    <div class="uc-bullets">
+                        <div class="uc-bullet-item">Daily social engagement — reels, posts, and discount campaign alerts</div>
+                        <div class="uc-bullet-item">Localized store promotion campaigns across Muscat branches</div>
+                        <div class="uc-bullet-item">Custom digital menu & feedback collection automation</div>
+                        <div class="uc-bullet-item">Influencer marketing collaboration strategy</div>
+                    </div>
+                    <div class="uc-impact-box">Outcome: Elevated local brand awareness & weekend footfall growth</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide-footer">
+            <div>Tadbeer Transformation Trading &nbsp;|&nbsp; Retail Track Record</div>
+            <div class="slide-number">Slide 03 of 08</div>
+        </div>
+    </div>
+
+    <!-- ================= SLIDE 4: CURRENT BOTTLENECKS ================= -->
+    <div class="slide">
+        <div class="slide-header">
+            <img src="../logo.png" alt="Tadbeer Logo" class="logo-img">
+            <div class="header-tag">Slide 04 &nbsp;|&nbsp; Industry Bottlenecks</div>
+        </div>
+
+        <div class="slide-body">
+            <div>
+                <h1 class="slide-title">Common Challenges: <span class="title-gold">Why Retailers Stop Growing</span></h1>
+                <p class="slide-intro">Many fragrance brands have great products but struggle with operations that slow down their sales and lower their profits.</p>
+            </div>
+
+            <div class="bottlenecks-grid">
+                <div class="bn-card">
+                    <div class="bn-num">Bottleneck 01</div>
+                    <div class="bn-title">Unowned Social Storefronts</div>
+                    <div class="bn-desc">Relying 100% on manual Instagram DMs and phone calls without an owned e-commerce website or centralized customer database.</div>
+                    <div class="bn-bullets">
+                        <div class="bn-bullet">No structured catalog with SKUs, pricing, or reviews</div>
+                        <div class="bn-bullet">High customer drop-off due to manual DM delays</div>
+                        <div class="bn-bullet">Founder tied down in repetitive manual product description links</div>
+                    </div>
+                    <div class="bn-impact-tag">Risk: Total reliance on social algorithms & lost sales leads</div>
+                </div>
+
+                <div class="bn-card">
+                    <div class="bn-num">Bottleneck 02</div>
+                    <div class="bn-title">Prestige Erosion via Heavy Discounts</div>
+                    <div class="bn-desc">Depending constantly on "50% Off" discount promotions to drive sales, eroding brand value and sacrificing profit margins.</div>
+                    <div class="bn-bullets">
+                        <div class="bn-bullet">Commoditizing luxury perfumes into discount offers</div>
+                        <div class="bn-bullet">Slashing profit margins on international brand decants</div>
+                        <div class="bn-bullet">Training customers to only purchase when discounts are active</div>
+                    </div>
+                    <div class="bn-impact-tag">Risk: Low profit margins & training buyers to wait for sales</div>
+                </div>
+
+                <div class="bn-card">
+                    <div class="bn-num">Bottleneck 03</div>
+                    <div class="bn-title">Zero Customer Retention Systems</div>
+                    <div class="bn-desc">Lacking an automated CRM or loyalty program to re-engage buyers for Eid, National Day, birthdays, and seasonal fragrance gifting.</div>
+                    <div class="bn-bullets">
+                        <div class="bn-bullet">No record of customer scent preferences or past purchases</div>
+                        <div class="bn-bullet">Zero automated WhatsApp broadcasts for seasonal gifting</div>
+                        <div class="bn-bullet">High customer churn rates after first perfume purchase completes</div>
+                    </div>
+                    <div class="bn-impact-tag">Risk: High customer acquisition costs & zero repeat LTV</div>
+                </div>
+
+                <div class="bn-card">
+                    <div class="bn-num">Bottleneck 04</div>
+                    <div class="bn-title">Manual Order & Inventory Friction</div>
+                    <div class="bn-desc">Handling orders, decant pricing, and stock tracking manually on paper or chat, causing billing delays and inventory mismatches.</div>
+                    <div class="bn-bullets">
+                        <div class="bn-bullet">Stockouts on fast-selling perfume 10L decant stock</div>
+                        <div class="bn-bullet">Manual invoice creation & payment tracking delays</div>
+                        <div class="bn-bullet">Errors in customer shipping details during chat transcription</div>
+                    </div>
+                    <div class="bn-impact-tag">Risk: Stockouts, lost orders & staff processing bottlenecks</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide-footer">
+            <div>Tadbeer Transformation Trading &nbsp;|&nbsp; Operational Bottlenecks</div>
+            <div class="slide-number">Slide 04 of 08</div>
+        </div>
+    </div>
+
+    <!-- ================= SLIDE 5: SOLUTION ARCHITECTURE ================= -->
+    <div class="slide">
+        <div class="slide-header">
+            <img src="../logo.png" alt="Tadbeer Logo" class="logo-img">
+            <div class="header-tag">Slide 05 &nbsp;|&nbsp; Solution Architecture</div>
+        </div>
+
+        <div class="slide-body">
+            <div>
+                <h1 class="slide-title">How We Fix It: <span class="title-gold">Our 4-Step Solution</span></h1>
+                <p class="slide-intro">A simple, proven system to transform your social media presence into a profitable digital business.</p>
+            </div>
+
+            <div class="sol-arch-grid">
+                <div class="sol-arch-card">
+                    <div class="sol-arch-num">01</div>
+                    <div class="sol-arch-name">E-Commerce Store</div>
+                    <div class="sol-arch-items">
+                        <div class="sol-arch-item">Custom bilingual web storefront development</div>
+                        <div class="sol-arch-item">Omani debit card, Thawani & COD options</div>
+                        <div class="sol-arch-item">Prestige scent catalog & decant size selector</div>
+                        <div class="sol-arch-item">Instant high-speed mobile checkout experience</div>
+                        <div class="sol-arch-item">Live customer reviews & ratings module</div>
+                        <div class="sol-arch-item">Automatic inventory alerts & updates</div>
+                    </div>
+                    <div class="sol-arch-result">Goal: Instant 24/7 direct online sales</div>
+                </div>
+
+                <div class="sol-arch-card gold-top">
+                    <div class="sol-arch-num">02</div>
+                    <div class="sol-arch-name">WhatsApp Commerce</div>
+                    <div class="sol-arch-items">
+                        <div class="sol-arch-item">Direct Click-to-WhatsApp ad funnels layout</div>
+                        <div class="sol-arch-item">AI Scent Recommendation Assistant integration</div>
+                        <div class="sol-arch-item">Live inventory stock verification scripts</div>
+                        <div class="sol-arch-item">Instant chat checkout link creation tools</div>
+                        <div class="sol-arch-item">Automated WhatsApp order confirmation alerts</div>
+                        <div class="sol-arch-item">24/7 customer support query routing</div>
+                    </div>
+                    <div class="sol-arch-result">Goal: 5-second inquiry response & conversion</div>
+                </div>
+
+                <div class="sol-arch-card">
+                    <div class="sol-arch-num">03</div>
+                    <div class="sol-arch-name">Customer Retention</div>
+                    <div class="sol-arch-items">
+                        <div class="sol-arch-item">Automated Eid & Birthday broadcasts setup</div>
+                        <div class="sol-arch-item">Phone-number checkout loyalty points tracker</div>
+                        <div class="sol-arch-item">VIP fragrance gifting bundles selection</div>
+                        <div class="sol-arch-item">Micro-CDP customer scent tagging profiles</div>
+                        <div class="sol-arch-item">Quarterly scent subscription boxes templates</div>
+                        <div class="sol-arch-item">Email newsletters and scent story guides</div>
+                    </div>
+                    <div class="sol-arch-result">Goal: Maximize customer lifetime value (LTV)</div>
+                </div>
+
+                <div class="sol-arch-card gold-top">
+                    <div class="sol-arch-num">04</div>
+                    <div class="sol-arch-name">Paid Ad Scale</div>
+                    <div class="sol-arch-items">
+                        <div class="sol-arch-item">DFY Meta & TikTok video reels scripts</div>
+                        <div class="sol-arch-item">Localized Arabic ad copy & hook templates</div>
+                        <div class="sol-arch-item">High-intent Muscat audience targeting segments</div>
+                        <div class="sol-arch-item">Continuous ROAS optimization and testing</div>
+                        <div class="sol-arch-item">Retargeting funnels for storefront web visitors</div>
+                        <div class="sol-arch-item">Custom lookalike model audience creation</div>
+                    </div>
+                    <div class="sol-arch-result">Goal: Predictable daily customer growth</div>
+                </div>
+            </div>
+
+            <div class="process-summary-banner">
+                Every component is built and managed end-to-end by Tadbeer to guarantee zero technical complexity for your team.
+            </div>
+        </div>
+
+        <div class="slide-footer">
+            <div>Tadbeer Transformation Trading &nbsp;|&nbsp; Solution Architecture</div>
+            <div class="slide-number">Slide 05 of 08</div>
+        </div>
+    </div>
+
+    <!-- ================= SLIDE 6: FULL SERVICE PORTFOLIO ================= -->
+    <div class="slide">
+        <div class="slide-header">
+            <img src="../logo.png" alt="Tadbeer Logo" class="logo-img">
+            <div class="header-tag">Slide 06 &nbsp;|&nbsp; Full Capabilities</div>
+        </div>
+
+        <div class="slide-body">
+            <div>
+                <h1 class="slide-title">What We Do: <span class="title-gold">Our Full Services</span></h1>
+                <p class="slide-intro">Everything you need to grow your business, handled by one expert team from start to finish.</p>
+            </div>
+
+            <div class="capabilities-grid">
+                <div class="cap-column">
+                    <div class="cap-title">Digital Marketing & Ads</div>
+                    <div class="cap-bullets">
+                        <div class="cap-bullet-item">DFY Meta & TikTok Paid Ad Campaigns</div>
+                        <div class="cap-bullet-item">AI-Generated High-Converting Reel Creatives</div>
+                        <div class="cap-bullet-item">Seasonal Gifting & Launch Campaigns</div>
+                        <div class="cap-bullet-item">Strategic Brand & Influencer Collaborations</div>
+                        <div class="cap-bullet-item">Direct Lead Generation Funnels</div>
+                        <div class="cap-bullet-item">ROAS Tracking & Audience Retargeting</div>
+                        <div class="cap-bullet-item">Omani Dialect Creative Hook Development</div>
+                    </div>
+                    <div class="cap-highlight-box">Core Impact: Paid Ad Acquisition Engine</div>
+                </div>
+
+                <div class="cap-column gold-top">
+                    <div class="cap-title">Software & Tech</div>
+                    <div class="cap-bullets">
+                        <div class="cap-bullet-item">Bilingual Custom E-Commerce Storefront</div>
+                        <div class="cap-bullet-item">WhatsApp Commerce Order Hub</div>
+                        <div class="cap-bullet-item">Local Payment Gateways & COD Integration</div>
+                        <div class="cap-bullet-item">Cloud POS & Live Stock Inventory Spine</div>
+                        <div class="cap-bullet-item">Custom Analytics & Founder Cockpit</div>
+                        <div class="cap-bullet-item">Decant Volume & Wholesale Pricing System</div>
+                        <div class="cap-bullet-item">High-Speed Cloud Hosting Infrastructure</div>
+                    </div>
+                    <div class="cap-highlight-box">Core Impact: E-Commerce Store & WhatsApp Commerce</div>
+                </div>
+
+                <div class="cap-column gold-top">
+                    <div class="cap-title">AI & Automation Agents</div>
+                    <div class="cap-bullets">
+                        <div class="cap-bullet-item">AI Fragrance Recommendation Chatbot</div>
+                        <div class="cap-bullet-item">WhatsApp & Instagram DM Sales Agents</div>
+                        <div class="cap-bullet-item">Automated Order Status & Delivery Tracking</div>
+                        <div class="cap-bullet-item">Micro-CDP & Customer Loyalty Engine</div>
+                        <div class="cap-bullet-item">24/7 Automated Inventory Lookup</div>
+                        <div class="cap-bullet-item">VIP Re-engagement Broadcast Workflows</div>
+                        <div class="cap-bullet-item">Automated Customer Scent Preference Tagging</div>
+                    </div>
+                    <div class="cap-highlight-box">Core Impact: 24/7 AI Scent Advisor & CRM</div>
+                </div>
+
+                <div class="cap-column">
+                    <div class="cap-title">Human Capital & Operations</div>
+                    <div class="cap-bullets">
+                        <div class="cap-bullet-item">Store Opening & Decanting SOP Design</div>
+                        <div class="cap-bullet-item">Wholesale & B2B Order Flow Architecture</div>
+                        <div class="cap-bullet-item">Customer Support Staff Training</div>
+                        <div class="cap-bullet-item">Performance Management Framework</div>
+                        <div class="cap-bullet-item">Store Staff Incentive & Commission System</div>
+                        <div class="cap-bullet-item">Inventory Audit & Stock Control Checklist</div>
+                        <div class="cap-bullet-item">Supplier Order & Fulfillment System</div>
+                    </div>
+                    <div class="cap-highlight-box">Core Impact: Retail Operations & Decant SOPs</div>
+                </div>
+            </div>
+
+            <div class="summary-banner">
+                An integrated system providing all the tools needed to scale PerfumesByHuda into a profitable retail brand.
+            </div>
+        </div>
+
+        <div class="slide-footer">
+            <div>Tadbeer Transformation Trading &nbsp;|&nbsp; Full Capabilities</div>
+            <div class="slide-number">Slide 06 of 08</div>
+        </div>
+    </div>
+
+    <!-- ================= SLIDE 7: DISCOVERY SESSION ================= -->
+    <div class="slide">
+        <div class="slide-header">
+            <img src="../logo.png" alt="Tadbeer Logo" class="logo-img">
+            <div class="header-tag">Slide 07 &nbsp;|&nbsp; Executive Discovery</div>
+        </div>
+
+        <div class="slide-body">
+            <div>
+                <h1 class="slide-title">Next Step: <span class="title-gold">Let's Plan Your Growth</span></h1>
+                <p class="slide-intro">A quick 45-minute meeting to map out exactly how we can launch your digital products and grow your brand:</p>
+            </div>
+
+            <div class="discovery-grid">
+                <div class="disc-card">
+                    <div class="disc-num">01</div>
+                    <div class="disc-title">E-Commerce Storefront & Payment Gateways</div>
+                    <div class="disc-question">How can we structure your custom bilingual e-commerce store with local Omani payment gateways & COD to convert Instagram visitors directly?</div>
+                    <div class="disc-subpoints">
+                        <div class="disc-subpoint">Structure bilingual Arabic/English mobile catalog</div>
+                        <div class="disc-subpoint">Integrate local Omani debit gateways & Cash on Delivery</div>
+                        <div class="disc-subpoint">Plan product tags, categories, and stock codes (SKUs)</div>
+                    </div>
+                    <div class="disc-tag">Focus: Web store architecture & payment setup</div>
+                </div>
+
+                <div class="disc-card gold-accent">
+                    <div class="disc-num">02</div>
+                    <div class="disc-title">WhatsApp Commerce & AI Fragrance Advisor</div>
+                    <div class="disc-question">How will an automated WhatsApp AI Sales Agent assist your customers with scent recommendations, verify live stock, and close orders 24/7?</div>
+                    <div class="disc-subpoints">
+                        <div class="disc-subpoint">Configure AI scent profiling & fragrance recommendation prompts</div>
+                        <div class="disc-subpoint">Connect WhatsApp Chat directly to live store stock</div>
+                        <div class="disc-subpoint">Setup automated chat templates for checkout and invoicing</div>
+                    </div>
+                    <div class="disc-tag">Focus: AI Scent Assistant & stock automation</div>
+                </div>
+
+                <div class="disc-card gold-accent">
+                    <div class="disc-num">03</div>
+                    <div class="disc-title">Prestige Collections & Margin Protection</div>
+                    <div class="disc-question">How can we transition your promotional strategy away from heavy 50% discount spams toward high-margin prestige fragrance gift sets and corporate bundles?</div>
+                    <div class="disc-subpoints">
+                        <div class="disc-subpoint">Design luxury gift boxes & seasonal perfume bundles</div>
+                        <div class="disc-subpoint">Protect product margins with prestige brand messaging</div>
+                        <div class="disc-subpoint">Plan pricing tiers for wholesale and B2B orders</div>
+                    </div>
+                    <div class="disc-tag">Focus: Margin protection & luxury bundling</div>
+                </div>
+
+                <div class="disc-card">
+                    <div class="disc-num">04</div>
+                    <div class="disc-title">Paid Ad Lead Generation & CDP Retention</div>
+                    <div class="disc-question">What targeted ad acquisition channels (Meta, TikTok) and automated customer re-engagement campaigns (Eid, Birthdays) will drive maximum sales?</div>
+                    <div class="disc-subpoints">
+                        <div class="disc-subpoint">Define monthly paid ad budget & ROAS targets in Muscat</div>
+                        <div class="disc-subpoint">Schedule automated Eid, Ramadan & National Day broadcasts</div>
+                        <div class="disc-subpoint">Map custom audiences from existing customer list databases</div>
+                    </div>
+                    <div class="disc-tag">Focus: Paid acquisition ROAS & LTV retention</div>
+                </div>
+            </div>
+
+            <div class="disc-closing-banner">
+                Following this discovery session, Tadbeer will deliver a comprehensive commercial proposal with clear launch timelines and ROI projections.
+            </div>
+        </div>
+
+        <div class="slide-footer">
+            <div>Tadbeer Transformation Trading &nbsp;|&nbsp; Executive Discovery</div>
+            <div class="slide-number">Slide 07 of 08</div>
+        </div>
+    </div>
+
+    <!-- ================= SLIDE 8: CLOSING ================= -->
+    <div class="slide slide-back">
+        <div class="back-top">
+            <img src="../logo.png" alt="Tadbeer Logo" class="logo-img" style="filter: brightness(0) saturate(100%) invert(74%) sepia(38%) saturate(762%) hue-rotate(6deg) brightness(96%) contrast(89%);">
+            <div style="font-size: 8.5pt; font-weight: 700; letter-spacing: 1.5px; color: var(--secondary); text-transform: uppercase; background: rgba(255,255,255,0.08); padding: 4px 12px; border-radius: 20px; border: 1px solid rgba(202, 169, 76, 0.3);">Strategic Partnership</div>
+        </div>
+
+        <div class="back-hero">
+            <h1 class="back-title">Partnering for Commercial Retail Growth<br><span style="color: var(--secondary);">For PerfumesByHuda Across Oman & the GCC.</span></h1>
+            <p class="back-subtitle">We look forward to collaborating with PerfumesByHuda to build your owned e-commerce storefront, elevate brand prestige, and maximize recurring retail revenue.</p>
+
+            <div class="contact-grid">
+                <div class="contact-col">
+                    <h4>Head Office</h4>
+                    <p>Muscat, Sultanate of Oman</p>
+                </div>
+                <div class="contact-col">
+                    <h4>Direct Inquiries</h4>
+                    <p>operation@tadbeertt.com</p>
+                </div>
+                <div class="contact-col">
+                    <h4>Online Presence</h4>
+                    <p>www.tadbeertt.com</p>
+                </div>
+                <div class="contact-col">
+                    <h4>Core Scope</h4>
+                    <p>E-Com, Ads, AI & Systems</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="back-bottom">
+            <div>Tadbeer Transformation Trading © 2026</div>
+            <div style="color: var(--secondary); font-weight: 700;">Executive Proposal — PerfumesByHuda</div>
+        </div>
+    </div>
+
+</body>
+</html>

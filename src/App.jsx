@@ -283,6 +283,7 @@ function App() {
     const savedScrollPos = sessionStorage.getItem('homepage_scroll_pos');
 
     const scrollToTop = () => {
+      lenisRef.current?.resize?.();
       lenisRef.current?.scrollTo?.(0, { immediate: true, force: true });
       window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
       document.documentElement.scrollTop = 0;
@@ -295,6 +296,7 @@ function App() {
       
       // Delay slightly for Lenis and component mounts to finalize layout sizing
       const timer = setTimeout(() => {
+        lenisRef.current?.resize?.();
         lenisRef.current?.scrollTo?.(targetPos, { immediate: true, force: true });
         window.scrollTo({ top: targetPos, left: 0, behavior: 'auto' });
       }, 100);
@@ -314,6 +316,11 @@ function App() {
       }, 100);
     }
 
+    // Force Lenis to recalculate dimensions on route changes
+    setTimeout(() => {
+      lenisRef.current?.resize?.();
+    }, 200);
+
     previousPageRef.current = pageKey;
   }, [location.pathname, location.search, location.hash]);
 
@@ -332,28 +339,50 @@ function App() {
     const lenis = new Lenis({
       duration: 1.2,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      direction: 'vertical',
-      gestureDirection: 'vertical',
-      smooth: true,
-      mouseMultiplier: 1,
-      smoothTouch: false,
+      orientation: 'vertical',
+      gestureOrientation: 'vertical',
+      smoothWheel: true,
+      wheelMultiplier: 1,
       touchMultiplier: 2,
       infinite: false,
     });
     lenisRef.current = lenis;
+    window.lenis = lenis;
 
+    let animId;
     function raf(time) {
-      if (lenisRef.current) {
-        lenis.raf(time);
-        requestAnimationFrame(raf);
+      try {
+        if (lenisRef.current) {
+          lenisRef.current.raf(time);
+          animId = requestAnimationFrame(raf);
+        }
+      } catch (err) {
+        animId = requestAnimationFrame(raf);
       }
     }
 
-    requestAnimationFrame(raf);
+    animId = requestAnimationFrame(raf);
+
+    // Keep Lenis scroll limits and DOM dimensions strictly synchronized across all dynamic updates
+    const resizeObserver = new ResizeObserver(() => {
+      lenisRef.current?.resize?.();
+    });
+    resizeObserver.observe(document.body);
+
+    const handleResize = () => {
+      lenisRef.current?.resize?.();
+    };
+    window.addEventListener('resize', handleResize);
+    window.addEventListener('load', handleResize);
 
     return () => {
+      if (animId) cancelAnimationFrame(animId);
+      resizeObserver.disconnect();
+      window.removeEventListener('resize', handleResize);
+      window.removeEventListener('load', handleResize);
       lenis.destroy();
       lenisRef.current = null;
+      window.lenis = null;
     };
   }, []);
 
